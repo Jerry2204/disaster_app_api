@@ -22,6 +22,15 @@
         "rusak_berat": 10,
         "rusak_ringan": 15,
     },
+    "status_penanggulangan": {
+        "tanggal": "2021-09-03",
+        "petugas": "Timothy",
+        "keterangan": "Sudah dilakukan evakuasi warga ke tempat pengungsian",
+        "tindakan": [
+            "Membagikan bantuan makanan dan air bersih kepada pengungsi",
+            "Mengirimkan bantuan ke lokasi bencana"
+        ]
+    },
     "created_at": "2021-09-02",
     "updated_at": "2021-09-02",
     "created_by": {
@@ -64,6 +73,15 @@
             "nama_infrastruktur": "Rumah",
             "rusak_berat": 10,
             "rusak_ringan": 15,
+        },
+        "status_penanggulangan": {
+            "tanggal": "2021-09-03",
+            "petugas": "Timothy",
+            "keterangan": "Sudah dilakukan evakuasi warga ke tempat pengungsian",
+            "tindakan": [
+                "Membagikan bantuan makanan dan air bersih kepada pengungsi",
+                "Mengirimkan bantuan ke lokasi bencana"
+            ]
         },
         "created_at": "2021-09-02",
         "updated_at": "2021-09-02",
@@ -143,6 +161,15 @@
                 "rusak_berat": 10,
                 "rusak_ringan": 15,
             },
+            "status_penanggulangan": {
+                "tanggal": "2021-09-03",
+                "petugas": "Timothy",
+                "keterangan": "Sudah dilakukan evakuasi warga ke tempat pengungsian",
+                "tindakan": [
+                    "Membagikan bantuan makanan dan air bersih kepada pengungsi",
+                    "Mengirimkan bantuan ke lokasi bencana"
+                ]
+            },
             "created_at": "2021-09-02",
             "updated_at": "2021-09-02",
             "created_by": {
@@ -172,6 +199,15 @@
                 "nama_infrastruktur": "Rumah",
                 "rusak_berat": 10,
                 "rusak_ringan": 1,
+            },
+            "status_penanggulangan": {
+                "tanggal": "2021-09-03",
+                "petugas": "Timothy",
+                "keterangan": "Sudah dilakukan evakuasi warga ke tempat pengungsian",
+                "tindakan": [
+                    "Membagikan bantuan makanan dan air bersih kepada pengungsi",
+                    "Mengirimkan bantuan ke lokasi bencana"
+                ]
             },
             "created_at": "2021-09-02",
             "updated_at": "2021-09-02",
@@ -231,6 +267,15 @@
             "nama_infrastruktur": "Rumah",
             "rusak_berat": 10,
             "rusak_ringan": 15,
+        },
+        "status_penanggulangan": {
+            "tanggal": "2021-09-03",
+            "petugas": "Timothy",
+            "keterangan": "Sudah dilakukan evakuasi warga ke tempat pengungsian",
+            "tindakan": [
+                "Membagikan bantuan makanan dan air bersih kepada pengungsi",
+                "Mengirimkan bantuan ke lokasi bencana"
+            ]
         },
         "created_at": "2021-09-02",
         "updated_at": "2021-09-02",
@@ -292,6 +337,15 @@
         "rusak_berat": 10,
         "rusak_ringan": 15,
     },
+    "status_penanggulangan": {
+        "tanggal": "2021-09-03",
+        "petugas": "Timothy",
+        "keterangan": "Sudah dilakukan evakuasi warga ke tempat pengungsian",
+        "tindakan": [
+            "Membagikan bantuan makanan dan air bersih kepada pengungsi",
+            "Mengirimkan bantuan ke lokasi bencana"
+        ]
+    },
     "created_at": "2021-09-02",
     "updated_at": "2021-09-02",
     "created_by": {
@@ -332,6 +386,15 @@
             "nama_infrastruktur": "Rumah",
             "rusak_berat": 10,
             "rusak_ringan": 15,
+        },
+        "status_penanggulangan": {
+            "tanggal": "2021-09-03",
+            "petugas": "Timothy",
+            "keterangan": "Sudah dilakukan evakuasi warga ke tempat pengungsian",
+            "tindakan": [
+                "Membagikan bantuan makanan dan air bersih kepada pengungsi",
+                "Mengirimkan bantuan ke lokasi bencana"
+            ]
         },
         "created_at": "2021-09-02",
         "updated_at": "2021-09-02",
