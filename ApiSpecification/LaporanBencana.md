@@ -1,18 +1,27 @@
-# Api For Disaster Prone Area
+# Api For Disaster Report
 
-## Create Disaster Prone Area
+## Create Disaster Report
 
-+ Endpoint : ``/api/rawan/bencana``
++ Endpoint : ``/api/laporan/bencana``
 + HTTP Method : ``POST``
 + Request Body :
 
 ```json
 {
-    "nama_wilayah": "Parsoburan",
-    "koordinat_lattitude": 2.3331,
-    "koordinat_longitude": 99.0506,
-    "jenis_rawan_bencana": "Tanah Longsor",
-    "level_rawan_bencana": "Tinggi",
+    "jenis_bencana": "Banjir",
+    "lokasi": "Jl. PI Del, No. 1, Sitoluama, Laguboti",
+    "keterangan": "Banjir akibat selokan yang dipenuhi dengan sampah",
+    "korban": {
+        "meninggal": 23,
+        "luka_berat": 100,
+        "luka_ringan": 250,
+        "hilang": 15
+    },
+    "kerusakan": {
+        "nama_infrastruktur": "Rumah",
+        "rusak_berat": 10,
+        "rusak_ringan": 15,
+    },
     "created_at": "2021-09-02",
     "updated_at": "2021-09-02",
     "created_by": {
@@ -23,7 +32,7 @@
         "username": "jerry2204",
         "role": {
             "id": 1,
-            "nama_role": "Bidang1"
+            "nama_role": "masyarakat"
         }
     }
 }
@@ -39,14 +48,23 @@
 {
     "code": 201,
     "status": "created",
-    "message": "Disaster Prone Area Created successfully",
+    "message": "Disaster Report Created successfully",
     "data": {
-        "id": 1,
-        "nama_wilayah": "Parsoburan",
-        "koordinat_lattitude": 2.3331,
-        "koordinat_longitude": 99.0506,
-        "jenis_rawan_bencana": "Tanah Longsor",
-        "level_rawan_bencana": "Tinggi",
+        "id_laporan": "BD001",
+        "jenis_bencana": "Banjir",
+        "lokasi": "Jl. PI Del, No. 1, Sitoluama, Laguboti",
+        "keterangan": "Banjir akibat selokan yang dipenuhi dengan sampah",
+        "korban": {
+            "meninggal": 23,
+            "luka_berat": 100,
+            "luka_ringan": 250,
+            "hilang": 15
+        },
+        "kerusakan": {
+            "nama_infrastruktur": "Rumah",
+            "rusak_berat": 10,
+            "rusak_ringan": 15,
+        },
         "created_at": "2021-09-02",
         "updated_at": "2021-09-02",
         "created_by": {
@@ -57,7 +75,7 @@
             "username": "jerry2204",
             "role": {
                 "id": 1,
-                "nama_role": "Bidang1"
+                "nama_role": "masyarakat"
             }
         }
     }
@@ -93,9 +111,9 @@
 }
 ```
 
-## Get All Prone Disaster Area
+## Get All Disaster Report
 
-+ Endpoint       : ``/api/rawan/bencana``
++ Endpoint       : ``/api/laporan/bencana``
 + HTTP Method    : ``GET``
 + Request Header :
     + Accept        : ``application/json``
@@ -110,12 +128,21 @@
     "count": 2,
     "data": [
         {
-            "id": 1,
-            "nama_wilayah": "Parsoburan",
-            "koordinat_lattitude": 2.3331,
-            "koordinat_longitude": 99.0506,
-            "jenis_rawan_bencana": "Tanah Longsor",
-            "level_rawan_bencana": "Tinggi",
+            "id_laporan": "BD001",
+            "jenis_bencana": "Banjir",
+            "lokasi": "Jl. PI Del, No. 1, Sitoluama, Laguboti",
+            "keterangan": "Banjir akibat selokan yang dipenuhi dengan sampah",
+            "korban": {
+                "meninggal": 23,
+                "luka_berat": 100,
+                "luka_ringan": 250,
+                "hilang": 15
+            },
+            "kerusakan": {
+                "nama_infrastruktur": "Rumah",
+                "rusak_berat": 10,
+                "rusak_ringan": 15,
+            },
             "created_at": "2021-09-02",
             "updated_at": "2021-09-02",
             "created_by": {
@@ -126,17 +153,26 @@
                 "username": "jerry2204",
                 "role": {
                     "id": 1,
-                    "nama_role": "Bidang1"
+                    "nama_role": "masyarakat"
                 }
             }
         },
         {
-            "id": 2,
-            "nama_wilayah": "Laguboti",
-            "koordinat_lattitude": 2.4441,
-            "koordinat_longitude": 98.0607,
-            "jenis_rawan_bencana": "Banjir",
-            "level_rawan_bencana": "Tinggi",
+            "id_laporan": "BD002",
+            "jenis_bencana": "Kebakaran Rumah",
+            "lokasi": "Jl. PI Del, No. 1, Sitoluama, Laguboti",
+            "keterangan": "kebakaran rumah yang sudah menghabiskan banyak rumah",
+            "korban": {
+                "meninggal": 0,
+                "luka_berat": 1,
+                "luka_ringan": 2,
+                "hilang": 0
+            },
+            "kerusakan": {
+                "nama_infrastruktur": "Rumah",
+                "rusak_berat": 10,
+                "rusak_ringan": 1,
+            },
             "created_at": "2021-09-02",
             "updated_at": "2021-09-02",
             "created_by": {
@@ -147,7 +183,7 @@
                 "username": "jerry2204",
                 "role": {
                     "id": 1,
-                    "nama_role": "Bidang1"
+                    "nama_role": "masyarakat"
                 }
             }
         }
@@ -166,9 +202,9 @@
 }
 ```
 
-## Get Detail Disaster Prone Area
+## Get Detail Disaster Report
 
-+ Endpoint : ``/api/rawan/bencana/{id}``
++ Endpoint : ``/api/laporan/bencana/{id}``
 + HTTP Method : ``GET``
 + Request Header :
     + Accept : ``application/json``
@@ -181,25 +217,34 @@
     "code": 200,
     "status": "OK",
     "data": {
-        "id": 1,
-            "nama_wilayah": "Parsoburan",
-            "koordinat_lattitude": 2.3331,
-            "koordinat_longitude": 99.0506,
-            "jenis_rawan_bencana": "Tanah Longsor",
-            "level_rawan_bencana": "Tinggi",
-            "created_at": "2021-09-02",
-            "updated_at": "2021-09-02",
-            "created_by": {
-                "id": 1,
-                "full_name": "Jerry Andrianto Pangaribuan",
-                "email": "jerryandrianto22@gmail.com",
-                "address": "Perdagangan",
-                "username": "jerry2204",
-                "role": {
-                    "id": 1,
-                    "nama_role": "Bidang1"
-                }
+        "id_laporan": "BD001",
+        "jenis_bencana": "Banjir",
+        "lokasi": "Jl. PI Del, No. 1, Sitoluama, Laguboti",
+        "keterangan": "Banjir akibat selokan yang dipenuhi dengan sampah",
+        "korban": {
+            "meninggal": 23,
+            "luka_berat": 100,
+            "luka_ringan": 250,
+            "hilang": 15
+        },
+        "kerusakan": {
+            "nama_infrastruktur": "Rumah",
+            "rusak_berat": 10,
+            "rusak_ringan": 15,
+        },
+        "created_at": "2021-09-02",
+        "updated_at": "2021-09-02",
+        "created_by": {
+            "id": 1,
+            "full_name": "Jerry Andrianto Pangaribuan",
+            "email": "jerryandrianto22@gmail.com",
+            "address": "Perdagangan",
+            "username": "jerry2204",
+            "role": {
+                "id": 2,
+                "nama_role": "masyarakat"
             }
+        }
     }
 }
 ```
@@ -220,23 +265,33 @@
     "timestamp": "2021-05-14T04:22:26.690+0000",
     "status": 404,
     "error": "Not Found",
-    "message": "Disaster Prone Area Not Found"
+    "message": "Disaster Report Not Found"
 }
 ```
 
-## Edit Agenda
+## Edit Disaster Report
 
-+ Endpoint : ``/api/rawan/bencana/{id}``
++ Endpoint : ``/api/laporan/bencana/{id}``
 + HTTP Method : ``PUT``
 + Request Body :
 
 ```json
 {
-    "nama_wilayah": "Parsoburan",
-    "koordinat_lattitude": 2.3331,
-    "koordinat_longitude": 99.0506,
-    "jenis_rawan_bencana": "Gempa Bumi",
-    "level_rawan_bencana": "Tinggi",
+    "id_laporan": "BD001",
+    "jenis_bencana": "Banjir",
+    "lokasi": "Jl. PI Del, No. 1, Sitoluama, Laguboti",
+    "keterangan": "Banjir akibat seharian hujan tanpa henti",
+    "korban": {
+        "meninggal": 0,
+        "luka_berat": 0,
+        "luka_ringan": 0,
+        "hilang": 1
+    },
+    "kerusakan": {
+        "nama_infrastruktur": "Rumah",
+        "rusak_berat": 10,
+        "rusak_ringan": 15,
+    },
     "created_at": "2021-09-02",
     "updated_at": "2021-09-02",
     "created_by": {
@@ -261,14 +316,23 @@
 {
     "code": 200,
     "status": "OK",
-    "message": "Disaster Prone Area updated successfully",
+    "message": "Disaster Report updated successfully",
     "data": {
-        "id": 1,
-        "nama_wilayah": "Parsoburan",
-        "koordinat_lattitude": 2.3331,
-        "koordinat_longitude": 99.0506,
-        "jenis_rawan_bencana": "Tanah Longsor",
-        "level_rawan_bencana": "Tinggi",
+        "id_laporan": "BD001",
+        "jenis_bencana": "Banjir",
+        "lokasi": "Jl. PI Del, No. 1, Sitoluama, Laguboti",
+        "keterangan": "Banjir akibat seharian hujan tanpa henti",
+        "korban": {
+            "meninggal": 0,
+            "luka_berat": 0,
+            "luka_ringan": 0,
+            "hilang": 1
+        },
+        "kerusakan": {
+            "nama_infrastruktur": "Rumah",
+            "rusak_berat": 10,
+            "rusak_ringan": 15,
+        },
         "created_at": "2021-09-02",
         "updated_at": "2021-09-02",
         "created_by": {
@@ -306,7 +370,7 @@
 }
 ```
 
-## Delete Disaster Prone Area
+## Delete Disaster Report
 
 + Endpoint : ``/api/rawan/bencana/{id}``
 + HTTP Method : ``DELETE``
@@ -318,7 +382,7 @@
 {
     "code": 200,
     "status": "OK",
-    "message": "Disaster Prone Area deleted successfully"
+    "message": "Disaster Report deleted successfully"
 }
 ```
 
@@ -338,6 +402,6 @@
     "timestamp": "2021-05-14T04:22:26.690+0000",
     "status": 404,
     "error": "Not Found",
-    "message": "Disaster Prone Area Not Found"
+    "message": "Disaster Report Not Found"
 }
 ```
