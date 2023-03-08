@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RawanBencana;
 use App\Http\Requests\StoreRawanBencanaRequest;
 use App\Http\Requests\UpdateRawanBencanaRequest;
+use App\Http\Resources\RawanBencanasResource;
 
 class RawanBencanaController extends Controller
 {
@@ -15,7 +16,9 @@ class RawanBencanaController extends Controller
      */
     public function index()
     {
-        //
+        return RawanBencanasResource::collection(
+            RawanBencana::all()
+        );
     }
 
     /**
