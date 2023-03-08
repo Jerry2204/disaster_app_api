@@ -6,6 +6,7 @@ use App\Models\RawanBencana;
 use App\Http\Requests\StoreRawanBencanaRequest;
 use App\Http\Requests\UpdateRawanBencanaRequest;
 use App\Http\Resources\RawanBencanasResource;
+use Illuminate\Support\Facades\Auth;
 
 class RawanBencanaController extends Controller
 {
@@ -39,7 +40,18 @@ class RawanBencanaController extends Controller
      */
     public function store(StoreRawanBencanaRequest $request)
     {
-        //
+        $request->validated($request->all());
+
+        $rawanBencana = RawanBencana::create([
+            'user_id' => Auth::user()->id,
+            'nama_wilayah' => $request->nama_wilayah,
+            'koordinat_lattitude' => $request->koordinat_lattitude,
+            'koordinat_longitude' => $request->koordinat_longitude,
+            'jenis_rawan_bencana' => $request->jenis_rawan_bencana,
+            'level_rawan_bencana' => $request->level_rawan_bencana,
+        ]);
+
+        return new RawanBencanasResource($rawanBencana);
     }
 
     /**
