@@ -15,10 +15,10 @@ class CreateKorbansTable extends Migration
     {
         Schema::create('korbans', function (Blueprint $table) {
             $table->id();
-            $table->integer('meninggal');
-            $table->integer('luka_berat');
-            $table->integer('luka_ringan');
-            $table->integer('hilang');
+            $table->integer('meninggal')->default(0);
+            $table->integer('luka_berat')->default(0);
+            $table->integer('luka_ringan')->default(0);
+            $table->integer('hilang')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

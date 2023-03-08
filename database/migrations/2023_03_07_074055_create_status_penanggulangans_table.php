@@ -15,9 +15,9 @@ class CreateStatusPenanggulangansTable extends Migration
     {
         Schema::create('status_penanggulangans', function (Blueprint $table) {
             $table->id();
-            $table->string('petugas');
-            $table->text('keterangan');
-            $table->json('tindakan');
+            $table->string('petugas')->default("");
+            $table->text('keterangan')->default("");
+            $table->json('tindakan')->default("");
             $table->enum('status', ['menunggu', 'diterima', 'proses', 'selesai'])->default('menunggu');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

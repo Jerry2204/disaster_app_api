@@ -15,9 +15,9 @@ class CreateKerusakansTable extends Migration
     {
         Schema::create('kerusakans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_infrastruktur');
-            $table->integer('rusak_berat');
-            $table->integer('rusak_ringan');
+            $table->string('nama_infrastruktur')->default("");
+            $table->integer('rusak_berat')->default(0);
+            $table->integer('rusak_ringan')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
