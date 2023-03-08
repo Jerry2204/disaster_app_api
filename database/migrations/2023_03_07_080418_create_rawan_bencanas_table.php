@@ -19,7 +19,7 @@ class CreateRawanBencanasTable extends Migration
             $table->string('koordinat_lattitude');
             $table->string('koordinat_longitude');
             $table->string('jenis_rawan_bencana');
-            $table->string('level_rawan_bencana');
+            $table->enum('level_rawan_bencana', ['level 1', 'level 2', 'level 3', 'level 4']);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
