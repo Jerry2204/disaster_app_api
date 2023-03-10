@@ -28,8 +28,7 @@ class StoreRawanBencanaRequest extends FormRequest
             'koordinat_lattitude' => ['required'],
             'koordinat_longitude' => ['required'],
             'jenis_rawan_bencana' => ['required'],
-            'level_rawan_bencana' => ['required'],
-            'user_id' => ['required']
+            'level_rawan_bencana' => ['required']
         ];
     }
 }
