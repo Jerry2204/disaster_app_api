@@ -13,7 +13,7 @@ class UpdateRawanBencanaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateRawanBencanaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama_wilayah' => ['required'],
+            'koordinat_lattitude' => ['required'],
+            'koordinat_longitude' => ['required'],
+            'jenis_rawan_bencana' => ['required'],
+            'level_rawan_bencana' => ['required']
         ];
     }
 }

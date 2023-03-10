@@ -6,10 +6,14 @@ use App\Models\RawanBencana;
 use App\Http\Requests\StoreRawanBencanaRequest;
 use App\Http\Requests\UpdateRawanBencanaRequest;
 use App\Http\Resources\RawanBencanasResource;
+use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
 
 class RawanBencanaController extends Controller
 {
+
+    use HttpResponses;
+
     /**
      * Display a listing of the resource.
      *
@@ -60,9 +64,15 @@ class RawanBencanaController extends Controller
      * @param  \App\Models\RawanBencana  $rawanBencana
      * @return \Illuminate\Http\Response
      */
-    public function show(RawanBencana $rawanBencana)
+    public function show($id)
     {
-        //
+        $rawanBencana = RawanBencana::find($id);
+
+        if (!$rawanBencana) {
+            return $this->error('', 'Data Daerah Rawan Bencana tidak ditemukan', 404);
+        }
+
+        return new RawanBencanasResource($rawanBencana);
     }
 
     /**
@@ -71,9 +81,15 @@ class RawanBencanaController extends Controller
      * @param  \App\Models\RawanBencana  $rawanBencana
      * @return \Illuminate\Http\Response
      */
-    public function edit(RawanBencana $rawanBencana)
+    public function edit($id)
     {
-        //
+        $rawanBencana = RawanBencana::find($id);
+
+        if (!$rawanBencana) {
+            return $this->error('', 'Data Daerah Rawan Bencana tidak ditemukan', 404);
+        }
+
+        return new RawanBencanasResource($rawanBencana);
     }
 
     /**
@@ -83,9 +99,13 @@ class RawanBencanaController extends Controller
      * @param  \App\Models\RawanBencana  $rawanBencana
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRawanBencanaRequest $request, RawanBencana $rawanBencana)
+    public function update(UpdateRawanBencanaRequest $request, RawanBencana $bencana)
     {
-        //
+        $request->validated($request->all());
+
+        $bencana->update($request->all());
+
+        return new RawanBencanasResource($bencana);
     }
 
     /**

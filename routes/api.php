@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\RawanBencanaController;
+use App\Models\RawanBencana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +26,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Public Routes
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::resource('/tasks', TaskController::class);
-    Route::resource('/rawan/bencana', RawanBencanaController::class);
+    Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show']);
 });
+
