@@ -114,8 +114,16 @@ class RawanBencanaController extends Controller
      * @param  \App\Models\RawanBencana  $rawanBencana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RawanBencana $rawanBencana)
+    public function destroy($id)
     {
-        //
+        $rawanBencana = RawanBencana::find($id);
+
+        if (!$rawanBencana) {
+            return $this->error('', 'Data Daerah Rawan Bencana tidak ditemukan', 404);
+        }
+
+        $rawanBencana->delete();
+
+        return $this->success('', 'Data Daerah Rawan Bencana Berhasil Dihapus', 200);
     }
 }
