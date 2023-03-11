@@ -20,7 +20,6 @@ class CreateLaporanBencanasTable extends Migration
             $table->text('keterangan');
             $table->string('status_bencana');
             $table->foreignId('korban_id')->constrained();
-            $table->foreignId('kerusakan_id')->constrained();
             $table->foreignId('status_penanggulangan_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
