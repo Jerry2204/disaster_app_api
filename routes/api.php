@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::resource('/tasks', TaskController::class);
     Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show']);
     Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show']);
+    Route::put('/dampak/bencana/{bencana}', [LaporanBencanaController::class, 'updateDampakBencana']);
 });
 
 Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
