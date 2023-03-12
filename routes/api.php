@@ -27,8 +27,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Public Routes
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
-Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
@@ -38,3 +36,5 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show']);
 });
 
+Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
+Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
