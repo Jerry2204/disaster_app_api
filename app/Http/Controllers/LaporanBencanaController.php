@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\LaporanBencana;
 use App\Http\Requests\StoreLaporanBencanaRequest;
 use App\Http\Requests\UpdateLaporanBencanaRequest;
+use App\Http\Resources\LaporanBencanasResource;
+use App\Models\Korban;
+use App\Models\StatusPenanggulangan;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanBencanaController extends Controller
 {
@@ -36,7 +40,26 @@ class LaporanBencanaController extends Controller
      */
     public function store(StoreLaporanBencanaRequest $request)
     {
-        //
+        $request->validated($request->all());
+
+        $korban = Korban::create([
+            'user_id' => Auth::user()->id,
+        ]);
+
+        $status_penanggulangan = StatusPenanggulangan::create([
+            'user_id' => Auth::user()->id,
+        ]);
+
+        $laporanBencana = LaporanBencana::create([
+            'jenis_bencana' => $request->jenis_bencana,
+            'lokasi' => $request->lokasi,
+            'keterangan' => $request->keterangan,
+            'status_bencana' => $request->status_bencana,
+            'korban_id' => $korban->id,
+            'status_penanggulangan_id' => $status_penanggulangan->id
+        ]);
+
+        return new LaporanBencanasResource($laporanBencana);
     }
 
     /**
