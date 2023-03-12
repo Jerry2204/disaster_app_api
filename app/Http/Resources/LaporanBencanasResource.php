@@ -30,18 +30,8 @@ class LaporanBencanasResource extends JsonResource
                     'user_name' => $this->user->name,
                     'user_email' => $this->user->email
                 ],
-                'korban' => [
-                    'meninggal' => $this->korban->meninggal,
-                    'luka_berat' => $this->korban->luka_berat,
-                    'luka_ringan' => $this->korban->luka_ringan,
-                    'hilang' => $this->korban->hilang
-                ],
-                'status_penanggulangan' => [
-                    'petugas' => $this->status_penanggulangan->petugas,
-                    'keterangan' => $this->status_penanggulangan->keterangan,
-                    'tindakan' => $this->status_penanggulangan->tindakan,
-                    'status' => $this->status_penanggulangan->status
-                ]
+                'status_penanggulangan' => new StatusPenanggulangansResource($this->whenLoaded('status_penanggulangan')),
+                'korban' => new KorbansResource($this->whenLoaded('korban')),
             ]
         ];
     }

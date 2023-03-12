@@ -103,9 +103,26 @@ class LaporanBencanaController extends Controller
      * @param  \App\Models\LaporanBencana  $laporanBencana
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLaporanBencanaRequest $request, LaporanBencana $laporanBencana)
+    public function update(UpdateLaporanBencanaRequest $request, LaporanBencana $bencana)
     {
-        //
+        $request->validated($request->all());
+
+        $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
+
+        $status_penanggulangan->update([
+            'petugas' => $request->petugas,
+            'keterangan' => $request->keterangan_penanggulangan,
+            'tindakan' => $request->tindakan,
+            'status' => $request->status,
+            'user_id' => Auth::user()->id
+        ]);
+
+        $bencana->update($request->all());
+
+        $bencana->load(array('korban'));
+        $bencana->load(array('status_penanggulangan'));
+
+        return new LaporanBencanasResource($bencana);
     }
 
     /**

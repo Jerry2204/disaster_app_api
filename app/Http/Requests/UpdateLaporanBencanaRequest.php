@@ -13,7 +13,7 @@ class UpdateLaporanBencanaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class UpdateLaporanBencanaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'jenis_bencana' => ['required'],
+            'nama_bencana' => 'required',
+            'lokasi' => ['required'],
+            'keterangan' => ['required'],
+            'status_bencana' => ['required'],
+            'petugas' => ['required'],
+            'keterangan_penanggulangan' => ['required'],
+            'tindakan' => ['required'],
+            'status' => ['required']
         ];
     }
 }
