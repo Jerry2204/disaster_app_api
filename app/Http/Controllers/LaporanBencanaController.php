@@ -8,10 +8,13 @@ use App\Http\Requests\UpdateLaporanBencanaRequest;
 use App\Http\Resources\LaporanBencanasResource;
 use App\Models\Korban;
 use App\Models\StatusPenanggulangan;
+use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
 
 class LaporanBencanaController extends Controller
 {
+    use HttpResponses;
+
     /**
      * Display a listing of the resource.
      *
@@ -71,9 +74,15 @@ class LaporanBencanaController extends Controller
      * @param  \App\Models\LaporanBencana  $laporanBencana
      * @return \Illuminate\Http\Response
      */
-    public function show(LaporanBencana $laporanBencana)
+    public function show($id)
     {
-        //
+        $laporanBencana = LaporanBencana::find($id);
+
+        if (!$laporanBencana) {
+            return $this->error('', 'Data Laporan Bencana tidak ditemukan', 404);
+        }
+
+        return new LaporanBencanasResource($laporanBencana);
     }
 
     /**
