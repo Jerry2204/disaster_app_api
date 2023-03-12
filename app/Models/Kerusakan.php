@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Kerusakan extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nama_infrastruktur',
+        'rusak_berat',
+        'rusak_ringan',
+        'user_id'
+    ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

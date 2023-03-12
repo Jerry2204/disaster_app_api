@@ -25,7 +25,7 @@ class LaporanBencanasResource extends JsonResource
                 'updated_at' => $this->updated_at,
             ],
             'relationships' => [
-
+                
             ]
         ];
     }
