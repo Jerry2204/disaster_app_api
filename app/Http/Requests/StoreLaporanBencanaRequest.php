@@ -13,7 +13,7 @@ class StoreLaporanBencanaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreLaporanBencanaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'jenis_bencana' => ['required'],
+            'lokasi' => ['required'],
+            'keterangan' => ['required'],
+            'status_bencana' => ['required']
         ];
     }
 }
