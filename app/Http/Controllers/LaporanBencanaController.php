@@ -56,7 +56,8 @@ class LaporanBencanaController extends Controller
             'keterangan' => $request->keterangan,
             'status_bencana' => $request->status_bencana,
             'korban_id' => $korban->id,
-            'status_penanggulangan_id' => $status_penanggulangan->id
+            'status_penanggulangan_id' => $status_penanggulangan->id,
+            'user_id' => Auth::user()->id,
         ]);
 
         return new LaporanBencanasResource($laporanBencana);

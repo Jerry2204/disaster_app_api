@@ -13,6 +13,7 @@ class LaporanBencana extends Model
         'jenis_bencana',
         'lokasi',
         'keterangan',
+        'status_bencana',
         'korban_id',
         'status_penanggulangan_id',
         'user_id'

@@ -17,7 +17,7 @@ class CreateStatusPenanggulangansTable extends Migration
             $table->id();
             $table->string('petugas')->default("");
             $table->text('keterangan')->default("");
-            $table->json('tindakan')->default("");
+            $table->json('tindakan')->default(json_encode([]));
             $table->enum('status', ['menunggu', 'diterima', 'proses', 'selesai'])->default('menunggu');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
