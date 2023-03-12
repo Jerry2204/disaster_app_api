@@ -152,8 +152,16 @@ class LaporanBencanaController extends Controller
      * @param  \App\Models\LaporanBencana  $laporanBencana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LaporanBencana $laporanBencana)
+    public function destroy($id)
     {
-        //
+        $laporanBencana = LaporanBencana::find($id);
+
+        if (!$laporanBencana) {
+            return $this->error('', 'Data Laporan Bencana tidak ditemukan', 404);
+        }
+
+        $laporanBencana->delete();
+
+        return $this->success('', 'Data Laporan Bencana Berhasil Dihapus', 200);
     }
 }
