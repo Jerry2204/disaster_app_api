@@ -19,7 +19,9 @@ class LaporanBencanaController extends Controller
      */
     public function index()
     {
-        //
+        return LaporanBencanasResource::collection(
+            LaporanBencana::all()
+        );
     }
 
     /**
