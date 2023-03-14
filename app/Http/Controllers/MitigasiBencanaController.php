@@ -6,6 +6,7 @@ use App\Models\MitigasiBencana;
 use App\Http\Requests\StoreMitigasiBencanaRequest;
 use App\Http\Requests\UpdateMitigasiBencanaRequest;
 use App\Http\Resources\MitigasiBencanasResource;
+use Illuminate\Support\Facades\Auth;
 
 class MitigasiBencanaController extends Controller
 {
@@ -39,7 +40,17 @@ class MitigasiBencanaController extends Controller
      */
     public function store(StoreMitigasiBencanaRequest $request)
     {
-        //
+        $request->validated($request->all());
+
+        $mitigasiBencana = MitigasiBencana::create([
+            'title' => $request->title,
+            'deskripsi' => $request->deskripsi,
+            'jenis_konten' => $request->jenis_konten,
+            'file' => $request->file,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return new MitigasiBencanasResource($mitigasiBencana);
     }
 
     /**
