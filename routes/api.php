@@ -32,6 +32,7 @@ Route::post('/register', [AuthController::class, 'register']);
 // Route for all users
 Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
 Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
+Route::get('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'show']);
 
 // Route for admin
 Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function() {

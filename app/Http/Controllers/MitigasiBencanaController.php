@@ -6,10 +6,12 @@ use App\Models\MitigasiBencana;
 use App\Http\Requests\StoreMitigasiBencanaRequest;
 use App\Http\Requests\UpdateMitigasiBencanaRequest;
 use App\Http\Resources\MitigasiBencanasResource;
+use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
 
 class MitigasiBencanaController extends Controller
 {
+    use HttpResponses;
     /**
      * Display a listing of the resource.
      *
@@ -59,9 +61,15 @@ class MitigasiBencanaController extends Controller
      * @param  \App\Models\MitigasiBencana  $mitigasiBencana
      * @return \Illuminate\Http\Response
      */
-    public function show(MitigasiBencana $mitigasiBencana)
+    public function show($id)
     {
-        //
+        $mitigasiBencana = MitigasiBencana::find($id);
+
+        if(!$mitigasiBencana) {
+            return $this->error('', 'Data Mitigasi Bencana tidak ditemukan', 404);
+        }
+
+        return new MitigasiBencanasResource($mitigasiBencana);
     }
 
     /**
