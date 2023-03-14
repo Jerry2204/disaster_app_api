@@ -29,7 +29,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 // Protected Routes
-Route::group(['middleware' => ['auth:sanctum']], function() {
+Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::resource('/tasks', TaskController::class);
     Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show']);
