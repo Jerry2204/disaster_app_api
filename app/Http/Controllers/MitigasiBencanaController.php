@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MitigasiBencana;
 use App\Http\Requests\StoreMitigasiBencanaRequest;
 use App\Http\Requests\UpdateMitigasiBencanaRequest;
+use App\Http\Resources\MitigasiBencanasResource;
 
 class MitigasiBencanaController extends Controller
 {
@@ -15,7 +16,9 @@ class MitigasiBencanaController extends Controller
      */
     public function index()
     {
-        //
+        return MitigasiBencanasResource::collection(
+            MitigasiBencana::all()
+        );
     }
 
     /**
