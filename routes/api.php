@@ -23,12 +23,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 // Public Routes
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 // Protected Routes
+// Route for all users
+Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
+Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
+
+// Route for admin
 Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::resource('/tasks', TaskController::class);
@@ -36,6 +40,3 @@ Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function() {
     Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show']);
     Route::put('/dampak/bencana/{bencana}', [LaporanBencanaController::class, 'updateDampakBencana']);
 });
-
-Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
-Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
