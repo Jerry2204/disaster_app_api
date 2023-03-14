@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class MitigasiBencana extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'deskripsi',
+        'jenis_konten',
+        'file',
+        'user_id'
+    ];
 }
