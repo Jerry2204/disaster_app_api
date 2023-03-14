@@ -101,8 +101,17 @@ class MitigasiBencanaController extends Controller
      * @param  \App\Models\MitigasiBencana  $mitigasiBencana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MitigasiBencana $mitigasiBencana)
+    public function destroy($id)
     {
-        //
+        $mitigasiBencana = MitigasiBencana::find($id);
+
+        if(!$mitigasiBencana) {
+            return $this->error('', 'Data Mitigasi Bencana tidak ditemukan', 404);
+        }
+
+        $mitigasiBencana->delete();
+
+        return $this->success('', 'Data Mitigasi Bencana Berhasil Dihapus', 200);
+
     }
 }
