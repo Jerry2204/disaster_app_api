@@ -90,9 +90,19 @@ class MitigasiBencanaController extends Controller
      * @param  \App\Models\MitigasiBencana  $mitigasiBencana
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMitigasiBencanaRequest $request, MitigasiBencana $mitigasiBencana)
+    public function update(UpdateMitigasiBencanaRequest $request, $id)
     {
-        //
+        $mitigasiBencana = MitigasiBencana::find($id);
+
+        if(!$mitigasiBencana) {
+            return $this->error('', 'Data Mitigasi Bencana tidak ditemukan', 404);
+        }
+
+        $request->validated($request->all());
+
+        $mitigasiBencana->update($request->all());
+
+        return new MitigasiBencanasResource($mitigasiBencana);
     }
 
     /**

@@ -13,7 +13,7 @@ class UpdateMitigasiBencanaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateMitigasiBencanaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required'],
+            'deskripsi' => ['required'],
+            'jenis_konten' => ['required'],
+            'file' => ['required']
         ];
     }
 }
