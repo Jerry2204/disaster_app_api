@@ -99,13 +99,19 @@ class RawanBencanaController extends Controller
      * @param  \App\Models\RawanBencana  $rawanBencana
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRawanBencanaRequest $request, RawanBencana $bencana)
+    public function update(UpdateRawanBencanaRequest $request, $id)
     {
+        $rawanBencana = RawanBencana::find($id);
+
+        if(!$rawanBencana) {
+            return $this->error('', 'Data Rawan Bencana tidak ditemukan', 404);
+        }
+
         $request->validated($request->all());
 
-        $bencana->update($request->all());
+        $rawanBencana->update($request->all());
 
-        return new RawanBencanasResource($bencana);
+        return new RawanBencanasResource($rawanBencana);
     }
 
     /**
