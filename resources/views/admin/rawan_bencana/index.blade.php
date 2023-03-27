@@ -105,6 +105,7 @@
                     </button>
                 </div>
                 <form method="POST" action="{{ route('rawan_bencana.add') }}">
+                    @csrf
                     <div class="modal-body">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="nama_wilayah">Nama Wilayah</label>
@@ -139,17 +140,17 @@
                             <div class="col-sm-10">
                                 <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control">
                                     <option value="">Pilih Level Rawan Bencana</option>
-                                    <option value="level_1">Level 1</option>
-                                    <option value="level_2">Level 2</option>
-                                    <option value="level_3">Level 3</option>
-                                    <option value="level_4">Level 4</option>
+                                    <option value="level 1">Level 1</option>
+                                    <option value="level 2">Level 2</option>
+                                    <option value="level 3">Level 3</option>
+                                    <option value="level 4">Level 4</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>

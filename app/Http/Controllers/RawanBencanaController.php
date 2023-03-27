@@ -65,6 +65,22 @@ class RawanBencanaController extends Controller
         return new RawanBencanasResource($rawanBencana);
     }
 
+    public function addAdmin(StoreRawanBencanaRequest $request)
+    {
+        $request->validated($request->all());
+
+        RawanBencana::create([
+            'user_id' => Auth::user()->id,
+            'nama_wilayah' => $request->nama_wilayah,
+            'koordinat_lattitude' => $request->koordinat_lattitude,
+            'koordinat_longitude' => $request->koordinat_longitude,
+            'jenis_rawan_bencana' => $request->jenis_rawan_bencana,
+            'level_rawan_bencana' => $request->level_rawan_bencana,
+        ]);
+
+        return redirect()->back()->with('sukses', 'Data Rawan Bencana Berhasil ditambahkan');
+    }
+
     /**
      * Display the specified resource.
      *
