@@ -77,6 +77,10 @@
                                             <td>{{ $item->koordinat_longitude }}</td>
                                             <td>{{ $item->jenis_rawan_bencana }}</td>
                                             <td>{{ $item->level_rawan_bencana }}</td>
+                                            <td>
+                                                <a href="" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
