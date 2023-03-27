@@ -3,7 +3,7 @@
     <div class="pcoded-inner-navbar main-menu">
         <div class="">
             <div class="main-menu-header">
-                <img class="img-40 img-radius" src="admin/images/avatar-4.jpg" alt="User-Profile-Image">
+                <img class="img-40 img-radius" src="{{ asset('admin/images/avatar-4.jpg') }}" alt="User-Profile-Image">
                 <div class="user-details">
                     <span>John Doe</span>
                     <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
@@ -115,6 +115,13 @@
                     </li>
 
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('rawan_bencana.index') }}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Rawan Bencana</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
             </li>
         </ul>
     </div>

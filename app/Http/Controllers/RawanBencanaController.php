@@ -26,6 +26,13 @@ class RawanBencanaController extends Controller
         );
     }
 
+    public function indexAdmin()
+    {
+        $rawanBencana = RawanBencana::all();
+
+        return view('admin.rawan_bencana.index', compact('rawanBencana'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

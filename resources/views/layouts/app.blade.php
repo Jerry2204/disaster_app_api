@@ -17,18 +17,18 @@
       <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
       <meta name="author" content="CodedThemes">
       <!-- Favicon icon -->
-      <link rel="icon" href="admin/images/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="{{ asset('admin/images/favicon.ico') }}" type="image/x-icon">
       <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
       <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="admin/css/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap/css/bootstrap.min.css') }}">
       <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="admin/icon/themify-icons/themify-icons.css">
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin/icon/themify-icons/themify-icons.css') }}">
       <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="admin/icon/icofont/css/icofont.css">
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin/icon/icofont/css/icofont.css') }}">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="admin/css/style.css">
-      <link rel="stylesheet" type="text/css" href="admin/css/jquery.mCustomScrollbar.css">
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/jquery.mCustomScrollbar.css') }}">
   </head>
 
   <body>
@@ -83,12 +83,7 @@
                         <div class="pcoded-inner-content">
                             <div class="main-body">
                                 <div class="page-wrapper">
-
-                                    <div class="page-body">
-                                        <div class="row">
-                                            @yield('content')
-                                        </div>
-                                    </div>
+                                    @yield('content')
 
                                     <div id="styleSelector">
 
@@ -151,26 +146,26 @@
 <![endif]-->
 <!-- Warning Section Ends -->
 <!-- Required Jquery -->
-<script type="text/javascript" src="admin/js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="admin/js/jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript" src="admin/js/popper.js/popper.min.js"></script>
-<script type="text/javascript" src="admin/js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/popper.js/popper.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- jquery slimscroll js -->
-<script type="text/javascript" src="admin/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script type="text/javascript" src="{{ asset('admin/js/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
 <!-- modernizr js -->
-<script type="text/javascript" src="admin/js/modernizr/modernizr.js"></script>
+<script type="text/javascript" src="{{ asset('admin/js/modernizr/modernizr.js') }}"></script>
 <!-- am chart -->
-<script src="admin/pages/widget/amchart/amcharts.min.js"></script>
-<script src="admin/pages/widget/amchart/serial.min.js"></script>
+<script src="{{ asset('admin/pages/widget/amchart/amcharts.min.js') }}"></script>
+<script src="{{ asset('admin/pages/widget/amchart/serial.min.js') }}"></script>
 <!-- Todo js -->
-<script type="text/javascript " src="admin/pages/todo/todo.js "></script>
+<script type="text/javascript " src="{{ asset('admin/pages/todo/todo.js') }} "></script>
 <!-- Custom js -->
-<script type="text/javascript" src="admin/pages/dashboard/custom-dashboard.js"></script>
-<script type="text/javascript" src="admin/js/script.js"></script>
-<script type="text/javascript " src="admin/js/SmoothScroll.js"></script>
-<script src="admin/js/pcoded.min.js"></script>
-<script src="admin/js/demo-12.js"></script>
-<script src="admin/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="{{ asset('admin/pages/dashboard/custom-dashboard.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/script.js') }}"></script>
+<script type="text/javascript " src="{{ asset('admin/js/SmoothScroll.js') }}"></script>
+<script src="{{ asset('admin/js/pcoded.min.js') }}"></script>
+<script src="{{ asset('admin/js/demo-12.js') }}"></script>
+<script src="{{ asset('admin/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script>
 var $window = $(window);
 var nav = $('.fixed-button');
