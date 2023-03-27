@@ -10,8 +10,8 @@
                 <div class="page-header-title">
                     <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
                     <div class="d-inline">
-                        <h4>Sample Page</h4>
-                        <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                        <h4>Rawan Bencana</h4>
+                        <span>Daftar Daerah Rawan Bencana</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         </li>
                         <li class="breadcrumb-item"><a href="#!">Pages</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Sample page</a>
+                        <li class="breadcrumb-item"><a href="#!">Rawan Bencana</a>
                         </li>
                     </ul>
                 </div>
@@ -38,13 +38,15 @@
     <div class="page-body">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card p-3">
                     <div class="card-header">
-                        <h5>Hello card</h5>
-                        <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Tambah Daerah Rawan Bencana
+                        </button>
                         <div class="card-header-right">
-                            <ul class="list-unstyled card-option" style="width: 35px;">
-                                <li class=""><i class="icofont icofont-simple-left"></i></li>
+                            <ul class="list-unstyled card-option">
+                                <li><i class="icofont icofont-simple-left "></i></li>
                                 <li><i class="icofont icofont-maximize full-card"></i></li>
                                 <li><i class="icofont icofont-minus minimize-card"></i></li>
                                 <li><i class="icofont icofont-refresh reload-card"></i></li>
@@ -52,20 +54,105 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card-block">
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                            enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                            nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        </p>
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Wilayah</th>
+                                        <th>Koordinat Lattitude</th>
+                                        <th>Koordinat Longitude</th>
+                                        <th>Jenis Rawan Bencana</th>
+                                        <th>Level Rawan Bencana</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($rawanBencana as $item)
+                                        <tr>
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $item->nama_wilayah }}</td>
+                                            <td>{{ $item->koordinat_lattitude }}</td>
+                                            <td>{{ $item->koordinat_longitude }}</td>
+                                            <td>{{ $item->jenis_rawan_bencana }}</td>
+                                            <td>{{ $item->level_rawan_bencana }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <th scope="row" colspan="7" class="text-center">Data Daerah Rawan Bencana
+                                                Tidak Ada</th>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Page body end -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Daerah Rawan Bencana</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="{{ route('rawan_bencana.add') }}">
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="nama_wilayah">Nama Wilayah</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control"
+                                    placeholder="Masukkan nama wilayah">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="koordinat_lattitude">Koordinat Lattitude</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="koordinat_lattitude" id="koordinat_lattitude"
+                                    class="form-control" placeholder="Masukkan koordinat lattitude">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="koordinat_longitude">Koordinat Longitude</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="koordinat_longitude" id="koordinat_longitude"
+                                    class="form-control" placeholder="Masukkan koordinat longitude">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="jenis_rawan_bencana">Jenis Rawan Bencana</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="jenis_rawan_bencana" id="jenis_rawan_bencana"
+                                    class="form-control" placeholder="Masukkan jenis rawan bencana">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="level_rawan_bencana">Level Rawan Bencana</label>
+                            <div class="col-sm-10">
+                                <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control">
+                                    <option value="">Pilih Level Rawan Bencana</option>
+                                    <option value="level_1">Level 1</option>
+                                    <option value="level_2">Level 2</option>
+                                    <option value="level_3">Level 3</option>
+                                    <option value="level_4">Level 4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
