@@ -15,7 +15,8 @@ class CreateLaporanBencanasTable extends Migration
     {
         Schema::create('laporan_bencanas', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_bencana');
+            $table->enum('jenis_bencana', ['bencana alam', 'bencana non alam', 'bencana sosial']);
+            $table->string('nama_bencana');
             $table->text('lokasi');
             $table->text('keterangan');
             $table->text('gambar');

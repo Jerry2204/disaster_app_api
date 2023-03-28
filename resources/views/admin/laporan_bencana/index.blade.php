@@ -76,7 +76,7 @@
                                             <td>{{ $item->lokasi }}</td>
                                             <td>{{ $item->keterangan }}</td>
                                             <td>{{ $item->status_bencana }}</td>
-                                            <td>{{ $item->level_rawan_bencana }}</td>
+                                            <td>{{ $item->status_penanggulangan->status }}</td>
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"
@@ -114,58 +114,66 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Daerah Rawan Bencana</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Laporan Bencana</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('rawan_bencana.add') }}">
+                <form method="POST" action="{{ route('laporan_bencana.add') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="jenis_bencana">Nama Wilayah</label>
+                            <label class="col-sm-2 col-form-label" for="jenis_bencana">Jenis Bencana</label>
                             <div class="col-sm-10">
-                                <input type="text" name="jenis_bencana" id="jenis_bencana" class="form-control"
-                                    placeholder="Masukkan nama wilayah">
+                                <select name="jenis_bencana" id="jenis_bencana" class="form-control">
+                                    <option value="">Pilih Jenis Bencana</option>
+                                    <option value="bencana alam">Bencana Alam</option>
+                                    <option value="bencana non alam">Bencana Non Alam</option>
+                                    <option value="bencana sosial">Bencana Sosial</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="lokasi">Koordinat Lattitude</label>
+                            <label class="col-sm-2 col-form-label" for="nama_bencana">Nama Bencana</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nama_bencana" id="nama_bencana"
+                                    class="form-control" placeholder="Masukkan nama bencana">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
                             <div class="col-sm-10">
                                 <input type="text" name="lokasi" id="lokasi"
-                                    class="form-control" placeholder="Masukkan koordinat lattitude">
+                                    class="form-control" placeholder="Masukkan lokasi bencana">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="keterangan">Koordinat Longitude</label>
+                            <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                             <div class="col-sm-10">
-                                <input type="text" name="keterangan" id="keterangan"
-                                    class="form-control" placeholder="Masukkan koordinat longitude">
+                                <textarea id="keterangan" rows="5" cols="5" class="form-control" name="keterangan" placeholder="Masukkan keterangan"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="status_bencana">Jenis Rawan Bencana</label>
+                            <label class="col-sm-2 col-form-label" for="status_bencana">Status Bencana</label>
                             <div class="col-sm-10">
-                                <input type="text" name="status_bencana" id="status_bencana"
-                                    class="form-control" placeholder="Masukkan jenis rawan bencana">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="level_rawan_bencana">Level Rawan Bencana</label>
-                            <div class="col-sm-10">
-                                <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control">
-                                    <option value="">Pilih Level Rawan Bencana</option>
-                                    <option value="level 1">Level 1</option>
-                                    <option value="level 2">Level 2</option>
-                                    <option value="level 3">Level 3</option>
-                                    <option value="level 4">Level 4</option>
+                                <select name="status_bencana" id="status_bencana" class="form-control">
+                                    <option value="">Pilih Status Bencana</option>
+                                    <option value="ringan">Ringan</option>
+                                    <option value="sedang">Sedang</option>
+                                    <option value="darurat">Darurat</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="file">Gambar</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file" id="file" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

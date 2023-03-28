@@ -25,9 +25,9 @@ class StoreLaporanBencanaRequest extends FormRequest
     {
         return [
             'jenis_bencana' => ['required'],
-            'nama_bencana' => ['required'],
             'lokasi' => ['required'],
-            'keterangan' => ['required']
+            'keterangan' => ['required'],
+            'file' => ['required']
         ];
     }
 }

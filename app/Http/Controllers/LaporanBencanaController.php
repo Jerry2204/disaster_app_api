@@ -76,6 +76,40 @@ class LaporanBencanaController extends Controller
         return new LaporanBencanasResource($laporanBencana);
     }
 
+    public function addAdmin(StoreLaporanBencanaRequest $request)
+    {
+        $request->validated($request->all());
+
+        $korban = Korban::create([
+            'user_id' => Auth::user()->id,
+        ]);
+
+        $status_penanggulangan = StatusPenanggulangan::create([
+            'user_id' => Auth::user()->id,
+        ]);
+
+        // Handle file
+        $file = $request->file('file');
+
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+        $file->move("public/laporan", $nama_file);
+
+        $laporanBencana = LaporanBencana::create([
+            'jenis_bencana' => $request->jenis_bencana,
+            'nama_bencana' => $request->nama_bencana,
+            'lokasi' => $request->lokasi,
+            'keterangan' => $request->keterangan,
+            'status_bencana' => $request->status_bencana,
+            'korban_id' => $korban->id,
+            'gambar' => $nama_file,
+            'status_penanggulangan_id' => $status_penanggulangan->id,
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
+    }
+
     /**
      * Display the specified resource.
      *

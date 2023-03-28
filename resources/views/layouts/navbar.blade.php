@@ -9,7 +9,7 @@
                 <i class="ti-search"></i>
             </a>
             <a href="index.html">
-                <img class="img-fluid" src="{{ asset('admin/images/logo.png') }}" alt="Theme-Logo" />
+                <img class="img-fluid" src="{{ asset('admin/images/logo_bpbd.png') }}" width="45" height="45" alt="Theme-Logo" />
             </a>
             <a class="mobile-options">
                 <i class="ti-more"></i>

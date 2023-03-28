@@ -11,9 +11,11 @@ class LaporanBencana extends Model
 
     protected $fillable = [
         'jenis_bencana',
+        'nama_bencana',
         'lokasi',
         'keterangan',
         'status_bencana',
+        'gambar',
         'korban_id',
         'status_penanggulangan_id',
         'user_id'

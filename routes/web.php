@@ -20,8 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('/', [AuthController::class, 'login'])->name('login');
 
-Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function() {
+Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
+Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function() {
     Route::get('/rawan/bencana', [RawanBencanaController::class, 'indexAdmin'])->name('rawan_bencana.index');
     Route::post('/rawan/bencana', [RawanBencanaController::class, 'addAdmin'])->name('rawan_bencana.add');
     Route::put('/rawan/bencana', [RawanBencanaController::class, 'updateAdmin'])->name('rawan_bencana.update');
@@ -29,9 +32,8 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function()
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], function() {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
-    // Route::post('/rawan/bencana', [RawanBencanaController::class, 'addAdmin'])->name('rawan_bencana.add');
+    Route::post('/laporan/bencana', [LaporanBencanaController::class, 'addAdmin'])->name('laporan_bencana.add');
     // Route::put('/rawan/bencana', [RawanBencanaController::class, 'updateAdmin'])->name('rawan_bencana.update');
     // Route::delete('/rawan/bencana/{id}', [RawanBencanaController::class, 'deleteAdmin'])->name('rawan_bencana.delete');
 });

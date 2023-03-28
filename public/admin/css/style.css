@@ -6077,7 +6077,7 @@ body[themebg-pattern="pattern9"] {
   border-bottom: 1px solid #444c67;
   border-top: 1px solid #444c67; }
 .pcoded .pcoded-header .navbar-logo[logo-theme="theme1"] {
-  background-color: #303549; }
+  background-color: #0255A5; }
 .pcoded .pcoded-header .navbar-logo[logo-theme="theme2"] {
   background-color: #ef5350; }
 .pcoded .pcoded-header .navbar-logo[logo-theme="theme3"] {
@@ -6344,7 +6344,7 @@ body[themebg-pattern="pattern9"] {
     .theme-color a[lheader-theme="theme6"] {
       background: #fff; }
     .theme-color a[header-theme="theme1"] .head:after {
-      background-color: #303549; }
+      background-color: #0255A5; }
     .theme-color a[header-theme="theme1"] .head:before {
       background-color: #fff; }
     .theme-color a[header-theme="theme2"] .head:after, .theme-color a[header-theme="theme2"] .head:before {
@@ -6360,7 +6360,7 @@ body[themebg-pattern="pattern9"] {
     .theme-color a[navbar-theme="theme1"] {
       background: #303548; }
     .theme-color a[logo-theme="theme1"] .head:after {
-      background: #303549; }
+      background: #0255A5; }
     .theme-color a[logo-theme="theme2"] .head:after {
       background: #ef5350; }
     .theme-color a[logo-theme="theme3"] .head:after {
