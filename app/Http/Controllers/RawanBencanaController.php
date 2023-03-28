@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRawanBencanaRequest;
 use App\Http\Resources\RawanBencanasResource;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class RawanBencanaController extends Controller
 {
@@ -21,9 +22,13 @@ class RawanBencanaController extends Controller
      */
     public function index()
     {
-        return RawanBencanasResource::collection(
-            RawanBencana::all()
-        );
+        if(!Cache::has('rawan_bencana')) {
+            Cache::put('rawan_bencana', RawanBencanasResource::collection(
+                RawanBencana::all()
+            ), now()->addMinutes(10));
+        }
+
+        return Cache::get('rawan_bencana');
     }
 
     public function indexAdmin()

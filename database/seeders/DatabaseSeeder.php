@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\LaporanBencana;
+use App\Models\RawanBencana;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,8 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class
-        ]);
+        // $this->call([
+        //     UserSeeder::class,
+        // ]);
+
+        RawanBencana::factory(30)->create();
+        LaporanBencana::factory(30)->create();
     }
 }
