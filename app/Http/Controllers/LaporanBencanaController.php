@@ -28,6 +28,13 @@ class LaporanBencanaController extends Controller
         );
     }
 
+    public function indexAdmin()
+    {
+        $laporanBencana = LaporanBencana::all();
+
+        return view('admin.laporan_bencana.index', compact('laporanBencana'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
