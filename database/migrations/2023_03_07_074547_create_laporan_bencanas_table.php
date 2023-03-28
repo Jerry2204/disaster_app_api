@@ -18,6 +18,7 @@ class CreateLaporanBencanasTable extends Migration
             $table->string('jenis_bencana');
             $table->text('lokasi');
             $table->text('keterangan');
+            $table->text('gambar');
             $table->string('status_bencana')->nullable();
             $table->foreignId('korban_id')->nullable()->constrained();
             $table->foreignId('status_penanggulangan_id')->nullable()->constrained();
