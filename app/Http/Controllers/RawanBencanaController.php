@@ -137,6 +137,21 @@ class RawanBencanaController extends Controller
         return new RawanBencanasResource($rawanBencana);
     }
 
+    public function updateAdmin(UpdateRawanBencanaRequest $request)
+    {
+        $rawanBencana = RawanBencana::find($request->rawan_id);
+
+        if(!$rawanBencana) {
+            return back()->with('gagal', 'Data tidak ditemukan');
+        }
+
+        $request->validated($request->all());
+
+        $rawanBencana->update($request->all());
+
+        return back()->with('sukses', 'Data berhasil diubah');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

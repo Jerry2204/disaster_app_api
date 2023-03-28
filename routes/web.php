@@ -19,6 +19,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('/', [AuthController::class, 'login'])->name('login');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/rawan/bencana', [RawanBencanaController::class, 'indexAdmin'])->name('rawan_bencana.index');
-Route::post('/rawan/bencana', [RawanBencanaController::class, 'addAdmin'])->name('rawan_bencana.add');
+Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function() {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/rawan/bencana', [RawanBencanaController::class, 'indexAdmin'])->name('rawan_bencana.index');
+    Route::post('/rawan/bencana', [RawanBencanaController::class, 'addAdmin'])->name('rawan_bencana.add');
+    Route::put('/rawan/bencana', [RawanBencanaController::class, 'updateAdmin'])->name('rawan_bencana.update');
+});
+
+Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], function() {
+});
+
+Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana']], function() {
+});
+
+Route::group(['middleware' => ['auth', 'checkRoleUser:user']], function() {
+});
+
+Route::group(['middleware' => ['auth', 'checkRoleUser:admin']], function() {
+});

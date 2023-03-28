@@ -178,6 +178,7 @@ var nav = $('.fixed-button');
      }
  });
 </script>
+ @yield('js')
 </body>
 
 </html>

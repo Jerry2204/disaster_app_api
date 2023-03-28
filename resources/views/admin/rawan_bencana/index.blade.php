@@ -78,7 +78,11 @@
                                             <td>{{ $item->jenis_rawan_bencana }}</td>
                                             <td>{{ $item->level_rawan_bencana }}</td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-warning">Ubah</a>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"
+                                                    data-target="#modalEdit" data-nama_wilayah="{{ $item->nama_wilayah }}" data-koordinat_lattitude="{{ $item->koordinat_lattitude }}" data-koordinat_longitude="{{ $item->koordinat_longitude }}" data-jenis_rawan_bencana="{{ $item->jenis_rawan_bencana }}" data-level_rawan_bencana="{{ $item->level_rawan_bencana }}" data-rawan_id="{{ $item->id }}">
+                                                    Ubah
+                                                </button>
                                                 <a href="" class="btn btn-sm btn-danger">Hapus</a>
                                             </td>
                                         </tr>
@@ -98,7 +102,7 @@
     </div>
     <!-- Page body end -->
 
-    <!-- Modal -->
+    <!-- Modal Add -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -160,4 +164,93 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Daerah Rawan Bencana</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="{{ route('rawan_bencana.update') }}">
+                    @csrf
+                    <input name="_method" type="hidden" value="PUT">
+                    <div class="modal-body">
+                        <input type="hidden" name="rawan_id" id="rawan_id" value="">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="nama_wilayah">Nama Wilayah</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control"
+                                    placeholder="Masukkan nama wilayah">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="koordinat_lattitude">Koordinat Lattitude</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="koordinat_lattitude" id="koordinat_lattitude"
+                                    class="form-control" placeholder="Masukkan koordinat lattitude">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="koordinat_longitude">Koordinat Longitude</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="koordinat_longitude" id="koordinat_longitude"
+                                    class="form-control" placeholder="Masukkan koordinat longitude">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="jenis_rawan_bencana">Jenis Rawan Bencana</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="jenis_rawan_bencana" id="jenis_rawan_bencana"
+                                    class="form-control" placeholder="Masukkan jenis rawan bencana">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="level_rawan_bencana">Level Rawan Bencana</label>
+                            <div class="col-sm-10">
+                                <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control">
+                                    <option value="">Pilih Level Rawan Bencana</option>
+                                    <option value="level 1">Level 1</option>
+                                    <option value="level 2">Level 2</option>
+                                    <option value="level 3">Level 3</option>
+                                    <option value="level 4">Level 4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+<script>
+    $('#modalEdit').on('show.bs.modal', function(e) {
+        var link = $(e.relatedTarget)
+        var nama_wilayah = link.data("nama_wilayah");
+        var koordinat_lattitude = link.data('koordinat_lattitude');
+        var koordinat_longitude = link.data('koordinat_longitude');
+        var jenis_rawan_bencana = link.data('jenis_rawan_bencana');
+        var level_rawan_bencana = link.data('level_rawan_bencana');
+        var rawan_id = link.data('rawan_id');
+
+        console.log(rawan_id);
+
+        var modal = $(this)
+        modal.find('.modal-body #nama_wilayah').val(nama_wilayah);
+        modal.find('.modal-body #koordinat_lattitude').val(koordinat_lattitude);
+        modal.find('.modal-body #koordinat_longitude').val(koordinat_longitude);
+        modal.find('.modal-body #jenis_rawan_bencana').val(jenis_rawan_bencana);
+        modal.find('.modal-body #level_rawan_bencana').val(level_rawan_bencana);
+        modal.find('.modal-body #rawan_id').val(rawan_id);
+    })
+</script>
 @endsection
