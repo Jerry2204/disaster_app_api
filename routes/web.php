@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function()
     Route::get('/rawan/bencana', [RawanBencanaController::class, 'indexAdmin'])->name('rawan_bencana.index');
     Route::post('/rawan/bencana', [RawanBencanaController::class, 'addAdmin'])->name('rawan_bencana.add');
     Route::put('/rawan/bencana', [RawanBencanaController::class, 'updateAdmin'])->name('rawan_bencana.update');
+    Route::delete('/rawan/bencana/{id}', [RawanBencanaController::class, 'deleteAdmin'])->name('rawan_bencana.delete');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], function() {

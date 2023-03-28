@@ -29,6 +29,8 @@
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/jquery.mCustomScrollbar.css') }}">
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      @yield('css')
   </head>
 
   <body>

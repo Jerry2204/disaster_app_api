@@ -83,7 +83,14 @@
                                                     data-target="#modalEdit" data-nama_wilayah="{{ $item->nama_wilayah }}" data-koordinat_lattitude="{{ $item->koordinat_lattitude }}" data-koordinat_longitude="{{ $item->koordinat_longitude }}" data-jenis_rawan_bencana="{{ $item->jenis_rawan_bencana }}" data-level_rawan_bencana="{{ $item->level_rawan_bencana }}" data-rawan_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
-                                                <a href="" class="btn btn-sm btn-danger">Hapus</a>
+                                                <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                    <form action="{{ route('rawan_bencana.delete', $item->id) }}" method="POST"
+                                                        id="delete{{ $item->id }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                    </form>
+                                                    Hapus
+                                                </button>
                                             </td>
                                         </tr>
                                     @empty
@@ -252,5 +259,22 @@
         modal.find('.modal-body #level_rawan_bencana').val(level_rawan_bencana);
         modal.find('.modal-body #rawan_id').val(rawan_id);
     })
+
+    $(".delete").click(function(e) {
+            id = e.target.dataset.id
+            Swal.fire({
+                title: "Are you sure you want to delete this data?",
+                text: "You can't restore the data later!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`#delete${id}`).submit();
+                }
+            })
+        })
 </script>
 @endsection

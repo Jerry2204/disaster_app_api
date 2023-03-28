@@ -170,4 +170,17 @@ class RawanBencanaController extends Controller
 
         return $this->success('', 'Data Daerah Rawan Bencana Berhasil Dihapus', 200);
     }
+
+    public function deleteAdmin($id)
+    {
+        $rawanBencana = RawanBencana::find($id);
+
+        if (!$rawanBencana) {
+            return back()->with('gagal', 'Data Daerah Rawan Bencana Tidak Ditemukan');
+        }
+
+        $rawanBencana->delete();
+
+        return back()->with('gagal', 'Data Daerah Rawan Bencana Tidak Ditemukan');
+    }
 }
