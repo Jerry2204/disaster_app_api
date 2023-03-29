@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'index'])->name('login');
-Route::post('/', [AuthController::class, 'login'])->name('login');
+
+
+Route::group(['middleware' => ['guest']], function() {
+    Route::get('/', [AuthController::class, 'index'])->name('login');
+    Route::post('/', [AuthController::class, 'login'])->name('login');
+});
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');

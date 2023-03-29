@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Korban;
+use App\Models\StatusPenanggulangan;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,8 +23,8 @@ class LaporanBencanaFactory extends Factory
             'keterangan' => $this->faker->sentence(),
             'gambar' => '1679987265_psikotest.png',
             'status_bencana' =>  $this->faker->randomElement(['rendah', 'sedang', 'darurat']),
-            'korban_id' => 1,
-            'status_penanggulangan_id' => 1,
+            'korban_id' => Korban::all()->random()->id,
+            'status_penanggulangan_id' => StatusPenanggulangan::all()->random()->id,
             'user_id' => User::all()->random()->id
         ];
     }
