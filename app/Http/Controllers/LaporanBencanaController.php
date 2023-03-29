@@ -199,6 +199,16 @@ class LaporanBencanaController extends Controller
                 ]);
 
                 return back()->with('sukses', 'Laporan Bencana berhasil diubah');
+            } else {
+                $bencana->update([
+                    'jenis_bencana' => $request->jenis_bencana,
+                    'nama_bencana' => $request->nama_bencana,
+                    'lokasi' => $request->lokasi,
+                    'keterangan' => $request->keterangan,
+                    'status_bencana' => $request->status_bencana
+                ]);
+
+                return back()->with('sukses', 'Laporan Bencana berhasil diubah');
             }
         }
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
