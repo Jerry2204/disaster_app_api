@@ -11,6 +11,7 @@ use App\Models\Korban;
 use App\Models\StatusPenanggulangan;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class LaporanBencanaController extends Controller
 {
@@ -30,7 +31,7 @@ class LaporanBencanaController extends Controller
 
     public function indexAdmin()
     {
-        $laporanBencana = LaporanBencana::all();
+        $laporanBencana = LaporanBencana::latest()->paginate(10);
 
         return view('admin.laporan_bencana.index', compact('laporanBencana'));
     }
@@ -93,7 +94,7 @@ class LaporanBencanaController extends Controller
 
         $nama_file = time()."_".$file->getClientOriginalName();
 
-        $file->move("public/laporan", $nama_file);
+        $file->move("laporan", $nama_file);
 
         $laporanBencana = LaporanBencana::create([
             'jenis_bencana' => $request->jenis_bencana,
@@ -165,6 +166,43 @@ class LaporanBencanaController extends Controller
         $bencana->load(array('status_penanggulangan'));
 
         return new LaporanBencanasResource($bencana);
+    }
+
+    public function updateAdmin(UpdateLaporanBencanaRequest $request)
+    {
+        $request->validated($request->all());
+
+        $bencana = LaporanBencana::find($request->laporan_id);
+
+        if ($bencana) {
+            if ($request->hasFile('file')) {
+
+                $file_path = public_path() . '/laporan/' . $bencana->gambar;
+
+                if(file_exists($file_path)) {
+                    unlink($file_path);
+                }
+
+                $file = $request->file('file');
+
+                $nama_file = time()."_".$file->getClientOriginalName();
+
+                $file->move('laporan', $nama_file);
+
+                $bencana->update([
+                    'jenis_bencana' => $request->jenis_bencana,
+                    'nama_bencana' => $request->nama_bencana,
+                    'lokasi' => $request->lokasi,
+                    'keterangan' => $request->keterangan,
+                    'status_bencana' => $request->status_bencana,
+                    'gambar' => $nama_file
+                ]);
+
+                return back()->with('sukses', 'Laporan Bencana berhasil diubah');
+            }
+        }
+        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
+
     }
 
     public function updateDampakBencana(UpdateDampakBencanaRequest $request, LaporanBencana $bencana)

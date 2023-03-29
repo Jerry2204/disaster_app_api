@@ -28,11 +28,7 @@ class UpdateLaporanBencanaRequest extends FormRequest
             'nama_bencana' => 'required',
             'lokasi' => ['required'],
             'keterangan' => ['required'],
-            'status_bencana' => ['required'],
-            'petugas' => ['required'],
-            'keterangan_penanggulangan' => ['required'],
-            'tindakan' => ['required'],
-            'status' => ['required']
+            'status_bencana' => ['required']
         ];
     }
 }
