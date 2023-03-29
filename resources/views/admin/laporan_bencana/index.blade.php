@@ -3,6 +3,19 @@
 @section('title', 'Rawan Bencana')
 
 @section('content')
+    @if (Session::has('sukses'))
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            showConfirmButton: false,
+            timer: 2000,
+        })
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('sukses') }}'
+        })
+        </script>
+    @endif
     <!-- Page-header start -->
     <div class="page-header card">
         <div class="row align-items-end">
