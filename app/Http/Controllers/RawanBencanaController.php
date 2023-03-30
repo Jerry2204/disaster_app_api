@@ -33,7 +33,7 @@ class RawanBencanaController extends Controller
 
     public function indexAdmin()
     {
-        $rawanBencana = RawanBencana::all();
+        $rawanBencana = RawanBencana::latest()->paginate(10);
 
         return view('admin.rawan_bencana.index', compact('rawanBencana'));
     }

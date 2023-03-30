@@ -101,6 +101,9 @@
                                     @endforelse
                                 </tbody>
                             </table>
+                            <div class="d-flex my-5">
+                                {!! $rawanBencana->links() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
