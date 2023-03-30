@@ -5,10 +5,10 @@
             <div class="main-menu-header">
                 <img class="img-40 img-radius" src="{{ asset('admin/images/avatar-4.jpg') }}" alt="User-Profile-Image">
                 <div class="user-details">
-                    <span>John Doe</span>
-                    <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
+                    <span style="font-size: 12px">{{ auth()->user()->name }}</span>
+                    <span id="more-details">{{ auth()->user()->role  }}<i class="ti-angle-down"></i></span>
                 </div>
-            </div>
+            </div>  
 
             <div class="main-menu-content">
                 <ul>

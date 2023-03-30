@@ -3,19 +3,6 @@
 @section('title', 'Rawan Bencana')
 
 @section('content')
-    @if (Session::has('sukses'))
-    <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            showConfirmButton: false,
-            timer: 2000,
-        })
-        Toast.fire({
-            icon: 'success',
-            title: '{{ session('sukses') }}'
-        })
-        </script>
-    @endif
     <!-- Page-header start -->
     <div class="page-header card">
         <div class="row align-items-end">
@@ -97,7 +84,7 @@
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('rawan_bencana.delete', $item->id) }}" method="POST"
+                                                    <form action="{{ route('laporan_bencana.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')

@@ -186,6 +186,6 @@ class RawanBencanaController extends Controller
 
         $rawanBencana->delete();
 
-        return back()->with('gagal', 'Data Daerah Rawan Bencana Tidak Ditemukan');
+        return back()->with('sukses', 'Data Daerah Rawan Berhasil dihapus');
     }
 }

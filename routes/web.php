@@ -19,10 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['middleware' => ['guest']], function() {
-    Route::get('/', [AuthController::class, 'index'])->name('login');
-    Route::post('/', [AuthController::class, 'login'])->name('login');
-});
+Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -39,7 +37,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], functi
     Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
     Route::post('/laporan/bencana', [LaporanBencanaController::class, 'addAdmin'])->name('laporan_bencana.add');
     Route::put('/laporan/bencana', [LaporanBencanaController::class, 'updateAdmin'])->name('laporan_bencana.update');
-    // Route::delete('/rawan/bencana/{id}', [RawanBencanaController::class, 'deleteAdmin'])->name('rawan_bencana.delete');
+    Route::delete('/laporan/bencana/{id}', [LaporanBencanaController::class, 'deleteAdmin'])->name('laporan_bencana.delete');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana']], function() {

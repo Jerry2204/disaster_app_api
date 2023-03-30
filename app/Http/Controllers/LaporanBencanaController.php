@@ -253,4 +253,17 @@ class LaporanBencanaController extends Controller
 
         return $this->success('', 'Data Laporan Bencana Berhasil Dihapus', 200);
     }
+
+    public function deleteAdmin($id)
+    {
+        $laporanBencana = LaporanBencana::find($id);
+
+        if (!$laporanBencana) {
+            return back()->with('gagal', 'Data Daerah Rawan Bencana Tidak Ditemukan');
+        }
+
+        $laporanBencana->delete();
+
+        return back()->with('sukses', 'Data Laporan Bencana berhasil dihapus');
+    }
 }
