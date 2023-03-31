@@ -86,7 +86,7 @@
                         <div class="pcoded-inner-content">
                             <div class="main-body">
                                 <div class="page-wrapper">
-                                    @if (Session::has('sukses'))
+                                    {{-- @if (Session::has('sukses'))
                                         <script>
                                             const Toast = Swal.mixin({
                                                 toast: true,
@@ -98,7 +98,41 @@
                                                 title: '{{ session('sukses') }}'
                                             })
                                         </script>
-                                    @endif
+                                    @endif --}}
+                                    <script>
+                                        @if (!empty(Session::get('sukses')))
+                                            var popupId = "{{ uniqid() }}";
+                                            if (!sessionStorage.getItem('shown-' + popupId)) {
+                                                const Toast = Swal.mixin({
+                                                toast: true,
+                                                showConfirmButton: false,
+                                                timer: 2000,
+                                            })
+                                            Toast.fire({
+                                                icon: 'success',
+                                                title: '{{ session('sukses') }}'
+                                            })
+                                            }
+                                            sessionStorage.setItem('shown-' + popupId, '1');
+                                        @endif
+                                    </script>
+                                    <script>
+                                        @if (!empty(Session::get('gagal')))
+                                            var popupId = "{{ uniqid() }}";
+                                            if (!sessionStorage.getItem('shown-' + popupId)) {
+                                                const Toast = Swal.mixin({
+                                                toast: true,
+                                                showConfirmButton: false,
+                                                timer: 2000,
+                                            })
+                                            Toast.fire({
+                                                icon: 'error',
+                                                title: '{{ session('gagal') }}'
+                                            })
+                                            }
+                                            sessionStorage.setItem('shown-' + popupId, '1');
+                                        @endif
+                                    </script>
                                     @yield('content')
 
                                     <div id="styleSelector">
@@ -193,6 +227,24 @@
                     nav.removeClass('active');
                 }
             });
+        </script>
+        <script>
+            $(".logout").click(function(e) {
+                id = e.target.dataset.id
+                Swal.fire({
+                    text: "Are you sure you want to log out from this system?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, log out!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.preventDefault();
+                        document.getElementById('logout-form').submit();
+                    }
+                })
+            })
         </script>
         @yield('js')
 </body>

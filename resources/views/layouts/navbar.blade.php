@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="auth-normal-sign-in.html">
+                            <a href="#" class="logout">
                                 <i class="ti-layout-sidebar-left"></i> Logout
                             </a>
                         </li>

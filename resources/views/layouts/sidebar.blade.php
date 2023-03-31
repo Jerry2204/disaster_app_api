@@ -8,14 +8,17 @@
                     <span style="font-size: 12px">{{ auth()->user()->name }}</span>
                     <span id="more-details">{{ auth()->user()->role  }}<i class="ti-angle-down"></i></span>
                 </div>
-            </div>  
+            </div>
 
             <div class="main-menu-content">
                 <ul>
                     <li class="more-details">
                         <a href="#"><i class="ti-user"></i>View Profile</a>
                         <a href="#!"><i class="ti-settings"></i>Settings</a>
-                        <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                        <a href="#" class="logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                 </ul>
             </div>

@@ -78,14 +78,23 @@
                                             <td>{{ $item->status_bencana }}</td>
                                             <td>{{ $item->status_penanggulangan->status }}</td>
                                             <td>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}" data-lokasi="{{ $item->lokasi }}" data-keterangan="{{ $item->keterangan }}" data-status_bencana="{{ $item->status_bencana }}" data-nama_bencana="{{ $item->nama_bencana }}" data-laporan_id="{{ $item->id }}">
+                                                @if ($item->confirmed == true)
+                                                    <!-- Button trigger modal -->
+                                                    <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                                                @endif
+                                                <button type="button" class="btn btn-sm btn-warning"
+                                                    id="modalEdit-{{ $item->id }}" data-toggle="modal"
+                                                    data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
+                                                    data-lokasi="{{ $item->lokasi }}"
+                                                    data-keterangan="{{ $item->keterangan }}"
+                                                    data-status_bencana="{{ $item->status_bencana }}"
+                                                    data-nama_bencana="{{ $item->nama_bencana }}"
+                                                    data-laporan_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('laporan_bencana.delete', $item->id) }}" method="POST"
-                                                        id="delete{{ $item->id }}">
+                                                    <form action="{{ route('laporan_bencana.delete', $item->id) }}"
+                                                        method="POST" id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
@@ -139,21 +148,22 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="nama_bencana">Nama Bencana</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama_bencana" id="nama_bencana"
-                                    class="form-control" placeholder="Masukkan nama bencana">
+                                <input type="text" name="nama_bencana" id="nama_bencana" class="form-control"
+                                    placeholder="Masukkan nama bencana">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi"
-                                    class="form-control" placeholder="Masukkan lokasi bencana">
+                                <input type="text" name="lokasi" id="lokasi" class="form-control"
+                                    placeholder="Masukkan lokasi bencana">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                             <div class="col-sm-10">
-                                <textarea id="keterangan" rows="5" cols="5" class="form-control" name="keterangan" placeholder="Masukkan keterangan"></textarea>
+                                <textarea id="keterangan" rows="5" cols="5" class="form-control" name="keterangan"
+                                    placeholder="Masukkan keterangan"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -212,21 +222,22 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="nama_bencana">Nama Bencana</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama_bencana" id="nama_bencana"
-                                    class="form-control" placeholder="Masukkan nama bencana">
+                                <input type="text" name="nama_bencana" id="nama_bencana" class="form-control"
+                                    placeholder="Masukkan nama bencana">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi"
-                                    class="form-control" placeholder="Masukkan lokasi bencana">
+                                <input type="text" name="lokasi" id="lokasi" class="form-control"
+                                    placeholder="Masukkan lokasi bencana">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                             <div class="col-sm-10">
-                                <textarea id="keterangan" rows="5" cols="5" class="form-control" name="keterangan" placeholder="Masukkan keterangan"></textarea>
+                                <textarea id="keterangan" rows="5" cols="5" class="form-control" name="keterangan"
+                                    placeholder="Masukkan keterangan"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -258,26 +269,26 @@
 @endsection
 
 @section('js')
-<script>
-    $('#modalEdit').on('show.bs.modal', function(e) {
-        var link = $(e.relatedTarget)
-        var jenis_bencana = link.data("jenis_bencana");
-        var nama_bencana = link.data("nama_bencana");
-        var lokasi = link.data('lokasi');
-        var keterangan = link.data('keterangan');
-        var status_bencana = link.data('status_bencana');
-        var laporan_id = link.data('laporan_id');
+    <script>
+        $('#modalEdit').on('show.bs.modal', function(e) {
+            var link = $(e.relatedTarget)
+            var jenis_bencana = link.data("jenis_bencana");
+            var nama_bencana = link.data("nama_bencana");
+            var lokasi = link.data('lokasi');
+            var keterangan = link.data('keterangan');
+            var status_bencana = link.data('status_bencana');
+            var laporan_id = link.data('laporan_id');
 
-        var modal = $(this)
-        modal.find('.modal-body #jenis_bencana').val(jenis_bencana);
-        modal.find('.modal-body #lokasi').val(lokasi);
-        modal.find('.modal-body #nama_bencana').val(nama_bencana);
-        modal.find('.modal-body #keterangan').val(keterangan);
-        modal.find('.modal-body #status_bencana').val(status_bencana);
-        modal.find('.modal-body #laporan_id').val(laporan_id);
-    });
+            var modal = $(this)
+            modal.find('.modal-body #jenis_bencana').val(jenis_bencana);
+            modal.find('.modal-body #lokasi').val(lokasi);
+            modal.find('.modal-body #nama_bencana').val(nama_bencana);
+            modal.find('.modal-body #keterangan').val(keterangan);
+            modal.find('.modal-body #status_bencana').val(status_bencana);
+            modal.find('.modal-body #laporan_id').val(laporan_id);
+        });
 
-    $(".delete").click(function(e) {
+        $(".delete").click(function(e) {
             id = e.target.dataset.id
             Swal.fire({
                 title: "Are you sure you want to delete this data?",
@@ -293,5 +304,5 @@
                 }
             })
         })
-</script>
+    </script>
 @endsection
