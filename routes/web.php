@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], functi
     Route::delete('/laporan/bencana/{id}', [LaporanBencanaController::class, 'deleteAdmin'])->name('laporan_bencana.delete');
     Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'detailAdmin'])->name('laporan_bencana.detail');
     Route::get('/laporan/bencana/{id}/confirm', [LaporanBencanaController::class, 'confirmAdmin'])->name('laporan_bencana.confirm');
+    Route::get('/laporan/bencana/{id}/reject', [LaporanBencanaController::class, 'rejectAdmin'])->name('laporan_bencana.reject');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana']], function() {

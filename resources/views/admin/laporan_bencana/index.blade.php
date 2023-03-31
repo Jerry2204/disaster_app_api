@@ -94,13 +94,18 @@
                                                     data-laporan_id="{{ $item->id }}">
                                                     Ubah
                                                 </button> --}}
-                                                <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('laporan_bencana.delete', $item->id) }}"
                                                         method="POST" id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
-                                                    Hapus
+                                                    Tolak
+                                                </button> --}}
+                                                <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                    <form action="{{ route('laporan_bencana.reject', $item->id) }}" id="reject{{ $item->id }}">
+                                                    </form>
+                                                    Tolak
                                                 </button>
                                             </td>
                                         </tr>
@@ -292,6 +297,7 @@
 
         $(".delete").click(function(e) {
             id = e.target.dataset.id
+            console.log(id);
             Swal.fire({
                 title: "Are you sure you want to delete this data?",
                 text: "You can't restore the data later!",
@@ -302,7 +308,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $(`#delete${id}`).submit();
+                    $(`#reject${id}`).submit();
                 }
             })
         })

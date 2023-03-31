@@ -243,6 +243,21 @@ class LaporanBencanaController extends Controller
 
     }
 
+    public function rejectAdmin($id)
+    {
+        $bencana = LaporanBencana::find($id);
+
+        if ($bencana) {$bencana->update([
+                'confirmed' => false
+            ]);
+
+            return redirect()->back()->with('sukses', 'Laporan ditolak');
+        }
+
+        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
+
+    }
+
     public function updateDampakBencana(UpdateDampakBencanaRequest $request, LaporanBencana $bencana)
     {
         $request->validated($request->all());
