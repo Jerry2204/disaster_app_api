@@ -10,6 +10,7 @@ use App\Http\Resources\LaporanBencanasResource;
 use App\Models\Korban;
 use App\Models\StatusPenanggulangan;
 use App\Traits\HttpResponses;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -222,6 +223,22 @@ class LaporanBencanaController extends Controller
                 return back()->with('sukses', 'Laporan Bencana berhasil diubah');
             }
         }
+        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
+
+    }
+
+    public function confirmAdmin($id)
+    {
+
+        $bencana = LaporanBencana::find($id);
+
+        if ($bencana) {$bencana->update([
+                'confirmed' => true
+            ]);
+
+            return redirect()->back()->with('sukses', 'Laporan dikonfirmasi');
+        }
+
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
 
     }

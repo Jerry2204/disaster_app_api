@@ -45,6 +45,15 @@
                     <div class="card-header">
                         <h5>{{ $laporanBencana->nama_bencana }}</h5>
                         <span>{{ $laporanBencana->jenis_bencana }}</span>
+                        @if ($laporanBencana->status_penanggulangan->status == 'selesai')
+                        <div class="badge badge-success p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
+                        @elseif ($laporanBencana->status_penanggulangan->status == 'menunggu')
+                        <div class="badge badge-danger p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
+                        @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
+                        <div class="badge badge-info p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
+                        @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
+                        <div class="badge badge-warning p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
+                        @endif
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option" style="width: 35px;">
                                 <li class=""><i class="icofont icofont-simple-left"></i></li>

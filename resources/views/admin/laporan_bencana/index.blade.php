@@ -81,8 +81,10 @@
                                                 @if ($item->confirmed == true)
                                                     <!-- Button trigger modal -->
                                                     <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                                                    @else
+                                                    <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
                                                 @endif
-                                                <button type="button" class="btn btn-sm btn-warning"
+                                                {{-- <button type="button" class="btn btn-sm btn-warning"
                                                     id="modalEdit-{{ $item->id }}" data-toggle="modal"
                                                     data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
                                                     data-lokasi="{{ $item->lokasi }}"
@@ -91,7 +93,7 @@
                                                     data-nama_bencana="{{ $item->nama_bencana }}"
                                                     data-laporan_id="{{ $item->id }}">
                                                     Ubah
-                                                </button>
+                                                </button> --}}
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('laporan_bencana.delete', $item->id) }}"
                                                         method="POST" id="delete{{ $item->id }}">

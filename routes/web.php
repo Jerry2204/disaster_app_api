@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], functi
     Route::put('/laporan/bencana', [LaporanBencanaController::class, 'updateAdmin'])->name('laporan_bencana.update');
     Route::delete('/laporan/bencana/{id}', [LaporanBencanaController::class, 'deleteAdmin'])->name('laporan_bencana.delete');
     Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'detailAdmin'])->name('laporan_bencana.detail');
+    Route::get('/laporan/bencana/{id}/confirm', [LaporanBencanaController::class, 'confirmAdmin'])->name('laporan_bencana.confirm');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana']], function() {

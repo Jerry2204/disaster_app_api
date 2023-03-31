@@ -15,6 +15,7 @@ class LaporanBencana extends Model
         'lokasi',
         'keterangan',
         'status_bencana',
+        'confirmed',
         'gambar',
         'korban_id',
         'status_penanggulangan_id',
