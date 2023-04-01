@@ -45,17 +45,21 @@
                     <div class="card-header">
                         <h5>{{ $laporanBencana->nama_bencana }}</h5>
                         <span>{{ $laporanBencana->jenis_bencana }}</span>
-                        @if ($laporanBencana->status_penanggulangan->status != 'menunggu')
+                        @if ($laporanBencana->status_penanggulangan->status == 'menunggu')
+                        <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}" class="btn btn-sm btn-success">
+                            Konfirmasi
+                        </a>
+                        @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
+                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
+                            Selesai
+                        </button>
+                        @else
                         <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">
                             Proses Laporan
                         </button>
                         <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
                             Selesai
                         </button>
-                        @else
-                        <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}" class="btn btn-sm btn-success">
-                            Konfirmasi
-                        </a>
                         @endif
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option" style="width: 35px;">
