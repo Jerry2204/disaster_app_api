@@ -231,9 +231,16 @@ class LaporanBencanaController extends Controller
     {
 
         $bencana = LaporanBencana::find($id);
+        $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
 
-        if ($bencana) {$bencana->update([
+        if ($bencana) {
+
+            $bencana->update([
                 'confirmed' => true
+            ]);
+
+            $status_penanggulangan->update([
+                'status' => 'diterima'
             ]);
 
             return redirect()->back()->with('sukses', 'Laporan dikonfirmasi');
@@ -246,9 +253,15 @@ class LaporanBencanaController extends Controller
     public function rejectAdmin($id)
     {
         $bencana = LaporanBencana::find($id);
+        $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
 
-        if ($bencana) {$bencana->update([
+        if ($bencana) {
+            $bencana->update([
                 'confirmed' => false
+            ]);
+
+            $status_penanggulangan->update([
+                'status' => 'menunggu'
             ]);
 
             return redirect()->back()->with('sukses', 'Laporan ditolak');
@@ -256,6 +269,43 @@ class LaporanBencanaController extends Controller
 
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
 
+    }
+
+    public function processAdmin(Request $request, $id)
+    {
+        $bencana = LaporanBencana::find($id);
+        $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
+
+        if ($bencana) {
+            $status_penanggulangan->update([
+                'status' => 'proses',
+                'petugas' => $request->petugas
+            ]);
+
+            return redirect()->back()->with('sukses', 'Laporan diproses');
+        }
+
+        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
+    }
+
+    public function completeAdmin($id)
+    {
+        $bencana = LaporanBencana::find($id);
+        $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
+
+        if ($bencana) {
+            $bencana->update([
+                'confirmed' => false
+            ]);
+
+            $status_penanggulangan->update([
+                'status' => 'menunggu'
+            ]);
+
+            return redirect()->back()->with('sukses', 'Laporan ditolak');
+        }
+
+        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
     }
 
     public function updateDampakBencana(UpdateDampakBencanaRequest $request, LaporanBencana $bencana)

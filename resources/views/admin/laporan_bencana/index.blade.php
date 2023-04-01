@@ -78,9 +78,14 @@
                                             <td>{{ $item->status_bencana }}</td>
                                             <td>{{ $item->status_penanggulangan->status }}</td>
                                             <td>
+                                                <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
                                                 @if ($item->confirmed == true)
                                                     <!-- Button trigger modal -->
-                                                    <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                                                    <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                        <form action="{{ route('laporan_bencana.reject', $item->id) }}" id="reject{{ $item->id }}">
+                                                        </form>
+                                                        Tolak
+                                                    </button>
                                                     @else
                                                     <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
                                                 @endif
@@ -102,11 +107,7 @@
                                                     </form>
                                                     Tolak
                                                 </button> --}}
-                                                <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('laporan_bencana.reject', $item->id) }}" id="reject{{ $item->id }}">
-                                                    </form>
-                                                    Tolak
-                                                </button>
+
                                             </td>
                                         </tr>
                                     @empty
@@ -299,7 +300,7 @@
             id = e.target.dataset.id
             console.log(id);
             Swal.fire({
-                title: "Are you sure you want to delete this data?",
+                title: "Tolak Laporan?",
                 text: "You can't restore the data later!",
                 icon: 'warning',
                 showCancelButton: true,

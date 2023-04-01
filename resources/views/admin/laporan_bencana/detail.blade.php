@@ -45,14 +45,17 @@
                     <div class="card-header">
                         <h5>{{ $laporanBencana->nama_bencana }}</h5>
                         <span>{{ $laporanBencana->jenis_bencana }}</span>
-                        @if ($laporanBencana->status_penanggulangan->status == 'selesai')
-                        <div class="badge badge-success p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
-                        @elseif ($laporanBencana->status_penanggulangan->status == 'menunggu')
-                        <div class="badge badge-danger p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
-                        @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
-                        <div class="badge badge-info p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
-                        @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
-                        <div class="badge badge-warning p-2">{{ $laporanBencana->status_penanggulangan->status }}</div>
+                        @if ($laporanBencana->status_penanggulangan->status != 'menunggu')
+                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">
+                            Proses Laporan
+                        </button>
+                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
+                            Selesai
+                        </button>
+                        @else
+                        <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}" class="btn btn-sm btn-success">
+                            Konfirmasi
+                        </a>
                         @endif
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option" style="width: 35px;">
@@ -68,6 +71,23 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <p class="mb-0">
+                                    Status Penanggulangan:
+                                </p>
+
+                                @if ($laporanBencana->status_penanggulangan->status == 'selesai')
+                                    <div class="badge badge-success">
+                                        {{ $laporanBencana->status_penanggulangan->status }}</div>
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'menunggu')
+                                    <div class="badge badge-danger">{{ $laporanBencana->status_penanggulangan->status }}
+                                    </div>
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
+                                    <div class="badge badge-info">{{ $laporanBencana->status_penanggulangan->status }}
+                                    </div>
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
+                                    <div class="badge badge-warning">
+                                        {{ $laporanBencana->status_penanggulangan->status }}</div>
+                                @endif
+                                <p class="mb-0 mt-3">
                                     Tanggal:
                                 </p>
                                 <b>
@@ -96,8 +116,8 @@
                                 <p class="mb-0">
                                     Gambar:
                                 </p>
-                                <img class="gambar-bencana" src="{{ asset("laporan/$laporanBencana->gambar") }}" alt="{{ $laporanBencana->nama_bencana }}">
-
+                                <img class="gambar-bencana" src="{{ asset("laporan/$laporanBencana->gambar") }}"
+                                    alt="{{ $laporanBencana->nama_bencana }}">
                             </div>
                         </div>
                     </div>
@@ -169,4 +189,68 @@
         </div>
     </div>
     <!-- Page body end -->
+
+    {{-- Modal Proses --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Proses Laporan</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="{{ route('laporan_bencana.process', $laporanBencana->id) }}" method="post">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="petugas">Petugas</label>
+                        <input id="petugas" name="petugas" class="form-control" type="text" placeholder="Masukkan nama petugas">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {{-- Modal Selesai --}}
+      <div class="modal fade" id="selesaiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="{{ route('laporan_bencana.complete', $laporanBencana->id) }}" method="post">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="Petugas">Petugas</label>
+                        <input id="Petugas" class="form-control" type="text" name="petugas" placeholder="Masukkan nama petugas">
+                    </div>
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan</label>
+                        <textarea id="keterangan" class="form-control" name="keterangan" rows="5" placeholder="Masukkan keterangan"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tindakan">Tindakan</label>
+                        <textarea id="tindakan" class="form-control" name="tindakan" rows="5" placeholder="Masukkan tindakan"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
 @endsection
