@@ -232,12 +232,13 @@
             $(".logout").click(function(e) {
                 id = e.target.dataset.id
                 Swal.fire({
-                    text: "Are you sure you want to log out from this system?",
+                    text: "Apakah Anda yakin ingin keluar dari sistem ini?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, log out!'
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Ya, keluar!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         event.preventDefault();
