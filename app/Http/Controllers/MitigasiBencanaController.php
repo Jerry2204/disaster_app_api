@@ -204,4 +204,18 @@ class MitigasiBencanaController extends Controller
         return $this->success('', 'Data Mitigasi Bencana Berhasil Dihapus', 200);
 
     }
+
+    public function deleteAdmin($id)
+    {
+        $mitigasiBencana = MitigasiBencana::find($id);
+
+        if(!$mitigasiBencana) {
+            return back()->with('gagal', 'Data mitigasi bencana tidak ditemukan');
+        }
+
+        $mitigasiBencana->delete();
+
+        return back()->with('sukses', 'Data mitigasi bencana berhasil diubah');
+
+    }
 }

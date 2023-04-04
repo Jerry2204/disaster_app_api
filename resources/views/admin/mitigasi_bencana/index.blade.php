@@ -82,7 +82,7 @@
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('rawan_bencana.delete', $item->id) }}" method="POST"
+                                                    <form action="{{ route('mitigasi_bencana.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
@@ -216,13 +216,14 @@
     $(".delete").click(function(e) {
             id = e.target.dataset.id
             Swal.fire({
-                title: "Are you sure you want to delete this data?",
-                text: "You can't restore the data later!",
+                title: "Apakah anda yakin ingin menghapus data ini?",
+                text: "Anda tidak dapat memulihkan data nanti!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                cancelButtonText: 'Batal',
+                confirmButtonText: 'Ya, hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $(`#delete${id}`).submit();
