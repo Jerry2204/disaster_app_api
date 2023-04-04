@@ -34,10 +34,12 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
 Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
 Route::get('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'show']);
-Route::post('/laporan/bencana', [LaporanBencanaController::class, 'store']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/laporan/bencanas', [LaporanBencanaController::class, 'store']);
+});
 
 // Route for admin
-Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function() {
+Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::resource('/tasks', TaskController::class);
     Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show', 'store']);
