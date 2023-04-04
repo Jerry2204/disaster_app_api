@@ -65,12 +65,19 @@ class LaporanBencanaController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
+        $file = $request->file('file');
+
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+        $file->move("laporan", $nama_file);
+
         $laporanBencana = LaporanBencana::create([
             'jenis_bencana' => $request->jenis_bencana,
             'lokasi' => $request->lokasi,
             'keterangan' => $request->keterangan,
             'status_bencana' => $request->status_bencana,
             'korban_id' => $korban->id,
+            'gambar' => $nama_file,
             'status_penanggulangan_id' => $status_penanggulangan->id,
             'user_id' => Auth::user()->id,
         ]);
@@ -288,21 +295,20 @@ class LaporanBencanaController extends Controller
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
     }
 
-    public function completeAdmin($id)
+    public function completeAdmin(Request $request, $id)
     {
         $bencana = LaporanBencana::find($id);
         $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
 
         if ($bencana) {
-            $bencana->update([
-                'confirmed' => false
-            ]);
-
             $status_penanggulangan->update([
-                'status' => 'menunggu'
+                'petugas' => $request->petugas,
+                'status' => 'selesai',
+                'keterangan' => $request->keterangan,
+                'tindakan' => $request->tindakan
             ]);
 
-            return redirect()->back()->with('sukses', 'Laporan ditolak');
+            return redirect()->back()->with('sukses', 'Laporan Selesai');
         }
 
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');

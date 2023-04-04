@@ -53,13 +53,14 @@
                         <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
                             Selesai
                         </button>
-                        @else
+                        @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
                         <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">
                             Proses Laporan
                         </button>
                         <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
                             Selesai
                         </button>
+                        @else
                         @endif
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option" style="width: 35px;">
@@ -238,7 +239,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="Petugas">Petugas</label>
-                        <input id="Petugas" class="form-control" type="text" name="petugas" placeholder="Masukkan nama petugas">
+                        <input id="Petugas" class="form-control" type="text" name="petugas" placeholder="Masukkan nama petugas" value="{{ $laporanBencana->status_penanggulangan->petugas ? $laporanBencana->status_penanggulangan->petugas : '' }}">
                     </div>
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>

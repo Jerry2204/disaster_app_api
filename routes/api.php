@@ -33,12 +33,13 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
 Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
 Route::get('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'show']);
+Route::post('/laporan/bencana', [LaporanBencanaController::class, 'store']);
 
 // Route for admin
 Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::resource('/tasks', TaskController::class);
-    Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show']);
+    Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show', 'store']);
     Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show']);
     Route::resource('/mitigasi/bencana', MitigasiBencanaController::class)->except(['show']);
     Route::put('/dampak/bencana/{bencana}', [LaporanBencanaController::class, 'updateDampakBencana']);

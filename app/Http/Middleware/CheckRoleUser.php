@@ -20,6 +20,6 @@ class CheckRoleUser
             return $next($request);
         }
 
-        return redirect('/');
+        return redirect('/')->with('gagal', 'Anda tidak memiliki otorisasi');
     }
 }

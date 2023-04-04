@@ -24,6 +24,13 @@ class MitigasiBencanaController extends Controller
         );
     }
 
+    public function indexAdmin()
+    {
+       $mitigasiBencana = MitigasiBencana::latest()->paginate(10);
+
+        return view('admin.mitigasi_bencana.index', compact('mitigasiBencana'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
