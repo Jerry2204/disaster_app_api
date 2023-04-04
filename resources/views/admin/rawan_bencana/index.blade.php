@@ -125,38 +125,38 @@
                 <form method="POST" action="{{ route('rawan_bencana.add') }}">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group row">
+                        <div class="form-group {{ $errors->has('nama_wilayah') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="nama_wilayah">Nama Wilayah</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control"
+                                <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control {{ $errors->has('nama_wilayah') ? 'form-control-danger' : '' }}"
                                     placeholder="Masukkan nama wilayah">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group {{ $errors->has('koordinat_lattitude') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="koordinat_lattitude">Koordinat Lattitude</label>
                             <div class="col-sm-10">
                                 <input type="text" name="koordinat_lattitude" id="koordinat_lattitude"
-                                    class="form-control" placeholder="Masukkan koordinat lattitude">
+                                    class="form-control {{ $errors->has('koordinat_lattitude') ? 'form-control-danger' : '' }}" placeholder="Masukkan koordinat lattitude">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group {{ $errors->has('koordinat_longitude') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="koordinat_longitude">Koordinat Longitude</label>
                             <div class="col-sm-10">
                                 <input type="text" name="koordinat_longitude" id="koordinat_longitude"
-                                    class="form-control" placeholder="Masukkan koordinat longitude">
+                                    class="form-control {{ $errors->has('koordinat_longitude') ? 'form-control-danger' : '' }}" placeholder="Masukkan koordinat longitude">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group {{ $errors->has('jenis_rawan_bencana') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="jenis_rawan_bencana">Jenis Rawan Bencana</label>
                             <div class="col-sm-10">
                                 <input type="text" name="jenis_rawan_bencana" id="jenis_rawan_bencana"
-                                    class="form-control" placeholder="Masukkan jenis rawan bencana">
+                                    class="form-control {{ $errors->has('jenis_rawan_bencana') ? 'form-control-danger' : '' }}" placeholder="Masukkan jenis rawan bencana">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group {{ $errors->has('level_rawan_bencana') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="level_rawan_bencana">Level Rawan Bencana</label>
                             <div class="col-sm-10">
-                                <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control">
+                                <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control {{ $errors->has('level_rawan_bencana') ? 'form-control-danger' : '' }}">
                                     <option value="">Pilih Level Rawan Bencana</option>
                                     <option value="level 1">Level 1</option>
                                     <option value="level 2">Level 2</option>
