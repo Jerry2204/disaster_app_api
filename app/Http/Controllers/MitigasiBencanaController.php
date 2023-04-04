@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAdminMitigasiRequest;
 use App\Models\MitigasiBencana;
 use App\Http\Requests\StoreMitigasiBencanaRequest;
 use App\Http\Requests\UpdateMitigasiBencanaRequest;
@@ -62,7 +63,7 @@ class MitigasiBencanaController extends Controller
         return new MitigasiBencanasResource($mitigasiBencana);
     }
 
-    public function addAdmin(StoreMitigasiBencanaRequest $request)
+    public function addAdmin(StoreAdminMitigasiRequest $request)
     {
         $request->validated($request->all());
 
@@ -77,8 +78,8 @@ class MitigasiBencanaController extends Controller
         $file->move("mitigasi", $nama_file);
 
         $mitigasiBencana = MitigasiBencana::create([
-            'title' => $request->title,
-            'deskripsi' => $request->deskripsi,
+            'title' => $request->title_add,
+            'deskripsi' => $request->deskripsi_add,
             'jenis_konten' => $jenis_konten,
             'file' => $nama_file,
             'user_id' => Auth::user()->id

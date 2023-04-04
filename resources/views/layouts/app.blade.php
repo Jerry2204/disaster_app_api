@@ -183,7 +183,7 @@
                     <img src="admin/images/browser/safari.png" alt="Safari">
                     <div>Safari</div>
                 </a>
-            </li>
+            </li>   
             <li>
                 <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
                     <img src="admin/images/browser/ie.png" alt="">

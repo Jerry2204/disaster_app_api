@@ -123,18 +123,18 @@
                 <form method="POST" action="{{ route('mitigasi_bencana.add') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="title">Judul</label>
+                        <div class="form-group {{ $errors->has('title_add') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="title_add">Judul</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" id="title" class="form-control"
+                                <input type="text" name="title_add" id="title_add" class="form-control {{ $errors->has('title_add') ? 'form-control-danger' : '' }}"
                                     placeholder="Masukkan judul">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
+                        <div class="form-group {{ $errors->has('deskripsi_add') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="deskripsi_add">Deskripsi</label>
                             <div class="col-sm-10">
-                                <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control" placeholder="Masukkan Deskripsi">
+                                <input type="text" name="deskripsi_add" id="deskripsi_add"
+                                    class="form-control {{ $errors->has('deskripsi_add') ? 'form-control-danger' : '' }}" placeholder="Masukkan Deskripsi">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -168,18 +168,18 @@
                     @method('PUT')
                     <div class="modal-body">
                         <input type="hidden" name="mitigasi_id" id="mitigasi_id" value="">
-                        <div class="form-group row">
+                        <div class="form-group {{ $errors->has('title') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="title">Judul</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" id="title" class="form-control"
+                                <input type="text" name="title" id="title" class="form-control {{ $errors->has('title') ? 'form-control-danger' : '' }}"
                                     placeholder="Masukkan judul">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
                             <div class="col-sm-10">
                                 <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control" placeholder="Masukkan Deskripsi">
+                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}" placeholder="Masukkan Deskripsi">
                             </div>
                         </div>
                         <div class="form-group row">
