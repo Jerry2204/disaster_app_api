@@ -52,11 +52,21 @@ class MitigasiBencanaController extends Controller
     {
         $request->validated($request->all());
 
+        $mimeType = $request->file('file')->getMimeType();
+
+        $jenis_konten = explode('/', $mimeType)[0] == 'video' ? 'video' : 'pdf';
+
+        $file = $request->file('file');
+
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+        $file->move("mitigasi", $nama_file);
+
         $mitigasiBencana = MitigasiBencana::create([
             'title' => $request->title,
             'deskripsi' => $request->deskripsi,
-            'jenis_konten' => $request->jenis_konten,
-            'file' => $request->file,
+            'jenis_konten' => $jenis_konten,
+            'file' => $nama_file,
             'user_id' => Auth::user()->id
         ]);
 
