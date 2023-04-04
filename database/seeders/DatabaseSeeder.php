@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call([
-        //     UserSeeder::class,
-        //     // StatusPenanggulanganSeeder::class,
-        //     // KorbanSeeder::class
-        // ]);
+        $this->call([
+            UserSeeder::class,
+             StatusPenanggulanganSeeder::class,
+            KorbanSeeder::class
+        ]);
 
         RawanBencana::factory(30)->create();
         // LaporanBencana::factory(30)->create();
