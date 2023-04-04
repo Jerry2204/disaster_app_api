@@ -17,7 +17,7 @@ class CreateMitigasiBencanasTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('deskripsi');
-            $table->enum('jenis_konten', ['gambar', 'dokumen', 'video']);
+            $table->enum('jenis_konten', ['pdf', 'video']);
             $table->text('file');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

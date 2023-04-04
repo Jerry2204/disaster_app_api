@@ -33,9 +33,9 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function()
     Route::post('/rawan/bencana', [RawanBencanaController::class, 'addAdmin'])->name('rawan_bencana.add');
     Route::put('/rawan/bencana', [RawanBencanaController::class, 'updateAdmin'])->name('rawan_bencana.update');
     Route::delete('/rawan/bencana/{id}', [RawanBencanaController::class, 'deleteAdmin'])->name('rawan_bencana.delete');
-    // Route::get('/mitigasi/bencana', [MitigasiBencanaController::class, 'indexAdmin'])->name('mitigasi_bencana.index');
-    // Route::post('/mitigasi/bencana', [MitigasiBencanaController::class, 'addAdmin'])->name('mitigasi_bencana.add');
-    // Route::put('/mitigasi/bencana', [MitigasiBencanaController::class, 'updateAdmin'])->name('mitigasi_bencana.update');
+    Route::get('/mitigasi/bencana', [MitigasiBencanaController::class, 'indexAdmin'])->name('mitigasi_bencana.index');
+    Route::post('/mitigasi/bencana', [MitigasiBencanaController::class, 'addAdmin'])->name('mitigasi_bencana.add');
+    Route::put('/mitigasi/bencana', [MitigasiBencanaController::class, 'updateAdmin'])->name('mitigasi_bencana.update');
     // Route::delete('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'deleteAdmin'])->name('mitigasi_bencana.delete');
 });
 

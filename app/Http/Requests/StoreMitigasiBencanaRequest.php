@@ -26,7 +26,6 @@ class StoreMitigasiBencanaRequest extends FormRequest
         return [
             'title' => ['required'],
             'deskripsi' => ['required'],
-            'jenis_konten' => ['required'],
             'file' => ['required']
         ];
     }

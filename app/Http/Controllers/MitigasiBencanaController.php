@@ -62,6 +62,31 @@ class MitigasiBencanaController extends Controller
         return new MitigasiBencanasResource($mitigasiBencana);
     }
 
+    public function addAdmin(StoreMitigasiBencanaRequest $request)
+    {
+        $request->validated($request->all());
+
+        $mimeType = $request->file('file')->getMimeType();
+
+        $jenis_konten = explode('/', $mimeType)[0] == 'video' ? 'video' : 'pdf';
+
+        $file = $request->file('file');
+
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+        $file->move("mitigasi", $nama_file);
+
+        $mitigasiBencana = MitigasiBencana::create([
+            'title' => $request->title,
+            'deskripsi' => $request->deskripsi,
+            'jenis_konten' => $jenis_konten,
+            'file' => $nama_file,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return back()->with('sukses', 'Data mitigasi bencana berhasil ditambahkan');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -110,6 +135,47 @@ class MitigasiBencanaController extends Controller
         $mitigasiBencana->update($request->all());
 
         return new MitigasiBencanasResource($mitigasiBencana);
+    }
+
+    public function updateAdmin(UpdateMitigasiBencanaRequest $request)
+    {
+        $mitigasiBencana = MitigasiBencana::find($request->mitigasi_id);
+
+        if(!$mitigasiBencana) {
+            return $this->error('', 'Data Mitigasi Bencana tidak ditemukan', 404);
+        }
+
+        $request->validated($request->all());
+
+        if($request->hasFile('file')) {
+            $mimeType = $request->file('file')->getMimeType();
+
+            $jenis_konten = explode('/', $mimeType)[0] == 'video' ? 'video' : 'pdf';
+
+            $file = $request->file('file');
+
+            $nama_file = time()."_".$file->getClientOriginalName();
+
+            $file->move("mitigasi", $nama_file);
+
+            $mitigasiBencana->update([
+                'title' => $request->title,
+                'deskripsi' => $request->deskripsi,
+                'jenis_konten' => $jenis_konten,
+                'file' => $nama_file,
+                'user_id' => Auth::user()->id
+            ]);
+
+            return back()->with('sukses', 'Data mitigasi bencana berhasil diubah');
+        }
+
+        $mitigasiBencana->update([
+            'title' => $request->title,
+            'deskripsi' => $request->deskripsi,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return back()->with('sukses', 'Data mitigasi bencana berhasil diubah');
     }
 
     /**

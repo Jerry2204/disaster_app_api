@@ -7,6 +7,7 @@ use App\Http\Controllers\MitigasiBencanaController;
 use App\Http\Controllers\RawanBencanaController;
 use App\Models\RawanBencana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +44,17 @@ Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function() {
     Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show']);
     Route::resource('/mitigasi/bencana', MitigasiBencanaController::class)->except(['show']);
     Route::put('/dampak/bencana/{bencana}', [LaporanBencanaController::class, 'updateDampakBencana']);
+});
+
+Route::get('/file/pdf', function () {
+    $path = storage_path('app/public/pdf/example.pdf');
+    if (!File::exists($path)) {
+        abort(404);
+    }
+    $file = File::get($path);
+
+    return response($file, 200, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="example.pdf"',
+    ]);
 });
