@@ -266,13 +266,14 @@
     $(".delete").click(function(e) {
             id = e.target.dataset.id
             Swal.fire({
-                title: "Are you sure you want to delete this data?",
-                text: "You can't restore the data later!",
+                title: "Apakah anda yakin ingin menghapus data ini?",
+                text: "Anda tidak dapat memulihkan data nanti",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                cancelButtonText: 'Batal',
+                confirmButtonText: 'Ya, hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $(`#delete${id}`).submit();
