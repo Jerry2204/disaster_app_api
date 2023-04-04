@@ -142,12 +142,19 @@ class MitigasiBencanaController extends Controller
         $mitigasiBencana = MitigasiBencana::find($request->mitigasi_id);
 
         if(!$mitigasiBencana) {
-            return $this->error('', 'Data Mitigasi Bencana tidak ditemukan', 404);
+            return back('gagal', 'Data mitigasi bencana tidak ditemukan');
         }
 
         $request->validated($request->all());
 
         if($request->hasFile('file')) {
+
+            $file_path = public_path() . '/mitigasi/' . $mitigasiBencana->file;
+
+                if(file_exists($file_path)) {
+                    unlink($file_path);
+                }
+
             $mimeType = $request->file('file')->getMimeType();
 
             $jenis_konten = explode('/', $mimeType)[0] == 'video' ? 'video' : 'pdf';
