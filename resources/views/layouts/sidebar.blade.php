@@ -39,6 +39,7 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'pra_bencana')
             <li>
                 <a href="{{ route('rawan_bencana.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
@@ -46,6 +47,8 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat')
             <li>
                 <a href="{{ route('laporan_bencana.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
@@ -53,6 +56,8 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'pra_bencana')
             <li>
                 <a href="{{ route('mitigasi_bencana.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
@@ -60,6 +65,7 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 </nav>
