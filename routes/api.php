@@ -33,6 +33,8 @@ Route::post('/register', [AuthController::class, 'register']);
 // Route for all users
 Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
 Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
+Route::get('/laporan/bencana', [LaporanBencanaController::class, 'index']);
+Route::get('/mitigasi/bencana', [MitigasiBencanaController::class, 'index']);
 Route::get('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'show']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/laporan/bencanas', [LaporanBencanaController::class, 'store']);
@@ -43,8 +45,8 @@ Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function () 
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::resource('/tasks', TaskController::class);
     Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show', 'store']);
-    Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show']);
-    Route::resource('/mitigasi/bencana', MitigasiBencanaController::class)->except(['show']);
+    Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show', 'index']);
+    Route::resource('/mitigasi/bencana', MitigasiBencanaController::class)->except(['show', 'index']);
     Route::put('/dampak/bencana/{bencana}', [LaporanBencanaController::class, 'updateDampakBencana']);
 });
 

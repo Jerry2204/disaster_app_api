@@ -26,26 +26,34 @@ class UserSeeder extends Seeder
                 'updated_at' => Date::now()
             ],
             [
-                'name' => 'Ricky Alfrido Pangaribuan',
-                'email' => 'alfridoricky@gmail.com',
-                'password' => Hash::make('ricky123'),
+                'name' => 'User Pra Bencana',
+                'email' => 'prabencana@gmail.com',
+                'password' => Hash::make('prabencana123'),
                 'role' => 'pra_bencana',
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ],
             [
-                'name' => 'Farida Pangaribuan',
-                'email' => 'faridapangaribuan@gmail.com',
-                'password' => Hash::make('farida123'),
+                'name' => 'User Tanggap Darurat',
+                'email' => 'tanggapdarurat@gmail.com',
+                'password' => Hash::make('tanggapdarurat123'),
                 'role' => 'tanggap_darurat',
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ],
             [
-                'name' => 'Irin Pangaribuan',
-                'email' => 'irinpangaribuan@gmail.com',
+                'name' => 'User Pasca Bencana',
+                'email' => 'pascabencana@gmail.com',
                 'password' => Hash::make('irin123'),
                 'role' => 'pasca_bencana',
+                'created_at' => Date::now(),
+                'updated_at' => Date::now()
+            ],
+            [
+                'name' => 'Sonia Pasaribu',
+                'email' => 'sonia@gmail.com',
+                'password' => Hash::make('sonia123'),
+                'role' => 'user',
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()
             ],

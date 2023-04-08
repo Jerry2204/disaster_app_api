@@ -20,6 +20,7 @@ class LaporanBencanasResource extends JsonResource
                 'jenis_bencana' => $this->jenis_bencana,
                 'nama_bencana' => $this->nama_bencana,
                 'lokasi' => $this->lokasi,
+                'gambar' => $this->gambar,
                 'keterangan' => $this->keterangan,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
