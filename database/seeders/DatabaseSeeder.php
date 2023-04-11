@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             PeringatanDiniSeeder::class,
+            ArtikelSeeder::class
             // StatusPenanggulanganSeeder::class,
             // KorbanSeeder::class
         ]);
