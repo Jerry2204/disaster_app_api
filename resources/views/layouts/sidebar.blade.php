@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('peringatan_dini.index') }}">
+                <a href="{{ route('artikel.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Artikel</span>
                     <span class="pcoded-mcaret"></span>

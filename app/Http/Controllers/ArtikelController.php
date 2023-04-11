@@ -18,6 +18,13 @@ class ArtikelController extends Controller
         //
     }
 
+    public function indexAdmin()
+    {
+        $artikel = Artikel::latest()->paginate(10);
+
+        return view('admin.artikel.index', compact('artikel'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

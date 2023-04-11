@@ -17,6 +17,7 @@ class CreateArtikelsTable extends Migration
             $table->id();
             $table->string('judul');
             $table->text('deskripsi');
+            $table->text('gambar');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
