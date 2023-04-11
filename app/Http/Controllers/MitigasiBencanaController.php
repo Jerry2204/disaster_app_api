@@ -226,7 +226,7 @@ class MitigasiBencanaController extends Controller
 
         $mitigasiBencana->delete();
 
-        return back()->with('sukses', 'Data mitigasi bencana berhasil diubah');
+        return back()->with('sukses', 'Data mitigasi bencana berhasil dihapus');
 
     }
 }

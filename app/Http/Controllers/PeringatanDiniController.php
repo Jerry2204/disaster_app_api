@@ -131,4 +131,17 @@ class PeringatanDiniController extends Controller
     {
         //
     }
+
+    public function deleteAdmin($id)
+    {
+        $peringatanDini = PeringatanDini::find($id);
+
+        if(!$peringatanDini) {
+            return back()->with('gagal', 'Data Peringatan Dini tidak Ditemukan');
+        }
+
+        $peringatanDini->delete();
+
+        return back()->with('sukses', 'Data peringatan dini berhasil dihapus');
+    }
 }

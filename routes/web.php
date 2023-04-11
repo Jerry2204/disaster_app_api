@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::get('/peringatan/dini', [PeringatanDiniController::class, 'indexAdmin'])->name('peringatan_dini.index');
     Route::post('/peringatan/dini', [PeringatanDiniController::class, 'addAdmin'])->name('peringatan_dini.add');
     Route::put('/peringatan/dini', [PeringatanDiniController::class, 'updateAdmin'])->name('peringatan_dini.update');
+    Route::delete('/peringatan/dini/{id}', [PeringatanDiniController::class, 'deleteAdmin'])->name('peringatan_dini.delete');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function() {
