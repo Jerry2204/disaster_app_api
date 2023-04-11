@@ -1,2 +1,3 @@
 *.sqlite*
-/public/laporan
+/public/laporan/
+/public/mitigasi/

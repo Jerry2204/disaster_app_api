@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            StatusPenanggulanganSeeder::class,
-            KorbanSeeder::class
+            // StatusPenanggulanganSeeder::class,
+            // KorbanSeeder::class
         ]);
 
         RawanBencana::factory(30)->create();
