@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PeringatanDini;
 use App\Http\Requests\StorePeringatanDiniRequest;
 use App\Http\Requests\UpdatePeringatanDiniRequest;
+use App\Http\Resources\PeringatanDinisResource;
 use Illuminate\Http\Request;
 
 class PeringatanDiniController extends Controller
@@ -16,7 +17,9 @@ class PeringatanDiniController extends Controller
      */
     public function index()
     {
-        //
+        return PeringatanDinisResource::collection(
+            PeringatanDini::latest()->limit(1)->get()
+        );
     }
 
     public function indexAdmin()

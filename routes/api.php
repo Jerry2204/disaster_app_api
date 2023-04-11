@@ -4,8 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\LaporanBencanaController;
 use App\Http\Controllers\MitigasiBencanaController;
+use App\Http\Controllers\PeringatanDiniController;
 use App\Http\Controllers\RawanBencanaController;
-use App\Models\RawanBencana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +39,8 @@ Route::get('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'show'])
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/laporan/bencanas', [LaporanBencanaController::class, 'store']);
 });
+
+Route::get('/peringatan/dini', [PeringatanDiniController::class, 'index']);
 
 // Route for admin
 Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function () {
