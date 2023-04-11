@@ -113,26 +113,19 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Peringatan Dini</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('peringatan_dini.add') }}">
+                <form method="POST" action="{{ route('artikel.add') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group {{ $errors->has('tanggal') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
+                        <div class="form-group {{ $errors->has('judul') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="judul">Judul</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tanggal" id="tanggal" class="form-control {{ $errors->has('tanggal') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan nama wilayah">
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('lokasi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi"
-                                    class="form-control {{ $errors->has('lokasi') ? 'form-control-danger' : '' }}" placeholder="Masukkan lokasi">
+                                <input type="text" name="judul" id="judul" class="form-control {{ $errors->has('judul') ? 'form-control-danger' : '' }}"
+                                    placeholder="Masukkan Judul Artikel">
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
@@ -140,6 +133,13 @@
                             <div class="col-sm-10">
                                 <input type="text" name="deskripsi" id="deskripsi"
                                     class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}" placeholder="Masukkan deskripsi">
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="gambar">gambar</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="gambar" id="gambar"
+                                    class="form-control {{ $errors->has('gambar') ? 'form-control-danger' : '' }}" placeholder="Masukkan gambar">
                             </div>
                         </div>
                     </div>

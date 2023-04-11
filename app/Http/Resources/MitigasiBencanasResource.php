@@ -21,6 +21,8 @@ class MitigasiBencanasResource extends JsonResource
                 'deskripsi' => $this->deskripsi,
                 'jenis_konten' => $this->jenis_konten,
                 'file' => $this->file,
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at
             ],
             'relationships' => [
                 'user_id' => $this->user->id,
