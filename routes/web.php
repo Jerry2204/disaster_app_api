@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanBencanaController;
 use App\Http\Controllers\MitigasiBencanaController;
+use App\Http\Controllers\PeringatanDiniController;
 use App\Http\Controllers\RawanBencanaController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,9 @@ Route::post('/', [AuthController::class, 'login'])->name('login');
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/peringatan/dini', [PeringatanDiniController::class, 'indexAdmin'])->name('peringatan_dini.index');
+    Route::post('/peringatan/dini', [PeringatanDiniController::class, 'addAdmin'])->name('peringatan_dini.add');
+    Route::put('/peringatan/dini', [PeringatanDiniController::class, 'updateAdmin'])->name('peringatan_dini.update');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function() {

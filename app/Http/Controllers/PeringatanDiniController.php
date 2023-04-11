@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PeringatanDini;
 use App\Http\Requests\StorePeringatanDiniRequest;
 use App\Http\Requests\UpdatePeringatanDiniRequest;
+use Illuminate\Http\Request;
 
 class PeringatanDiniController extends Controller
 {
@@ -16,6 +17,13 @@ class PeringatanDiniController extends Controller
     public function index()
     {
         //
+    }
+
+    public function indexAdmin()
+    {
+        $peringatanDini = PeringatanDini::paginate(10);
+
+        return view('admin.peringatan_dini.index', compact('peringatanDini'));
     }
 
     /**
@@ -37,6 +45,23 @@ class PeringatanDiniController extends Controller
     public function store(StorePeringatanDiniRequest $request)
     {
         //
+    }
+
+    public function addAdmin(Request $request)
+    {
+        $request->validate([
+            'tanggal' => 'required|date',
+            'lokasi' => 'required',
+            'deskripsi' => 'required'
+        ]);
+
+        PeringatanDini::create([
+            'tanggal' => $request->tanggal,
+            'lokasi' => $request->lokasi,
+            'deskripsi' => $request->deskripsi
+        ]);
+
+        return back()->with('sukses', 'Peringatan Dini berhasil ditambahkan');
     }
 
     /**
@@ -71,6 +96,29 @@ class PeringatanDiniController extends Controller
     public function update(UpdatePeringatanDiniRequest $request, PeringatanDini $peringatanDini)
     {
         //
+    }
+
+    public function updateAdmin(Request $request)
+    {
+        $request->validate([
+            'tanggal' => 'required|date',
+            'lokasi' => 'required',
+            'deskripsi' => 'required'
+        ]);
+
+        $peringatanDini = PeringatanDini::find($request->peringatan_id);
+
+        if(!$peringatanDini) {
+            return back()->with('gagal', 'Data Peringatan Dini tidak ditemukan');
+        }
+
+        $peringatanDini->update([
+            'tanggal' => $request->tanggal,
+            'lokasi' => $request->lokasi,
+            'deskripsi' => $request->deskripsi
+        ]);
+
+        return back()->with('sukses', 'Data Peringatan Dini berhasil diubah');
     }
 
     /**
