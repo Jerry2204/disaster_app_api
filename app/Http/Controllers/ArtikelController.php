@@ -125,6 +125,13 @@ class ArtikelController extends Controller
         }
 
         if($request->hasFile('gambar')) {
+
+            $file_path = public_path() . '/artikel/' . $artikel->gambar;
+
+            if(file_exists($file_path)) {
+                unlink($file_path);
+            }
+
             $file = $request->file('gambar');
 
             $nama_file = time()."_".$file->getClientOriginalName();

@@ -164,7 +164,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('artikel.update') }}">
+                <form method="POST" action="{{ route('artikel.update') }}" enctype="multipart/form-data">
                     @csrf
                     <input name="_method" type="hidden" value="PUT">
                     <div class="modal-body">
