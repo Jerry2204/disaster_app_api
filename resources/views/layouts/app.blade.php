@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>GURU Able - Free Lite Admin Template </title>
+    <title>@yield('title')</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/jquery.mCustomScrollbar.css') }}">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
     @yield('css')
 </head>
 
@@ -183,7 +184,7 @@
                     <img src="admin/images/browser/safari.png" alt="Safari">
                     <div>Safari</div>
                 </a>
-            </li>   
+            </li>
             <li>
                 <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
                     <img src="admin/images/browser/ie.png" alt="">
@@ -246,6 +247,13 @@
                     }
                 })
             })
+        </script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
         </script>
         @yield('js')
 </body>

@@ -36,10 +36,10 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::delete('/peringatan/dini/{id}', [PeringatanDiniController::class, 'deleteAdmin'])->name('peringatan_dini.delete');
 
     // Artikel
-    Route::get('/artikel', [ArtikelController::class, 'indexAdmin'])->name('artikel.index');
-    Route::post('/artikel', [ArtikelController::class, 'addAdmin'])->name('artikel.add');
-    Route::put('/artikel', [ArtikelController::class, 'updateAdmin'])->name('artikel.update');
-    Route::delete('/artikel/{id}', [ArtikelController::class, 'deleteAdmin'])->name('artikel.delete');
+    Route::get('/articles', [ArtikelController::class, 'indexAdmin'])->name('artikel.index');
+    Route::post('/articles', [ArtikelController::class, 'addAdmin'])->name('artikel.add');
+    Route::put('/articles', [ArtikelController::class, 'updateAdmin'])->name('artikel.update');
+    Route::delete('/articles/{id}', [ArtikelController::class, 'deleteAdmin'])->name('artikel.delete');
 
 });
 
