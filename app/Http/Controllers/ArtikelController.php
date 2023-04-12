@@ -130,7 +130,22 @@ class ArtikelController extends Controller
             $nama_file = time()."_".$file->getClientOriginalName();
 
             $file->move('artikel', $nama_file);
+
+            $artikel->update([
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'gambar' => $nama_file
+            ]);
+
+            return back()->with('sukses', 'Artikel berhasil diubah');
         }
+
+        $artikel->update([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi
+        ]);
+
+        return back()->with('sukses', 'Artikel berhasil diubah');
     }
 
     /**
@@ -142,5 +157,18 @@ class ArtikelController extends Controller
     public function destroy(Artikel $artikel)
     {
         //
+    }
+
+    public function deleteAdmin($id)
+    {
+        $artikel = Artikel::find($id);
+
+        if(!$artikel) {
+            return back()->with('gagal', 'Artikel tidak ditemukan');
+        }
+
+        $artikel->delete();
+
+        return back()->with('sukses', 'Artikel berhasil dihapus');
     }
 }

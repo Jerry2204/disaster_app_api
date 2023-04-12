@@ -81,7 +81,7 @@
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('peringatan_dini.delete', $item->id) }}"
+                                                    <form action="{{ route('artikel.delete', $item->id) }}"
                                                         method="POST" id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
