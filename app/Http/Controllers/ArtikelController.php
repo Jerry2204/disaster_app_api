@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use App\Http\Requests\StoreArtikelRequest;
 use App\Http\Requests\UpdateArtikelRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArtikelController extends Controller
 {
@@ -43,7 +45,36 @@ class ArtikelController extends Controller
      */
     public function store(StoreArtikelRequest $request)
     {
-        //
+
+    }
+
+    public function addAdmin(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'required'
+        ]);
+
+        $file = $request->file('gambar');
+
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+        $file->move('artikel', $nama_file);
+
+        $artikel = Artikel::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $nama_file,
+            'user_id' => Auth::user()->id
+        ]);
+
+        if($artikel) {
+            return back()->with('sukses', 'Artikel berhasil ditambahkan');
+        }
+
+        return back()->with('gagal', 'Artikel gagal ditambahkan');
+
     }
 
     /**
@@ -78,6 +109,28 @@ class ArtikelController extends Controller
     public function update(UpdateArtikelRequest $request, Artikel $artikel)
     {
         //
+    }
+
+    public function updateAdmin(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        $artikel = Artikel::find($request->artikel_id);
+
+        if(!$artikel) {
+            return back()->with('gagal', 'Artikel tidak ditemukan');
+        }
+
+        if($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+
+            $nama_file = time()."_".$file->getClientOriginalName();
+
+            $file->move('artikel', $nama_file);
+        }
     }
 
     /**

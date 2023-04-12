@@ -61,7 +61,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Judul</th>
-                                        <th>Deskripsi</th>
                                         <th>Gambar</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -71,17 +70,19 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->judul }}</td>
-                                            <td>{{ $item->deskripsi }}</td>
                                             <td>{{ $item->gambar }}</td>
                                             <td>
                                                 <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-lokasi="{{ $item->lokasi }}" data-tanggal="{{ $item->tanggal }}" data-deskripsi="{{ $item->deskripsi }}" data-peringatan_id="{{ $item->id }}">
+                                                <button type="button" class="btn btn-sm btn-warning"
+                                                    id="modalEdit-{{ $item->id }}" data-toggle="modal"
+                                                    data-target="#modalEdit" data-judul="{{ $item->judul }}"
+                                                    data-deskripsi="{{ $item->deskripsi }}"
+                                                    data-artikel_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('peringatan_dini.delete', $item->id) }}" method="POST"
-                                                        id="delete{{ $item->id }}">
+                                                    <form action="{{ route('peringatan_dini.delete', $item->id) }}"
+                                                        method="POST" id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
@@ -124,22 +125,23 @@
                         <div class="form-group {{ $errors->has('judul') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="judul">Judul</label>
                             <div class="col-sm-10">
-                                <input type="text" name="judul" id="judul" class="form-control {{ $errors->has('judul') ? 'form-control-danger' : '' }}"
+                                <input type="text" name="judul" id="judul"
+                                    class="form-control {{ $errors->has('judul') ? 'form-control-danger' : '' }}"
                                     placeholder="Masukkan Judul Artikel">
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
                             <div class="col-sm-10">
-                                <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}" placeholder="Masukkan deskripsi">
+                                <textarea id="editor" cols="30" rows="10" name="deskripsi"></textarea>
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="gambar">gambar</label>
                             <div class="col-sm-10">
-                                <input type="file" name="gambar" id="gambar"
-                                    class="form-control {{ $errors->has('gambar') ? 'form-control-danger' : '' }}" placeholder="Masukkan gambar">
+                                <input type="file" name="gambar" id="gambar" accept="image/*"
+                                    class="form-control {{ $errors->has('gambar') ? 'form-control-danger' : '' }}"
+                                    placeholder="Masukkan gambar">
                             </div>
                         </div>
                     </div>
@@ -162,30 +164,33 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('peringatan_dini.update') }}">
+                <form method="POST" action="{{ route('artikel.update') }}">
                     @csrf
                     <input name="_method" type="hidden" value="PUT">
                     <div class="modal-body">
-                        <input type="hidden" name="peringatan_id" id="peringatan_id" value="">
-                        <div class="form-group {{ $errors->has('tanggal') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
+                        <input type="hidden" name="artikel_id" id="artikel_id" value="">
+                        <div class="form-group {{ $errors->has('judul') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="judul">Judul</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tanggal" id="tanggal" class="form-control {{ $errors->has('tanggal') ? 'form-control-danger' : '' }}"
+                                <input type="text" name="judul" id="judul"
+                                    class="form-control {{ $errors->has('judul') ? 'form-control-danger' : '' }}"
                                     placeholder="Masukkan nama wilayah">
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('lokasi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi"
-                                    class="form-control {{ $errors->has('lokasi') ? 'form-control-danger' : '' }}" placeholder="Masukkan lokasi">
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
                             <div class="col-sm-10">
                                 <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}" placeholder="Masukkan deskripsi">
+                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"
+                                    placeholder="Masukkan deskripsi">
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="gambar">gambar</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="gambar" id="gambar" accept="image/*"
+                                    class="form-control {{ $errors->has('gambar') ? 'form-control-danger' : '' }}"
+                                    placeholder="Masukkan gambar">
                             </div>
                         </div>
                     </div>
@@ -200,24 +205,20 @@
 @endsection
 
 @section('js')
-<script>
-    $('#modalEdit').on('show.bs.modal', function(e) {
-        var link = $(e.relatedTarget)
-        var tanggal = link.data("tanggal");
-        var lokasi = link.data('lokasi');
-        var deskripsi = link.data('deskripsi');
-        var peringatan_id = link.data('peringatan_id');
+    <script>
+        $('#modalEdit').on('show.bs.modal', function(e) {
+            var link = $(e.relatedTarget)
+            var judul = link.data("judul");
+            var deskripsi = link.data('deskripsi');
+            var artikel_id = link.data('artikel_id');
 
-        console.log(peringatan_id);
+            var modal = $(this)
+            modal.find('.modal-body #judul').val(judul);
+            modal.find('.modal-body #deskripsi').val(deskripsi);
+            modal.find('.modal-body #artikel_id').val(artikel_id);
+        })
 
-        var modal = $(this)
-        modal.find('.modal-body #tanggal').val(tanggal);
-        modal.find('.modal-body #lokasi').val(lokasi);
-        modal.find('.modal-body #deskripsi').val(deskripsi);
-        modal.find('.modal-body #peringatan_id').val(peringatan_id);
-    })
-
-    $(".delete").click(function(e) {
+        $(".delete").click(function(e) {
             id = e.target.dataset.id
             Swal.fire({
                 title: "Apakah anda yakin ingin menghapus data ini?",
@@ -234,5 +235,5 @@
                 }
             })
         })
-</script>
+    </script>
 @endsection
