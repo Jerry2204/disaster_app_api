@@ -21,10 +21,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/public', [WeatherController::class, 'getWeather']);
 
 Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/', [AuthController::class, 'login'])->name('login');
+
+// Beranda
+Route::get('/public', [WeatherController::class, 'getWeather'])->name('public');
+
+//Public
+// Mitigasi Bencana
+Route::get('/public/mitigasi/bencana', [MitigasiBencanaController::class, 'indexPublic'])->name('mitigasi.public');
+Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPublic'])->name('report.detail');
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');

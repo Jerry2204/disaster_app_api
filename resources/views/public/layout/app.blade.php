@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('admin/css/custom/index.css') }}">
+
+    @yield('css')
 </head>
 
 <body>
@@ -33,10 +35,10 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{  }}">Mitigasi Bencana</a>
+                        <a class="nav-link" href="{{ route('mitigasi.public') }}">Mitigasi Bencana</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profil</a>

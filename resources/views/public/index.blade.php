@@ -91,10 +91,8 @@
                                     </p>
                                     <button class="btn btn-primary mt-5"
                                         style="background-color: rgb(2, 85, 165);">
-                                        <a href="" style="text-decoration: none; color: white;">
-                                            <strong>
-                                                Baca Selengkapnya
-                                            </strong>
+                                        <a href="{{ route('report.detail', $item->id) }}" style="text-decoration: none; color: white;">
+                                            Baca Selengkapnya
                                         </a>
                                     </button>
                                 </div>

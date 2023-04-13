@@ -148,6 +148,17 @@ class LaporanBencanaController extends Controller
         return view('admin.laporan_bencana.detail', compact('laporanBencana'));
     }
 
+    public function detailPublic($id)
+    {
+        $laporanBencana = LaporanBencana::find($id);
+
+        if (!$laporanBencana) {
+            return redirect()->route('laporan_bencana.index')->with('gagal', 'Data laporan bencana tidak ditemukan');
+        }
+
+        return view('public.laporan_bencana.detail', compact('laporanBencana'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
