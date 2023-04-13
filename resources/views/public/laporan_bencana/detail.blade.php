@@ -7,6 +7,7 @@
         .laporan-lengkap {
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 1px solid black;
+            border-radius: 5px;
         }
 
         .image-laporan {
@@ -82,6 +83,21 @@
                                 Gambar:
                             </p>
                             <img src="{{ asset('laporan/' . $laporanBencana->gambar) }}" class="image-laporan" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="laporan-lengkap mt-4">
+                    <div class="row">
+                        <div class="col-md-6 p-5">
+                        <h6>Kerusakan Infrastruktur</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="laporan-lengkap mt-4">
+                    <div class="row">
+                        <div class="col-md-6 p-5">
+                        <h6>Korban Jiwa</h6>
                         </div>
                     </div>
                 </div>
