@@ -1,0 +1,267 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', 'Inter';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  p {
+    font-family: 'Inter';
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .navbar {
+    background-color: #0255A5;
+    height: 75px;
+    font-family: 'Inter', sans-serif;
+
+  }
+
+  @media(max-width:670px){
+    .navbar{
+      height: 100%;
+    }
+
+
+  }
+
+  .brand-bold {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .brand-regular {
+    font-size: 14px;
+  }
+
+  .logo {
+    width: 45px;
+    height: 45px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+  .warning {
+    border: 1px solid #ccc;
+    height: 140px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    position: absolute;
+    background-color: #FFA500;
+  }
+
+
+  .icon {
+
+    width: 70px;
+    height: 100px;
+    color: #FFFFFF;
+
+  }
+
+  .date {
+    text-align: left;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  legend {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+
+
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+
+
+  .hero {
+    height: 390px;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    z-index: 9;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .hero::after {
+    z-index: 10;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    content: "";
+    opacity: 10%;
+  }
+
+  .hero-container {
+    z-index: 20;
+    color: #fff;
+  }
+
+  .btn-custom-danger {
+    background-color: #FA0000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 220px;
+    height: 64px;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+
+  }
+
+  .text-hero {
+    font-size: 40px;
+    font-weight: 700;
+    color: #FFF50B;
+  }
+
+  .subtext-hero {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .box {
+    width: 100%;
+    height: 100%;
+  }
+
+  .peringatan-dini-hero {
+    width: 475px;
+    height: 270px;
+    border-radius: 15px;
+    background-color: #FE9705;
+  }
+
+  .peringatan-dini {
+    display: none;
+    width: 475px;
+    height: 270px;
+    border-radius: 15px;
+    background-color: #FE9705;
+  }
+
+  .warning-icon {
+    margin-top: 20px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .hr-peringatan {
+    border: 3px solid #fff;
+    opacity: 100%;
+  }
+
+  .box-pemetaan {
+    border-radius: 15px;
+  }
+
+  .text-marker {
+    color: black;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+  }
+
+  .bg-blue {
+    background-color: #0255A5;
+  }
+
+  .bg-oranye {
+    background-color: #FE9705;
+  }
+
+  .box-cuaca {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);;
+  }
+
+  .card img {
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .footer {
+    background-color: #0255A5;
+    color: white;
+    height: 100%;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    line-height: 2.5;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+footer a:hover {
+    color: #FE9705;
+}

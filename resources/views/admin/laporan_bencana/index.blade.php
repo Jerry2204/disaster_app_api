@@ -76,9 +76,29 @@
                                             <td>{{ $item->lokasi }}</td>
                                             <td>{{ $item->keterangan }}</td>
                                             <td>{{ $item->status_bencana }}</td>
-                                            <td>{{ $item->status_penanggulangan->status }}</td>
+                                            <td>
+                                                @if ($item->status_penanggulangan->status == 'menunggu')
+                                                <span class="badge badge-danger">{{ $item->status_penanggulangan->status }}</span>
+                                                @elseif ($item->status_penanggulangan->status == 'diterima')
+                                                <span class="badge badge-info">{{ $item->status_penanggulangan->status }}</span>
+                                                @elseif ($item->status_penanggulangan->status == 'proses')
+                                                <span class="badge badge-warning">{{ $item->status_penanggulangan->status }}</span>
+                                                @elseif ($item->status_penanggulangan->status == 'selesai')
+                                                <span class="badge badge-success">{{ $item->status_penanggulangan->status }}</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                                                <button type="button" class="btn btn-sm btn-warning"
+                                                    id="modalEdit-{{ $item->id }}" data-toggle="modal"
+                                                    data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
+                                                    data-lokasi="{{ $item->lokasi }}"
+                                                    data-keterangan="{{ $item->keterangan }}"
+                                                    data-status_bencana="{{ $item->status_bencana }}"
+                                                    data-nama_bencana="{{ $item->nama_bencana }}"
+                                                    data-laporan_id="{{ $item->id }}">
+                                                    Ubah
+                                                </button>
                                                 @if ($item->confirmed == true)
                                                     <!-- Button trigger modal -->
                                                     <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
@@ -89,16 +109,6 @@
                                                     @else
                                                     <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
                                                 @endif
-                                                {{-- <button type="button" class="btn btn-sm btn-warning"
-                                                    id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
-                                                    data-lokasi="{{ $item->lokasi }}"
-                                                    data-keterangan="{{ $item->keterangan }}"
-                                                    data-status_bencana="{{ $item->status_bencana }}"
-                                                    data-nama_bencana="{{ $item->nama_bencana }}"
-                                                    data-laporan_id="{{ $item->id }}">
-                                                    Ubah
-                                                </button> --}}
                                                 {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('laporan_bencana.delete', $item->id) }}"
                                                         method="POST" id="delete{{ $item->id }}">

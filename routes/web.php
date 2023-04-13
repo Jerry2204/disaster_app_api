@@ -7,6 +7,7 @@ use App\Http\Controllers\LaporanBencanaController;
 use App\Http\Controllers\MitigasiBencanaController;
 use App\Http\Controllers\PeringatanDiniController;
 use App\Http\Controllers\RawanBencanaController;
+use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/public', [WeatherController::class, 'getWeather']);
 
 Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/', [AuthController::class, 'login'])->name('login');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use App\Http\Requests\StoreArtikelRequest;
 use App\Http\Requests\UpdateArtikelRequest;
+use App\Http\Resources\ArtikelsResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,9 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        //
+        return ArtikelsResource::collection(
+            Artikel::all()
+        );
     }
 
     public function indexAdmin()
@@ -125,12 +128,34 @@ class ArtikelController extends Controller
         }
 
         if($request->hasFile('gambar')) {
+
+            $file_path = public_path() . '/artikel/' . $artikel->gambar;
+
+            if(file_exists($file_path)) {
+                unlink($file_path);
+            }
+
             $file = $request->file('gambar');
 
             $nama_file = time()."_".$file->getClientOriginalName();
 
             $file->move('artikel', $nama_file);
+
+            $artikel->update([
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'gambar' => $nama_file
+            ]);
+
+            return back()->with('sukses', 'Artikel berhasil diubah');
         }
+
+        $artikel->update([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi
+        ]);
+
+        return back()->with('sukses', 'Artikel berhasil diubah');
     }
 
     /**
@@ -142,5 +167,18 @@ class ArtikelController extends Controller
     public function destroy(Artikel $artikel)
     {
         //
+    }
+
+    public function deleteAdmin($id)
+    {
+        $artikel = Artikel::find($id);
+
+        if(!$artikel) {
+            return back()->with('gagal', 'Artikel tidak ditemukan');
+        }
+
+        $artikel->delete();
+
+        return back()->with('sukses', 'Artikel berhasil dihapus');
     }
 }

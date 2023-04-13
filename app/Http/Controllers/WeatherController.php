@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Artikel;
+use App\Models\LaporanBencana;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
+
+class WeatherController extends Controller
+{
+    public function getWeather()
+    {
+        $client = new Client();
+
+        $response = $client->get('https://cuaca-gempa-rest-api.vercel.app/weather/sumatera-utara/balige');
+
+        $data = json_decode($response->getBody(), true);
+
+        $weather = collect($data['data']['params'])->map(function($cuaca) {
+            if($cuaca['id'] == 'weather') {
+                return $cuaca;
+            }
+        })->whereNotNull()->values();
+
+        $cuaca = $weather[0]['times'];
+        $newestReport = LaporanBencana::latest()->limit(3)->get();
+        $newestArtikel = Artikel::latest()->limit(3)->get();
+
+        return view('public\index', compact('cuaca', 'newestReport', 'newestArtikel'));
+    }
+}

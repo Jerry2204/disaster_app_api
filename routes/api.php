@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\LaporanBencanaController;
 use App\Http\Controllers\MitigasiBencanaController;
 use App\Http\Controllers\PeringatanDiniController;
@@ -34,6 +35,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
 Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
 Route::get('/laporan/bencana', [LaporanBencanaController::class, 'index']);
+Route::get('/articles', [ArtikelController::class, 'index']);
 Route::get('/mitigasi/bencana', [MitigasiBencanaController::class, 'index']);
 Route::get('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'show']);
 Route::group(['middleware' => ['auth:sanctum']], function () {

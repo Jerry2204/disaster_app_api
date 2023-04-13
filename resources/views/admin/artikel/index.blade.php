@@ -81,7 +81,7 @@
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('peringatan_dini.delete', $item->id) }}"
+                                                    <form action="{{ route('artikel.delete', $item->id) }}"
                                                         method="POST" id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
@@ -159,12 +159,12 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Peringatan Dini</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Artikel</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('artikel.update') }}">
+                <form method="POST" action="{{ route('artikel.update') }}" enctype="multipart/form-data">
                     @csrf
                     <input name="_method" type="hidden" value="PUT">
                     <div class="modal-body">
@@ -180,9 +180,7 @@
                         <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
                             <div class="col-sm-10">
-                                <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan deskripsi">
+                                <textarea placeholder="Masukkan deskripsi" id="deskripsi" cols="30" rows="10" name="deskripsi" class="editor form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"></textarea>
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
