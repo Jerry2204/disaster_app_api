@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use App\Http\Requests\StoreArtikelRequest;
 use App\Http\Requests\UpdateArtikelRequest;
+use App\Http\Resources\ArtikelsResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,9 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        //
+        return ArtikelsResource::collection(
+            Artikel::all()
+        );
     }
 
     public function indexAdmin()

@@ -180,9 +180,7 @@
                         <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
                             <div class="col-sm-10">
-                                <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan deskripsi">
+                                <textarea placeholder="Masukkan deskripsi" id="deskripsi" cols="30" rows="10" name="deskripsi" class="editor form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"></textarea>
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
