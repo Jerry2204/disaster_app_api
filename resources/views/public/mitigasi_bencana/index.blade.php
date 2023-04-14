@@ -35,7 +35,7 @@
                             </p>
                             <button class="btn btn-primary mt-5"
                                 style="background-color: rgb(2, 85, 165);">
-                                <a href="" class="" style="text-decoration: none; color: white;">
+                                <a href="{{ route('mitigasi.public.detail', $item->id) }}" class="" style="text-decoration: none; color: white;">
                                     Baca Selengkapnya
                                 </a>
                             </button>
@@ -76,7 +76,7 @@
                             </p>
                             <button class="btn btn-primary mt-5"
                                 style="background-color: rgb(2, 85, 165);">
-                                <a href="" class="" style="text-decoration: none; color: white;">
+                                <a href="{{ route('mitigasi.public.detail', $item->id) }}" class="" style="text-decoration: none; color: white;">
                                     Baca Selengkapnya
                                 </a>
                             </button>

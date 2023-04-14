@@ -31,7 +31,12 @@ Route::get('/public', [WeatherController::class, 'getWeather'])->name('public');
 //Public
 // Mitigasi Bencana
 Route::get('/public/mitigasi/bencana', [MitigasiBencanaController::class, 'indexPublic'])->name('mitigasi.public');
+Route::get('/public/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'showPublic'])->name('mitigasi.public.detail');
+
+// Laporan Bencana
+Route::get('/public/laporan', [LaporanBencanaController::class, 'publicAdd'])->name('report.add');
 Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPublic'])->name('report.detail');
+
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');

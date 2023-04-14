@@ -123,6 +123,17 @@ class MitigasiBencanaController extends Controller
         return new MitigasiBencanasResource($mitigasiBencana);
     }
 
+    public function showPublic($id)
+    {
+        $mitigasiBencana = MitigasiBencana::find($id);
+
+        if(!$mitigasiBencana) {
+            return back()->with('gagal', 'Data Mitigasi Bencana tidak ditemukan');
+        }
+
+        return view('public.mitigasi_bencana.detail', compact('mitigasiBencana'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

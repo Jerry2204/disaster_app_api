@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-5 text-start d-flex flex-column justify-content-center left-hero">
                 <h1 class="text-hero">Anda Dalam Keadaan Darurat?</h1>
-                <p class="subtext-hero">Sampaikan Laporan Peristiwa Darurat di Sekitar Anda!</p><a href="/darurat"
+                <p class="subtext-hero">Sampaikan Laporan Peristiwa Darurat di Sekitar Anda!</p><a href="{{ route('report.add') }}"
                     style="text-decoration: none; color: white;"> <button
                         class="btn-custom-danger"><strong>LAPOR!</strong></button></a>
             </div>

@@ -120,6 +120,11 @@ class LaporanBencanaController extends Controller
         return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }
 
+    public function publicAdd()
+    {
+        return view('public.laporan_bencana.add');
+    }
+
     /**
      * Display the specified resource.
      *
