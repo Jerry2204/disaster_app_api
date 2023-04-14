@@ -30,7 +30,7 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/jquery.mCustomScrollbar.css') }}">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
     @yield('css')
 </head>

@@ -40,11 +40,12 @@ Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPubl
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {
     Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Peringatan Dini
     Route::get('/peringatan/dini', [PeringatanDiniController::class, 'indexAdmin'])->name('peringatan_dini.index');

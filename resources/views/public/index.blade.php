@@ -1,4 +1,5 @@
 @extends('public.layout.app')
+
 @section('content')
 <div class="hero position-relative d-flex justify-content-center align-items-center"><img
         src="{{ asset('image/banjir.jpg') }}" class="overflow-hidden hero-image" alt="">
