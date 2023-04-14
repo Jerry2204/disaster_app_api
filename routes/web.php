@@ -22,11 +22,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Beranda
-Route::get('/public', [WeatherController::class, 'getWeather'])->name('public');
+Route::get('/', [WeatherController::class, 'getWeather'])->name('public');
 
 //Public
 // Mitigasi Bencana
