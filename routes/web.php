@@ -21,14 +21,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// Login
 Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+
+/** Public */
 
 // Beranda
 Route::get('/', [WeatherController::class, 'getWeather'])->name('public');
 
-//Public
 // Mitigasi Bencana
 Route::get('/public/mitigasi/bencana', [MitigasiBencanaController::class, 'indexPublic'])->name('mitigasi.public');
 Route::get('/public/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'showPublic'])->name('mitigasi.public.detail');
@@ -38,20 +40,18 @@ Route::get('/public/laporan', [LaporanBencanaController::class, 'publicAdd'])->n
 Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
 Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPublic'])->name('report.detail');
 
+/** Auth All User */
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {
+    // Add Laporan from all user
     Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
 
+    // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
+/** Auth without general user */
+Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-    // Peringatan Dini
-    Route::get('/peringatan/dini', [PeringatanDiniController::class, 'indexAdmin'])->name('peringatan_dini.index');
-    Route::post('/peringatan/dini', [PeringatanDiniController::class, 'addAdmin'])->name('peringatan_dini.add');
-    Route::put('/peringatan/dini', [PeringatanDiniController::class, 'updateAdmin'])->name('peringatan_dini.update');
-    Route::delete('/peringatan/dini/{id}', [PeringatanDiniController::class, 'deleteAdmin'])->name('peringatan_dini.delete');
 
     // Artikel
     Route::get('/articles', [ArtikelController::class, 'indexAdmin'])->name('artikel.index');
@@ -61,18 +61,30 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
 
 });
 
+/** Auth Pra Bencana */
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function() {
+    // Peringatan Dini
+    Route::get('/peringatan/dini', [PeringatanDiniController::class, 'indexAdmin'])->name('peringatan_dini.index');
+    Route::post('/peringatan/dini', [PeringatanDiniController::class, 'addAdmin'])->name('peringatan_dini.add');
+    Route::put('/peringatan/dini', [PeringatanDiniController::class, 'updateAdmin'])->name('peringatan_dini.update');
+    Route::delete('/peringatan/dini/{id}', [PeringatanDiniController::class, 'deleteAdmin'])->name('peringatan_dini.delete');
+
+    // Rawan Bencana
     Route::get('/rawan/bencana', [RawanBencanaController::class, 'indexAdmin'])->name('rawan_bencana.index');
     Route::post('/rawan/bencana', [RawanBencanaController::class, 'addAdmin'])->name('rawan_bencana.add');
     Route::put('/rawan/bencana', [RawanBencanaController::class, 'updateAdmin'])->name('rawan_bencana.update');
     Route::delete('/rawan/bencana/{id}', [RawanBencanaController::class, 'deleteAdmin'])->name('rawan_bencana.delete');
+
+    // Mitigasi Bencana
     Route::get('/mitigasi/bencana', [MitigasiBencanaController::class, 'indexAdmin'])->name('mitigasi_bencana.index');
     Route::post('/mitigasi/bencana', [MitigasiBencanaController::class, 'addAdmin'])->name('mitigasi_bencana.add');
     Route::put('/mitigasi/bencana', [MitigasiBencanaController::class, 'updateAdmin'])->name('mitigasi_bencana.update');
     Route::delete('/mitigasi/bencana/{id}', [MitigasiBencanaController::class, 'deleteAdmin'])->name('mitigasi_bencana.delete');
 });
 
+/** Auth Tanggap Darurat */
 Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], function() {
+    // Manage Laporan Bencana
     Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
     Route::post('/laporan/bencana', [LaporanBencanaController::class, 'addAdmin'])->name('laporan_bencana.add');
     Route::put('/laporan/bencana', [LaporanBencanaController::class, 'updateAdmin'])->name('laporan_bencana.update');
