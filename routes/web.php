@@ -35,8 +35,12 @@ Route::get('/public/mitigasi/bencana/{id}', [MitigasiBencanaController::class, '
 
 // Laporan Bencana
 Route::get('/public/laporan', [LaporanBencanaController::class, 'publicAdd'])->name('report.add');
+Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
 Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPublic'])->name('report.detail');
 
+Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {
+    Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
+});
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
