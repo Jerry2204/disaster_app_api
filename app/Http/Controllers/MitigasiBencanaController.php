@@ -32,6 +32,14 @@ class MitigasiBencanaController extends Controller
         return view('admin.mitigasi_bencana.index', compact('mitigasiBencana'));
     }
 
+    public function indexPublic()
+    {
+       $mitigasiBencanaPDF = MitigasiBencana::where('jenis_konten', 'pdf')->latest()->paginate(4);
+       $mitigasiBencanaVideo = MitigasiBencana::where('jenis_konten', 'video')->latest()->paginate(4);
+
+        return view('public.mitigasi_bencana.index', compact('mitigasiBencanaPDF', 'mitigasiBencanaVideo'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -113,6 +121,17 @@ class MitigasiBencanaController extends Controller
         }
 
         return new MitigasiBencanasResource($mitigasiBencana);
+    }
+
+    public function showPublic($id)
+    {
+        $mitigasiBencana = MitigasiBencana::find($id);
+
+        if(!$mitigasiBencana) {
+            return back()->with('gagal', 'Data Mitigasi Bencana tidak ditemukan');
+        }
+
+        return view('public.mitigasi_bencana.detail', compact('mitigasiBencana'));
     }
 
     /**

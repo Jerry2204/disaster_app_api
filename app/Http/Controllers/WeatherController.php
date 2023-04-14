@@ -24,8 +24,8 @@ class WeatherController extends Controller
         })->whereNotNull()->values();
 
         $cuaca = $weather[0]['times'];
-        $newestReport = LaporanBencana::latest()->limit(3)->get();
-        $newestArtikel = Artikel::latest()->limit(3)->get();
+        $newestReport = LaporanBencana::latest()->limit(4)->get();
+        $newestArtikel = Artikel::latest()->limit(4)->get();
 
         return view('public\index', compact('cuaca', 'newestReport', 'newestArtikel'));
     }

@@ -1,4 +1,5 @@
 @extends('public.layout.app')
+
 @section('content')
 <div class="hero position-relative d-flex justify-content-center align-items-center"><img
         src="{{ asset('image/banjir.jpg') }}" class="overflow-hidden hero-image" alt="">
@@ -6,7 +7,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-5 text-start d-flex flex-column justify-content-center left-hero">
                 <h1 class="text-hero">Anda Dalam Keadaan Darurat?</h1>
-                <p class="subtext-hero">Sampaikan Laporan Peristiwa Darurat di Sekitar Anda!</p><a href="/darurat"
+                <p class="subtext-hero">Sampaikan Laporan Peristiwa Darurat di Sekitar Anda!</p><a href="{{ route('report.add') }}"
                     style="text-decoration: none; color: white;"> <button
                         class="btn-custom-danger"><strong>LAPOR!</strong></button></a>
             </div>
@@ -75,11 +76,28 @@
                 <h3 class="mb-5 text-white text-center">Bencana Terkini </h3>
                 <div class="row">
                     @foreach ($newestReport as $item)
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card text-start" style="padding: 0px;">
                                 <img src="{{ asset('laporan/' . $item->gambar) }}" alt="{{ $item->gambar }}"
                                     style="border-radius: 5px 5px 0px 0px;">
-                                <div class="card-body">
+                                    @if ($item->status_penanggulangan->status == 'menunggu')
+                                    <div class="d-inline ms-3" style="margin-top: -30px;">
+                                        <p class="badge bg-danger">{{ $item->status_penanggulangan->status }}</p>
+                                    </div>
+                                    @elseif ($item->status_penanggulangan->status == 'diterima')
+                                    <div class="d-inline ms-3" style="margin-top: -30px;">
+                                        <p class="badge bg-info">{{ $item->status_penanggulangan->status }}</p>
+                                    </div>
+                                    @elseif ($item->status_penanggulangan->status == 'proses')
+                                    <div class="d-inline ms-3" style="margin-top: -30px;">
+                                        <p class="badge bg-warning">{{ $item->status_penanggulangan->status }}</p>
+                                    </div>
+                                    @elseif ($item->status_penanggulangan->status == 'selesai')
+                                    <div class="d-inline ms-3" style="margin-top: -30px;">
+                                        <p class="badge bg-success">{{ $item->status_penanggulangan->status }}</p>
+                                    </div>
+                                    @endif
+                                    <div class="card-body">
                                     <h6 class="card-title text-start">
                                         {{ $item->nama_bencana }}
                                     </h6>
@@ -91,10 +109,8 @@
                                     </p>
                                     <button class="btn btn-primary mt-5"
                                         style="background-color: rgb(2, 85, 165);">
-                                        <a href="" style="text-decoration: none; color: white;">
-                                            <strong>
-                                                Baca Selengkapnya
-                                            </strong>
+                                        <a href="{{ route('report.detail', $item->id) }}" style="text-decoration: none; color: white;">
+                                            Baca Selengkapnya
                                         </a>
                                     </button>
                                 </div>
@@ -114,7 +130,7 @@
                 <h3 class="mb-5 text-white text-center">Pengumuman</h3>
                 <div class="row">
                     @foreach ($newestArtikel as $item)
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card text-start" style="padding: 0px;">
                                 <img src="{{ asset('artikel/' . $item->gambar) }}" alt="{{ $item->gambar }}"
                                     style="border-radius: 5px 5px 0px 0px;">
