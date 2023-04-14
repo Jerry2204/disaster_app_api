@@ -38,10 +38,10 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('mitigasi.public') }}">Mitigasi Bencana</a>
+                        <a class="nav-link" href="#">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="{{ route('mitigasi.public') }}">Mitigasi Bencana</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -104,6 +104,22 @@
             </div>
         </div>
     </footer>
+
+    <div className=" box-button-urgent">
+        <div className="d-flex flex-column gap-3">
+
+          <div className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+            <a
+              href="/darurat"
+              style="textDecoration: none; color: white;"
+            >
+              <div className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+             <i class="fa fa-phone" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

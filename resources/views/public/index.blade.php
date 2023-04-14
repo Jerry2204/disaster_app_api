@@ -76,7 +76,7 @@
                 <h3 class="mb-5 text-white text-center">Bencana Terkini </h3>
                 <div class="row">
                     @foreach ($newestReport as $item)
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card text-start" style="padding: 0px;">
                                 <img src="{{ asset('laporan/' . $item->gambar) }}" alt="{{ $item->gambar }}"
                                     style="border-radius: 5px 5px 0px 0px;">
@@ -130,7 +130,7 @@
                 <h3 class="mb-5 text-white text-center">Pengumuman</h3>
                 <div class="row">
                     @foreach ($newestArtikel as $item)
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card text-start" style="padding: 0px;">
                                 <img src="{{ asset('artikel/' . $item->gambar) }}" alt="{{ $item->gambar }}"
                                     style="border-radius: 5px 5px 0px 0px;">

@@ -10,9 +10,8 @@
             <div class="row">
                 <div class="col-md-12 text-sta d-flex flex-column justify-content-center align-items-center">
                     <div class="position-absolute w-100 text-center">
-                        <h1 style="font-family: Roboto; font-style: normal; font-size: 70px; font-weight: 700;">LAPOR</h1>
-                        <p style="font-weight: 300; font-family: Roboto; font-style: normal; font-size: 25px;">Siap Membantu
-                            Masyarakat Dalam Situasi Gawat Darurat</p>
+                        <h1 class="fw-bold">LAPOR</h1>
+                        <p>Siap Membantu Masyarakat Dalam Situasi Gawat Darurat</p>
                     </div>
                 </div>
             </div>
