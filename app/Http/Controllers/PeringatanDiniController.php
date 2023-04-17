@@ -22,7 +22,7 @@ class PeringatanDiniController extends Controller
         );
     }
 
-    public function indexAdmin()
+    public function indexAdmin() 
     {
         $peringatanDini = PeringatanDini::paginate(10);
 
