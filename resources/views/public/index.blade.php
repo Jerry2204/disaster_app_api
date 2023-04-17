@@ -105,7 +105,7 @@
                                         {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
                                     </p>
                                     <p class="text-secondary fw-light mt-3">
-                                        {{ $item->keterangan }}
+                                        {!! Str::words($item->keterangan, 3)  !!}
                                     </p>
                                     <button class="btn btn-primary mt-5"
                                         style="background-color: rgb(2, 85, 165);">

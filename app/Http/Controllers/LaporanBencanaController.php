@@ -37,6 +37,27 @@ class LaporanBencanaController extends Controller
         return view('admin.laporan_bencana.index', compact('laporanBencana'));
     }
 
+    public function bencanaAlam()
+    {
+        $bencanaAlam = LaporanBencana::where('jenis_bencana', 'bencana alam')->get();
+
+        return view('public.bencanaAlam', compact('bencanaAlam'));
+    }
+
+    public function bencanaNonAlam()
+    {
+        $bencanaNonAlam = LaporanBencana::where('jenis_bencana', 'bencana non alam')->get();
+
+        return view('public.bencanaNonAlam', compact('bencanaNonAlam'));
+    }
+
+    public function bencanaSosial()
+    {
+        $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->get();
+
+        return view('public.bencanaSosial', compact('bencanaSosial'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
