@@ -38,7 +38,7 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('mitigasi.public') }}">Mitigasi Bencana</a>
@@ -51,7 +51,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('bencana.alam') }}">Bencana Alam</a></li>
                             <li><a class="dropdown-item" href="{{ route('bencana.nonalam') }}">Bencana Non Alam</a></li>
-                            <li><a class="dropdown-item" href="#">Bencana Sosial</a></li>
+                            <li><a class="dropdown-item" href="{{ route('bencana.sosial') }}">Bencana Sosial</a></li>
                         </ul>
                     <li class="nav-item">
                         @auth

@@ -31,7 +31,7 @@
                                 {{ $item->title }}
                             </h6>
                             <p class="text-secondary fw-light mt-3">
-                                {{ $item->deskripsi }}
+                                {!! Str::words($item->deskripsi, 3)  !!}
                             </p>
                             <button class="btn btn-primary mt-5"
                                 style="background-color: rgb(2, 85, 165);">
@@ -72,7 +72,7 @@
                                 {{ $item->title }}
                             </h6>
                             <p class="text-secondary fw-light mt-3">
-                                {{ $item->deskripsi }}
+                                {!! Str::words($item->deskripsi, 3)  !!}
                             </p>
                             <button class="btn btn-primary mt-5"
                                 style="background-color: rgb(2, 85, 165);">

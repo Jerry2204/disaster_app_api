@@ -30,7 +30,7 @@ class LaporanBencanaController extends Controller
         );
     }
 
-    public function indexAdmin($id)
+    public function indexAdmin()
     {
         $laporanBencana = LaporanBencana::latest()->paginate(10);
 
@@ -49,6 +49,13 @@ class LaporanBencanaController extends Controller
         $bencanaNonAlam = LaporanBencana::where('jenis_bencana', 'bencana non alam')->get();
 
         return view('public.bencanaNonAlam', compact('bencanaNonAlam'));
+    }
+
+    public function bencanaSosial()
+    {
+        $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->get();
+
+        return view('public.bencanaSosial', compact('bencanaSosial'));
     }
 
     /**

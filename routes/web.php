@@ -43,6 +43,10 @@ Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPubl
 // Data Bencana
 Route::get('/bencana/alam', [LaporanBencanaController::class, 'bencanaAlam'])->name('bencana.alam');
 Route::get('/bencana/nonalam', [LaporanBencanaController::class, 'bencanaNonAlam'])->name('bencana.nonalam');
+Route::get('/bencana/sosial', [LaporanBencanaController::class, 'bencanaSosial'])->name('bencana.sosial');
+
+// Profil BPBD
+Route::get('/bpbd/profil', [HomeController::class, 'profile_bpbd'])->name('bpbd.profil');
 
 /** Auth All User */
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {
