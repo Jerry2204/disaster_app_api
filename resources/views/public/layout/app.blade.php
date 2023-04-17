@@ -49,8 +49,8 @@
                             Data Bencana
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Bencana Alam</a></li>
-                            <li><a class="dropdown-item" href="#">Bencana Non Alam</a></li>
+                            <li><a class="dropdown-item" href="{{ route('bencana.alam') }}">Bencana Alam</a></li>
+                            <li><a class="dropdown-item" href="{{ route('bencana.nonalam') }}">Bencana Non Alam</a></li>
                             <li><a class="dropdown-item" href="#">Bencana Sosial</a></li>
                         </ul>
                     <li class="nav-item">
