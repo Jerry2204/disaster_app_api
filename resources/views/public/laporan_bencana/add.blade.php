@@ -52,19 +52,28 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade mt-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="tab-pane fade mt-3" id="pills-profile" role="tabpanel"  aria-labelledby="pills-profile-tab">
             <div class="container">
-                <div class="row mb-5 border rounded p-3">
+                <div class="row mb-5 border rounded p-3"style="box-shadow: 0px 0px 10px 0px black">
                     <div class="col-md-12">
                         <h3 class="text-center mt-3 mb-5">Form Pelaporan Bencana</h3>
-                    </div>
-                    <div class="col-md-6">
-                        Test
+
+                        <h6  class="text-center" style="font-size: 20px">
+                            Segera Laporkan Jika Ditemukan Bencana Disekitar Anda Silakan Melaporkannya Melalui Form Dibawah Ini
+                          </h6>
+                          <br>
+                          <h6 class="text-center" style="font-size: 20px">
+                            Hubungi No Berikut :
+                            <span style="color: red">
+                              <b>No Telepon : 063221709</b>
+                            </span>
+                          </h6>
+                        <hr>
                     </div>
                     <div class="col-md-6">
                         <form action="{{ route('report.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-3 ">
                                 <select name="jenis_bencana" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                     <option value="">-- Pilih Jenis Bencana --</option>
                                     <option value="bencana alam">Bencana Alam</option>
