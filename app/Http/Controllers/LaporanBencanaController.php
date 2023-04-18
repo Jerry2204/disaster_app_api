@@ -25,6 +25,13 @@ class LaporanBencanaController extends Controller
      */
     public function index()
     {
+
+        $laporanBencana = LaporanBencana::all();
+
+        if($laporanBencana->isEmpty()) {
+            return $this->error('', 'Data Laporan Bencana tidak ditemukan', 404);
+        }
+
         return LaporanBencanasResource::collection(
             LaporanBencana::all()
         );
@@ -74,6 +81,7 @@ class LaporanBencanaController extends Controller
      * @param  \App\Http\Requests\StoreLaporanBencanaRequest  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(StoreLaporanBencanaRequest $request)
     {
         $request->validated($request->all());

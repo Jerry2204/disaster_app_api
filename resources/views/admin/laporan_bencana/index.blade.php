@@ -40,10 +40,12 @@
             <div class="col-sm-12">
                 <div class="card p-3">
                     <div class="card-header">
+                        @if (auth()->user()->role == 'tanggap_darurat')
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                             Tambah Laporan Bencana
                         </button>
+                        @endif
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option">
                                 <li><i class="icofont icofont-simple-left "></i></li>
@@ -89,25 +91,31 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
-                                                <button type="button" class="btn btn-sm btn-warning"
-                                                    id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
-                                                    data-lokasi="{{ $item->lokasi }}"
-                                                    data-keterangan="{{ $item->keterangan }}"
-                                                    data-status_bencana="{{ $item->status_bencana }}"
-                                                    data-nama_bencana="{{ $item->nama_bencana }}"
-                                                    data-laporan_id="{{ $item->id }}">
-                                                    Ubah
-                                                </button>
-                                                @if ($item->confirmed == true)
-                                                    <!-- Button trigger modal -->
-                                                    <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                        <form action="{{ route('laporan_bencana.reject', $item->id) }}" id="reject{{ $item->id }}">
-                                                        </form>
-                                                        Tolak
+                                                @if (auth()->user()->role == 'tanggap_darurat')
+                                                    <button type="button" class="btn btn-sm btn-warning"
+                                                        id="modalEdit-{{ $item->id }}" data-toggle="modal"
+                                                        data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
+                                                        data-lokasi="{{ $item->lokasi }}"
+                                                        data-keterangan="{{ $item->keterangan }}"
+                                                        data-status_bencana="{{ $item->status_bencana }}"
+                                                        data-nama_bencana="{{ $item->nama_bencana }}"
+                                                        data-laporan_id="{{ $item->id }}">
+                                                        Ubah
                                                     </button>
+                                                    @if ($item->confirmed == true)
+                                                        <!-- Button trigger modal -->
+                                                        <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                            <form action="{{ route('laporan_bencana.reject', $item->id) }}" id="reject{{ $item->id }}">
+                                                            </form>
+                                                            Tolak
+                                                        </button>
                                                     @else
-                                                    <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
+                                                        <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
+                                                    @endif
+                                                @elseif (auth()->user()->role == 'pasca_bencana')
+                                                <button class="btn btn-sm btn-primary" data-id="{{ $item->id }}">
+                                                    Tambah Dampak Bencana
+                                                </button>
                                                 @endif
                                                 {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('laporan_bencana.delete', $item->id) }}"
@@ -117,7 +125,6 @@
                                                     </form>
                                                     Tolak
                                                 </button> --}}
-
                                             </td>
                                         </tr>
                                     @empty

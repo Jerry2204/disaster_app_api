@@ -45,6 +45,7 @@
                     <div class="card-header">
                         <h5>{{ $laporanBencana->nama_bencana }}</h5>
                         <span>{{ $laporanBencana->jenis_bencana }}</span>
+                        @if (auth()->user()->role == 'tanggap_darurat')
                         @if ($laporanBencana->status_penanggulangan->status == 'menunggu')
                         <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}" class="btn btn-sm btn-success">
                             Konfirmasi
@@ -61,6 +62,7 @@
                             Selesai
                         </button>
                         @else
+                        @endif
                         @endif
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option" style="width: 35px;">

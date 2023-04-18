@@ -41,7 +41,7 @@
                 </a>
             </li>
             @endif
-            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat')
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana')
             <li>
                 <a href="{{ route('laporan_bencana.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
