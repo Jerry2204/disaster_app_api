@@ -10,6 +10,9 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('admin/css/custom/index.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+
     @yield('css')
 </head>
 
@@ -53,18 +56,30 @@
                             <li><a class="dropdown-item" href="{{ route('bencana.nonalam') }}">Bencana Non Alam</a></li>
                             <li><a class="dropdown-item" href="{{ route('bencana.sosial') }}">Bencana Sosial</a></li>
                         </ul>
-                    <li class="nav-item">
+                    </li>
+                    <li class="nav-item dropdown">
                         @auth
-                        <a href="#" class="btn btn-success logout">Keluar</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Keluar</button>
+                                    </form>
+                                </li>
+                            </ul>
                         @endauth
+
                         @guest
-                        <a class="btn btn-success" href="{{ route('login') }}">Masuk</a>
+                            <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Login</a></li>
                         @endguest
                     </li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                    </li>
+
+                        </li>
+
                 </ul>
             </div>
         </div>
@@ -76,8 +91,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2 text-center">
-                    <img class="logo" src="{{ asset('image/logo.png') }}"
-                        alt="Logo Tidak ditemukan">
+                    <img class="logo" src="{{ asset('image/logo.png') }}" alt="Logo Tidak ditemukan">
                     <h6>BPBD TOBA</h6>
                 </div>
                 <div class="col-md-6">
@@ -108,21 +122,21 @@
     <div className=" box-button-urgent">
         <div className="d-flex flex-column gap-3">
 
-          <div className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-            <a
-              href="/darurat"
-              style="textDecoration: none; color: white;"
-            >
-              <div className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-             <i class="fa fa-phone" aria-hidden="true"></i>
-              </div>
-            </a>
-          </div>
+            <div
+                className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+                <a href="/darurat" style="textDecoration: none; color: white;">
+                    <div
+                        className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </div>
+                </a>
+            </div>
         </div>
-      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -147,6 +161,17 @@
             })
         })
     </script>
+<div class="fixed-bottom d-flex justify-content-end text-center mt-5">
+    <div class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+      <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
+        <div class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+           <i class="fas fa-phone" style="font-size: 24px; color: white;"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+
+@yield('javascript')
 </body>
 
 </html>
