@@ -1,6 +1,7 @@
 @extends('public.layout.app')
 
 @section('content')
+
     <div class="hero position-relative d-flex justify-content-center align-items-center"><img
             src="{{ asset('image/banjir.jpg') }}" class="overflow-hidden hero-image" alt="">
         <div class="container position-relative hero-container">
@@ -145,10 +146,10 @@
                                             {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
                                         </p>
                                         <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
-                                            <a href="" style="text-decoration: none; color: white;">
-                                                <strong>
-                                                    Baca Selengkapnya
-                                                </strong>
+
+                                            <a href="{{ route('artikel.detail', $item->id) }}"
+                                                style="text-decoration: none; color: white;">
+                                                Baca Selengkapnya
                                             </a>
                                         </button>
                                     </div>
@@ -156,10 +157,17 @@
                             </div>
                         @endforeach
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
+    {{-- <div class="container">
+        <div class="row no- gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
+            <div class="sharethis-sticky-share-buttons"></div>
+        </div>
+    </div> --}}
+    <div class="sharethis-sticky-share-buttons"></div>
 @endsection
 
 @section('javascript')
@@ -222,7 +230,7 @@
         async function initMap() {
             //@ts-ignore
             const {
-                Map 
+                Map
             } = await google.maps.importLibrary("maps");
 
             const defaultProps = {

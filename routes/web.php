@@ -39,7 +39,8 @@ Route::get('/public/mitigasi/bencana/{id}', [MitigasiBencanaController::class, '
 Route::get('/public/laporan', [LaporanBencanaController::class, 'publicAdd'])->name('report.add');
 Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
 Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPublic'])->name('report.detail');
-
+//Fetail Artikel
+Route::get('/artikel/{id}/detail', [ArtikelController::class, 'ArtikelPublic'])->name('artikel.detail');
 // Data Bencana
 Route::get('/bencana/alam', [LaporanBencanaController::class, 'bencanaAlam'])->name('bencana.alam');
 Route::get('/bencana/nonalam', [LaporanBencanaController::class, 'bencanaNonAlam'])->name('bencana.nonalam');
@@ -66,6 +67,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::post('/articles', [ArtikelController::class, 'addAdmin'])->name('artikel.add');
     Route::put('/articles', [ArtikelController::class, 'updateAdmin'])->name('artikel.update');
     Route::delete('/articles/{id}', [ArtikelController::class, 'deleteAdmin'])->name('artikel.delete');
+
 
 });
 
