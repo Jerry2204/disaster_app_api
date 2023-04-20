@@ -7,6 +7,7 @@ use App\Http\Controllers\LaporanBencanaController;
 use App\Http\Controllers\MitigasiBencanaController;
 use App\Http\Controllers\PeringatanDiniController;
 use App\Http\Controllers\RawanBencanaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,11 @@ Route::get('/bpbd/profil', [HomeController::class, 'profile_bpbd'])->name('bpbd.
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {
     // Add Laporan from all user
     Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
+
+    // Manage User Account
+    Route::get('/users', [UserController::class, 'indexAdmin'])->name('users.index');
+    Route::post('/users', [UserController::class, 'addAdmin'])->name('users.add');
+    Route::put('/users', [UserController::class, 'updateAdmin'])->name('users.update');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
