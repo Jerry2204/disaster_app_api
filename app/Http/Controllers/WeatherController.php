@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use App\Models\PeringatanDini;
 use App\Models\LaporanBencana;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class WeatherController extends Controller
         $cuaca = $weather[0]['times'];
         $newestReport = LaporanBencana::latest()->limit(4)->get();
         $newestArtikel = Artikel::latest()->limit(4)->get();
+        $newestPeringatan = PeringatanDini::latest()->get();
 
-        return view('public\index', compact('cuaca', 'newestReport', 'newestArtikel'));
+        return view('public\index', compact('cuaca', 'newestReport', 'newestArtikel','newestPeringatan'));
     }
 }

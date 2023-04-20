@@ -57,7 +57,7 @@
                                 Tanggal:
                             </p>
                             <p>
-                                {{ $laporanBencana->created_at }}
+                                {{ \Carbon\Carbon::parse($laporanBencana->created_at)->locale('id-ID')->format('d F Y') }}
                             </p>
                             <p class="mb-0">
                                 Lokasi:
