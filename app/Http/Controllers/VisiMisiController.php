@@ -130,4 +130,21 @@ class VisiMisiController extends Controller
     {
         //
     }
+
+    public function deleteAdmin($id)
+    {
+        $visiMisi = VisiMisi::find($id);
+
+        if (!$visiMisi) {
+            return back()->with('gagal', 'Data Visi & Misi tidak ditemukan');
+        }
+
+        $deleted = $visiMisi->delete();
+
+        if ($deleted) {
+            return back()->with('sukses', 'Data Visi & Misi berhasil dihapus');
+        }
+
+        return back()->with('gagal', 'Data Visi & Misi gagal dihapus');
+    }
 }
