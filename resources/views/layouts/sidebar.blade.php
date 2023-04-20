@@ -89,7 +89,7 @@
             </li>
             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Profil</div>
             <li>
-                <a href="">
+                <a href="{{ route('profile.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Visi & Misi</span>
                     <span class="pcoded-mcaret"></span>

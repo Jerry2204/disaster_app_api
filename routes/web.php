@@ -9,7 +9,9 @@ use App\Http\Controllers\MitigasiBencanaController;
 use App\Http\Controllers\PeringatanDiniController;
 use App\Http\Controllers\RawanBencanaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\WeatherController;
+use App\Models\VisiMisi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +69,10 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::post('/contacts', [KontakDaruratController::class, 'addAdmin'])->name('kontak.add');
     Route::put('/contacts', [KontakDaruratController::class, 'updateAdmin'])->name('kontak.update');
     Route::delete('/contacts/{id}', [KontakDaruratController::class, 'deleteAdmin'])->name('kontak.delete');
+
+    // Manage Visi Misi
+    Route::get('/visi', [VisiMisiController::class, 'indexAdmin'])->name('profile.index');
+    Route::post('/visi', [VisiMisiController::class, 'addAdmin'])->name('visimisi.add');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
