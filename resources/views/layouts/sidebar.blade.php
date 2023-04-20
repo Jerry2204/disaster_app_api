@@ -80,6 +80,13 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('kontak.index') }}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Kontak Darurat</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

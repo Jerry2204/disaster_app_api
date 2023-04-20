@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KontakDaruratController;
 use App\Http\Controllers\LaporanBencanaController;
 use App\Http\Controllers\MitigasiBencanaController;
 use App\Http\Controllers\PeringatanDiniController;
@@ -60,6 +61,10 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::post('/users', [UserController::class, 'addAdmin'])->name('users.add');
     Route::put('/users', [UserController::class, 'updateAdmin'])->name('users.update');
     Route::delete('/users/{id}', [UserController::class, 'deleteAdmin'])->name('users.delete');
+
+    // Manage Kontak Darurat
+    Route::get('/contacts', [KontakDaruratController::class, 'indexAdmin'])->name('kontak.index');
+    Route::post('/contacts', [KontakDaruratController::class, 'addAdmin'])->name('kontak.add');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

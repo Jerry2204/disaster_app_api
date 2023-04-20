@@ -36,18 +36,19 @@
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div id="">
                 <div class="container">
-                    <div class="row container">
+                    <div class="row">
+                        @foreach ($kontakDarurat as $item)
                         <div class="col-md-4 container py-2">
                             <div class="cards  container card" style="width: 20rem; height: 22rem;"><br>
                                 <div class="card-title h5">
-                                    <p> Dinas Pemadam Kebakaran</p>
+                                    <p>{{ $item->name }}</p>
                                 </div>
-                                <img class="card-img-top damkar" src="/assets/images/damkar.png">
+                                <img class="card-img-top damkar" src="{{ asset('kontak/' . $item->gambar) }}">
                                 <button class="darurat">
-
                                 </button>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -1,0 +1,121 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\KontakDarurat;
+use App\Http\Requests\StoreKontakDaruratRequest;
+use App\Http\Requests\UpdateKontakDaruratRequest;
+use Illuminate\Http\Request;
+
+class KontakDaruratController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    public function indexAdmin()
+    {
+        $kontakDarurat = KontakDarurat::latest()->paginate(10);
+
+        return view('admin.kontak_darurat.index', compact('kontakDarurat'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreKontakDaruratRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreKontakDaruratRequest $request)
+    {
+        //
+    }
+
+    public function addAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nomor' => 'required',
+            'gambar' => 'required'
+        ]);
+
+        $file = $request->file('gambar');
+
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+        $file->move('kontak', $nama_file);
+
+        $kontakDarurat = KontakDarurat::create([
+            'name' => $request->name,
+            'nomor' => $request->nomor,
+            'gambar' => $nama_file
+        ]);
+
+        if ($kontakDarurat) {
+            return back()->with('sukses', 'Data Kontak Darurat berhasil ditambahkan');
+        }
+
+        return back()->with('gagal', 'Data Kontak Darurat gagal ditambahkan');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\KontakDarurat  $kontakDarurat
+     * @return \Illuminate\Http\Response
+     */
+    public function show(KontakDarurat $kontakDarurat)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\KontakDarurat  $kontakDarurat
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(KontakDarurat $kontakDarurat)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateKontakDaruratRequest  $request
+     * @param  \App\Models\KontakDarurat  $kontakDarurat
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateKontakDaruratRequest $request, KontakDarurat $kontakDarurat)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\KontakDarurat  $kontakDarurat
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(KontakDarurat $kontakDarurat)
+    {
+        //
+    }
+}

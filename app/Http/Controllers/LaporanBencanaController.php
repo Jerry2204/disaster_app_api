@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLaporanBencanaRequest;
 use App\Http\Requests\UpdateDampakBencanaRequest;
 use App\Http\Requests\UpdateLaporanBencanaRequest;
 use App\Http\Resources\LaporanBencanasResource;
+use App\Models\KontakDarurat;
 use App\Models\Korban;
 use App\Models\StatusPenanggulangan;
 use App\Traits\HttpResponses;
@@ -190,7 +191,9 @@ class LaporanBencanaController extends Controller
 
     public function publicAdd()
     {
-        return view('public.laporan_bencana.add');
+        $kontakDarurat = KontakDarurat::all();
+
+        return view('public.laporan_bencana.add', compact('kontakDarurat'));
     }
 
     /**
