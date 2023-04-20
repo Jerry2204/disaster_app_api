@@ -77,9 +77,9 @@
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-sm btn-warning"
                                                     id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-judul="{{ $item->judul }}"
-                                                    data-deskripsi="{{ $item->deskripsi }}"
-                                                    data-artikel_id="{{ $item->id }}">
+                                                    data-target="#modalEdit" data-name="{{ $item->name }}"
+                                                    data-nomor="{{ $item->nomor }}"
+                                                    data-kontak_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
@@ -163,28 +163,30 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Artikel</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Kontak Darurat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('artikel.update') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('kontak.update') }}" enctype="multipart/form-data">
                     @csrf
                     <input name="_method" type="hidden" value="PUT">
                     <div class="modal-body">
-                        <input type="hidden" name="artikel_id" id="artikel_id" value="">
-                        <div class="form-group {{ $errors->has('judul') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="judul">Judul</label>
+                        <input type="hidden" name="kontak_id" id="kontak_id" value="">
+                        <div class="form-group {{ $errors->has('name') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="name">Nama</label>
                             <div class="col-sm-10">
-                                <input type="text" name="judul" id="judul"
-                                    class="form-control {{ $errors->has('judul') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan nama wilayah">
+                                <input type="text" name="name" id="name"
+                                    class="form-control {{ $errors->has('name') ? 'form-control-danger' : '' }}"
+                                    placeholder="Masukkan nama">
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
+                        <div class="form-group {{ $errors->has('nomor') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="nomor">Nomor</label>
                             <div class="col-sm-10">
-                                <textarea placeholder="Masukkan deskripsi" id="deskripsi" cols="30" rows="10" name="deskripsi" class="editor form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"></textarea>
+                                <input type="text" name="nomor" id="nomor"
+                                    class="form-control {{ $errors->has('nomor') ? 'form-control-danger' : '' }}"
+                                    placeholder="Masukkan nomor">
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
@@ -210,14 +212,14 @@
     <script>
         $('#modalEdit').on('show.bs.modal', function(e) {
             var link = $(e.relatedTarget)
-            var judul = link.data("judul");
-            var deskripsi = link.data('deskripsi');
-            var artikel_id = link.data('artikel_id');
+            var name = link.data("name");
+            var nomor = link.data('nomor');
+            var kontak_id = link.data('kontak_id');
 
             var modal = $(this)
-            modal.find('.modal-body #judul').val(judul);
-            modal.find('.modal-body #deskripsi').val(deskripsi);
-            modal.find('.modal-body #artikel_id').val(artikel_id);
+            modal.find('.modal-body #name').val(name);
+            modal.find('.modal-body #nomor').val(nomor);
+            modal.find('.modal-body #kontak_id').val(kontak_id);
         })
 
         $(".delete").click(function(e) {

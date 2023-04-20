@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     // Manage Kontak Darurat
     Route::get('/contacts', [KontakDaruratController::class, 'indexAdmin'])->name('kontak.index');
     Route::post('/contacts', [KontakDaruratController::class, 'addAdmin'])->name('kontak.add');
+    Route::put('/contacts', [KontakDaruratController::class, 'updateAdmin'])->name('kontak.update');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

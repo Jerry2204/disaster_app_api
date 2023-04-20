@@ -108,6 +108,51 @@ class KontakDaruratController extends Controller
         //
     }
 
+    public function updateAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nomor' => 'required',
+            'kontak_id' => 'required'
+        ]);
+
+        $kontak = KontakDarurat::find($request->kontak_id);
+
+        if (!$kontak) {
+            return back('gagal', 'Data kontak darurat tidak ditemukan');
+        }
+
+        if($request->hasFile('gambar')) {
+
+            $file_path = public_path() . '/kontak/' . $kontak->gambar;
+
+            if(file_exists($file_path)) {
+                unlink($file_path);
+            }
+
+            $file = $request->file('gambar');
+
+            $nama_file = time()."_".$file->getClientOriginalName();
+
+            $file->move('kontak', $nama_file);
+
+            $kontak->update([
+                'name' => $request->name,
+                'nomor' => $request->nomor,
+                'gambar' => $nama_file
+            ]);
+
+            return back()->with('sukses', 'Data kontak darurat berhasil diubah');
+        }
+
+        $kontak->update([
+            'name' => $request->name,
+            'nomor' => $request->nomor
+        ]);
+
+        return back()->with('sukses', 'Data kontak darurat berhasil diubah');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
