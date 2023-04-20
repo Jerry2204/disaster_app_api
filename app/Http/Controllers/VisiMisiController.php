@@ -100,6 +100,26 @@ class VisiMisiController extends Controller
         //
     }
 
+    public function updateAdmin(Request $request)
+    {
+        $visiMisi = VisiMisi::find($request->visi_misi_id);
+
+        if (!$visiMisi) {
+            return back()->with('gagal', 'Data Visi & Misi tidak ditemukan');
+        }
+
+        $updated = $visiMisi->update([
+            'visi' => $request->visi,
+            'misi' => $request->misi
+        ]);
+
+        if($updated) {
+            return back()->with('sukses', 'Data Visi & Misi berhasil diubah');
+        }
+
+        return back()->with('sukses', 'Data Visi & Misi gagal diubah');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

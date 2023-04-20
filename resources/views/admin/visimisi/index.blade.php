@@ -76,13 +76,12 @@
                                                 <button type="button" class="btn btn-sm btn-warning"
                                                     id="modalEdit-{{ $item->id }}" data-toggle="modal"
                                                     data-target="#modalEdit" data-visi="{{ $item->visi }}"
-                                                    data-misi="{{ $item->misi }}"
-                                                    data-visi_misi_id="{{ $item->id }}">
+                                                    data-misi="{{ $item->misi }}" data-visi_misi_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('artikel.delete', $item->id) }}"
-                                                        method="POST" id="delete{{ $item->id }}">
+                                                    <form action="{{ route('artikel.delete', $item->id) }}" method="POST"
+                                                        id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
@@ -149,36 +148,26 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Artikel</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Visi & Misi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('artikel.update') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('visimisi.update') }}" enctype="multipart/form-data">
                     @csrf
                     <input name="_method" type="hidden" value="PUT">
                     <div class="modal-body">
-                        <input type="hidden" name="artikel_id" id="artikel_id" value="">
-                        <div class="form-group {{ $errors->has('judul') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="judul">Judul</label>
+                        <input type="hidden" name="visi_misi_id" id="visi_misi_id" value="">
+                        <div class="form-group {{ $errors->has('visi') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="visi">visi</label>
                             <div class="col-sm-10">
-                                <input type="text" name="judul" id="judul"
-                                    class="form-control {{ $errors->has('judul') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan nama wilayah">
+                                <textarea id="editor3" cols="30" rows="10" name="visi"></textarea>
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
+                        <div class="form-group {{ $errors->has('misi') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="misi">misi</label>
                             <div class="col-sm-10">
-                                <textarea placeholder="Masukkan deskripsi" id="deskripsi" cols="30" rows="10" name="deskripsi" class="editor form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="gambar">gambar</label>
-                            <div class="col-sm-10">
-                                <input type="file" name="gambar" id="gambar" accept="image/*"
-                                    class="form-control {{ $errors->has('gambar') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan gambar">
+                                <textarea id="editor4" cols="30" rows="10" name="misi"></textarea>
                             </div>
                         </div>
                     </div>
@@ -196,23 +185,40 @@
 
     <script>
         ClassicEditor
-            .create( document.querySelector( '#editor2' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+            .create(document.querySelector('#editor2'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
     <script>
         $('#modalEdit').on('show.bs.modal', function(e) {
             var link = $(e.relatedTarget)
-            var judul = link.data("judul");
-            var deskripsi = link.data('deskripsi');
-            var artikel_id = link.data('artikel_id');
+            var visi = link.data("visi");
+            var misi = link.data('misi');
+            var visi_misi_id = link.data('visi_misi_id');
 
             var modal = $(this)
-            modal.find('.modal-body #judul').val(judul);
-            modal.find('.modal-body #deskripsi').val(deskripsi);
-            modal.find('.modal-body #artikel_id').val(artikel_id);
+            ClassicEditor
+                .create(document.querySelector('#editor3'))
+                .then(editor => {
+                    editor.setData(visi);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+                ClassicEditor
+                .create(document.querySelector('#editor4'))
+                .then(editor => {
+                    editor.setData(misi);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            modal.find('.modal-body #misi').val(misi);
+            modal.find('.modal-body #visi_misi_id').val(visi_misi_id);
         })
 
         $(".delete").click(function(e) {
@@ -232,5 +238,7 @@
                 }
             })
         })
+
+        // editor.setData( '<p>Some text.</p>' );
     </script>
 @endsection

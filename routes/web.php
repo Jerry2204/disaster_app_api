@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     // Manage Visi Misi
     Route::get('/visi', [VisiMisiController::class, 'indexAdmin'])->name('profile.index');
     Route::post('/visi', [VisiMisiController::class, 'addAdmin'])->name('visimisi.add');
+    Route::put('/visi', [VisiMisiController::class, 'updateAdmin'])->name('visimisi.update');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
