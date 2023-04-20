@@ -76,7 +76,7 @@
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-title="{{ $item->title }}" data-deskripsi="{{ $item->deskripsi }}" data-mitigasi_id="{{ $item->id }}">
+                                                    data-target="#modalEdit" data-name="{{ $item->name }}" data-email="{{ $item->email }}" data-role="{{ $item->role }}" data-user_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
@@ -227,14 +227,16 @@
 <script>
     $('#modalEdit').on('show.bs.modal', function(e) {
         var link = $(e.relatedTarget)
-        var title = link.data("title");
-        var deskripsi = link.data('deskripsi');
-        var mitigasi_id = link.data('mitigasi_id');
+        var name = link.data("name");
+        var email = link.data('email');
+        var user_id = link.data('user_id');
+        var role = link.data('role');
 
         var modal = $(this)
-        modal.find('.modal-body #title').val(title);
-        modal.find('.modal-body #deskripsi').val(deskripsi);
-        modal.find('.modal-body #mitigasi_id').val(mitigasi_id);
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #email').val(email);
+        modal.find('.modal-body #role').val(role);
+        modal.find('.modal-body #user_id').val(user_id);
     })
 
     $(".delete").click(function(e) {

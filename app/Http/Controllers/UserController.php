@@ -41,8 +41,37 @@ class UserController extends Controller
         return back()->with('gagal', 'Data user gagal ditambahkan!');
     }
 
-    public function updateAdmin()
+    public function updateAdmin(Request $request)
     {
-        
+        $request->validate([
+            'name' => 'required',
+            'email' => 'email|required',
+            'role' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        $user_id = $request->user_id;
+
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return back()->with('gagal', 'Data User tidak ditemukan');
+        }
+
+        $password = 'BPBDKabToba' . Carbon::now()->format('Y') . "!";
+
+        $updated = $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => $password,
+        ]);
+
+        if ($updated) {
+            return back()->with('sukses', 'Data Petugas berhasil diubah');
+        }
+
+        return back()->with('gagal', 'Data petugas gagal diubah');
+
     }
 }
