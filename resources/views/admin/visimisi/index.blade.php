@@ -192,6 +192,8 @@
     </script>
 
     <script>
+        let editor;
+        let editor2;
         $('#modalEdit').on('show.bs.modal', function(e) {
             var link = $(e.relatedTarget)
             var visi = link.data("visi");
@@ -199,27 +201,54 @@
             var visi_misi_id = link.data('visi_misi_id');
 
             var modal = $(this)
-            ClassicEditor
-                .create(document.querySelector('#editor3'))
-                .then(editor => {
-                    editor.setData(visi);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
 
-                ClassicEditor
-                .create(document.querySelector('#editor4'))
-                .then(editor => {
-                    editor.setData(misi);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            if (!editor) {
+                editor = ClassicEditor
+                    .create(document.querySelector('#editor3'))
+                    .then(editor => {
+                        editor.setData(visi);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+            if (!editor2) {
+                editor2 = ClassicEditor
+                    .create(document.querySelector('#editor4'))
+                    .then(editor2 => {
+                        editor2.setData(misi);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
 
             modal.find('.modal-body #misi').val(misi);
             modal.find('.modal-body #visi_misi_id').val(visi_misi_id);
         })
+
+        $('#modalEdit').on('hidden.bs.modal', function() {
+            if (editor) {
+                editor.destroy()
+                    .then(() => {
+                        editor = null;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+            if (editor2) {
+                editor2.destroy()
+                    .then(() => {
+                        editor2 = null;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
 
         $(".delete").click(function(e) {
             id = e.target.dataset.id
