@@ -72,6 +72,22 @@ class UserController extends Controller
         }
 
         return back()->with('gagal', 'Data petugas gagal diubah');
+    }
 
+    public function deleteAdmin($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return back()->with('gagal', 'Data User tidak ditemukan');
+        }
+
+        $deleted = $user->delete();
+
+        if($deleted) {
+            return back()->with('sukses', 'Data petugas berhasil dihapus');
+        }
+
+        return back()->with('gagal', 'Data petugas gagal dihapus');
     }
 }

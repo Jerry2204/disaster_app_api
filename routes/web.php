@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::get('/users', [UserController::class, 'indexAdmin'])->name('users.index');
     Route::post('/users', [UserController::class, 'addAdmin'])->name('users.add');
     Route::put('/users', [UserController::class, 'updateAdmin'])->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'deleteAdmin'])->name('users.delete');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
