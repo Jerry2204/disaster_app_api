@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Artikel;
 use App\Http\Requests\StoreArtikelRequest;
 use App\Http\Requests\UpdateArtikelRequest;
@@ -167,6 +167,28 @@ class ArtikelController extends Controller
     public function destroy(Artikel $artikel)
     {
         //
+    }
+
+    public function ArtikelPublic($id)
+    {
+        $article = DB::table('artikels')
+            ->select('artikels.*', 'users.name')
+            ->join('users', 'users.id', '=', 'artikels.user_id')
+            ->where('artikels.id', '=', $id)
+            ->get();
+
+        $selengkapnya = DB::table('artikels')
+            ->select('artikels.*', 'users.name')
+            ->join('users', 'users.id', '=', 'artikels.user_id')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        if (!$article) {
+            return redirect()->route('laporan_bencana.index')->with('gagal', 'Data artikel tidak ditemukan');
+        }
+
+        return view('public.laporan_bencana.artikeldetail',compact('article', 'selengkapnya'));
     }
 
     public function deleteAdmin($id)
