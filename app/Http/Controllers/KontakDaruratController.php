@@ -163,4 +163,21 @@ class KontakDaruratController extends Controller
     {
         //
     }
+
+    public function deleteAdmin($id)
+    {
+        $kontak = KontakDarurat::find($id);
+
+        if(!$kontak) {
+            return back('gagal', 'Data Kontak Darurat tidak ditemukan');
+        }
+
+        $deleted = $kontak->delete();
+
+        if ($deleted) {
+            return back()->with('sukses', 'Data Kontak Darurat berhasil dihapus');
+        }
+
+        return back()->with('gagal', 'Data kontak darurat gagal dihapus');
+    }
 }
