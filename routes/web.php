@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::post('/users', [UserController::class, 'addAdmin'])->name('users.add');
     Route::put('/users', [UserController::class, 'updateAdmin'])->name('users.update');
     Route::delete('/users/{id}', [UserController::class, 'deleteAdmin'])->name('users.delete');
+    Route::get('/users/profile', [UserController::class, 'profile'])->name('users.profile.index');
+    Route::put('/users/profile/update', [UserController::class, 'updateProfile'])->name('users.profile.update');
 
     // Manage Kontak Darurat
     Route::get('/contacts', [KontakDaruratController::class, 'indexAdmin'])->name('kontak.index');

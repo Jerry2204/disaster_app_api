@@ -88,7 +88,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('users.profile.index') }}">
                                 <i class="ti-user"></i> Profile
                             </a>
                         </li>
