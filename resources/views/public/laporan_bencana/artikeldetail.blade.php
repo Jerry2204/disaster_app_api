@@ -15,7 +15,7 @@
             <div class="AnnouncementPage-announcement-info">
               <div>
                 <span>
-                  <i class="fas fa-pencil-alt"></i>
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
                   {{ $article_item->name }}
                 </span>
                 &nbsp; &nbsp;

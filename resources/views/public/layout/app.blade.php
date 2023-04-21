@@ -12,7 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @yield('css')
 </head>
 
@@ -67,18 +69,19 @@
                                 <li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">Keluar</button>
+                                        <button type="submit" class="dropdown-item">Keluar <span></span><i
+                                                class="fa fa-sign-out" aria-hidden="true"></i></button>
                                     </form>
                                 </li>
                             </ul>
                         @endauth
 
                         @guest
-                            <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Login</a></li>
-                        @endguest
+                        <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Masuk</a></li>
+                    @endguest
                     </li>
 
-                        </li>
+                    </li>
 
                 </ul>
             </div>
@@ -119,20 +122,6 @@
         </div>
     </footer>
 
-    <div className=" box-button-urgent">
-        <div className="d-flex flex-column gap-3">
-
-            <div
-                className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-                <a href="/darurat" style="textDecoration: none; color: white;">
-                    <div
-                        className="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-                        <i class="fa fa-phone" aria-hidden="true"></i>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
@@ -161,17 +150,21 @@
             })
         })
     </script>
-<div class="fixed-bottom d-flex justify-content-end text-center mt-5">
-    <div class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-      <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
-        <div class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-           <i class="fas fa-phone" style="font-size: 24px; color: white;"></i>
+    <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 200px; right: 20px;">
+        <div
+            class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+            <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
+                <div
+                    class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+                    <i class="fa fa-phone" style="font-size: 30px; color: white;"></i>
+                </div>
+            </a>
         </div>
-      </a>
     </div>
-  </div>
 
-@yield('javascript')
+
+
+    @yield('javascript')
 </body>
 
 </html>

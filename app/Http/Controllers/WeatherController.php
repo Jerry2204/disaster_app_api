@@ -25,7 +25,7 @@ class WeatherController extends Controller
         })->whereNotNull()->values();
 
         $cuaca = $weather[0]['times'];
-        $newestReport = LaporanBencana::latest()->limit(4)->get();
+         $newestReport = LaporanBencana::orderBy('created_at', 'desc')->limit(4)->get();
         $newestArtikel = Artikel::latest()->limit(4)->get();
         $newestPeringatan = PeringatanDini::latest()->get();
 
