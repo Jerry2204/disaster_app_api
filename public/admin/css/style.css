@@ -14350,3 +14350,15 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     max-width: 80%;
     margin: 20px auto;
 }
+
+.word-image {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+}
+
+.word-image-navbar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

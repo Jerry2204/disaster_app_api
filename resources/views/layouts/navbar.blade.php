@@ -72,8 +72,12 @@
                     </ul>
                 </li>
                 <li class="user-profile header-notification">
-                    <a href="#!">
-                        <img src="{{ asset('admin/images/avatar-4.jpg') }}" class="img-radius" alt="User-Profile-Image">
+                    <a href="#!" class="d-flex align-items-center">
+                        <div class="d-flex justify-content-center align-items-center word-image-navbar text-white bg-c-blue mr-3">
+                            <b>
+                                {{ substr(auth()->user()->name, 0, 1) }}
+                                </b>
+                        </div>
                         <span>{{ auth()->user()->name }}</span>
                         <i class="ti-angle-down"></i>
                     </a>

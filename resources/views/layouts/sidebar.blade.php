@@ -3,7 +3,11 @@
     <div class="pcoded-inner-navbar main-menu">
         <div class="">
             <div class="main-menu-header">
-                <img class="img-40 img-radius" src="{{ asset('admin/images/avatar-4.jpg') }}" alt="User-Profile-Image">
+                <div class="d-flex justify-content-center align-items-center word-image text-white bg-c-blue">
+                    <b>
+                        {{ substr(auth()->user()->name, 0, 1) }}
+                    </b>
+                </div>
                 <div class="user-details">
                     <span style="font-size: 12px">{{ auth()->user()->name }}</span>
                     <span id="more-details">{{ auth()->user()->role  }}<i class="ti-angle-down"></i></span>
