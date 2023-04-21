@@ -73,13 +73,10 @@
                                             <td>{{ $item->gambar }}</td>
                                             <td>
                                                 <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-sm btn-warning"
-                                                    id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-judul="{{ $item->judul }}"
-                                                    data-deskripsi="{{ $item->deskripsi }}"
-                                                    data-artikel_id="{{ $item->id }}">
+                                                <a href="{{ route('artikel.edit', $item->id) }}" class="btn btn-sm btn-warning"
+                                                    >
                                                     Ubah
-                                                </button>
+                                                </a>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('artikel.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
@@ -153,89 +150,10 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal Edit -->
-    <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Artikel</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST" action="{{ route('artikel.update') }}" enctype="multipart/form-data">
-                    @csrf
-                    <input name="_method" type="hidden" value="PUT">
-                    <div class="modal-body">
-                        <input type="hidden" name="artikel_id" id="artikel_id" value="">
-                        <div class="form-group {{ $errors->has('judul') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="judul">Judul</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="judul" id="judul"
-                                    class="form-control {{ $errors->has('judul') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan nama wilayah">
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
-                            <div class="col-sm-10">
-                                <textarea placeholder="Masukkan deskripsi" id="editor1" cols="30" rows="10" name="deskripsi"
-                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="gambar">gambar</label>
-                            <div class="col-sm-10">
-                                <input type="file" name="gambar" id="gambar" accept="image/*"
-                                    class="form-control {{ $errors->has('gambar') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan gambar">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('js')
     <script>
-        let editor;
-        $('#modalEdit').on('show.bs.modal', function(e) {
-            var link = $(e.relatedTarget)
-            var judul = link.data("judul");
-            var deskripsi = link.data('deskripsi');
-            var artikel_id = link.data('artikel_id');
-
-            var modal = $(this)
-            if (!editor) {
-                editor = ClassicEditor
-                    .create(document.querySelector('#editor1'))
-                    .then(editor => {
-                        editor.setData(deskripsi);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
-
-            modal.find('.modal-body #judul').val(judul);
-            modal.find('.modal-body #artikel_id').val(artikel_id);
-        })
-
-        $('#modalEdit').on('hidden.bs.modal', function() {
-            if(editor) {
-                console.log(editor);
-                editor = null;
-                console.log(editor);
-            }
-        });
-
         $(".delete").click(function(e) {
             id = e.target.dataset.id
             Swal.fire({

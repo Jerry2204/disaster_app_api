@@ -88,7 +88,8 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     // Artikel
     Route::get('/articles', [ArtikelController::class, 'indexAdmin'])->name('artikel.index');
     Route::post('/articles', [ArtikelController::class, 'addAdmin'])->name('artikel.add');
-    Route::put('/articles', [ArtikelController::class, 'updateAdmin'])->name('artikel.update');
+    Route::get('/articles/{id}/edit', [ArtikelController::class, 'editAdmin'])->name('artikel.edit');
+    Route::put('/articles/{id}', [ArtikelController::class, 'updateAdmin'])->name('artikel.update');
     Route::delete('/articles/{id}', [ArtikelController::class, 'deleteAdmin'])->name('artikel.delete');
 
 

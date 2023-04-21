@@ -102,6 +102,17 @@ class ArtikelController extends Controller
         //
     }
 
+    public function editAdmin($id)
+    {
+        $article = Artikel::find($id);
+
+        if(!$article) {
+            return back()->with('gagal', 'Data Artikel tidak ditemukan');
+        }
+
+        return view('admin.artikel.edit', compact('article'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -114,14 +125,14 @@ class ArtikelController extends Controller
         //
     }
 
-    public function updateAdmin(Request $request)
+    public function updateAdmin(Request $request, $id)
     {
         $request->validate([
             'judul' => 'required',
             'deskripsi' => 'required',
         ]);
 
-        $artikel = Artikel::find($request->artikel_id);
+        $artikel = Artikel::find($id);
 
         if(!$artikel) {
             return back()->with('gagal', 'Artikel tidak ditemukan');
@@ -147,7 +158,7 @@ class ArtikelController extends Controller
                 'gambar' => $nama_file
             ]);
 
-            return back()->with('sukses', 'Artikel berhasil diubah');
+            return redirect()->route('artikel.index')->with('sukses', 'Artikel berhasil diubah');
         }
 
         $artikel->update([
@@ -155,7 +166,7 @@ class ArtikelController extends Controller
             'deskripsi' => $request->deskripsi
         ]);
 
-        return back()->with('sukses', 'Artikel berhasil diubah');
+        return redirect()->route('artikel.index')->with('sukses', 'Artikel berhasil diubah');
     }
 
     /**
