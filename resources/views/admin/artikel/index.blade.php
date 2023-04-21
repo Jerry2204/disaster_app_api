@@ -81,8 +81,8 @@
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('artikel.delete', $item->id) }}"
-                                                        method="POST" id="delete{{ $item->id }}">
+                                                    <form action="{{ route('artikel.delete', $item->id) }}" method="POST"
+                                                        id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
@@ -180,7 +180,8 @@
                         <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
                             <div class="col-sm-10">
-                                <textarea placeholder="Masukkan deskripsi" id="deskripsi" cols="30" rows="10" name="deskripsi" class="editor form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"></textarea>
+                                <textarea placeholder="Masukkan deskripsi" id="editor1" cols="30" rows="10" name="deskripsi"
+                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}"></textarea>
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('gambar') ? 'has-danger' : '' }} row">
@@ -204,6 +205,7 @@
 
 @section('js')
     <script>
+        let editor;
         $('#modalEdit').on('show.bs.modal', function(e) {
             var link = $(e.relatedTarget)
             var judul = link.data("judul");
@@ -211,10 +213,28 @@
             var artikel_id = link.data('artikel_id');
 
             var modal = $(this)
+            if (!editor) {
+                editor = ClassicEditor
+                    .create(document.querySelector('#editor1'))
+                    .then(editor => {
+                        editor.setData(deskripsi);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
             modal.find('.modal-body #judul').val(judul);
-            modal.find('.modal-body #deskripsi').val(deskripsi);
             modal.find('.modal-body #artikel_id').val(artikel_id);
         })
+
+        $('#modalEdit').on('hidden.bs.modal', function() {
+            if(editor) {
+                console.log(editor);
+                editor = null;
+                console.log(editor);
+            }
+        });
 
         $(".delete").click(function(e) {
             id = e.target.dataset.id

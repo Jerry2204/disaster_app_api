@@ -72,13 +72,10 @@
                                             <td>{{ $item->visi }}</td>
                                             <td>{{ $item->misi }}</td>
                                             <td>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-sm btn-warning"
-                                                    id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-visi="{{ $item->visi }}"
-                                                    data-misi="{{ $item->misi }}" data-visi_misi_id="{{ $item->id }}">
+                                                <a href="{{ route('visimisi.edit', $item->id) }}"
+                                                    class="btn btn-sm btn-warning">
                                                     Ubah
-                                                </button>
+                                                </a>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('visimisi.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
@@ -142,43 +139,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal Edit -->
-    <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Visi & Misi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST" action="{{ route('visimisi.update') }}" enctype="multipart/form-data">
-                    @csrf
-                    <input name="_method" type="hidden" value="PUT">
-                    <div class="modal-body">
-                        <input type="hidden" name="visi_misi_id" id="visi_misi_id" value="">
-                        <div class="form-group {{ $errors->has('visi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="visi">visi</label>
-                            <div class="col-sm-10">
-                                <textarea id="editor3" cols="30" rows="10" name="visi"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('misi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="misi">misi</label>
-                            <div class="col-sm-10">
-                                <textarea id="editor4" cols="30" rows="10" name="misi"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('js')
@@ -190,66 +150,7 @@
                 console.error(error);
             });
     </script>
-
     <script>
-        let editor;
-        let editor2;
-        $('#modalEdit').on('show.bs.modal', function(e) {
-            var link = $(e.relatedTarget)
-            var visi = link.data("visi");
-            var misi = link.data('misi');
-            var visi_misi_id = link.data('visi_misi_id');
-
-            var modal = $(this)
-
-            if (!editor) {
-                editor = ClassicEditor
-                    .create(document.querySelector('#editor3'))
-                    .then(editor => {
-                        editor.setData(visi);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
-
-            if (!editor2) {
-                editor2 = ClassicEditor
-                    .create(document.querySelector('#editor4'))
-                    .then(editor2 => {
-                        editor2.setData(misi);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
-
-            modal.find('.modal-body #misi').val(misi);
-            modal.find('.modal-body #visi_misi_id').val(visi_misi_id);
-        })
-
-        $('#modalEdit').on('hidden.bs.modal', function() {
-            if (editor) {
-                editor.destroy()
-                    .then(() => {
-                        editor = null;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
-
-            if (editor2) {
-                editor2.destroy()
-                    .then(() => {
-                        editor2 = null;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
-        });
-
         $(".delete").click(function(e) {
             id = e.target.dataset.id
             Swal.fire({

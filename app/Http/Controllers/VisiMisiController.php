@@ -88,6 +88,17 @@ class VisiMisiController extends Controller
         //
     }
 
+    public function editAdmin($id)
+    {
+        $visiMisi = VisiMisi::find($id);
+
+        if (!$visiMisi) {
+            return back()->with('gagal', 'Data Visi & Misi tidak ditemukan');
+        }
+
+        return view('admin.visimisi.edit', compact('visiMisi'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -100,9 +111,9 @@ class VisiMisiController extends Controller
         //
     }
 
-    public function updateAdmin(Request $request)
+    public function updateAdmin(Request $request, $id)
     {
-        $visiMisi = VisiMisi::find($request->visi_misi_id);
+        $visiMisi = VisiMisi::find($id);
 
         if (!$visiMisi) {
             return back()->with('gagal', 'Data Visi & Misi tidak ditemukan');
@@ -114,7 +125,7 @@ class VisiMisiController extends Controller
         ]);
 
         if($updated) {
-            return back()->with('sukses', 'Data Visi & Misi berhasil diubah');
+            return redirect()->route('profile.index')->with('sukses', 'Data Visi & Misi berhasil diubah');
         }
 
         return back()->with('sukses', 'Data Visi & Misi gagal diubah');
