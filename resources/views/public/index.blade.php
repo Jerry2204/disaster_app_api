@@ -22,17 +22,13 @@
                                 </path>
                             </svg>
                             <hr class="hr-peringatan">
-                            @foreach ($newestPeringatan as $notif)
                                 <div class="p-3 fs-6"><b
-                                        style="font-family: Inter;">{{ \Carbon\Carbon::parse($notif->tanggal)->locale('id-ID')->format('d F Y') }}|
-                                        {{ $notif->lokasi }} </b>
-                                    <p class="mt-3" style="font-family: Inter;">{{ $notif->deskripsi }}</p>
+                                        style="font-family: Inter;">{{ \Carbon\Carbon::parse($newestPeringatan->tanggal)->locale('id-ID')->format('d F Y') }} |
+                                        {{ $newestPeringatan->lokasi }} </b>
+                                    <p class="mt-3" style="font-family: Inter;">{{ $newestPeringatan->deskripsi }}</p>
                                 </div>
-
                         </div>
-
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
