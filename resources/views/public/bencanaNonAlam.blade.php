@@ -1,7 +1,6 @@
 @extends('public.layout.app')
 
 @section('title', 'Bencana Alam')
-
 @section('content')
     <div class="container">
         <div class="row">
