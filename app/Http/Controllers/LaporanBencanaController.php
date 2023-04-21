@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReportInserted;
 use App\Models\LaporanBencana;
 use App\Http\Requests\StoreLaporanBencanaRequest;
 use App\Http\Requests\UpdateDampakBencanaRequest;
@@ -151,6 +152,8 @@ class LaporanBencanaController extends Controller
             'status_penanggulangan_id' => $status_penanggulangan->id,
             'user_id' => Auth::user()->id
         ]);
+
+        event(new ReportInserted($laporanBencana));
 
         return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }

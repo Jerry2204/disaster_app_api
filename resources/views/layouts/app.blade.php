@@ -105,14 +105,14 @@
                                             var popupId = "{{ uniqid() }}";
                                             if (!sessionStorage.getItem('shown-' + popupId)) {
                                                 const Toast = Swal.mixin({
-                                                toast: true,
-                                                showConfirmButton: false,
-                                                timer: 2000,
-                                            })
-                                            Toast.fire({
-                                                icon: 'success',
-                                                title: '{{ session('sukses') }}'
-                                            })
+                                                    toast: true,
+                                                    showConfirmButton: false,
+                                                    timer: 2000,
+                                                })
+                                                Toast.fire({
+                                                    icon: 'success',
+                                                    title: '{{ session('sukses') }}'
+                                                })
                                             }
                                             sessionStorage.setItem('shown-' + popupId, '1');
                                         @endif
@@ -122,14 +122,14 @@
                                             var popupId = "{{ uniqid() }}";
                                             if (!sessionStorage.getItem('shown-' + popupId)) {
                                                 const Toast = Swal.mixin({
-                                                toast: true,
-                                                showConfirmButton: false,
-                                                timer: 2000,
-                                            })
-                                            Toast.fire({
-                                                icon: 'error',
-                                                title: '{{ session('gagal') }}'
-                                            })
+                                                    toast: true,
+                                                    showConfirmButton: false,
+                                                    timer: 2000,
+                                                })
+                                                Toast.fire({
+                                                    icon: 'error',
+                                                    title: '{{ session('gagal') }}'
+                                                })
                                             }
                                             sessionStorage.setItem('shown-' + popupId, '1');
                                         @endif
@@ -218,6 +218,7 @@
         <script src="{{ asset('admin/js/pcoded.min.js') }}"></script>
         <script src="{{ asset('admin/js/demo-12.js') }}"></script>
         <script src="{{ asset('admin/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
         <script>
             var $window = $(window);
             var nav = $('.fixed-button');
@@ -250,16 +251,42 @@
         </script>
         <script>
             ClassicEditor
-                .create( document.querySelector( '#editor' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
 
-                ClassicEditor
-                .create( document.querySelector( '.editor' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
+            ClassicEditor
+                .create(document.querySelector('.editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+
+        <script>
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('08583ec192b21489bdb9', {
+                cluster: 'ap1'
+            });
+
+            var channel = pusher.subscribe('popup-channel');
+            channel.bind('report-inserted', function(data) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Laporan Baru',
+                    text: `Telah terjadi ${data.name.nama_bencana} di ${data.name.lokasi}`,
+                    showConfirmButton: true,
+                    timer: 10000,
+                    confirmButtonText: 'Lihat Laporan',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `http://localhost:8000/laporan/bencana/${data.name.id}`;
+                    }
+                })
+            });
         </script>
         @yield('js')
 </body>
