@@ -1,7 +1,6 @@
 @extends('public.layout.app')
 
 @section('content')
-
     <div class="hero position-relative d-flex justify-content-center align-items-center"><img
             src="{{ asset('image/banjir.jpg') }}" class="overflow-hidden hero-image" alt="">
         <div class="container position-relative hero-container">
@@ -23,12 +22,17 @@
                                 </path>
                             </svg>
                             <hr class="hr-peringatan">
-                            <div class="p-3 fs-6"><b style="font-family: Inter;">Selasa, 11 April 2023 | Laguboti</b>
-                                <p class="mt-3" style="font-family: Inter;">Angin kencang diprediksi akan melanda
-                                    laguboti, dan diharapkan masyarakat tetap berada di rumah</p>
-                            </div>
+                            @foreach ($newestPeringatan as $notif)
+                                <div class="p-3 fs-6"><b
+                                        style="font-family: Inter;">{{ \Carbon\Carbon::parse($notif->tanggal)->locale('id-ID')->format('d F Y') }}|
+                                        {{ $notif->lokasi }} </b>
+                                    <p class="mt-3" style="font-family: Inter;">{{ $notif->deskripsi }}</p>
+                                </div>
+
                         </div>
+
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -74,57 +78,61 @@
     </section>
 
     <section class="bg-oranye text-black p-1">
-        <div class="container">
-            <div class="col-md-12 mt-5 mb-5">
-                <div class="my-5">
-                    <h3 class="mb-5 text-white text-center">Bencana Terkini </h3>
-                    <div class="row">
-                        @foreach ($newestReport as $item)
-                            <div class="col-md-3 mb-3">
-                                <div class="card text-start" style="padding: 0px;">
-                                    <img src="{{ asset('laporan/' . $item->gambar) }}" alt="{{ $item->gambar }}"
-                                        style="border-radius: 5px 5px 0px 0px;">
-                                    @if ($item->status_penanggulangan->status == 'menunggu')
-                                        <div class="d-inline ms-3" style="margin-top: -30px;">
-                                            <p class="badge bg-danger">{{ $item->status_penanggulangan->status }}</p>
+        @if (count($newestReport) > 0)
+            <div class="container">
+                <div class="col-md-12 mt-5 mb-5">
+                    <div class="my-5">
+                        <h3 class="mb-5 text-white text-center">Bencana Terkini </h3>
+                        <div class="row">
+                            @foreach ($newestReport as $item)
+                                <div class="col-md-3 mb-3">
+                                    <div class="card text-start" style="padding: 0px;">
+                                        <img src="{{ asset('laporan/' . $item->gambar) }}" alt="{{ $item->gambar }}"
+                                            style="border-radius: 5px 5px 0px 0px;">
+                                        @if ($item->status_penanggulangan->status == 'menunggu')
+                                            <div class="d-inline ms-3" style="margin-top: -30px;">
+                                                <p class="badge bg-danger">{{ $item->status_penanggulangan->status }}</p>
+                                            </div>
+                                        @elseif ($item->status_penanggulangan->status == 'diterima')
+                                            <div class="d-inline ms-3" style="margin-top: -30px;">
+                                                <p class="badge bg-info">{{ $item->status_penanggulangan->status }}</p>
+                                            </div>
+                                        @elseif ($item->status_penanggulangan->status == 'proses')
+                                            <div class="d-inline ms-3" style="margin-top: -30px;">
+                                                <p class="badge bg-warning">{{ $item->status_penanggulangan->status }}</p>
+                                            </div>
+                                        @elseif ($item->status_penanggulangan->status == 'selesai')
+                                            <div class="d-inline ms-3" style="margin-top: -30px;">
+                                                <p class="badge bg-success">{{ $item->status_penanggulangan->status }}</p>
+                                            </div>
+                                        @endif
+                                        <div class="card-body">
+                                            <h6 class="card-title text-start">
+                                                {{ $item->nama_bencana }}
+                                            </h6>
+                                            <p class="card-subtitle mb-2 text-muted ">
+                                                {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
+                                            </p>
+                                            <p class="text-secondary fw-light mt-3">
+                                                {!! Str::words($item->keterangan, 3) !!}
+                                            </p>
+                                            <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
+                                                <a href="{{ route('report.detail', $item->id) }}"
+                                                    style="text-decoration: none; color: white;">
+                                                    Baca Selengkapnya
+                                                </a>
+                                            </button>
                                         </div>
-                                    @elseif ($item->status_penanggulangan->status == 'diterima')
-                                        <div class="d-inline ms-3" style="margin-top: -30px;">
-                                            <p class="badge bg-info">{{ $item->status_penanggulangan->status }}</p>
-                                        </div>
-                                    @elseif ($item->status_penanggulangan->status == 'proses')
-                                        <div class="d-inline ms-3" style="margin-top: -30px;">
-                                            <p class="badge bg-warning">{{ $item->status_penanggulangan->status }}</p>
-                                        </div>
-                                    @elseif ($item->status_penanggulangan->status == 'selesai')
-                                        <div class="d-inline ms-3" style="margin-top: -30px;">
-                                            <p class="badge bg-success">{{ $item->status_penanggulangan->status }}</p>
-                                        </div>
-                                    @endif
-                                    <div class="card-body">
-                                        <h6 class="card-title text-start">
-                                            {{ $item->nama_bencana }}
-                                        </h6>
-                                        <p class="card-subtitle mb-2 text-muted ">
-                                            {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
-                                        </p>
-                                        <p class="text-secondary fw-light mt-3">
-                                            {!! Str::words($item->keterangan, 3) !!}
-                                        </p>
-                                        <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
-                                            <a href="{{ route('report.detail', $item->id) }}"
-                                                style="text-decoration: none; color: white;">
-                                                Baca Selengkapnya
-                                            </a>
-                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @else
+        <h3 class="mb-5 text-white text-center">Tidak Ada Bencana Terkini</h3>
+        @endif
     </section>
 
     <section class="bg-blue text-black p-1">
