@@ -86,14 +86,29 @@
                         <div class="row">
                             @foreach ($newestReport as $item)
                                 <div class="col-md-3 mb-3">
-                                    @if ($item->status_penanggulangan->status == 'selesai')
                                     <div class="card text-start" style="padding: 0px;">
                                         <img src="{{ asset('laporan/' . $item->gambar) }}" alt="{{ $item->gambar }}"
                                             style="border-radius: 5px 5px 0px 0px;">
-
+                                        @if ($item->status_penanggulangan->status == 'menunggu')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
-                                                <p class="badge bg-success">{{ $item->status_penanggulangan->status }}</p>
+                                                <p class="badge bg-danger">{{ $item->status_penanggulangan->status }}
+                                                </p>
                                             </div>
+                                        @elseif ($item->status_penanggulangan->status == 'diterima')
+                                            <div class="d-inline ms-3" style="margin-top: -30px;">
+                                                <p class="badge bg-info">{{ $item->status_penanggulangan->status }}</p>
+                                            </div>
+                                        @elseif ($item->status_penanggulangan->status == 'proses')
+                                            <div class="d-inline ms-3" style="margin-top: -30px;">
+                                                <p class="badge bg-warning">{{ $item->status_penanggulangan->status }}
+                                                </p>
+                                            </div>
+                                        @elseif ($item->status_penanggulangan->status == 'selesai')
+                                            <div class="d-inline ms-3" style="margin-top: -30px;">
+                                                <p class="badge bg-success">{{ $item->status_penanggulangan->status }}
+                                                </p>
+                                            </div>
+                                        @endif
 
                                         <div class="card-body">
                                             <h6 class="card-title text-start">
@@ -113,7 +128,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    @endif
                                 </div>
                             @endforeach
                         </div>
@@ -121,7 +135,7 @@
                 </div>
             </div>
         @else
-        <h3 class="mb-5 text-white text-center">Tidak Ada Bencana Terkini</h3>
+            <h3 class="mb-5 text-white text-center">Tidak Ada Bencana Terkini</h3>
         @endif
     </section>
 
