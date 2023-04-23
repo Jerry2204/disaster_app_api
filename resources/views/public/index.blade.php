@@ -136,6 +136,7 @@
     </section>
 
     <section class="bg-blue text-black p-1">
+        @if (count($newestArtikel) > 0)
         <div class="container">
             <div class="col-md-12 mt-5 mb-5">
                 <div class="my-5">
@@ -169,6 +170,10 @@
                 </div>
             </div>
         </div>
+        @else
+        <br>
+        <h3 class="mb-5 text-white text-center">Tidak Ada Pengumuman Terkini</h3>
+    @endif
     </section>
     {{-- <div class="container">
         <div class="row no- gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">

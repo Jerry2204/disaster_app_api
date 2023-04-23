@@ -16,7 +16,7 @@ class VisiMisiController extends Controller
      */
     public function index()
     {
-        //
+       //
     }
 
     public function indexAdmin()

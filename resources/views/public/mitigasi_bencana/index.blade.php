@@ -14,6 +14,7 @@
         </div>
     </div>
     <section class="bg-blue p-5 text-white">
+        @if (count($mitigasiBencanaPDF) > 0)
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -48,8 +49,13 @@
                 {!! $mitigasiBencanaPDF->links() !!}
             </div>
         </div>
+        @else
+        <br>
+        <h3 class="mb-5 text-white text-center">Buku Panduan Mitigasi Bencana Belum Ditambahkan</h3>
+    @endif
     </section>
     <section class="bg-oranye p-5 text-white">
+        @if (count($mitigasiBencanaVideo) > 0)
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -89,5 +95,9 @@
                 {!! $mitigasiBencanaPDF->links() !!}
             </div>
         </div>
+        @else
+        <br>
+        <h3 class="mb-5 text-white text-center">Video Panduan Mitigasi Bencana Belum Ditambahkan</h3>
+    @endif
     </section>
 @endsection

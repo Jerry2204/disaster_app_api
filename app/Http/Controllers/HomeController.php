@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaporanBencana;
+use App\Models\VisiMisi;
+use App\Models\Petugas;
 use App\Models\StatusPenanggulangan;
 use Illuminate\Http\Request;
 
@@ -20,6 +22,9 @@ class HomeController extends Controller
 
     public function profile_bpbd()
     {
-        return view('public.profile.index');
+        $visiMisi = VisiMisi::all();
+        $petugas = Petugas::all();
+
+        return view('public.profile.index',compact('visiMisi','petugas'));
     }
 }

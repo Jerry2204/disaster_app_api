@@ -100,7 +100,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{{ route('petugas.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Struktur Organisasi</span>
                     <span class="pcoded-mcaret"></span>

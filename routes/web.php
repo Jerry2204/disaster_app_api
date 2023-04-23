@@ -10,6 +10,7 @@ use App\Http\Controllers\PeringatanDiniController;
 use App\Http\Controllers\RawanBencanaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisiMisiController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\WeatherController;
 use App\Models\VisiMisi;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,7 @@ Route::get('/bencana/sosial', [LaporanBencanaController::class, 'bencanaSosial']
 // Profil BPBD
 Route::get('/bpbd/profil', [HomeController::class, 'profile_bpbd'])->name('bpbd.profil');
 
+
 /** Auth All User */
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {
     // Add Laporan from all user
@@ -78,6 +80,13 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::get('/visi/{id}/edit', [VisiMisiController::class, 'editAdmin'])->name('visimisi.edit');
     Route::put('/visi/{id}', [VisiMisiController::class, 'updateAdmin'])->name('visimisi.update');
     Route::delete('/visi/{id}', [VisiMisiController::class, 'deleteAdmin'])->name('visimisi.delete');
+
+    //Manage Pengurus
+    Route::get('/pengurus', [PetugasController::class, 'indexAdmin'])->name('petugas.index');
+    Route::post('/pengurus', [PetugasController::class, 'addAdmin'])->name('petugas.add');
+    Route::get('/pengurus/{id}/edit', [PetugasController::class, 'editAdmin'])->name('pengurus.edit');
+    Route::put('/pengurus/{id}', [PetugasController::class, 'updateAdmin'])->name('pengurus.update');
+    Route::delete('/pengurus/{id}',[PetugasController::class, 'deleteAdmin'])->name('petugas.delete');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
