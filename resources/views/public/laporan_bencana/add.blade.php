@@ -113,30 +113,50 @@
                             <button type="submit" class="btn btn-danger" onclick="laporkan()">Laporkan</button>
                         </form>
                         <script>
-                            function laporkan() {
-                                @if (!auth()->check())
-                                    Swal.fire({
-                                        icon: 'warning',
-                                        title: 'Maaf, Anda belum login!',
-                                        text: 'Silahkan login terlebih dahulu.',
-                                        confirmButtonText: 'OK',
-                                        confirmButtonColor: '#dc3545',
-                                        timer: 10000
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.href = "{{ route('login') }}";
-                                        }
-                                    });
-                                @else
-                                    Swal.fire({
-                                        icon: 'success',
-                                        text: 'Berhasil Menambahkan Laporan.',
-                                        confirmButtonText: 'OK',
-                                        confirmButtonColor: '#3AC430',
-                                        timer: 10000
-                                    });
-                                @endif
-                            }
+   function laporkan() {
+    var jenisBencana = document.getElementById("floatingSelect").value;
+    var namaBencana = document.getElementById("nama_bencana").value;
+    var lokasi = document.getElementById("lokasi").value;
+    var keterangan = document.getElementById("keterangan").value;
+
+    if (!jenisBencana || !namaBencana || !lokasi || !keterangan) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Maaf, data tidak bisa kosong!',
+            text: 'Silahkan lengkapi semua kolom form laporan.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#dc3545',
+            timer: null
+        });
+    } else {
+        @if (!auth()->check())
+            Swal.fire({
+                icon: 'warning',
+                title: 'Maaf, Anda belum login!',
+                text: 'Silahkan login terlebih dahulu.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#dc3545',
+                timer: null
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ route('login') }}";
+                }
+            });
+        @else
+            Swal.fire({
+                icon: 'success',
+                text: 'Berhasil Menambahkan Laporan.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#3AC430',
+                timer: null
+            }).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = "{{ route('report.store') }}";
+  }
+            });
+        @endif
+    }
+}
                         </script>
                     </div>
                 </div>
