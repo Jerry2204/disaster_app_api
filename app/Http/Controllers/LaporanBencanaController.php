@@ -49,21 +49,21 @@ class LaporanBencanaController extends Controller
 
     public function bencanaAlam()
     {
-        $bencanaAlam = LaporanBencana::where('jenis_bencana', 'bencana alam')->get();
+        $bencanaAlam = LaporanBencana::where('jenis_bencana', 'bencana alam')->where('confirmed', true)->latest()->paginate(12);
 
         return view('public.bencanaAlam', compact('bencanaAlam'));
     }
 
     public function bencanaNonAlam()
     {
-        $bencanaNonAlam = LaporanBencana::where('jenis_bencana', 'bencana non alam')->get();
+        $bencanaNonAlam = LaporanBencana::where('jenis_bencana', 'bencana non alam')->where('confirmed', true)->latest()->paginate(12);
 
         return view('public.bencanaNonAlam', compact('bencanaNonAlam'));
     }
 
     public function bencanaSosial()
     {
-        $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->get();
+        $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->where('confirmed', true)->latest()->paginate(12);
 
         return view('public.bencanaSosial', compact('bencanaSosial'));
     }

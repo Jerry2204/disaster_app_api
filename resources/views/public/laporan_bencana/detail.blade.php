@@ -37,21 +37,21 @@
                                 Status Penanggulangan:
                             </p>
                             @if ($laporanBencana->status_penanggulangan->status == 'menunggu')
-                            <p class="badge rounded-pill bg-danger text-capitalize">
-                                {{ $laporanBencana->status_penanggulangan->status }}
-                            </p>
+                                <p class="badge rounded-pill bg-danger text-capitalize">
+                                    {{ $laporanBencana->status_penanggulangan->status }}
+                                </p>
                             @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
-                            <p class="badge rounded-pill bg-info text-capitalize">
-                                {{ $laporanBencana->status_penanggulangan->status }}
-                            </p>
+                                <p class="badge rounded-pill bg-info text-capitalize">
+                                    {{ $laporanBencana->status_penanggulangan->status }}
+                                </p>
                             @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
-                            <p class="badge rounded-pill bg-warning text-capitalize">
-                                {{ $laporanBencana->status_penanggulangan->status }}
-                            </p>
+                                <p class="badge rounded-pill bg-warning text-capitalize">
+                                    {{ $laporanBencana->status_penanggulangan->status }}
+                                </p>
                             @elseif ($laporanBencana->status_penanggulangan->status == 'sukses')
-                            <p class="badge rounded-pill bg-success text-capitalize">
-                                {{ $laporanBencana->status_penanggulangan->status }}
-                            </p>
+                                <p class="badge rounded-pill bg-success text-capitalize">
+                                    {{ $laporanBencana->status_penanggulangan->status }}
+                                </p>
                             @endif
                             <p class="mt-3 mb-0">
                                 Tanggal:
@@ -82,22 +82,77 @@
                             <p>
                                 Gambar:
                             </p>
-                            <img src="{{ asset('laporan/' . $laporanBencana->gambar) }}" class="image-laporan" alt="">
+                            <img src="{{ asset('laporan/' . $laporanBencana->gambar) }}" class="image-laporan"
+                                alt="">
                         </div>
                     </div>
                 </div>
                 <div class="laporan-lengkap mt-4">
-                    <div class="row">
-                        <div class="col-md-6 p-5">
-                        <h6>Kerusakan Infrastruktur</h6>
+                    <div class="row p-5">
+                        <div class="col-md-6">
+                            <h6>Kerusakan Infrastruktur</h6>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Infrastruktur</th>
+                                        <th>Rusak Ringan</th>
+                                        <th>Rusak Berat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($laporanBencana->kerusakan as $item)
+                                    <tr>
+                                        <td>{{ $item->nama_infrastruktur }}</td>
+                                        <td>{{ $item->rusak_ringan }}</td>
+                                        <td>{{ $item->rusak_berat }}</td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td class="text-center" colspan="3">Data Kerusakan Tidak Ada</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
                 <div class="laporan-lengkap mt-4">
                     <div class="row">
-                        <div class="col-md-6 p-5">
-                        <h6>Korban Jiwa</h6>
+                        <div class="col-md-12 p-5">
+                            <h6>Korban Jiwa</h6>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <p class="mb-0">
+                                        Meninggal:
+                                    </p>
+                                    <b>
+                                        {{ $laporanBencana->korban->meninggal }}
+                                    </b>
+                                    <p class="mb-0 mt-3">
+                                        Luka Berat:
+                                    </p>
+                                    <b>
+                                        {{ $laporanBencana->korban->luka_berat }}
+                                    </b>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0 mt-3">
+                                        Luka Ringan:
+                                    </p>
+                                    <b class="text-capitalize">
+                                        {{ $laporanBencana->korban->luka_ringan }}
+                                    </b>
+                                    <p class="mb-0 mt-3">
+                                        Hilang:
+                                    </p>
+                                    <b>
+                                        {{ $laporanBencana->korban->hilang }}
+                                    </b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

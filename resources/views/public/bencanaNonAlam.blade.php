@@ -45,6 +45,9 @@
                 </div>
                 @endforeach
             </div>
+            <div class="d-flex my-5">
+                {!! $bencanaAlam->links() !!}
+            </div>
         </div>
     </div>
 @endsection
