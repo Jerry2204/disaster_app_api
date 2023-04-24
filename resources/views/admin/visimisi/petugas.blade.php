@@ -135,9 +135,20 @@
                         <div class="form-group {{ $errors->has('jabatan_add') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="jabatan_add">Jabatan</label>
                             <div class="col-sm-10">
-                                <input type="text" name="jabatan_add" id="jabatan_add"
-                                    class="form-control {{ $errors->has('jabatan_add') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan Jabatan">
+                                <select name="jabatan_add" id="jabatan_add" class="form-control {{ $errors->has('jabatan_add') ? 'form-control-danger' : '' }}">
+                                    <option value="">Pilih Jabatan</option>
+                                    <option value="KEPALA UNSUR PELAKSANA">KEPALA UNSUR PELAKSANA</option>
+                                    <option value="SEKRETARIS">SEKRETARIS</option>
+                                    <option value="KASUBBAG PERENCANAAN">KASUBBAG PERENCANAAN</option>
+                                    <option value="KASUBBAG UMUM DAN KEPEGAWAIAN">KASUBBAG UMUM DAN KEPEGAWAIAN</option>
+                                    <option value="KABID PENCEGAHAN & KESIAPSIAGAAN">KABID PENCEGAHAN & KESIAPSIAGAAN</option>
+                                    <option value="KABID KEDARURATAN & LOGISTIK">KABID KEDARURATAN & LOGISTIK</option>
+                                    <option value="KABID REHABILITASI REKONSTRUKSI">KABID REHABILITASI REKONSTRUKSI</option>
+                                    <option value="KASI KESIAPSIAGAAN ">KASI KESIAPSIAGAAN</option>
+                                    <option value="KASI KEDARURATAN">KASI KEDARURATAN</option>
+                                    <option value="KASI REHABILITASI">KASI REHABILITASI</option>
+
+                                </select>
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('Nomor_add') ? 'has-danger' : '' }} row">
