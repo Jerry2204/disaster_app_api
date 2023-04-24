@@ -8,6 +8,7 @@ use App\Http\Requests\StoreLaporanBencanaRequest;
 use App\Http\Requests\UpdateDampakBencanaRequest;
 use App\Http\Requests\UpdateLaporanBencanaRequest;
 use App\Http\Resources\LaporanBencanasResource;
+use App\Models\Kerusakan;
 use App\Models\KontakDarurat;
 use App\Models\Korban;
 use App\Models\StatusPenanggulangan;
@@ -455,5 +456,56 @@ class LaporanBencanaController extends Controller
         $laporanBencana->delete();
 
         return back()->with('sukses', 'Data Laporan Bencana berhasil dihapus');
+    }
+
+    public function updateDampakBencanaAdmin($id)
+    {
+        $bencana = LaporanBencana::find($id);
+
+        if (!$bencana) {
+            return back()->with('gagal', 'Data Laporan Bencana tidak ditemukan');
+        }
+
+        return view('admin.dampak_bencana.update', compact('bencana'));
+    }
+
+    public function updateDampakBencanaAdminStore(Request $request, $id)
+    {
+        $bencana = LaporanBencana::find($id);
+
+        if (!$bencana) {
+            return back()->with('gagal', 'Data Laporan Bencana tidak ditemukan');
+        }
+
+        $korban = Korban::find($bencana->korban->id);
+
+        $korban->update([
+            'meninggal' => $request->meninggal,
+            'luka_berat' => $request->luka_berat,
+            'luka_ringan' => $request->luka_ringan,
+            'hilang' => $request->hilang
+        ]);
+
+        if ($request->nama_infrastruktur) {
+            $kerusakan_length = count($request->nama_infrastruktur);
+
+            if ($bencana->kerusakan) {
+                foreach ($bencana->kerusakan as $item) {
+                    $item->delete();
+                }
+            }
+
+            for ($i = 0; $i < $kerusakan_length; $i++) {
+                Kerusakan::create([
+                    'nama_infrastruktur' => $request->nama_infrastruktur[$i],
+                    'rusak_ringan' => $request->rusak_ringan[$i],
+                    'rusak_berat' => $request->rusak_berat[$i],
+                    'laporan_bencana_id' => $bencana->id,
+                    'user_id' => Auth::user()->id
+                ]);
+            }
+        }
+
+        return back()->with('sukses', 'Dampak Bencana berhasil ditambahkan');
     }
 }

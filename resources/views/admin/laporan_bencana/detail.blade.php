@@ -143,6 +143,38 @@
                         </div>
                     </div>
                     <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>Jenis Infrastruktur</th>
+                                        <th>Jumlah Rusak Ringan</th>
+                                        <th>Jumlah Rusak Berat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($laporanBencana->kerusakan as $item)
+                                        <tr>
+                                            {{-- Input field untuk jenis infrastruktur --}}
+                                            <td>{{ $item->nama_infrastruktur }}
+                                            </td>
+                                            {{-- Input field untuk jumlah rusak ringan --}}
+                                            <td>
+                                                {{ $item->rusak_ringan }}
+                                            </td>
+                                            {{-- Input field untuk jumlah rusak berat --}}
+                                            <td>
+                                                {{ $item->rusak_berat }}
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center">Data Kerusakan Tidak Ada</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>

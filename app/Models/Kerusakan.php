@@ -13,10 +13,15 @@ class Kerusakan extends Model
         'nama_infrastruktur',
         'rusak_berat',
         'rusak_ringan',
+        'laporan_bencana_id',
         'user_id'
     ];
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function laporan() {
+        return $this->belongsTo(LaporanBencana::class);
     }
 }

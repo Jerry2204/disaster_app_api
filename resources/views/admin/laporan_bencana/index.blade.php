@@ -113,9 +113,9 @@
                                                         <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
                                                     @endif
                                                 @elseif (auth()->user()->role == 'pasca_bencana')
-                                                <button class="btn btn-sm btn-primary" data-id="{{ $item->id }}">
+                                                <a href="{{ route('dampak_bencana.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                                     Tambah Dampak Bencana
-                                                </button>
+                                                </a>
                                                 @endif
                                                 {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('laporan_bencana.delete', $item->id) }}"

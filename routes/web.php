@@ -142,7 +142,11 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], functi
 Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,pasca_bencana,admin']], function() {
     Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
     Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'detailAdmin'])->name('laporan_bencana.detail');
+});
 
+Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin']], function() {
+    Route::get('/dampak/bencana/{id}', [LaporanBencanaController::class, 'updateDampakBencanaAdmin'])->name('dampak_bencana.edit');
+    Route::put('/dampak/bencana/{id}', [LaporanBencanaController::class, 'updateDampakBencanaAdminStore'])->name('dampak_bencana.update');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:user']], function() {
