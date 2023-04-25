@@ -7,7 +7,9 @@
         <div class="text-start">
             <p>Buku Panduan Edukasi Kebencanaan</p>
             <p class="fw-bold fs-3">{{ $mitigasiBencana->title }}</p>
-            <p class="fs-6">{{ $mitigasiBencana->created_at }}</p>
+
+            <p class="fs-6">
+                {{ \Carbon\Carbon::parse($mitigasiBencana->created_at)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
         </div>
         @if ($mitigasiBencana->jenis_konten == 'pdf')
             <div>

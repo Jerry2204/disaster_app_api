@@ -42,7 +42,7 @@ Route::get('/public/mitigasi/bencana/{id}', [MitigasiBencanaController::class, '
 
 // Laporan Bencana
 Route::get('/public/laporan', [LaporanBencanaController::class, 'publicAdd'])->name('report.add');
-Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
+// Route::post('/public/laporan/add', [LaporanBencanaController::class, 'publicStore'])->name('report.store');
 Route::get('/laporan/{id}/detail', [LaporanBencanaController::class, 'detailPublic'])->name('report.detail');
 //Fetail Artikel
 Route::get('/artikel/{id}/detail', [ArtikelController::class, 'ArtikelPublic'])->name('artikel.detail');
@@ -53,6 +53,7 @@ Route::get('/bencana/sosial', [LaporanBencanaController::class, 'bencanaSosial']
 
 // Profil BPBD
 Route::get('/bpbd/profil', [HomeController::class, 'profile_bpbd'])->name('bpbd.profil');
+
 
 
 /** Auth All User */

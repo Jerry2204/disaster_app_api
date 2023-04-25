@@ -264,7 +264,7 @@
         </script>
 
         <script>
-            // Enable pusher logging - don't include this in production
+
             Pusher.logToConsole = true;
 
             var pusher = new Pusher('08583ec192b21489bdb9', {

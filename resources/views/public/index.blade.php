@@ -275,6 +275,7 @@
                             style="width: 100px; height: 100px"
                         />
                         <p class="text-danger">${el.desa}</p>
+                        <p class="text-danger">${el.jenis_bencana}</p>
                         </div>`
                 });
 

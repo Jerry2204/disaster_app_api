@@ -5,7 +5,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-              {{-- //Batas --}}
               <div class="row">
                 <div class="col-md-12 my-5">
                     <h3 class="text-center">Visi & Misi BPBD Kabupaten Toba</h3>
@@ -35,8 +34,6 @@
                     </div>
                 @endif
             </div>
-
-    {{-- //Batas --}}
     <div class="col-md-12 my-5">
         <h3 class="text-center">STRUKTUR ORGANISASI BPBD KABUPATEN TOBA</h3>
     </div>
