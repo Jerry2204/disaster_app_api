@@ -33,6 +33,7 @@ class LaporanBencanasResource extends JsonResource
                 ],
                 'status_penanggulangan' => new StatusPenanggulangansResource($this->whenLoaded('status_penanggulangan')),
                 'korban' => new KorbansResource($this->whenLoaded('korban')),
+                'kerusakan' => KerusakansResource::collection($this->whenLoaded('kerusakan')),
             ]
         ];
     }

@@ -121,6 +121,9 @@ class LaporanBencanaController extends Controller
             'user_id' => $request->user_id,
         ]);
 
+        $laporanBencana->load(array('korban'));
+        $laporanBencana->load(array('status_penanggulangan'));
+
         return new LaporanBencanasResource($laporanBencana);
     }
 
@@ -289,7 +292,7 @@ class LaporanBencanaController extends Controller
             'keterangan' => $request->keterangan_penanggulangan,
             'tindakan' => $request->tindakan,
             'status' => $request->status,
-            'user_id' => Auth::user()->id
+            'user_id' => $request->user_id
         ]);
 
         $bencana->update($request->all());
@@ -443,12 +446,32 @@ class LaporanBencanaController extends Controller
             'meninggal' => $request->meninggal,
             'luka_berat' => $request->luka_berat,
             'luka_ringan' => $request->luka_ringan,
-            'hilang' => $request->hilang,
-            'user_id' => Auth::user()->id
+            'hilang' => $request->hilang
         ]);
+
+        if ($request->nama_infrastruktur) {
+            $kerusakan_length = count($request->nama_infrastruktur);
+
+            if ($bencana->kerusakan) {
+                foreach ($bencana->kerusakan as $item) {
+                    $item->delete();
+                }
+            }
+
+            for ($i = 0; $i < $kerusakan_length; $i++) {
+                Kerusakan::create([
+                    'nama_infrastruktur' => $request->nama_infrastruktur[$i],
+                    'rusak_ringan' => $request->rusak_ringan[$i],
+                    'rusak_berat' => $request->rusak_berat[$i],
+                    'laporan_bencana_id' => $bencana->id,
+                    'user_id' => Auth::user()->id
+                ]);
+            }
+        }
 
         $bencana->load(array('korban'));
         $bencana->load(array('status_penanggulangan'));
+        // $bencana->load(array('kerusakan'));
 
         return new LaporanBencanasResource($bencana);
     }
