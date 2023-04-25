@@ -11,10 +11,13 @@ use App\Http\Resources\LaporanBencanasResource;
 use App\Models\Kerusakan;
 use App\Models\KontakDarurat;
 use App\Models\Korban;
+use App\Mail\Laporan;
 use App\Models\StatusPenanggulangan;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FormDataMail;
 use Illuminate\Support\Facades\File;
 
 class LaporanBencanaController extends Controller
@@ -158,6 +161,13 @@ class LaporanBencanaController extends Controller
         ]);
 
         event(new ReportInserted($laporanBencana));
+        // $report = LaporanBencana::first();
+        $authUser = Auth::user();
+        $laporanBencana = $laporanBencana->toArray();
+        Mail::send('public.mail', ['laporanBencana' => $laporanBencana,'authUser'=>$authUser], function($message) use ($authUser) {
+            $message->to('samuelsimanjuntak194@gmail.com', 'Admin Tanggap Darurat')
+                ->subject('Laporan Terjadi bencana dari ' . $authUser['name']);
+        });
 
         return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }
@@ -193,7 +203,6 @@ class LaporanBencanaController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
-        return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }
 
     public function publicAdd()

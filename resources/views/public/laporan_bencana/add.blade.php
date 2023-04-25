@@ -74,7 +74,8 @@
                         <hr>
                     </div>
                     <div class="col-md-6">
-                        <form action="{{ route('report.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('report.store') }}" method="post" enctype="multipart/form-data">
+
                             @csrf
                             <div class="form-floating mb-3 ">
                                 <select name="jenis_bencana" class="form-select" id="floatingSelect"
@@ -151,7 +152,7 @@
                 timer: null
             }).then((result) => {
   if (result.isConfirmed) {
-    window.location.href = "{{ route('report.store') }}";
+    console.log('success to send the email');
   }
             });
         @endif
