@@ -427,8 +427,14 @@ class LaporanBencanaController extends Controller
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
     }
 
-    public function updateDampakBencana(UpdateDampakBencanaRequest $request, LaporanBencana $bencana)
+    public function updateDampakBencana(UpdateDampakBencanaRequest $request, $id)
     {
+        $bencana = LaporanBencana::find($id);
+
+        if(!$bencana) {
+            return $this->error('', 'Data Laporan Bencana tidak ditemukan', 404);
+        }
+
         $request->validated($request->all());
 
         $korban = Korban::find($bencana->korban->id);
