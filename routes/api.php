@@ -34,6 +34,7 @@ Route::post('/register', [AuthController::class, 'register']);
 // Route for all users
 Route::get('/rawan/bencana/{id}', [RawanBencanaController::class, 'show']);
 Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'show']);
+Route::put('/laporan/bencana/{id}', [LaporanBencanaController::class, 'update']);
 Route::get('/laporan/bencana', [LaporanBencanaController::class, 'index']);
 Route::get('/articles', [ArtikelController::class, 'index']);
 Route::get('/mitigasi/bencana', [MitigasiBencanaController::class, 'index']);
@@ -49,16 +50,18 @@ Route::group(['middleware' => ['auth:sanctum', 'checkRole:admin']], function () 
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::resource('/tasks', TaskController::class);
     Route::resource('/rawan/bencana', RawanBencanaController::class)->except(['show', 'store']);
-    Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show', 'index']);
+    Route::resource('/laporan/bencana', LaporanBencanaController::class)->except(['show', 'index', 'update']);
     Route::resource('/mitigasi/bencana', MitigasiBencanaController::class)->except(['show', 'index']);
     Route::put('/dampak/bencana/{bencana}', [LaporanBencanaController::class, 'updateDampakBencana']);
 });
 
 Route::get('/file/pdf', function () {
     $path = storage_path('app/public/pdf/example.pdf');
+
     if (!File::exists($path)) {
         abort(404);
     }
+
     $file = File::get($path);
 
     return response($file, 200, [

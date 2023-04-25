@@ -35,8 +35,11 @@ class LaporanBencanaController extends Controller
             return $this->error('', 'Data Laporan Bencana tidak ditemukan', 404);
         }
 
+        $laporanBencana->load(array('korban'));
+        $laporanBencana->load(array('status_penanggulangan'));
+
         return LaporanBencanasResource::collection(
-            LaporanBencana::all()
+            $laporanBencana
         );
     }
 
@@ -214,6 +217,9 @@ class LaporanBencanaController extends Controller
             return $this->error('', 'Data Laporan Bencana tidak ditemukan', 404);
         }
 
+        $laporanBencana->load(array('korban'));
+        $laporanBencana->load(array('status_penanggulangan'));
+
         return new LaporanBencanasResource($laporanBencana);
     }
 
@@ -257,8 +263,14 @@ class LaporanBencanaController extends Controller
      * @param  \App\Models\LaporanBencana  $laporanBencana
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLaporanBencanaRequest $request, LaporanBencana $bencana)
+    public function update(UpdateLaporanBencanaRequest $request, $id)
     {
+        $bencana = LaporanBencana::find($id);
+
+        if (!$bencana) {
+            return $this->error('', 'Data Laporan Bencana tidak ditemukan', 404);
+        }
+
         $request->validated($request->all());
 
         $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
@@ -441,6 +453,9 @@ class LaporanBencanaController extends Controller
         }
 
         $laporanBencana->delete();
+
+        $laporanBencana->load(array('korban'));
+        $laporanBencana->load(array('status_penanggulangan'));
 
         return $this->success('', 'Data Laporan Bencana Berhasil Dihapus', 200);
     }
