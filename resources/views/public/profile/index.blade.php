@@ -50,6 +50,7 @@
                             </div>
                             <div style="display: inline-block; margin-left: 1px;">
                                 <h6 class="card-text" style="color: black; margin-top: 0;">
+                                  <br>
                                     <p>{{ $petugas[0]->nama }}</p>
                                     <strong>{{ $petugas[0]->nomor }}</strong>
                                 </h6>

@@ -47,7 +47,7 @@
                 @endforeach
             </div>
             <div class="d-flex my-5">
-                {!! $bencanaAlam->links() !!}
+                {!! $bencanaSosial->links() !!}
             </div>
         </div>
     </div>
