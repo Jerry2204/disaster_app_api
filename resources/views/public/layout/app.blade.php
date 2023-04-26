@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -151,7 +151,7 @@
             })
         })
     </script>
-    <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 200px; right: 20px;">
+    <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 50px; right: 20px;">
         <div
             class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
             <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
