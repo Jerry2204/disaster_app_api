@@ -101,6 +101,17 @@
     </div>
     </div>
     </div>
+    <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 50px; right: 20px;">
+        <div
+            class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+            <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
+                <div
+                    class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+                    <i class="fa fa-phone" style="font-size: 30px; color: white;"></i>
+                </div>
+            </a>
+        </div>
+    </div>
     <style>
         .trapezoid {
             border-top: 80px solid #D9D9D9;
