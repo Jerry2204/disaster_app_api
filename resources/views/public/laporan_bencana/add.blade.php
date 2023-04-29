@@ -65,12 +65,12 @@
                             Ini
                         </h6>
                         <br>
-                        <h6 class="text-center" style="font-size: 20px">
+                        {{-- <h6 class="text-center" style="font-size: 20px">
                             Hubungi No Berikut :
                             <span style="color: red">
                                 <b>No Telepon : 063221709</b>
                             </span>
-                        </h6>
+                        </h6> --}}
                         <hr>
                     </div>
                     <div class="col-md-6">
@@ -114,50 +114,50 @@
                             <button type="submit" class="btn btn-danger" onclick="laporkan()">Laporkan</button>
                         </form>
                         <script>
-   function laporkan() {
-    var jenisBencana = document.getElementById("floatingSelect").value;
-    var namaBencana = document.getElementById("nama_bencana").value;
-    var lokasi = document.getElementById("lokasi").value;
-    var keterangan = document.getElementById("keterangan").value;
+                            function laporkan() {
+                                var jenisBencana = document.getElementById("floatingSelect").value;
+                                var namaBencana = document.getElementById("nama_bencana").value;
+                                var lokasi = document.getElementById("lokasi").value;
+                                var keterangan = document.getElementById("keterangan").value;
 
-    if (!jenisBencana || !namaBencana || !lokasi || !keterangan) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Maaf, data tidak bisa kosong!',
-            text: 'Silahkan lengkapi semua kolom form laporan.',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#dc3545',
-            timer: null
-        });
-    } else {
-        @if (!auth()->check())
-            Swal.fire({
-                icon: 'warning',
-                title: 'Maaf, Anda belum login!',
-                text: 'Silahkan login terlebih dahulu.',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#dc3545',
-                timer: null
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "{{ route('login') }}";
-                }
-            });
-        @else
-            Swal.fire({
-                icon: 'success',
-                text: 'Berhasil Menambahkan Laporan.',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#3AC430',
-                timer: null
-            }).then((result) => {
-  if (result.isConfirmed) {
-    console.log('success to send the email');
-  }
-            });
-        @endif
-    }
-}
+                                if (!jenisBencana || !namaBencana || !lokasi || !keterangan) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Maaf, data tidak bisa kosong!',
+                                        text: 'Silahkan lengkapi semua kolom form laporan.',
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: '#dc3545',
+                                        timer: null
+                                    });
+                                } else {
+                                    @if (!auth()->check())
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Maaf, Anda belum login!',
+                                            text: 'Silahkan login terlebih dahulu.',
+                                            confirmButtonText: 'OK',
+                                            confirmButtonColor: '#dc3545',
+                                            timer: null
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href = "{{ route('login') }}";
+                                            }
+                                        });
+                                    @else
+                                        Swal.fire({
+                                            icon: 'success',
+                                            text: 'Berhasil Menambahkan Laporan.',
+                                            confirmButtonText: 'OK',
+                                            confirmButtonColor: '#3AC430',
+                                            timer: null
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                console.log('success to send the email');
+                                            }
+                                        });
+                                    @endif
+                                }
+                            }
                         </script>
                     </div>
                 </div>

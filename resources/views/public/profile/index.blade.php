@@ -50,6 +50,7 @@
                             </div>
                             <div style="display: inline-block; margin-left: 1px;">
                                 <h6 class="card-text" style="color: black; margin-top: 0;">
+                                  <br>
                                     <p>{{ $petugas[0]->nama }}</p>
                                     <strong>{{ $petugas[0]->nomor }}</strong>
                                 </h6>
@@ -99,6 +100,17 @@
     </div>
     </div>
     </div>
+    </div>
+    <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 50px; right: 20px;">
+        <div
+            class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+            <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
+                <div
+                    class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
+                    <i class="fa fa-phone" style="font-size: 30px; color: white;"></i>
+                </div>
+            </a>
+        </div>
     </div>
     <style>
         .trapezoid {
