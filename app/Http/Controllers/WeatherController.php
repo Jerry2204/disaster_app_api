@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artikel;
 use App\Models\PeringatanDini;
+use App\Models\RawanBencana;
 use App\Models\LaporanBencana;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class WeatherController extends Controller
          $newestReport = LaporanBencana::where('confirmed', true)->orderBy('created_at', 'desc')->limit(4)->get();
         $newestArtikel = Artikel::latest()->limit(4)->get();
         $newestPeringatan = PeringatanDini::latest()->first();
+        $rawanBencana = RawanBencana::all();
+        // dd($rawanBencana->toArray());
+        return view('public\index', compact('cuaca', 'newestReport', 'newestArtikel','newestPeringatan','rawanBencana'));
 
-        return view('public\index', compact('cuaca', 'newestReport', 'newestArtikel','newestPeringatan'));
     }
 }

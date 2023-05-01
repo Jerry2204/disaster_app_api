@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::put('/pengurus/{id}', [PetugasController::class, 'updateAdmin'])->name('pengurus.update');
     Route::delete('/pengurus/{id}',[PetugasController::class, 'deleteAdmin'])->name('petugas.delete');
 
+
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
@@ -151,6 +152,8 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin']], fu
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:user']], function() {
+    //LAPORANKU
+    Route::get('/public/laporan/laporankubencana', [LaporanBencanaController::class, 'indexPublic'])->name('laporanku.public');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:admin']], function() {

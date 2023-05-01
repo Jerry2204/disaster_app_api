@@ -59,6 +59,12 @@ class LaporanBencanaController extends Controller
 
         return view('public.bencanaAlam', compact('bencanaAlam'));
     }
+    public function indexPublic()
+    {
+        $bencanaAlam = LaporanBencana::where ('user_id',Auth::user()->id)->latest()->paginate(12);
+
+        return view('public.laporan_bencana.laporanku', compact('bencanaAlam'));
+    }
 
     public function bencanaNonAlam()
     {
