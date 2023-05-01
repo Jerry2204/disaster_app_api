@@ -48,7 +48,7 @@
             @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana')
             <li>
                 <a href="{{ route('laporan_bencana.index') }}">
-                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                    <span class="pcoded-micon"><i class="ti-flag-alt-2"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Laporan</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
@@ -65,14 +65,14 @@
             @endif
             <li>
                 <a href="{{ route('peringatan_dini.index') }}">
-                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                    <span class="pcoded-micon"><i class="ti-alert"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Peringatan Dini</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('artikel.index') }}">
-                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                    <span class="pcoded-micon"><i class="ti-book"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Artikel</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
