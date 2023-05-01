@@ -40,6 +40,7 @@ class LaporanBencanaController extends Controller
 
         $laporanBencana->load(array('korban'));
         $laporanBencana->load(array('status_penanggulangan'));
+        $laporanBencana->load(array('kerusakan'));
 
         return LaporanBencanasResource::collection(
             $laporanBencana
@@ -231,6 +232,7 @@ class LaporanBencanaController extends Controller
 
         $laporanBencana->load(array('korban'));
         $laporanBencana->load(array('status_penanggulangan'));
+        $laporanBencana->load(array('kerusakan'));
 
         return new LaporanBencanasResource($laporanBencana);
     }
@@ -299,6 +301,7 @@ class LaporanBencanaController extends Controller
 
         $bencana->load(array('korban'));
         $bencana->load(array('status_penanggulangan'));
+        $bencana->load(array('kerusakan'));
 
         return new LaporanBencanasResource($bencana);
     }
@@ -471,7 +474,7 @@ class LaporanBencanaController extends Controller
 
         $bencana->load(array('korban'));
         $bencana->load(array('status_penanggulangan'));
-        // $bencana->load(array('kerusakan'));
+        $bencana->load(array('kerusakan'));
 
         return new LaporanBencanasResource($bencana);
     }

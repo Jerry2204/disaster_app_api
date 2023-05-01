@@ -149,7 +149,8 @@
                                         Hilang:
                                     </p>
                                     <b>
-                                        {{ $laporanBencana->korban->hilang }}
+                                        {{ $laporanBencana->korban->hilang }} <br>
+                                        {{ $laporanBencana->upaya }}
                                     </b>
                                 </div>
                             </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('admin/css/custom/index.css') }}">
-    <link rel="icon" href="{{ asset('image/logo.png') }}">
+    <link rel="icon" href="{{ asset('image/bpbd.png') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
@@ -24,8 +25,7 @@
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
-                        <img src="{{ asset('image/logo.png') }}" class="logo" alt="" width="30"
-                            height="24">
+                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
                     </div>
                     <div class="text m ms-3 text-start">
                         <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
@@ -92,9 +92,10 @@
             <div class="row">
                 <div class="col-md-2 text-center">
                     <img class="logo" src="{{ asset('image/logo.png') }}" alt="Logo Tidak ditemukan">
-                    <h6 style="padding-top : 10px ">BPBD TOBA</h6>
+                    <h6>BPBD TOBA</h6>
                 </div>
-                <div class="col-md-6">
+                <br>
+                <div class="col-md-4">
                     <h6>BPBD Kabupaten Toba</h6>
                     <p>JL DI. Panjaitan, Toba Samosir, Balige, Sumatera Utara, Indonesia.</p>
                 </div>
@@ -147,19 +148,6 @@
             })
         })
     </script>
-    <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 50px; right: 20px;">
-        <div
-            class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-            <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
-                <div
-                    class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
-                    <i class="fa fa-phone" style="font-size: 30px; color: white;"></i>
-                </div>
-            </a>
-        </div>
-    </div>
-
-
 
     @yield('javascript')
 </body>

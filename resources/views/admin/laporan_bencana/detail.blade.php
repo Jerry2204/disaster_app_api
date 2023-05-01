@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Rawan Bencana')
+@section('title', 'Laporan Bencana')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/css/custom/laporan_detail.css') }}">
