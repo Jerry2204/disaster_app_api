@@ -32,7 +32,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 /** Public */
-
 // Beranda
 Route::get('/', [WeatherController::class, 'getWeather'])->name('public');
 
@@ -54,7 +53,9 @@ Route::get('/bencana/sosial', [LaporanBencanaController::class, 'bencanaSosial']
 // Profil BPBD
 Route::get('/bpbd/profil', [HomeController::class, 'profile_bpbd'])->name('bpbd.profil');
 
-
+// Registrasi
+Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
+Route::post('/registrasi', [AuthController::class, 'registrasiStore'])->name('registrasi');
 
 /** Auth All User */
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>Registrasi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -50,7 +50,7 @@
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
                     <div class="login-card card-block auth-body mr-auto ml-auto">
-                        <form class="md-float-material" action="{{ route('login') }}" method="POST">
+                        <form class="md-float-material" action="{{ route('registrasi') }}" method="POST">
                             @csrf
                             <div class="text-center">
                                 <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png">
@@ -58,12 +58,20 @@
                             <div class="auth-box">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Masuk</h3>
+                                        <h3 class="text-center txt-primary">Registrasi Akun</h3>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="input-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Your Email Address">
+                                    <input type="text" name="name" class="form-control" placeholder="Nama Lengkap">
+                                    <span class="md-line"></span>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" name="username" class="form-control" placeholder="Username">
+                                    <span class="md-line"></span>
+                                </div>
+                                <div class="input-group">
+                                    <input type="email" name="email" class="form-control" placeholder="Alamat Email">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="input-group">
@@ -72,8 +80,7 @@
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Masuk</button>
-                                        <a href="{{ route('registrasi') }}" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20">Daftar</a>
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Daftar</button>
                                     </div>
                                 </div>
                             </div>
