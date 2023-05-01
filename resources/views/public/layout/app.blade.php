@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,7 +23,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
                         <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
@@ -42,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('public') }}">Beranda</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     @auth
                     <li class="nav-item">
@@ -82,14 +81,11 @@
                                 </li>
                             </ul>
                         @endauth
-
                         @guest
                         <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Masuk</a></li>
                     @endguest
                     </li>
-
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -100,6 +96,7 @@
     <footer class="footer text-center text-md-start p-5">
         <div class="container">
             <div class="row">
+
                 <div class="col-md-4 text-center">
                     <img class="logo" src="{{ asset('image/bpbd.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
@@ -108,7 +105,8 @@
                     <img class="logo" src="{{ asset('image/toba.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
                     <h6>BPBD TOBA</h6>
-                </div>
+
+
                 <br>
                 <div class="col-md-4">
                     <h6>BPBD Kabupaten Toba</h6>
