@@ -118,7 +118,8 @@
                     <ul class="list-unstyled">
                         <li><a href="#">No Telepon : 0632 21 709</a></li>
                         <li><a href="#">Email</a></li>
-                        <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
+                        {{-- <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li> --}}
+                        <p style="font-size: 14px">Hak Cipta oleh BPBD Kabupaten Toba</p>
                     </ul>
                 </div>
             </div>

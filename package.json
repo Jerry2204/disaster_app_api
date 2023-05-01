@@ -16,6 +16,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "bootstrap-icons": "^1.10.5",
         "sweetalert": "^2.1.2"
     }
 }
