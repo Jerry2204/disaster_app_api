@@ -67,13 +67,10 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item">Keluar <span></span><i
-                                                class="fa fa-sign-out" aria-hidden="true"></i></button>
-                                    </form>
-                                </li>
+                                <li><a class="dropdown-item logout" href="#">Keluar</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </ul>
                         @endauth
 
