@@ -104,7 +104,10 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::put('/articles/{id}', [ArtikelController::class, 'updateAdmin'])->name('artikel.update');
     Route::delete('/articles/{id}', [ArtikelController::class, 'deleteAdmin'])->name('artikel.delete');
 
-
+    // Report
+    Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
+    Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'detailAdmin'])->name('laporan_bencana.detail');
+    Route::post('/laporan/bencana/read', [LaporanBencanaController::class, 'markNotification'])->name('admin.markNotification');
 });
 
 /** Auth Pra Bencana */
@@ -141,8 +144,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], functi
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,pasca_bencana,admin']], function() {
-    Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
-    Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'detailAdmin'])->name('laporan_bencana.detail');
+
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin']], function() {
