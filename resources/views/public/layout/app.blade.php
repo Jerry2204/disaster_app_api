@@ -60,26 +60,27 @@
                             <li><a class="dropdown-item" href="{{ route('bencana.sosial') }}">Bencana Sosial</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        @auth
+                    @auth
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item logout" href="#">Keluar</a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </ul>
-                        @endauth
 
-                        @guest
-                        <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Masuk</a></li>
+                        </li>
+                    @endauth
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('login') }}">Masuk</a>
+                        </li>
                     @endguest
-                    </li>
-
-                    </li>
 
                 </ul>
             </div>
