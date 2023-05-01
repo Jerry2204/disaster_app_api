@@ -18,7 +18,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FormDataMail;
+use App\Models\User;
+use App\Notifications\DisasterReported;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 
 class LaporanBencanaController extends Controller
 {
@@ -138,6 +142,8 @@ class LaporanBencanaController extends Controller
             'gambar' => 'required'
         ]);
 
+        $users = User::where('role', 'admin')->orWhere('role', 'pra_bencana')->orWhere('role', 'tanggap_darurat')->orWhere('role', 'pasca_bencana')->get();
+
         $korban = Korban::create([
             'user_id' => Auth::user()->id
         ]);
@@ -164,7 +170,11 @@ class LaporanBencanaController extends Controller
             'user_id' => Auth::user()->id
         ]);
 
+        Carbon::setLocale('id');
+
         event(new ReportInserted($laporanBencana));
+        Notification::send($users, new DisasterReported($laporanBencana));
+
         // $report = LaporanBencana::first();
         $authUser = Auth::user();
         $laporanBencana = $laporanBencana->toArray();
@@ -194,6 +204,8 @@ class LaporanBencanaController extends Controller
         $nama_file = time()."_".$file->getClientOriginalName();
 
         $file->move("laporan", $nama_file);
+
+        $users = User::where('role', 'admin')->orWhere('role', 'pra_bencana')->orWhere('role', 'tanggap_darurat')->orWhere('role', 'pasca_bencana')->get();
 
         $laporanBencana = LaporanBencana::create([
             'jenis_bencana' => $request->jenis_bencana,
@@ -563,5 +575,14 @@ class LaporanBencanaController extends Controller
         }
 
         return back()->with('sukses', 'Dampak Bencana berhasil ditambahkan');
+    }
+
+    public function markNotification(Request $request)
+    {
+        Auth::user()->unReadNotifications->when($request->input('id'), function ($query) use($request) {
+            return $query->where('id', $request->input('id'));
+        })->markAsRead();
+
+        return redirect()->route('laporan_bencana.detail', $request->laporan_id);
     }
 }
