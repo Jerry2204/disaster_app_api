@@ -90,8 +90,13 @@
     <footer class="footer text-center text-md-start p-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-2 text-center">
-                    <img class="logo" src="{{ asset('image/logo.png') }}" alt="Logo Tidak ditemukan">
+                <div class="col-md-4 text-center">
+                    <img class="logo" src="{{ asset('image/bpbd.png') }}"
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
+                    <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
+                        style="width: 80px; height: 90px;">
+                    <img class="logo" src="{{ asset('image/toba.png') }}"
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
                     <h6>BPBD TOBA</h6>
                 </div>
                 <br>
