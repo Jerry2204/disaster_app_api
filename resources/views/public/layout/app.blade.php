@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,7 +21,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
                         <img src="{{ asset('image/logo.png') }}" class="logo" alt="" width="30"
@@ -41,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('public') }}">Beranda</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
@@ -76,14 +75,11 @@
                                 </li>
                             </ul>
                         @endauth
-
                         @guest
                         <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Masuk</a></li>
                     @endguest
                     </li>
-
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -96,7 +92,7 @@
             <div class="row">
                 <div class="col-md-2 text-center">
                     <img class="logo" src="{{ asset('image/logo.png') }}" alt="Logo Tidak ditemukan">
-                    <h6>BPBD TOBA</h6>
+                    <h6 style="padding-top : 10px ">BPBD TOBA</h6>
                 </div>
                 <div class="col-md-6">
                     <h6>BPBD Kabupaten Toba</h6>
