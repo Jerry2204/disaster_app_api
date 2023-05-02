@@ -153,7 +153,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin']], fu
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:user']], function() {
     //LAPORANKU
-    Route::get('/public/laporan/laporankubencana', [LaporanBencanaController::class, 'indexPublic'])->name('laporanku.public');
+    Route::get('/public/laporan/laporanku', [LaporanBencanaController::class, 'indexPublic'])->name('laporanku.public');
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:admin']], function() {

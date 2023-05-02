@@ -16,6 +16,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "chart.js": "^4.3.0",
         "sweetalert": "^2.1.2"
     }
 }

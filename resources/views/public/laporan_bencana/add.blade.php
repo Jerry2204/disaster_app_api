@@ -111,8 +111,9 @@
                                 <input name="gambar" class="form-control form-control-sm" id="gambar"
                                     type="file">
                             </div>
-                            <button type="submit" class="btn btn-primary" onclick="laporkan()">Laporkan</button>
-                        </form>
+                            {{-- <button type="submit" class="btn btn-primary" onclick="laporkan()">Laporkan</button> --}}
+                            <button type="button" class="btn btn-primary"onclick="laporkan()">Laporkan</button>
+                                        </form>
                         <script>
                             function laporkan() {
                                 var jenisBencana = document.getElementById("floatingSelect").value;

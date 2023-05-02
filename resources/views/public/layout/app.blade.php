@@ -96,7 +96,6 @@
     <footer class="footer text-center text-md-start p-5">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-4 text-center">
                     <img class="logo" src="{{ asset('image/bpbd.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
@@ -106,7 +105,7 @@
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
                     <h6>BPBD TOBA</h6>
 
-
+                </div>
                 <br>
                 <div class="col-md-4">
                     <h6>BPBD Kabupaten Toba</h6>
