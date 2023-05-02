@@ -73,6 +73,9 @@
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Masuk</button>
+                                    </div>
+                                    <div class="col-md-12 text-dark">
+                                        <p class="mb-0 text-left">Belum memiliki akun?</p>
                                         <a href="{{ route('registrasi') }}" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20">Daftar</a>
                                     </div>
                                 </div>
