@@ -32,43 +32,33 @@
                 <li class="header-notification">
                     <a href="#!">
                         <i class="ti-bell"></i>
+                        @if (auth()->user()->unReadNotifications->count() != 0)
                         <span class="badge bg-c-pink"></span>
+                        @endif
                     </a>
                     <ul class="show-notification">
                         <li>
-                            <h6>Notifications</h6>
-                            <label class="label label-danger">New</label>
+                            <h6>Notifikasi</h6>
+                            <label class="label label-danger">Baru</label>
                         </li>
-                        <li>
-                            <div class="media">
-                                <img class="d-flex align-self-center img-radius" src="{{ asset('admin/images/avatar-4.jpg') }}" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="notification-user">John Doe</h5>
-                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                    <span class="notification-time">30 minutes ago</span>
+                        @forelse (auth()->user()->unReadNotifications as $item)
+                        <a href="{{ route('laporan_bencana.detail', $item->data['laporan_id']) }}" class="mark-as-read" data-id="{{ $item->id }}" data-laporan_id="{{ $item->data['laporan_id'] }}">
+                            <li>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="notification-user">{{ $item->data['nama_bencana'] }}</h5>
+                                        <p class="notification-msg">{{ $item->data['keterangan'] }}</p>
+                                        @php
+                                            $date = new DateTime($item->data['created_at'])
+                                        @endphp
+                                        <span class="notification-time">{{ $date->format('d M Y') }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="media">
-                                <img class="d-flex align-self-center img-radius" src="{{ asset('admin/images/avatar-3.jpg') }}" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="notification-user">Joseph William</h5>
-                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                    <span class="notification-time">30 minutes ago</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="media">
-                                <img class="d-flex align-self-center img-radius" src="{{ asset('admin/images/avatar-4.jpg') }}" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="notification-user">Sara Soudein</h5>
-                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                    <span class="notification-time">30 minutes ago</span>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        </a>
+                        @empty
+                        <p class="text-center">Notifikasi Belum Ada</p>
+                        @endforelse
                     </ul>
                 </li>
                 <li class="user-profile header-notification">
