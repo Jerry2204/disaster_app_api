@@ -134,7 +134,7 @@
                 </div>
             </div>
         @else
-            <h3 class="mb-5 text-white text-center">Tidak Ada Bencana Terkini</h3>
+            <h3 class="mb-5 text-white text-center" style="margin-top: 35px">Tidak Ada Bencana Terkini</h3>
         @endif
     </section>
 

@@ -25,7 +25,7 @@
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
-                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
+                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 45px; height: 45px;">
                     </div>
                     <div class="text m ms-3 text-start">
                         <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
@@ -92,12 +92,12 @@
             <div class="row">
                 <div class="col-md-4 text-center">
                     <img class="logo" src="{{ asset('image/bpbd.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 80px;">
                     <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 80px; height: 90px;">
+                        style="width: 80px; height: 80px;">
                     <img class="logo" src="{{ asset('image/toba.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
-                    <h6>BPBD TOBA</h6>
+                        alt="Logo Tidak ditemukan"style="width: 85px; height: 85px;">
+                    <h5 style="padding-top: 20px"><strong>BPBD TOBA</strong></h5>
                 </div>
                 <br>
                 <div class="col-md-4">
