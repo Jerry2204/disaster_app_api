@@ -32,7 +32,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 /** Public */
-
 // Beranda
 Route::get('/', [WeatherController::class, 'getWeather'])->name('public');
 
@@ -54,7 +53,9 @@ Route::get('/bencana/sosial', [LaporanBencanaController::class, 'bencanaSosial']
 // Profil BPBD
 Route::get('/bpbd/profil', [HomeController::class, 'profile_bpbd'])->name('bpbd.profil');
 
-
+// Registrasi
+Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
+Route::post('/registrasi', [AuthController::class, 'registrasiStore'])->name('registrasi');
 
 /** Auth All User */
 Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_darurat,pasca_bencana,user']], function() {
@@ -105,7 +106,10 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
     Route::put('/articles/{id}', [ArtikelController::class, 'updateAdmin'])->name('artikel.update');
     Route::delete('/articles/{id}', [ArtikelController::class, 'deleteAdmin'])->name('artikel.delete');
 
-
+    // Report
+    Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
+    Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'detailAdmin'])->name('laporan_bencana.detail');
+    Route::post('/laporan/bencana/read', [LaporanBencanaController::class, 'markNotification'])->name('admin.markNotification');
 });
 
 /** Auth Pra Bencana */
@@ -142,8 +146,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], functi
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,pasca_bencana,admin']], function() {
-    Route::get('/laporan/bencana', [LaporanBencanaController::class, 'indexAdmin'])->name('laporan_bencana.index');
-    Route::get('/laporan/bencana/{id}', [LaporanBencanaController::class, 'detailAdmin'])->name('laporan_bencana.detail');
+
 });
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin']], function() {

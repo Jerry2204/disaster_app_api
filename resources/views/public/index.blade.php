@@ -24,11 +24,12 @@
                                 </path>
                             </svg>
                             <hr class="hr-peringatan">
-                                <div class="p-3 fs-6"><b
-                                        style="font-family: Inter;">{{ \Carbon\Carbon::parse($newestPeringatan->tanggal)->locale('id-ID')->format('d F Y') }} |
-                                        {{ $newestPeringatan->lokasi }} </b>
-                                    <p class="mt-3" style="font-family: Inter;">{{ $newestPeringatan->deskripsi }}</p>
-                                </div>
+                            <div class="p-3 fs-6"><b
+                                    style="font-family: Inter;">{{ \Carbon\Carbon::parse($newestPeringatan->tanggal)->locale('id-ID')->format('d F Y') }}
+                                    |
+                                    {{ $newestPeringatan->lokasi }} </b>
+                                <p class="mt-3" style="font-family: Inter;">{{ $newestPeringatan->deskripsi }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +50,7 @@
                 </div>
                 <div class="col-md-5 md-7">
                     <h5 class="text-start mb-3 fw-bold ">PRAKIRAAN CUACA</h5>
-                    <div class="bg-primary w-100 text-white text-start p-3 box-weather shadow ">
+                    <div class="bg- w-100 text-white text-start p-3 box-weather shadow ">
                         <h3>Balige</h3>
                         <div class="d-flex overflow-auto shadow">
                             @foreach ($cuaca as $item)
@@ -133,50 +134,50 @@
                 </div>
             </div>
         @else
-            <h3 class="mb-5 text-white text-center">Tidak Ada Bencana Terkini</h3>
+            <h3 class="mb-5 text-white text-center" style="margin-top: 35px">Tidak Ada Bencana Terkini</h3>
         @endif
     </section>
 
     <section class="bg-blue text-black p-1">
         @if (count($newestArtikel) > 0)
-        <div class="container">
-            <div class="col-md-12 mt-5 mb-5">
-                <div class="my-5">
-                    <h3 class="mb-5 text-white text-center">Pengumuman</h3>
-                    <div class="row">
-                        @foreach ($newestArtikel as $item)
-                            <div class="col-md-3 mb-3">
-                                <div class="card text-start" style="padding: 0px;">
-                                    <img src="{{ asset('artikel/' . $item->gambar) }}" alt="{{ $item->gambar }}"
-                                        style="border-radius: 5px 5px 0px 0px;">
-                                    <div class="card-body">
-                                        <h6 class="card-title text-start">
-                                            {{ $item->judul }}
-                                        </h6>
-                                        <p class="card-subtitle mb-2 text-muted ">
-                                            {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
-                                        </p>
-                                        <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
+            <div class="container">
+                <div class="col-md-12 mt-5 mb-5">
+                    <div class="my-5">
+                        <h3 class="mb-5 text-white text-center">Pengumuman</h3>
+                        <div class="row">
+                            @foreach ($newestArtikel as $item)
+                                <div class="col-md-3 mb-3">
+                                    <div class="card text-start" style="padding: 0px;">
+                                        <img src="{{ asset('artikel/' . $item->gambar) }}" alt="{{ $item->gambar }}"
+                                            style="border-radius: 5px 5px 0px 0px;">
+                                        <div class="card-body">
+                                            <h6 class="card-title text-start">
+                                                {{ $item->judul }}
+                                            </h6>
+                                            <p class="card-subtitle mb-2 text-muted ">
+                                                {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
+                                            </p>
+                                            <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
 
-                                            <a href="{{ route('artikel.detail', $item->id) }}"
-                                                style="text-decoration: none; color: white;">
-                                                Baca Selengkapnya
-                                            </a>
-                                        </button>
+                                                <a href="{{ route('artikel.detail', $item->id) }}"
+                                                    style="text-decoration: none; color: white;">
+                                                    Baca Selengkapnya
+                                                </a>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
 
                 </div>
             </div>
         </div>
 
         @else
-        <br>
-        <h3 class="mb-5 text-white text-center">Tidak Ada Pengumuman Terkini</h3>
-    @endif
+            <br>
+            <h3 class="mb-5 text-white text-center">Tidak Ada Pengumuman Terkini</h3>
+        @endif
     </section>
     {{-- <div class="container">
         <div class="row no- gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">

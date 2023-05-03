@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="CodedThemes">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords"
         content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
@@ -26,6 +27,7 @@
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/icon/themify-icons/themify-icons.css') }}">
     <!-- ico font -->
+    <link rel="stylesheet" href="myProjects/webProject/icofont/css/icofont.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/icon/icofont/css/icofont.css') }}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
@@ -144,12 +146,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="fixed-button">
+                {{-- <div class="fixed-button">
                     <a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank"
                         class="btn btn-md btn-primary">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -264,7 +266,6 @@
         </script>
 
         <script>
-
             Pusher.logToConsole = true;
 
             var pusher = new Pusher('08583ec192b21489bdb9', {
@@ -287,6 +288,30 @@
                     }
                 })
             });
+        </script>
+
+        <script>
+            function sendMarkRequest(id = null) {
+                let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                return $.ajax("{{ route('admin.markNotification') }}", {
+                    method: 'POST',
+                    data: {
+                        _token: token,
+                        id
+                    }
+                })
+            }
+
+            $(function() {
+                $('.mark-as-read').click(function() {
+                    let request = sendMarkRequest($(this).data('id'));
+                    let laporan_id = $(this).data('laporan_id');
+
+                    request.done(() => {
+                        window.location.href = `/laporan/bencana/${laporan_id}`
+                    })
+                })
+            })
         </script>
         @yield('js')
 </body>

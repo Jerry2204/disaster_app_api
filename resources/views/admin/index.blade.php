@@ -41,7 +41,7 @@
     <div class="col-md-6 col-xl-3">
         <div class="card widget-card-1">
             <div class="card-block-small">
-                <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+                <i class="icofont icofont-ui-settings bg-c-blue card1-icon"></i>
                 <span class="text-c-blue f-w-600">Laporan diproses</span>
                 <h4>{{ $laporan_diproses }}</h4>
                 <div>
@@ -59,7 +59,7 @@
     <div class="col-md-6 col-xl-3">
         <div class="card widget-card-1">
             <div class="card-block-small">
-                <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
+                <i class="icofont icofont-check-circled bg-c-yellow card1-icon"></i>
                 <span class="text-c-yellow f-w-600">Laporan selesai</span>
                 <h4>{{ $laporan_selesai }}</h4>
                 <div>

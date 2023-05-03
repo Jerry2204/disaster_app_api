@@ -75,7 +75,7 @@
                                 <li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">Keluar <span></span><i
+                                        <button class="dropdown-item">Keluar <span></span><i
                                                 class="fa fa-sign-out" aria-hidden="true"></i></button>
                                     </form>
                                 </li>

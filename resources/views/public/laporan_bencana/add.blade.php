@@ -73,7 +73,7 @@
                         </h6> --}}
                         <hr>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <form action="{{ route('report.store') }}" method="post" enctype="multipart/form-data">
 
                             @csrf
