@@ -27,6 +27,7 @@
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/icon/themify-icons/themify-icons.css') }}">
     <!-- ico font -->
+    <link rel="stylesheet" href="myProjects/webProject/icofont/css/icofont.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/icon/icofont/css/icofont.css') }}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
@@ -145,12 +146,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="fixed-button">
+                {{-- <div class="fixed-button">
                     <a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank"
                         class="btn btn-md btn-primary">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
 

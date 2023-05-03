@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-md-5 md-7">
                     <h5 class="text-start mb-3 fw-bold ">PRAKIRAAN CUACA</h5>
-                    <div class="bg-primary w-100 text-white text-start p-3 box-weather shadow ">
+                    <div class="bg- w-100 text-white text-start p-3 box-weather shadow ">
                         <h3>Balige</h3>
                         <div class="d-flex overflow-auto shadow">
                             @foreach ($cuaca as $item)
@@ -188,86 +188,45 @@
 @endsection
 
 @section('javascript')
-    <script>
-        let map;
+<script>
+    let map;
 
-        const tobaCoordinates = [{
-                desa: "Parsaoran",
-                kecamatan: "Ajibata",
-                longitude: 98.93466667,
-                latitude: 2.65511111,
-                jenis_bencana: "Banjir",
+    const tobaCoordinates = @json($rawanBencana);
+
+    async function initMap() {
+        //@ts-ignore
+        const {
+            Map
+        } = await google.maps.importLibrary("maps");
+
+        const defaultProps = {
+            center: {
+                lat: 2.3357,
+                lng: 99.0534,
             },
-            {
-                desa: "Motung",
-                kecamatan: "Ajibata",
-                longitude: 98.93266667,
-                latitude: 2.64891667,
-                jenis_bencana: "Banjir",
+            zoom: 11,
+        };
 
-            },
-            {
-                desa: "Motung",
-                kecamatan: "Ajibata",
-                longitude: 98.93266667,
-                latitude: 2.64891667,
-                jenis_bencana: "Banjir",
-            },
-            {
-                desa: "Sigapiton",
-                kecamatan: "Ajibata",
-                longitude: 98.94361111,
-                latitude: 2.58580556,
-                jenis_bencana: "Rawan Longsor",
-            },
-            {
-                desa: "Pardamean",
-                kecamatan: "Ajibata",
-                longitude: 98.94361111,
-                latitude: 2.58580556,
-                jenis_bencana: "Rawan Longsor",
-            },
-            {
-                desa: "Siboruan",
-                kecamatan: "Balige",
-                longitude: 99.07758333,
-                latitude: 2.29769444,
-                jenis_bencana: "Rawan Longsor",
+        map = new Map(document.getElementById("maps"), defaultProps);
 
-            },
-            {
-                desa: "Siboruon",
-                kecamatan: "Balige",
-                longitude: 99.07268917,
-                latitude: 2.30781667,
-                jenis_bencana: "Rawan Longsor",
-            },
-        ];
-
-        async function initMap() {
-            //@ts-ignore
-            const {
-                Map
-            } = await google.maps.importLibrary("maps");
-
-            const defaultProps = {
-                center: {
-                    lat: 2.3357,
-                    lng: 99.0534,
-                },
-                zoom: 11,
-            };
-
-            map = new Map(document.getElementById("maps"), defaultProps);
-
-
-            tobaCoordinates.forEach((el, i) => {
+        tobaCoordinates.forEach((el, i) => {
+            const lat = el.koordinat_lattitude;
+            const lng = el.koordinat_longitude;
+            const geocoder = new google.maps.Geocoder();
+            const latlng = new google.maps.LatLng(lat, lng);
+            geocoder.geocode({
+                latLng: latlng
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    const name = results[0].address_components[0].long_name;
+                    el.nama_wilayah = name;
+                }
                 var marker = new google.maps.Marker({
                     position: {
-                        lat: el.latitude,
-                        lng: el.longitude
+                        lat: lat,
+                        lng: lng
                     },
-                    title: el.desa,
+                    title: el.nama_wilayah,
                 });
                 marker.setMap(map);
                 var information = new google.maps.InfoWindow({
@@ -278,20 +237,19 @@
                             srcset=""
                             style="width: 100px; height: 100px"
                         />
-                        <p class="text-danger">${el.desa}</p>
-                        <p class="text-danger">${el.jenis_bencana}</p>
+                        <p class="text-danger">${el.nama_wilayah}</p>
+                        <p class="text-danger">${el.jenis_rawan_bencana}</p>
                         </div>`
                 });
 
                 marker.addListener('click', function() {
                     information.open(map, marker);
                 });
-            })
+            });
+        })
+    }
 
+    initMap();
+</script>
 
-            // To add the marker to the map, call setMap();
-        }
-
-        initMap();
-    </script>
 @endsection

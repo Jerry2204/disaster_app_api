@@ -16,8 +16,8 @@ class CreateRawanBencanasTable extends Migration
         Schema::create('rawan_bencanas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_wilayah');
-            $table->string('koordinat_lattitude');
-            $table->string('koordinat_longitude');
+            $table->float('koordinat_lattitude');
+            $table->float('koordinat_longitude');
             $table->string('jenis_rawan_bencana');
             $table->enum('level_rawan_bencana', ['level 1', 'level 2', 'level 3', 'level 4']);
             $table->foreignId('user_id')->constrained();

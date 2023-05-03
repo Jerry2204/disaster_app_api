@@ -12,7 +12,8 @@
     <link rel="icon" href="{{ asset('image/bpbd.png') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,7 +26,7 @@
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
-                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 45px; height: 45px;">
+                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
                     </div>
                     <div class="text m ms-3 text-start">
                         <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
@@ -42,6 +43,11 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
+                    </li>
+                    @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
                     </li>
@@ -59,28 +65,27 @@
                             <li><a class="dropdown-item" href="{{ route('bencana.sosial') }}">Bencana Sosial</a></li>
                         </ul>
                     </li>
-                    @auth
-                        <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
+                        @auth
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item logout" href="#">Keluar</a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                <li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item">Keluar <span></span><i
+                                                class="fa fa-sign-out" aria-hidden="true"></i></button>
+                                    </form>
+                                </li>
                             </ul>
                         @endauth
-
                         @guest
                         <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Masuk</a></li>
                     @endguest
                     </li>
-
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -93,12 +98,13 @@
             <div class="row">
                 <div class="col-md-4 text-center">
                     <img class="logo" src="{{ asset('image/bpbd.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 80px;">
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
                     <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 80px; height: 80px;">
+                        style="width: 80px; height: 90px;">
                     <img class="logo" src="{{ asset('image/toba.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 85px; height: 85px;">
-                    <h5 style="padding-top: 20px"><strong>BPBD TOBA</strong></h5>
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
+                    <h6>BPBD TOBA</h6>
+
                 </div>
                 <br>
                 <div class="col-md-4">
@@ -119,8 +125,7 @@
                     <ul class="list-unstyled">
                         <li><a href="#">No Telepon : 0632 21 709</a></li>
                         <li><a href="#">Email</a></li>
-                        {{-- <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li> --}}
-                        <p style="font-size: 14px">Hak Cipta oleh BPBD Kabupaten Toba</p>
+                        <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
             </div>

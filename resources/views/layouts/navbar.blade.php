@@ -8,7 +8,7 @@
             <a class="mobile-search morphsearch-search" href="#">
                 <i class="ti-search"></i>
             </a>
-            <a href="index.html">
+            <a  href="{{ route('public') }}">
                 <img class="img-fluid" src="{{ asset('admin/images/logo_bpbd.png') }}" width="45" height="45" alt="Theme-Logo" />
             </a>
             <a class="mobile-options">
