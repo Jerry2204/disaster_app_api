@@ -65,18 +65,20 @@
                             <li><a class="dropdown-item" href="{{ route('bencana.sosial') }}">Bencana Sosial</a></li>
                         </ul>
                     </li>
-                    @auth
-                        <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
+                        @auth
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item logout" href="#">Keluar</a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                <li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item">Keluar <span></span><i
+                                                class="fa fa-sign-out" aria-hidden="true"></i></button>
+                                    </form>
+                                </li>
                             </ul>
 
 

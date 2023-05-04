@@ -81,9 +81,19 @@ class LaporanBencanaController extends Controller
     public function bencanaSosial()
     {
         $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->where('confirmed', true)->latest()->paginate(12);
+        $grafik = korban::all();
+        // $count_grafik = korban::count();
+        $count_grafik = korban::select(korban::raw('SUM(meninggal) as meninggal_total'),
+                                korban::raw('SUM(luka_berat) as luka_berat_total'),
+                                korban::raw('SUM(luka_ringan) as luka_ringan_total'),
+                                korban::raw('SUM(hilang) as hilang_total'))
+                        ->first();
 
-        return view('public.bencanaSosial', compact('bencanaSosial'));
+        // dd($grafik, $count_grafik);
+        return view('public.bencanaSosial', compact('bencanaSosial','grafik','count_grafik'));
     }
+    //Grafik
+
 
     /**
      * Show the form for creating a new resource.
