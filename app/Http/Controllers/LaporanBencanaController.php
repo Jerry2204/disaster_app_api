@@ -199,7 +199,7 @@ class LaporanBencanaController extends Controller
                 ->subject('Laporan Terjadi bencana dari ' . $authUser['name']);
         });
 
-        return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
+        return redirect()->route('laporanku.public')->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }
 
     public function addAdmin(StoreLaporanBencanaRequest $request)

@@ -145,6 +145,40 @@
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
 
+    <script>
+        @if (!empty(Session::get('sukses')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('sukses') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
+    <script>
+        @if (!empty(Session::get('gagal')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ session('gagal') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
 
     <script>
         $(".logout").click(function(e) {
