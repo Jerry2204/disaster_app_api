@@ -31,7 +31,7 @@ class WeatherController extends Controller
         $newestPeringatan = PeringatanDini::latest()->first();
         $rawanBencana = RawanBencana::all();
         // dd($rawanBencana->toArray());
-        return view('public\index', compact('cuaca', 'newestReport', 'newestArtikel','newestPeringatan','rawanBencana'));
+        return view('public.index', compact('cuaca', 'newestReport', 'newestArtikel','newestPeringatan','rawanBencana'));
 
     }
 }
