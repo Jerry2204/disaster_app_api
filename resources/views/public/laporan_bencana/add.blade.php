@@ -74,7 +74,7 @@
                         <hr>
                     </div>
                     <div class="col-md-12">
-                        <form action="{{ route('report.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('report.store') }}" id="form-lapor" method="post" enctype="multipart/form-data">
 
                             @csrf
                             <div class="form-floating mb-3 ">
@@ -112,7 +112,7 @@
                                     type="file">
                             </div>
                             {{-- <button type="submit" class="btn btn-primary" onclick="laporkan()">Laporkan</button> --}}
-                            <button type="button" class="btn btn-primary"onclick="laporkan()">Laporkan</button>
+                            <button type="button" class="btn btn-primary" onclick="laporkan()">Laporkan</button>
                                         </form>
                         <script>
                             function laporkan() {
@@ -125,38 +125,15 @@
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Maaf, data tidak bisa kosong!',
-                                        text: 'Silahkan lengkapi semua kolom form laporan.',
+                                        text: 'Silahkan lengkapi semua Data laporan.',
                                         confirmButtonText: 'OK',
                                         confirmButtonColor: '#dc3545',
                                         timer: null
                                     });
                                 } else {
-                                    @if (!auth()->check())
-                                        Swal.fire({
-                                            icon: 'warning',
-                                            title: 'Maaf, Anda belum login!',
-                                            text: 'Silahkan login terlebih dahulu.',
-                                            confirmButtonText: 'OK',
-                                            confirmButtonColor: '#dc3545',
-                                            timer: null
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                window.location.href = "{{ route('login') }}";
-                                            }
-                                        });
-                                    @else
-                                        Swal.fire({
-                                            icon: 'success',
-                                            text: 'Berhasil Menambahkan Laporan.',
-                                            confirmButtonText: 'OK',
-                                            confirmButtonColor: '#3AC430',
-                                            timer: null
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                console.log('success to send the email');
-                                            }
-                                        });
-                                    @endif
+                                    let form = document.getElementById('form-lapor');
+
+                                    form.submit();
                                 }
                             }
                         </script>

@@ -80,12 +80,17 @@
                                     </form>
                                 </li>
                             </ul>
-                        @endauth
-                        @guest
-                        <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Masuk</a></li>
+
+
+                        </li>
+                    @endauth
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('login') }}">Masuk</a>
+                        </li>
                     @endguest
-                    </li>
-                    </li>
+
+
                 </ul>
             </div>
         </div>
