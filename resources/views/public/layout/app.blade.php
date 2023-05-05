@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,9 +44,9 @@
                         <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
+                        </li>
                     @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
@@ -75,8 +75,8 @@
                                 <li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button class="dropdown-item">Keluar <span></span><i
-                                                class="fa fa-sign-out" aria-hidden="true"></i></button>
+                                        <button class="dropdown-item">Keluar <span></span><i class="fa fa-sign-out"
+                                                aria-hidden="true"></i></button>
                                     </form>
                                 </li>
                             </ul>
@@ -101,12 +101,8 @@
     <footer class="footer text-center text-md-start p-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 text-center">
+                <div class="col-md-2 text-center">
                     <img class="logo" src="{{ asset('image/bpbd.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
-                    <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 80px; height: 90px;">
-                    <img class="logo" src="{{ asset('image/toba.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
                     <h6>BPBD TOBA</h6>
 
@@ -133,8 +129,16 @@
                         <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
+                <div class="col-md-2 text-center">
+
+                    <img class="logo" src="{{ asset('image/toba.png') }}"
+                        alt="Logo Tidak ditemukan"style="width: 85px; height: 120px;">
+                        <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
+                        style="width: 80px; height: 90px;">
+                </div>
             </div>
         </div>
+
     </footer>
 
 

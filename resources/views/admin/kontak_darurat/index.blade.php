@@ -78,13 +78,12 @@
                                                 <button type="button" class="btn btn-sm btn-warning"
                                                     id="modalEdit-{{ $item->id }}" data-toggle="modal"
                                                     data-target="#modalEdit" data-name="{{ $item->name }}"
-                                                    data-nomor="{{ $item->nomor }}"
-                                                    data-kontak_id="{{ $item->id }}">
+                                                    data-nomor="{{ $item->nomor }}" data-kontak_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('kontak.delete', $item->id) }}"
-                                                        method="POST" id="delete{{ $item->id }}">
+                                                    <form action="{{ route('kontak.delete', $item->id) }}" method="POST"
+                                                        id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
