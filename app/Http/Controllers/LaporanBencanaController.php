@@ -23,6 +23,7 @@ use App\Notifications\DisasterReported;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\DB;
 
 class LaporanBencanaController extends Controller
 {
@@ -80,16 +81,18 @@ class LaporanBencanaController extends Controller
 
     public function bencanaSosial()
     {
+        $now = Carbon::now();
         $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->where('confirmed', true)->latest()->paginate(12);
         $grafik = korban::all();
         // $count_grafik = korban::count();
-        $count_grafik = korban::select(korban::raw('SUM(meninggal) as meninggal_total'),
+        $count_grafik = korban::select('updated_at')->select(korban::raw('SUM(meninggal) as meninggal_total'),
                                 korban::raw('SUM(luka_berat) as luka_berat_total'),
                                 korban::raw('SUM(luka_ringan) as luka_ringan_total'),
                                 korban::raw('SUM(hilang) as hilang_total'))
-                        ->first();
 
-        // dd($grafik, $count_grafik);
+                                ->whereYear('updated_at',$now)
+                        ->get();
+
         return view('public.bencanaSosial', compact('bencanaSosial','grafik','count_grafik'));
     }
     //Grafik
