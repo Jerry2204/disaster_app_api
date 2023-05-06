@@ -316,13 +316,13 @@ footer a:hover {
 
 @media (max-width: 576px) {
     .text-hero {
-        font-size: 24px;
-        margin-top: 40px;
+        font-size: 24px !important;
+        margin-top: 40px !important;
     }
 
     .btn-custom-danger {
-        background-color: #FA0000;
-        color: #fff;
+        background-color: #FA0000 !important;
+        color: #fff ;
         border: none;
         border-radius: 10px;
         width: 150px;
