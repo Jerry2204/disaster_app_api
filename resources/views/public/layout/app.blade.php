@@ -25,8 +25,8 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
-                    <div class="logo">
-                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
+                    <div class="logo accordion d-none d-sm-block">
+                        <img src="{{ asset('image/bpbd.png') }}" class="logo">
                     </div>
                     <div class="text m ms-3 text-start">
                         <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>

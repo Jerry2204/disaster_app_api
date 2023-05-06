@@ -32,6 +32,5 @@ class WeatherController extends Controller
         $rawanBencana = RawanBencana::all();
         // dd($rawanBencana->toArray());
         return view('public.index', compact('cuaca', 'newestReport', 'newestArtikel','newestPeringatan','rawanBencana'));
-
     }
 }
