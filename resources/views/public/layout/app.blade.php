@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,7 +26,7 @@
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
-                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
+                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 45px; height: 45px;">
                     </div>
                     <div class="text m ms-3 text-start">
                         <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
@@ -44,9 +44,9 @@
                         <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
+                        </li>
                     @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
@@ -61,7 +61,8 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('bencana.alam') }}">Bencana Alam</a></li>
-                            <li><a class="dropdown-item" href="{{ route('bencana.nonalam') }}">Bencana Non Alam</a></li>
+                            <li><a class="dropdown-item" href="{{ route('bencana.nonalam') }}">Bencana Non Alam</a>
+                            </li>
                             <li><a class="dropdown-item" href="{{ route('bencana.sosial') }}">Bencana Sosial</a></li>
                         </ul>
                     </li>
@@ -75,8 +76,8 @@
                                 <li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button class="dropdown-item">Keluar <span></span><i
-                                                class="fa fa-sign-out" aria-hidden="true"></i></button>
+                                        <button class="dropdown-item">Keluar <span></span><i class="fa fa-sign-out"
+                                                aria-hidden="true"></i></button>
                                     </form>
                                 </li>
                             </ul>
