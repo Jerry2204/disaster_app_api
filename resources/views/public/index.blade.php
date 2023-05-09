@@ -8,8 +8,7 @@
                 <div class="col-md-6 col-sm-12 text-start d-flex flex-column justify-content-center left-hero">
                     <h1 class="text-hero">Anda Dalam Keadaan Darurat?</h1>
                     <p class="subtext-hero">Sampaikan Laporan Peristiwa Darurat di Sekitar Anda!</p>
-                    <a
-                        href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
+                    <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
                         <button class="btn-custom-danger"></><strong>LAPOR!</strong></button></a>
                 </div>
 
@@ -92,6 +91,7 @@
                                     <div class="card text-start" style="padding: 0px;">
                                         <img src="{{ asset('laporan/' . $item->gambar) }}" alt="{{ $item->gambar }}"
                                             style="border-radius: 5px 5px 0px 0px;">
+
                                         @if ($item->status_penanggulangan->status == 'menunggu')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
                                                 <p class="badge bg-danger">{{ $item->status_penanggulangan->status }}
@@ -108,25 +108,27 @@
                                             </div>
                                         @elseif ($item->status_penanggulangan->status == 'selesai')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
-                                                <p class="badge bg-success">{{ $item->status_penanggulangan->status }}
-                                                </p>
-                                            </div>
-                                        @endif
+                                                <h4 class="badge" style="background-color: #3AC430; height: 25px; width: 100px; text-align: center;">
+                                                    {{ $item->status_penanggulangan->status }}
+                                                  </h4>
 
+                                            </div>
+                                            @endif
                                         <div class="card-body">
-                                            <h6 class="card-title text-start">
-                                                {{ $item->nama_bencana }}
-                                            </h6>
                                             <p class="card-subtitle mb-2 text-muted ">
                                                 {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
                                             </p>
-                                            <p class="text-secondary fw-light mt-3">
-                                                {!! Str::words($item->keterangan, 3) !!}
-                                            </p>
+                                            <strong class="card-title text-start">
+                                                {{ $item->nama_bencana }}
+                                            </strong>
+                                                <br>
+                                            <b class=" fw-light mt-3">
+                                                {!! Str::words($item->keterangan, 10) !!}
+                                            </b>
                                             <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
                                                 <a href="{{ route('report.detail', $item->id) }}"
                                                     style="text-decoration: none; color: white;">
-                                                    Baca Selengkapnya
+                                                    Baca Selengkapnya>>
                                                 </a>
                                             </button>
                                         </div>
@@ -161,7 +163,8 @@
                                             <p class="card-subtitle mb-2 text-muted ">
                                                 {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
                                             </p>
-                                            <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
+                                            <button class="btn btn-primary mt-5"
+                                                style="background-color: rgb(2, 85, 165);">
 
                                                 <a href="{{ route('artikel.detail', $item->id) }}"
                                                     style="text-decoration: none; color: white;">
@@ -174,10 +177,9 @@
                             @endforeach
                         </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-
         @else
             <br>
             <h3 class="mb-5 text-white text-center">Tidak Ada Pengumuman Terkini</h3>
@@ -190,51 +192,50 @@
     </div> --}}
     <div class="sharethis-sticky-share-buttons"></div>
 @endsection
-
 @section('javascript')
-<script>
-    let map;
+    <script>
+        let map;
 
-    const tobaCoordinates = @json($rawanBencana);
+        const tobaCoordinates = @json($rawanBencana);
 
-    async function initMap() {
-        //@ts-ignore
-        const {
-            Map
-        } = await google.maps.importLibrary("maps");
+        async function initMap() {
+            //@ts-ignore
+            const {
+                Map
+            } = await google.maps.importLibrary("maps");
 
-        const defaultProps = {
-            center: {
-                lat: 2.3357,
-                lng: 99.0534,
-            },
-            zoom: 11,
-        };
+            const defaultProps = {
+                center: {
+                    lat: 2.3357,
+                    lng: 99.0534,
+                },
+                zoom: 11,
+            };
 
-        map = new Map(document.getElementById("maps"), defaultProps);
+            map = new Map(document.getElementById("maps"), defaultProps);
 
-        tobaCoordinates.forEach((el, i) => {
-            const lat = el.koordinat_lattitude;
-            const lng = el.koordinat_longitude;
-            const geocoder = new google.maps.Geocoder();
-            const latlng = new google.maps.LatLng(lat, lng);
-            geocoder.geocode({
-                latLng: latlng
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    const name = results[0].address_components[0].long_name;
-                    el.nama_wilayah = name;
-                }
-                var marker = new google.maps.Marker({
-                    position: {
-                        lat: lat,
-                        lng: lng
-                    },
-                    title: el.nama_wilayah,
-                });
-                marker.setMap(map);
-                var information = new google.maps.InfoWindow({
-                    content: `<div>
+            tobaCoordinates.forEach((el, i) => {
+                const lat = el.koordinat_lattitude;
+                const lng = el.koordinat_longitude;
+                const geocoder = new google.maps.Geocoder();
+                const latlng = new google.maps.LatLng(lat, lng);
+                geocoder.geocode({
+                    latLng: latlng
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        const name = results[0].address_components[0].long_name;
+                        el.nama_wilayah = name;
+                    }
+                    var marker = new google.maps.Marker({
+                        position: {
+                            lat: lat,
+                            lng: lng
+                        },
+                        title: el.nama_wilayah,
+                    });
+                    marker.setMap(map);
+                    var information = new google.maps.InfoWindow({
+                        content: `<div>
                         <img
                             src="https://awsimages.detik.net.id/community/media/visual/2018/11/30/c668919c-a1e7-4f89-a06c-d9627861d5a3_169.jpeg?w=700&q=90"
                             alt=""
@@ -244,16 +245,15 @@
                         <p class="text-danger">${el.nama_wilayah}</p>
                         <p class="text-danger">${el.jenis_rawan_bencana}</p>
                         </div>`
+                    });
+
+                    marker.addListener('click', function() {
+                        information.open(map, marker);
+                    });
                 });
+            })
+        }
 
-                marker.addListener('click', function() {
-                    information.open(map, marker);
-                });
-            });
-        })
-    }
-
-    initMap();
-</script>
-
+        initMap();
+    </script>
 @endsection

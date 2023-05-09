@@ -16,17 +16,9 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    @yield('css')
-    <link rel="icon" href="{{ asset('image/bpbd.png') }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('admin/css/custom/index.css') }}">
     @yield('css')
 </head>
 
@@ -36,15 +28,13 @@
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
-                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 45px; height: 45px;">
-                        <div class="logo accordion d-none d-sm-block">
-                            <img src="{{ asset('image/bpbd.png') }}" class="logo">
-                        </div>
-                        <div class="text m ms-3 text-start">
-                            <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
-                            <p class="brand-regular mb-0">Kabupaten Toba</p>
-                        </div>
+                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
                     </div>
+                    <div class="text m ms-3 text-start">
+                        <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
+                        <p class="brand-regular mb-0">Kabupaten Toba</p>
+                    </div>
+                </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +63,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('bencana.alam') }}">Bencana Alam</a></li>
-                            <li><a class="dropdown-item" href="{{ route('bencana.nonalam') }}">Bencana Non Alam</a>
-                            </li>
+                            <li><a class="dropdown-item" href="{{ route('bencana.nonalam') }}">Bencana Non Alam</a></li>
                             <li><a class="dropdown-item" href="{{ route('bencana.sosial') }}">Bencana Sosial</a></li>
                         </ul>
                     </li>
@@ -114,12 +103,8 @@
     <footer class="footer text-center text-md-start p-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 text-center">
+                <div class="col-md-2 text-center">
                     <img class="logo" src="{{ asset('image/bpbd.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
-                    <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 80px; height: 90px;">
-                    <img class="logo" src="{{ asset('image/toba.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
                     <h6>BPBD TOBA</h6>
 
@@ -146,8 +131,16 @@
                         <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
+                <div class="col-md-2 text-center">
+
+                    <img class="logo" src="{{ asset('image/toba.png') }}"
+                        alt="Logo Tidak ditemukan"style="width: 85px; height: 120px;">
+                        <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
+                        style="width: 80px; height: 90px;">
+                </div>
             </div>
         </div>
+
     </footer>
 
 
@@ -158,40 +151,6 @@
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
 
-    <script>
-        @if (!empty(Session::get('sukses')))
-            var popupId = "{{ uniqid() }}";
-            if (!sessionStorage.getItem('shown-' + popupId)) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    showConfirmButton: false,
-                    timer: 2000,
-                })
-                Toast.fire({
-                    icon: 'success',
-                    title: '{{ session('sukses') }}'
-                })
-            }
-            sessionStorage.setItem('shown-' + popupId, '1');
-        @endif
-    </script>
-    <script>
-        @if (!empty(Session::get('gagal')))
-            var popupId = "{{ uniqid() }}";
-            if (!sessionStorage.getItem('shown-' + popupId)) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    showConfirmButton: false,
-                    timer: 2000,
-                })
-                Toast.fire({
-                    icon: 'error',
-                    title: '{{ session('gagal') }}'
-                })
-            }
-            sessionStorage.setItem('shown-' + popupId, '1');
-        @endif
-    </script>
 
     <script>
         $(".logout").click(function(e) {

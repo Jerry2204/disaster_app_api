@@ -1,6 +1,6 @@
 @extends('public.layout.app')
 
-@section('title', 'Bencana Alam')
+@section('title', 'Bencana Sosial')
 
 @section('content')
     <div class="container">

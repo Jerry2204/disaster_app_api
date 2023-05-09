@@ -23,7 +23,7 @@ use App\Notifications\DisasterReported;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
-use Image;
+use Illuminate\Support\Facades\DB;
 
 class LaporanBencanaController extends Controller
 {
@@ -81,16 +81,18 @@ class LaporanBencanaController extends Controller
 
     public function bencanaSosial()
     {
+        $now = Carbon::now();
         $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->where('confirmed', true)->latest()->paginate(12);
         $grafik = korban::all();
         // $count_grafik = korban::count();
-        $count_grafik = korban::select(korban::raw('SUM(meninggal) as meninggal_total'),
+        $count_grafik = korban::select('updated_at')->select(korban::raw('SUM(meninggal) as meninggal_total'),
                                 korban::raw('SUM(luka_berat) as luka_berat_total'),
                                 korban::raw('SUM(luka_ringan) as luka_ringan_total'),
                                 korban::raw('SUM(hilang) as hilang_total'))
-                        ->first();
 
-        // dd($grafik, $count_grafik);
+                                ->whereYear('updated_at',$now)
+                        ->get();
+
         return view('public.bencanaSosial', compact('bencanaSosial','grafik','count_grafik'));
     }
     //Grafik
@@ -173,7 +175,7 @@ class LaporanBencanaController extends Controller
 
         $nama_file = time()."_".$file->getClientOriginalName();
 
-        $img = Image::make($file)->resize(800, 800)->save('laporan/' . $nama_file, 0);
+        $file->move("laporan", $nama_file);
 
         $laporanBencana = LaporanBencana::create([
             'jenis_bencana' => $request->jenis_bencana,
@@ -200,7 +202,7 @@ class LaporanBencanaController extends Controller
                 ->subject('Laporan Terjadi bencana dari ' . $authUser['name']);
         });
 
-        return redirect()->route('laporanku.public')->with('sukses', 'Laporan Bencana berhasil ditambahkan');
+        return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }
 
     public function addAdmin(StoreLaporanBencanaRequest $request)

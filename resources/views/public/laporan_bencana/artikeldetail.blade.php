@@ -1,9 +1,8 @@
+
 @extends('public.layout.app')
 
 @section('title', 'Detail Artikel')
-<script type="text/javascript"
-    src="https://platform-api.sharethis.com/js/sharethis.js#property=643f7be73337a000130c380c&product=sticky-share-buttons&source=platform"
-    async="async"></script>
+
     @section('content')
     <br>
     <div class="container">
@@ -67,6 +66,7 @@
           </div>
         </div>
       </div>
+      <br>
 <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 50px; right: 20px;">
         <div
             class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
@@ -78,4 +78,7 @@
             </a>
         </div>
     </div>
+    <script type="text/javascript"
+    src="https://platform-api.sharethis.com/js/sharethis.js#property=643f7be73337a000130c380c&product=sticky-share-buttons&source=platform"
+    async="async"></script>
     @endsection
