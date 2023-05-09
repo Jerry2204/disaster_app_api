@@ -115,7 +115,7 @@
                                     type="file">
                             </div>
                             {{-- <button type="submit" class="btn btn-primary" onclick="laporkan()">Laporkan</button> --}}
-                            <button type="button" class="btn btn-primary" onclick="laporkan()">Laporkan</button>
+                            <button type="button" class="btn btn-primary" onclick="laporkan()"style="width: 100%">Laporkan</button>
                                         </form>
                         <script>
                             function laporkan() {

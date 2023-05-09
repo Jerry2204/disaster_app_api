@@ -43,7 +43,7 @@
 </div>
     <!-- Pre-loader end -->
 
-    <section class="login p-fixed d-flex text-center bg-primary common-img-bg">
+    <section class="login p-fixed d-flex text-center " style="background-color: #8A9CB7;">
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
@@ -52,32 +52,42 @@
                     <div class="login-card card-block auth-body mr-auto ml-auto">
                         <form class="md-float-material" action="{{ route('registrasi') }}" method="POST">
                             @csrf
+                            <br><br><br><br><br><br><br>
                             <div class="text-center">
-                                <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png">
+                                <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png"style="width: 90px; height: 90px;">
                             </div>
-                            <div class="auth-box">
+                            <strong class="text-black" style="font-size: 20px">Badan Penanggulangan Bencana
+                                Daerah</strong>
+                            <h5 style="color:#000000">Kabupaten Toba</h5>
+                            <div class="auth-box"style="width: 400px;">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Registrasi Akun</h3>
+                                        <h3 class="text-center" style="color: #003D78">Daftar Akun</h3>
+                                        <hr style="border: 0.5px solid #000000;">
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="input-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Nama Lengkap">
+                                    <input type="text" name="name" class="form-control" placeholder="Nama Lengkap"style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" name="username" class="form-control" placeholder="Username">
+                                    <input type="text" name="username" class="form-control" placeholder="Username"style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Alamat Email">
+                                    <input type="email" name="email" class="form-control" placeholder="Alamat Email"style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password">
+                                    <input type="password" name="password" class="form-control" placeholder="Password" style="height: 50px;">
                                     <span class="md-line"></span>
-                                </div>
+                                    <div class="input-group-append">
+                                      <span class="input-group-text">
+                                        <i class="fa fa-eye" id="togglePassword"></i>
+                                      </span>
+                                    </div>
+                                  </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Daftar</button>
@@ -97,6 +107,7 @@
     </section>
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
+    
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/popper.js/popper.min.js') }}"></script>
