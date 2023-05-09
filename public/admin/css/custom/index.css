@@ -313,3 +313,35 @@ footer a:hover {
 .button-urgent:last-child {
     background-color: #FA0000;
 }
+
+@media (max-width: 576px) {
+    .text-hero {
+        font-size: 24px !important;
+        margin-top: 40px !important;
+    }
+
+    .btn-custom-danger {
+        background-color: #FA0000 !important;
+        color: #fff ;
+        border: none;
+        border-radius: 10px;
+        width: 150px;
+        height: 50px;
+        font-size: 18px;
+      }
+
+      .peringatan-dini-hero {
+        display: flex;
+        width: 475px;
+        height: 200px;
+        border-radius: 15px;
+        background-color: #FE9705;
+        padding: 10px;
+        overflow: hidden;
+      }
+
+      .hero {
+        height: 500px;
+        overflow: hidden;
+      }
+ }

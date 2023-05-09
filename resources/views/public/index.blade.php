@@ -5,7 +5,7 @@
             src="{{ asset('image/banjir.jpg') }}" class="overflow-hidden hero-image" alt="">
         <div class="container position-relative hero-container">
             <div class="row">
-                <div class="col-md-6 col-sm-5 text-start d-flex flex-column justify-content-center left-hero">
+                <div class="col-md-6 col-sm-12 text-start d-flex flex-column justify-content-center left-hero">
                     <h1 class="text-hero">Anda Dalam Keadaan Darurat?</h1>
                     <p class="subtext-hero">Sampaikan Laporan Peristiwa Darurat di Sekitar Anda!</p>
                     <a
@@ -13,21 +13,25 @@
                         <button class="btn-custom-danger"></><strong>LAPOR!</strong></button></a>
                 </div>
 
-                <div class="col-md-6 col-sm-7 right-hero">
+                <div class="col-md-6 col-sm-12 mt-4 right-hero">
                     <div class="box d-flex justify-content-center align-items-center">
                         <div class="peringatan-dini-hero text-center">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="triangle-exclamation"
-                                class="svg-inline--fa fa-triangle-exclamation warning-icon" role="img"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <path fill="currentColor"
-                                    d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z">
-                                </path>
-                            </svg>
-                            <hr class="hr-peringatan">
-                            <div class="p-3 fs-6"><b
+                            <div class="d-none d-sm-block">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="triangle-exclamation"
+                                    class="svg-inline--fa fa-triangle-exclamation warning-icon" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor"
+                                        d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <hr class="hr-peringatan d-none d-sm-block">
+                            <div class="my-auto">
+                                <b
                                     style="font-family: Inter;">{{ \Carbon\Carbon::parse($newestPeringatan->tanggal)->locale('id-ID')->format('d F Y') }}
                                     |
-                                    {{ $newestPeringatan->lokasi }} </b>
+                                    {{ $newestPeringatan->lokasi }}
+                                </b>
                                 <p class="mt-3" style="font-family: Inter;">{{ $newestPeringatan->deskripsi }}</p>
                             </div>
                         </div>

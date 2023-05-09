@@ -18,6 +18,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @yield('css')
+    <link rel="icon" href="{{ asset('image/bpbd.png') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnVD8EkfvSTD4s-p_EX7BV-f5LUdeG4es&callback=initMap"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('admin/css/custom/index.css') }}">
+    @yield('css')
 </head>
 
 <body>
@@ -27,12 +37,14 @@
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
                         <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 45px; height: 45px;">
+                        <div class="logo accordion d-none d-sm-block">
+                            <img src="{{ asset('image/bpbd.png') }}" class="logo">
+                        </div>
+                        <div class="text m ms-3 text-start">
+                            <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
+                            <p class="brand-regular mb-0">Kabupaten Toba</p>
+                        </div>
                     </div>
-                    <div class="text m ms-3 text-start">
-                        <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
-                        <p class="brand-regular mb-0">Kabupaten Toba</p>
-                    </div>
-                </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,12 +93,17 @@
                                     </form>
                                 </li>
                             </ul>
-                        @endauth
-                        @guest
-                        <li><a class="dropdown-item" style="color:white;" href="{{ route('login') }}">Masuk</a></li>
+
+
+                        </li>
+                    @endauth
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('login') }}">Masuk</a>
+                        </li>
                     @endguest
-                    </li>
-                    </li>
+
+
                 </ul>
             </div>
         </div>
@@ -141,6 +158,40 @@
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
 
+    <script>
+        @if (!empty(Session::get('sukses')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('sukses') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
+    <script>
+        @if (!empty(Session::get('gagal')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ session('gagal') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
 
     <script>
         $(".logout").click(function(e) {
