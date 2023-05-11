@@ -174,7 +174,7 @@
                             </div>
                             {{-- Tombol untuk menambah input field --}}
                             <button type="button" id="tambah">Tambah</button>
-                            <button type="button" onclick="deleteLastRow()">Delete Last Row</button>
+                            <button type="button" onclick="deleteLastRow()">Hapus Data Terakhir</button>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             </div>

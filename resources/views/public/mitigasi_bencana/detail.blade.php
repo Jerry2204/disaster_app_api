@@ -5,7 +5,6 @@
 @section('content')
     <div class="container py-5">
         <div class="text-start">
-            <p>Buku Panduan Edukasi Kebencanaan</p>
             <p class="fw-bold fs-3">{{ $mitigasiBencana->title }}</p>
 
             <p class="fs-6">

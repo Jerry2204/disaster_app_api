@@ -28,8 +28,9 @@
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
-                        <img src="{{ asset('image/bpbd.png') }}" class="logo" style="width: 61px; height: 60px;">
+                        <img src="{{ asset('image/logo.png') }}" style="width: 60px; height: 60px;">
                     </div>
+
                     <div class="text m ms-3 text-start">
                         <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
                         <p class="brand-regular mb-0">Kabupaten Toba</p>
@@ -104,13 +105,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2 text-center">
-                    <img class="logo" src="{{ asset('image/bpbd.png') }}"
+                    <img class="logo" src="{{ asset('image/logo.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
                     <h6>BPBD TOBA</h6>
 
                 </div>
                 <br>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h6>BPBD Kabupaten Toba</h6>
                     <p>JL DI. Panjaitan, Toba Samosir, Balige, Sumatera Utara, Indonesia.</p>
                 </div>
@@ -131,7 +132,7 @@
                         <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2 text-center">
+                <div class="col-md-3 text-center">
 
                     <img class="logo" src="{{ asset('image/toba.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 85px; height: 120px;">
@@ -140,9 +141,7 @@
                 </div>
             </div>
         </div>
-
     </footer>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">

@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>Masuk</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="CodedThemes">
-    <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="keywords"
+        content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
     <!-- Favicon icon -->
     <link rel="icon" href="{{ asset('admin/images/favicon.ico') }}" type="image/x-icon">
@@ -26,24 +27,44 @@
 <body class="fix-menu">
     <!-- Pre-loader start -->
     <div class="theme-loader">
-    <div class="ball-scale">
-        <div class='contain'>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
-            <div class="ring"><div class="frame"></div></div>
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
     <!-- Pre-loader end -->
 
-    <section class="login p-fixed d-flex text-center bg-primary common-img-bg">
+    <section class="login p-fixed d-flex text-center " style="background-color: #8A9CB7;">
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
@@ -52,32 +73,45 @@
                     <div class="login-card card-block auth-body mr-auto ml-auto">
                         <form class="md-float-material" action="{{ route('login') }}" method="POST">
                             @csrf
+                            <br><br><br><br>
                             <div class="text-center">
-                                <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png">
+                                <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png"style="width: 90px; height: 90px;">
                             </div>
+                            <strong class="text-black" style="font-size: 20px">Badan Penanggulangan Bencana
+                                Daerah</strong>
+                            <h5 style="color:#000000">Kabupaten Toba</h5>
                             <div class="auth-box">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Masuk</h3>
+                                        <h3 class="text-center" style="color: #003D78">Masuk</h3>
+                                        <hr style="border: 0.5px solid #000000;">
                                     </div>
                                 </div>
-                                <hr/>
+
                                 <div class="input-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Your Email Address">
+                                    <input type="email" name="email" class="form-control" placeholder="Username/Email" style="height: 50px;">
                                     <span class="md-line"></span>
-                                </div>
+                                  </div>
                                 <div class="input-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password">
+                                    <input type="password" name="password" class="form-control" placeholder="Password" style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Masuk</button>
+                                        <button type="submit"
+                                            class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Masuk</button>
+                                        <p class="mb-0 text-left text-center"><u style="color: blue;">Tidak memiliki
+                                                akun?</u> <a href="{{ route('registrasi') }}"
+                                                style="color: red; text-decoration: underline red;">Daftar</a></p>
+                                        <br>
                                     </div>
                                     <div class="col-md-12 text-dark">
-                                        <p class="mb-0 text-left">Belum memiliki akun?</p>
-                                        <a href="{{ route('registrasi') }}" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20">Daftar</a>
+                                        <a href="{{ url('/') }}" target="_self"
+                                            class="btn btn-md btn-block waves-effect text-center m-b-20"
+                                            style="background-color: rgb(128, 128, 128); color: #fff;">Kembali Ke
+                                            Beranda</a>
                                     </div>
+
                                 </div>
                             </div>
                         </form>
@@ -90,9 +124,11 @@
             <!-- end of row -->
         </div>
         <!-- end of container-fluid -->
+
     </section>
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
+
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/popper.js/popper.min.js') }}"></script>

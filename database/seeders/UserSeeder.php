@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Date::now()
             ],
             [
-                'name' => 'User Pra Bencana',
+                'name' => 'PraBencana',
                 'email' => 'prabencana@gmail.com',
                 'username' => 'prabencana2204',
                 'password' => Hash::make('prabencana123'),
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Date::now()
             ],
             [
-                'name' => 'User Tanggap Darurat',
+                'name' => 'TanggapDarurat',
                 'email' => 'tanggapdarurat@gmail.com',
                 'username' => 'tanggapdarurat2204',
                 'password' => Hash::make('tanggapdarurat123'),
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Date::now()
             ],
             [
-                'name' => 'User Pasca Bencana',
+                'name' => 'PascaBencana',
                 'email' => 'pascabencana@gmail.com',
                 'username' => 'pascabencana2204',
                 'password' => Hash::make('pascabencana123'),

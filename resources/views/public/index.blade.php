@@ -1,8 +1,9 @@
 @extends('public.layout.app')
+<img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;">
 
 @section('content')
     <div class="hero position-relative d-flex justify-content-center align-items-center"><img
-            src="{{ asset('image/banjir.jpg') }}" class="overflow-hidden hero-image" alt="">
+            src="{{ asset('image/home.jpeg') }}" class="overflow-hidden hero-image" alt="">
         <div class="container position-relative hero-container">
             <div class="row">
                 <div class="col-md-6 col-sm-12 text-start d-flex flex-column justify-content-center left-hero">
@@ -61,11 +62,11 @@
                                     @if ($item['name'] == 'Berawan')
                                         <img src="{{ asset('image/berawan.png') }}" alt="" />
                                     @elseif ($item['name'] == 'Hujan Sedang')
-                                        <img src="{{ asset('image/hujan_sedang.png') }}" alt="" />
+                                        <img src="{{ asset('image/hujans.png') }}" alt="" />
                                     @elseif ($item['name'] == 'Kabut')
                                         <img src="{{ asset('image/kabut.png') }}" alt="" />
                                     @elseif ($item['name'] == 'Cerah Berawan')
-                                        <img src="{{ asset('image/berawan.png') }}" alt="" />
+                                        <img src="{{ asset('image/cerahberawan.png') }}" alt="" />
                                     @endif
                                     <p>{{ \Carbon\Carbon::createFromFormat('YmdHi', $item['datetime'])->format('d M Y, H:i') }}
                                     </p>
@@ -108,12 +109,12 @@
                                             </div>
                                         @elseif ($item->status_penanggulangan->status == 'selesai')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
-                                                <h4 class="badge" style="background-color: #3AC430; height: 25px; width: 100px; text-align: center;">
+                                                <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: rgba(58, 196, 48, 0.88); border-radius: 5px; text-align: center;">
                                                     {{ $item->status_penanggulangan->status }}
                                                   </h4>
-
                                             </div>
                                             @endif
+                                            <br>
                                         <div class="card-body">
                                             <p class="card-subtitle mb-2 text-muted ">
                                                 {{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
@@ -185,13 +186,9 @@
             <h3 class="mb-5 text-white text-center">Tidak Ada Pengumuman Terkini</h3>
         @endif
     </section>
-    {{-- <div class="container">
-        <div class="row no- gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
-            <div class="sharethis-sticky-share-buttons"></div>
-        </div>
-    </div> --}}
     <div class="sharethis-sticky-share-buttons"></div>
 @endsection
+
 @section('javascript')
     <script>
         let map;
@@ -256,4 +253,5 @@
 
         initMap();
     </script>
+        <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;">
 @endsection

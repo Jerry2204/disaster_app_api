@@ -85,13 +85,23 @@ class LaporanBencanaController extends Controller
         $bencanaSosial = LaporanBencana::where('jenis_bencana', 'bencana sosial')->where('confirmed', true)->latest()->paginate(12);
         $grafik = korban::all();
         // $count_grafik = korban::count();
-        $count_grafik = korban::select('updated_at')->select(korban::raw('SUM(meninggal) as meninggal_total'),
-                                korban::raw('SUM(luka_berat) as luka_berat_total'),
-                                korban::raw('SUM(luka_ringan) as luka_ringan_total'),
-                                korban::raw('SUM(hilang) as hilang_total'))
+        $now = date('Y');
 
-                                ->whereYear('updated_at',$now)
-                        ->get();
+$count_grafik = korban::select(
+        korban::raw('SUM(meninggal) as meninggal_total'),
+        korban::raw('SUM(luka_berat) as luka_berat_total'),
+        korban::raw('SUM(luka_ringan) as luka_ringan_total'),
+        korban::raw('SUM(hilang) as hilang_total'))
+    ->join('laporan_bencanas', function($join) use ($now) {
+        $join->on('korbans.id', '=', 'laporan_bencanas.id')
+             ->where('laporan_bencanas.jenis_bencana', 'bencana sosial')
+             ->where('laporan_bencanas.confirmed', true)
+             ->whereYear('korbans.updated_at', $now);
+    })
+    ->get();
+
+// $array_count_grafik = $count_grafik->toJSON();
+// var_dump($array_count_grafik);
 
         return view('public.bencanaSosial', compact('bencanaSosial','grafik','count_grafik'));
     }
