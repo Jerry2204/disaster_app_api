@@ -27,15 +27,15 @@
                 <div class="laporan-lengkap mt-4">
                     <div class="row">
                         <div class="col-md-6 p-5">
-                            <h5>
-                                {{ $laporanBencana->nama_bencana }}
-                            </h5>
-                            <p class="text-secondary">
+                            <td>
+                                <h5>{{ $laporanBencana->nama_bencana }}</h5>
+                              </td>
+                            <p>
                                 {{ $laporanBencana->jenis_bencana }}
                             </p>
-                            <p class="mt-5 mb-0">
+                            <b class="mt-5 mb-0">
                                 Status Penanggulangan:
-                            </p>
+                            </b>
                             @if ($laporanBencana->status_penanggulangan->status == 'menunggu')
                                 <p class="badge rounded-pill bg-danger text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}

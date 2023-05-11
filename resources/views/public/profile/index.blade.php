@@ -21,11 +21,11 @@
                         <div class="col-md-6">
                             <h4>Misi</h4>
                             <p>Misi Badan Penanggulangan Bencana Daerah Kabupaten Toba adalah :</p>
-                            <ol>
+
                                 @foreach ($visiMisi as $item)
-                                    <li>{!! $item->misi !!}</li>
+                                    <p>{!! $item->misi !!}</p>
                                 @endforeach
-                            </ol>
+
                         </div>
                     </div>
                 @else

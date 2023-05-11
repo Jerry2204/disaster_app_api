@@ -128,6 +128,9 @@
                                 <label for="lokasi">Lokasi</label>
                             </div>
 
+                            <div id="maps" style="width:100%;height:380px;">
+
+                            </div><br>
                             <div class="form-floating mb-3">
                                 <textarea class="form-control" name="keterangan" style="height: 150px" id="keterangan"
                                     placeholder="Masukkan keterangan"></textarea>
@@ -137,10 +140,10 @@
                             <div class="mb-3">
                                 <label for="gambar" class="form-label">Gambar</label>
                                 <input name="gambar" class="form-control form-control-sm" id="gambar"
-                                    type="file">
+                                    type="file" accept="image/*">
                             </div>
                             {{-- <button type="submit" class="btn btn-primary" onclick="laporkan()">Laporkan</button> --}}
-                            <button type="button" class="btn btn-primary" onclick="laporkan()">Laporkan</button>
+                            <button type="button" class="btn btn-primary" onclick="laporkan()"style="width: 100%">Laporkan</button>
                                         </form>
                         <script>
 
@@ -154,7 +157,7 @@
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Maaf, data tidak bisa kosong!',
-                                        text: 'Silahkan lengkapi semua Data laporan.',
+                                        text: 'Silahkan lengkapi semua kolom form laporan.',
                                         confirmButtonText: 'OK',
                                         confirmButtonColor: '#dc3545',
                                         timer: null
@@ -167,6 +170,92 @@
                                     form.submit();
                                 }
                             }
+                        </script>
+                       <script>
+                        function initMap() {
+                          // Batas wilayah Toba
+                          var tobaBounds = {
+                            north: 2.959256,
+                            south: 2.064355,
+                            east: 99.596545,
+                            west: 98.463357
+                          };
+
+                          // Membuat objek map dengan batas wilayah Toba
+                          var map = new google.maps.Map(document.getElementById('maps'), {
+                            zoom: 8,
+                            center: {
+                              lat: 2.3365,
+                              lng: 99.1325
+                            },
+                            restriction: {
+                              latLngBounds: tobaBounds,
+                              strictBounds: false
+                            }
+                          });
+
+                          // Membuat marker
+                          var marker = new google.maps.Marker({
+                            map: map,
+                            draggable: true
+                          });
+
+                          // Membuat event listener klik pada peta
+                          map.addListener('click', function(e) {
+                            var latLng = e.latLng;
+
+                            marker.setPosition(latLng);
+
+                            var url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latLng.lat() +
+                              '&lon=' + latLng.lng();
+
+                            fetch(url)
+                              .then(function(response) {
+                                return response.json();
+                              })
+                              .then(function(json) {
+                                document.getElementById('lokasi').value = json.display_name;
+                              })
+                              .catch(function(error) {
+                                console.log(error);
+                              });
+                          });
+
+                          // Membuat event listener pada marker untuk mendeteksi klik pada marker
+                          marker.addListener('click', function(e) {
+                            var latLng = e.latLng;
+                            document.getElementById('location-lokasi').value = latLng.lat() + ',' + latLng.lng();
+                          });
+
+                          // Membuat event listener pada input field lokasi
+                          document.getElementById('lokasi').addEventListener('input', function(e) {
+                            var inputText = e.target.value;
+
+                            var url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + inputText;
+
+                            fetch(url)
+                              .then(function(response) {
+                                return response.json();
+                              })
+                              .then(function(json) {
+                                if (json.length > 0) {
+                                  var latLng = {
+                                    lat: parseFloat(json[0].lat),
+                                    lng: parseFloat(json[0].lon)
+                                  };
+                                  map.setCenter(latLng);
+                                  marker.setPosition(latLng);
+                                }
+                              })
+                              .catch(function(error) {
+                                console.log(error);
+                              });
+                          });
+                        }
+                        </script>
+
+                        <script>
+                            initMap();
                         </script>
                     </div>
                 </div>

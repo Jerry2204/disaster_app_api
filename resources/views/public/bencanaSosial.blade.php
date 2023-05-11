@@ -1,6 +1,6 @@
 @extends('public.layout.app')
 
-@section('title', 'Bencana Alam')
+@section('title', 'Bencana Sosial')
 
 @section('content')
     <div class="container">
@@ -8,9 +8,11 @@
             <div class="col-md-12 my-5">
                 <h3 class="text-center">Data Bencana Sosial</h3>
             </div>
-            <div class="row">
+            <div class="row" style="box-shadow: 0px 0px 10px grey;">
                 @foreach ($bencanaSosial as $item)
-                <div class="col-md-3 mb-3">
+                <br>
+                <div class="col-md-3 mb-5">
+                    <br>
                     <div class="card text-start" style="padding: 0px;">
                         <img src="{{ asset('laporan/' . $item->gambar) }}" alt="1681457803_longsor.jpg"
                             style="border-radius: 5px 5px 0px 0px;">
@@ -22,9 +24,11 @@
                             @elseif ($item->status_penanggulangan->status == 'proses')
                             <p class="badge bg-warning">{{ $item->status_penanggulangan->status }}</p>
                             @elseif ($item->status_penanggulangan->status == 'selesai')
-                            <p class="badge bg-success">{{ $item->status_penanggulangan->status }}</p>
+                            <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: rgba(58, 196, 48, 0.88); border-radius: 5px; text-align: center;">
+                             {{ $item->status_penanggulangan->status }}</h1>
                             @endif
                         </div>
+                        <br>
                         <div class="card-body">
                             <h6 class="card-title text-start">
                                 {{ $item->nama_bencana }}
@@ -62,4 +66,5 @@
             </a>
         </div>
     </div>
+
 @endsection

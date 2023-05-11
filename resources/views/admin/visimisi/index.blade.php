@@ -69,8 +69,8 @@
                                     @forelse ($visiMisi as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $item->visi }}</td>
-                                            <td>{{ $item->misi }}</td>
+                                            <td>{!! $item->visi !!}</td>
+                                            <td>{!! $item->misi !!}</td>
                                             <td>
                                                 <a href="{{ route('visimisi.edit', $item->id) }}"
                                                     class="btn btn-sm btn-warning">
