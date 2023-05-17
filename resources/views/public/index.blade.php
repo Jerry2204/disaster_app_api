@@ -1,5 +1,5 @@
 @extends('public.layout.app')
-<img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;">
+<img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%; background-repeat: repeat-x;">
 
 @section('content')
     <div class="hero position-relative d-flex justify-content-center align-items-center"><img
