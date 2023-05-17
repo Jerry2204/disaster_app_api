@@ -23,6 +23,7 @@ use App\Notifications\DisasterReported;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
+use Image;
 use Illuminate\Support\Facades\DB;
 
 class LaporanBencanaController extends Controller

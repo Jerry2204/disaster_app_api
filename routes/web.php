@@ -113,7 +113,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin,tanggap_
 });
 
 /** Auth Pra Bencana */
-Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function() {
+Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin']], function() {
     // Peringatan Dini
     Route::get('/peringatan/dini', [PeringatanDiniController::class, 'indexAdmin'])->name('peringatan_dini.index');
     Route::post('/peringatan/dini', [PeringatanDiniController::class, 'addAdmin'])->name('peringatan_dini.add');
@@ -134,7 +134,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana']], function()
 });
 
 /** Auth Tanggap Darurat */
-Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat']], function() {
+Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,admin']], function() {
     // Manage Laporan Bencana
     Route::post('/laporan/bencana', [LaporanBencanaController::class, 'addAdmin'])->name('laporan_bencana.add');
     Route::put('/laporan/bencana', [LaporanBencanaController::class, 'updateAdmin'])->name('laporan_bencana.update');

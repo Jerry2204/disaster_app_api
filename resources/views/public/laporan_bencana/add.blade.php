@@ -140,7 +140,7 @@
                             <div class="mb-3">
                                 <label for="gambar" class="form-label">Gambar</label>
                                 <input name="gambar" class="form-control form-control-sm" id="gambar"
-                                    type="file">
+                                    type="file" accept="image/*">
                             </div>
                             {{-- <button type="submit" class="btn btn-primary" onclick="laporkan()">Laporkan</button> --}}
                             <button type="button" class="btn btn-primary" onclick="laporkan()"style="width: 100%">Laporkan</button>
