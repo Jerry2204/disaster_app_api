@@ -8,7 +8,8 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
+                    <i class="ti-target bg-c-pink"></i>
+                   
                     <div class="d-inline">
                         <h4>Visi & Misi</h4>
                         <span>Daftar Visi & Misi</span>

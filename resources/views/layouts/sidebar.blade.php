@@ -11,7 +11,7 @@
                 </div>
                 <div class="user-details">
                     <span style="font-size: 12px">{{ auth()->user()->name }}</span>
-                    <span id="more-details">{{ auth()->user()->role  }}<i class="ti-angle-down"></i></span>
+                    <span id="more-details">{{ auth()->user()->role }}<i class="ti-angle-down"></i></span>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 </ul>
             </div>
         </div>
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Menu</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="active">
                 <a href="{{ route('home') }}">
@@ -38,31 +38,33 @@
                 </a>
             </li>
             @if (auth()->user()->role == 'admin' || auth()->user()->role == 'pra_bencana')
-            <li>
-                <a href="{{ route('rawan_bencana.index') }}">
-                    <span class="pcoded-micon"><i class="ti-location-pin"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Rawan Bencana</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('rawan_bencana.index') }}">
+                        <span class="pcoded-micon"><i class="ti-location-pin"></i><b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Rawan Bencana</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
             @endif
-            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana')
-            <li>
-                <a href="{{ route('laporan_bencana.index') }}">
-                    <span class="pcoded-micon"><i class="fa fa-line-chart"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Laporan</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
+            @if (auth()->user()->role == 'admin' ||
+                    auth()->user()->role == 'tanggap_darurat' ||
+                    auth()->user()->role == 'pasca_bencana')
+                <li>
+                    <a href="{{ route('laporan_bencana.index') }}">
+                        <span class="pcoded-micon"><i class="fa fa-line-chart"></i><b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Laporan</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
             @endif
             @if (auth()->user()->role == 'admin' || auth()->user()->role == 'pra_bencana')
-            <li>
-                <a href="{{ route('mitigasi_bencana.index') }}">
-                    <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Mitigasi Bencana</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('mitigasi_bencana.index') }}">
+                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Mitigasi Bencana</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="{{ route('peringatan_dini.index') }}">
@@ -108,5 +110,13 @@
                 </a>
             </li>
         </ul>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer">
+                    <p><a href="{{ url('/') }}"><?php echo date('Y'); ?>~BPBD TOBA~</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>

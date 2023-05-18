@@ -11,6 +11,10 @@
             <a  href="{{ route('public') }}">
                 <img class="img-fluid" src="{{ asset('admin/images/logo_bpbd.png') }}" width="45" height="45" alt="Theme-Logo" />
             </a>
+            &nbsp;&nbsp;
+            <span class="text-white">
+               <h5>BPBD TOBA</h5>
+            </span>
             <a class="mobile-options">
                 <i class="ti-more"></i>
             </a>

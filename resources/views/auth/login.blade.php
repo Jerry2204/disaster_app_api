@@ -11,7 +11,7 @@
         content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
     <!-- Favicon icon -->
-    <link rel="icon" href="{{ asset('admin/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('image/bpbd.png') }}">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <!-- Required Fremwork -->
@@ -64,7 +64,7 @@
     </div>
     <!-- Pre-loader end -->
 
-    <section class="login p-fixed d-flex text-center " style="background-color: #8A9CB7;">
+    <section class="text-center " style="background-color: #8A9CB7;">
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
@@ -73,12 +73,11 @@
                     <div class="login-card card-block auth-body mr-auto ml-auto">
                         <form class="md-float-material" action="{{ route('login') }}" method="POST">
                             @csrf
-                            <br><br><br><br>
+                          
                             <div class="text-center">
-                                <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png"style="width: 90px; height: 90px;">
+                                <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png" style="width: 90px; height: 90px;">
                             </div>
-                            <strong class="text-black" style="font-size: 20px">Badan Penanggulangan Bencana
-                                Daerah</strong>
+                            <strong class="text-black" style="font-size: 20px">Badan Penanggulangan Bencana Daerah</strong>
                             <h5 style="color:#000000">Kabupaten Toba</h5>
                             <div class="auth-box">
                                 <div class="row m-b-20">
@@ -89,32 +88,41 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Username/Email" style="height: 50px;">
-                                    <span class="md-line"></span>
-                                  </div>
-                                <div class="input-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password" style="height: 50px;">
+                                    <input type="email" name="email" class="form-control" placeholder="Username/Email"
+                                        style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
+
+                                @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control" placeholder="Password"
+                                        style="height: 50px;">
+                                    <span class="md-line"></span>
+                                </div>
+
+                                @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit"
                                             class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Masuk</button>
-                                        <p class="mb-0 text-left text-center"><u style="color: blue;">Tidak memiliki
-                                                akun?</u> <a href="{{ route('registrasi') }}"
-                                                style="color: red; text-decoration: underline red;">Daftar</a></p>
+                                        <p class="mb-0 text-left text-center"><u style="color: blue;">Tidak memiliki akun?</u> <a
+                                                href="{{ route('registrasi') }}" style="color: red; text-decoration: underline red;">Daftar</a>
+                                        </p>
                                         <br>
                                     </div>
                                     <div class="col-md-12 text-dark">
                                         <a href="{{ url('/') }}" target="_self"
                                             class="btn btn-md btn-block waves-effect text-center m-b-20"
-                                            style="background-color: rgb(128, 128, 128); color: #fff;">Kembali Ke
-                                            Beranda</a>
+                                            style="background-color: rgb(128, 128, 128); color: #fff;">Kembali Ke Beranda</a>
                                     </div>
-
                                 </div>
                             </div>
                         </form>
+
                         <!-- end of form -->
                     </div>
                     <!-- Authentication card end -->

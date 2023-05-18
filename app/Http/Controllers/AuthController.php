@@ -31,32 +31,52 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
 
+        if (!User::where('email', $request->email)->exists()) {
+            return back()->withErrors([
+                'email' => 'Username/Email yang anda isi tidak tepat! Coba lagi!',
+            ])->onlyInput('email');
+        }
+
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'password' => 'Password yang anda isi tidak tepat! Coba lagi!',
         ])->onlyInput('email');
     }
 
-    public function registrasi() {
+    public function registrasi()
+    {
         return view('auth.register');
     }
 
-    public function registrasiStore(Request $request) {
+    public function registrasiStore(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'username' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
+            'nomor_telepon' => 'required|unique:users',
             'password' => 'required'
+        ], [
+            'name.required' => 'Nama harus diisi.',
+            'username.required' => 'Username harus diisi.',
+            'email.required' => 'Email harus diisi.',
+            'email.unique' => 'Email sudah digunakan.',
+            'nomor_telepon.required' => 'Nomor telepon harus diisi.',
+            'nomor_telepon.unique' => 'Nomor telepon sudah digunakan.',
+            'password.required' => 'Password harus diisi.'
         ]);
 
+        $validatedData = $request->all();
+
         $user = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validatedData['name'],
+            'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'nomor_telepon' => $validatedData['nomor_telepon'],
+            'password' => Hash::make($validatedData['password']),
             'role' => 'user'
         ]);
 
-        if($user) {
+        if ($user) {
             if (Auth::attempt($request->only('email', 'password'))) {
                 $request->session()->regenerate();
 
@@ -68,10 +88,10 @@ class AuthController extends Controller
             }
         }
 
-        return back()->with('gagal', 'Failed to add new user');
+        return back()->with('gagal', 'Gagal menambahkan pengguna baru.');
     }
-
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();

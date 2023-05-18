@@ -8,7 +8,8 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
+                    <i class="fa fa-warning bg-c-yellow"></i>
+
                     <div class="d-inline">
                         <h4>Peringatan Dini</h4>
                         <span>Daftar Peringatan Dini</span>
