@@ -8,6 +8,7 @@
             <div class="col-md-12 my-5">
                 <h3 class="text-center">Riwayat Laporan Saya</h3>
             </div>
+
             <div class="row">
                 @foreach ($bencanaAlam as $item)
                 <div class="col-md-3 mb-3">

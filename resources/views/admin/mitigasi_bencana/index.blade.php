@@ -8,8 +8,8 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
-                    <div class="d-inline">
+                    <i class="ti-direction-alt bg-c-green"></i>
+                     <div class="d-inline">
                         <h4>Mitigasi Bencana</h4>
                         <span>Daftar Mitigasi Bencana</span>
                     </div>

@@ -48,7 +48,7 @@
                     </li>
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('laporanku.public') }}">Laporanku</a>
                         </li>
                     @endauth
                     <li class="nav-item">
@@ -106,7 +106,7 @@
             <div class="row">
                 <div class="col-md-2 text-center">
                     <img class="logo" src="{{ asset('image/logo.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
+                        alt="Logo Tidak ditemukan"style="width: 85px; height: 90px;">
                     <h6>BPBD TOBA</h6>
 
                 </div>
@@ -141,6 +141,7 @@
                 </div>
             </div>
         </div>
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -222,6 +222,7 @@
                     if (status == google.maps.GeocoderStatus.OK) {
                         const name = results[0].address_components[0].long_name;
                         el.nama_wilayah = name;
+
                     }
                     var marker = new google.maps.Marker({
                         position: {
@@ -233,14 +234,9 @@
                     marker.setMap(map);
                     var information = new google.maps.InfoWindow({
                         content: `<div>
-                        <img
-                            src="https://awsimages.detik.net.id/community/media/visual/2018/11/30/c668919c-a1e7-4f89-a06c-d9627861d5a3_169.jpeg?w=700&q=90"
-                            alt=""
-                            srcset=""
-                            style="width: 100px; height: 100px"
-                        />
                         <p class="text-danger">${el.nama_wilayah}</p>
                         <p class="text-danger">${el.jenis_rawan_bencana}</p>
+                        <strong class="text-danger">${el.level_rawan_bencana}</strong>
                         </div>`
                     });
 
@@ -250,8 +246,7 @@
                 });
             })
         }
-
         initMap();
     </script>
-        <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;">
+        <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="gambar Tidak ditemukan" style="width: 100%;">
 @endsection
