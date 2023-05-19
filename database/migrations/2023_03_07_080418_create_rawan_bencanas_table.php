@@ -20,7 +20,7 @@ class CreateRawanBencanasTable extends Migration
             $table->float('koordinat_longitude', 15, 10);
 
             $table->string('jenis_rawan_bencana');
-            $table->enum('level_rawan_bencana', ['level 1', 'level 2', 'level 3', 'level 4']);
+            $table->enum('level_rawan_bencana', ['Sedang','Rendah','Tinggi']);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

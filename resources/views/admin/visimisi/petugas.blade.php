@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pengurus')
+@section('title', 'Struktur Organisasi')
 
 @section('content')
     <!-- Page-header start -->
@@ -8,10 +8,12 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
+                    <i class="fa fa-sitemap bg-c-green"></i>
+
+
                     <div class="d-inline">
-                        <h4>Pengurus</h4>
-                        <span>Pengurus BPBD </span>
+                        <h4>Struktur Organisasi</h4>
+                        <span>Struktur Organisasi BPBD </span>
                     </div>
                 </div>
             </div>
@@ -25,7 +27,7 @@
                         </li>
                         <li class="breadcrumb-item"><a href="#!">Pages</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Pengurus</a>
+                        <li class="breadcrumb-item"><a href="#!">Struktur Organisasi</a>
                         </li>
                     </ul>
                 </div>
@@ -42,7 +44,7 @@
                     <div class="card-header">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Tambah Pengurus
+                            Tambah Struktur Organisasi
                         </button>
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option">
@@ -92,8 +94,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <th scope="row" colspan="7" class="text-center">Visi & Misi
-                                                Tidak Ada Data Pengurus</th>
+                                            <th scope="row" colspan="7" class="text-center">
+                                                Tidak Ada Data Struktur Organisasi</th>
                                         </tr>
                                     @endforelse
                                 </tbody>

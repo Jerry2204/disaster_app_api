@@ -53,7 +53,7 @@
                     </li>
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('laporanku.public') }}">Laporanku</a>
                         </li>
                     @endauth
                     <li class="nav-item">
@@ -146,6 +146,7 @@
                 </div>
             </div>
         </div>
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
