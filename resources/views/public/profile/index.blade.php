@@ -10,7 +10,7 @@
                     <h3 class="text-center">Visi & Misi BPBD Kabupaten Toba</h3>
                 </div>
                 @if (count($visiMisi) > 0)
-                    <div class="row">
+                    <div class="row" style="padding: 30px; border:2px solid rgb(25, 21, 21); border-radius: 25px;">
                         <div class="col-md-6">
                             <h4>Visi</h4>
                             <p>Visi Pemerintah Kabupaten Toba untuk periode tahun 2021-2026 adalah:</p>
@@ -35,9 +35,9 @@
                 @endif
             </div>
     <div class="col-md-12 my-5">
-        <h3 class="text-center">STRUKTUR ORGANISASI BPBD KABUPATEN TOBA</h3>
+        <h3 class="text-center" style="padding:20px">STRUKTUR ORGANISASI BPBD KABUPATEN TOBA</h3>
     </div>
-    <div class="container">
+    <div class="container"  style="padding: 30px; border:2px solid rgb(25, 21, 21); border-radius: 25px; padding-bottom: 30px">
         <div class="row">
             @if (count($petugas) > 0)
                 <div class="col-md-4 offset-md-4 mb-4">
