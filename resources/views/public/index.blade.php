@@ -238,9 +238,9 @@
                     marker.setMap(map);
                     var information = new google.maps.InfoWindow({
                         content: `<div>
-                        <p class="text-danger">${el.nama_wilayah}</p>
-                        <p class="text-danger">${el.jenis_rawan_bencana}</p>
-                        <strong class="text-danger">${el.level_rawan_bencana}</strong>
+                        <h5 class="text-danger">${el.nama_wilayah}</h5>
+                        <p class="text-danger">Rawan Bencana ${el.jenis_rawan_bencana}</p>
+                        <strong class="text-danger">Berisiko ${el.level_rawan_bencana}</strong>
                         </div>`
                     });
 
