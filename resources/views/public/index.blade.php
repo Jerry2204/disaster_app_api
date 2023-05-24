@@ -105,7 +105,7 @@
                                                 <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: #FFC107; border-radius: 5px; text-align: center;">
                                                     <h6 style="position: relative;top: -4px; color:white;margin-left:8%">{{ $item->status_penanggulangan->status }}</h6>
                                                   </h1>
-                                                
+
                                             </div>
                                         @elseif ($item->status_penanggulangan->status == 'Selesai')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
@@ -126,6 +126,7 @@
                                             <b class=" fw-light mt-3">
                                                 {!! Str::words($item->keterangan, 10) !!}
                                             </b>
+                                            <br>
                                             <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
                                                 <a href="{{ route('report.detail', $item->id) }}"
                                                     style="text-decoration: none; color: white;">
