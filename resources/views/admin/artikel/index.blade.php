@@ -8,7 +8,7 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
+                    <i class="fa fa-book"style="background-color: #AB7967"></i>
                     <div class="d-inline">
                         <h4>Artikel</h4>
                         <span>Daftar Artikel</span>

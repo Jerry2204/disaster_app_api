@@ -8,7 +8,8 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
+                    <i class="ti-location-pin bg-c-pink"></i>
+          
                     <div class="d-inline">
                         <h4>Rawan Bencana</h4>
                         <span>Daftar Daerah Rawan Bencana</span>
@@ -158,17 +159,16 @@
                             <div class="col-sm-10">
                                 <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control {{ $errors->has('level_rawan_bencana') ? 'form-control-danger' : '' }}">
                                     <option value="">Pilih Level Rawan Bencana</option>
-                                    <option value="level 1">Level 1</option>
-                                    <option value="level 2">Level 2</option>
-                                    <option value="level 3">Level 3</option>
-                                    <option value="level 4">Level 4</option>
+                                    <option value="Rendah">Rendah</option>
+                                    <option value="Sedang">Sedang</option>
+                                    <option value="Tinggi">Tinggi</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>

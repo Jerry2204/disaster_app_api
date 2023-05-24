@@ -73,8 +73,9 @@
                                         <p>{{ $item->name }}</p>
                                     </div>
                                     <img class="card-img-top damkar" src="{{ asset('kontak/' . $item->gambar) }}">
-                                    <button class="btn-custom-danger"> <i class="fa fa-phone"
-                                            style="font-size:35px;"></i>{{ $item->nomor }}<strong> </strong></button>
+                                    <a href="tel:{{ $item->nomor }}"><button class="btn-custom-danger"> <i class="fa fa-phone"
+                                        style="font-size:35px;"></i>{{ $item->nomor }}<strong> </strong></button></a>
+
                                 </div>
                             </div>
                         @endforeach

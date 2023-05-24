@@ -55,7 +55,11 @@ class LaporanBencanaController extends Controller
 
     public function indexAdmin()
     {
-        $laporanBencana = LaporanBencana::latest()->paginate(10);
+            $laporanBencana = DB::table('laporan_bencanas')
+            ->select('laporan_bencanas.*', 'users.nomor_telepon','laporan_bencanas.*', 'status_penanggulangans.status')
+            ->join('users', 'users.id', '=', 'laporan_bencanas.user_id')
+            ->join('status_penanggulangans', 'status_penanggulangan_id', '=', 'laporan_bencanas.status_penanggulangan_id')
+            ->paginate(10);
 
         return view('admin.laporan_bencana.index', compact('laporanBencana'));
     }
@@ -464,7 +468,7 @@ $count_grafik = korban::select(
         if ($bencana) {
             $status_penanggulangan->update([
                 'petugas' => $request->petugas,
-                'status' => 'selesai',
+                'status' => 'Selesai',
                 'keterangan' => $request->keterangan,
                 'tindakan' => $request->tindakan
             ]);

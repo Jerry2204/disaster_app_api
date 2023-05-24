@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'username',
+        'nomor_telepon',
         'password',
         'role'
     ];
@@ -43,4 +44,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the validation rules for the model.
+     *
+     * @param int|null $id
+     * @return array
+     */
+    public static function rules($id = null)
+    {
+        return [
+            'email' => 'required|email|unique:users,email,' . $id,
+            'nomor_telepon' => 'required|unique:users,nomor_telepon,' . $id,
+            // Add other validation rules...
+        ];
+    }
 }

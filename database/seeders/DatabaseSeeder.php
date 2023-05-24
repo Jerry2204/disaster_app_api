@@ -18,12 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             PeringatanDiniSeeder::class,
-            ArtikelSeeder::class
+            ArtikelSeeder::class,
+            RawanBencanaSeeder::class
             // StatusPenanggulanganSeeder::class,
             // KorbanSeeder::class
         ]);
 
-        RawanBencana::factory(30)->create();
+        // RawanBencana::factory(30)->create();
         // LaporanBencana::factory(30)->create();
     }
 }

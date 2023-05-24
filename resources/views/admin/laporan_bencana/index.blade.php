@@ -8,7 +8,8 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
+                    <i class="fa fa-line-chart bg-c-pink"></i>
+
                     <div class="d-inline">
                         <h4>Laporan Bencana</h4>
                         <span>Daftar Laporan Bencana</span>
@@ -63,6 +64,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Jenis Bencana</th>
+                                        <th>Nomor Telepon</th>
                                         <th>lokasi</th>
                                         <th>Keterangan</th>
                                         <th>Status Bencana</th>
@@ -75,24 +77,31 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->jenis_bencana }}</td>
-                                            <td>{{ $item->lokasi }}</td>
+                                            <td>
+                                                  <a href="tel:{{ $item->nomor_telepon }}">
+                                                    {{-- <i class="fa fa-phone"
+                                                    style="font-size:18px;color:red"></i> --}}
+                                                    {{ $item->nomor_telepon }}
+                                                </a>
+                                              </td>
+                                             <td>{{ $item->lokasi }}</td>
                                             <td>{{ $item->keterangan }}</td>
                                             <td>{{ $item->status_bencana }}</td>
                                             <td>
-                                                @if ($item->status_penanggulangan->status == 'menunggu')
-                                                <span class="badge badge-danger">{{ $item->status_penanggulangan->status }}</span>
-                                                @elseif ($item->status_penanggulangan->status == 'diterima')
-                                                <span class="badge badge-info">{{ $item->status_penanggulangan->status }}</span>
-                                                @elseif ($item->status_penanggulangan->status == 'proses')
-                                                <span class="badge badge-warning">{{ $item->status_penanggulangan->status }}</span>
-                                                @elseif ($item->status_penanggulangan->status == 'selesai')
-                                                <span class="badge badge-success">{{ $item->status_penanggulangan->status }}</span>
+                                                @if ($item->status == 'Menunggu')
+                                                <span class="badge badge-danger">{{ $item->status }}</span>
+                                                @elseif ($item->status == 'Diterima')
+                                                <span class="badge badge-info">{{ $item->status }}</span>
+                                                @elseif ($item->status == 'Proses')
+                                                <span class="badge badge-warning">{{ $item->status }}</span>
+                                                @elseif ($item->status == 'Selesai')
+                                                <span class="badge badge-success">{{ $item->status }}</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
-                                                @if (auth()->user()->role == 'tanggap_darurat')
-                                                    <button type="button" class="btn btn-sm btn-warning"
+                                                @if (auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'admin')
+                                                <button type="button" class="btn btn-sm btn-warning"
                                                         id="modalEdit-{{ $item->id }}" data-toggle="modal"
                                                         data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
                                                         data-lokasi="{{ $item->lokasi }}"
@@ -112,8 +121,8 @@
                                                     @else
                                                         <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
                                                     @endif
-                                                @elseif (auth()->user()->role == 'pasca_bencana')
-                                                <a href="{{ route('dampak_bencana.edit', $item->id) }}" class="btn btn-sm btn-primary">
+                                                    @elseif (auth()->user()->role == 'pasca_bencana')
+                                                   <a href="{{ route('dampak_bencana.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                                     Tambah Dampak Bencana
                                                 </a>
                                                 @endif

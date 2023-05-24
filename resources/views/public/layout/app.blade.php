@@ -23,12 +23,13 @@
 </head>
 
 <body>
+    <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
         <div class="container">
             <a class="navbar-brand" href="{{ route('public') }}">
-                <div style="display: flex; align-items: center;">
-                    <div class="logo">
-                        <img src="{{ asset('image/logo.png') }}" style="width: 60px; height: 60px;">
+                <div class="d-flex align-items-center">
+                    <div class="logo" class="d-sm-none d-md-block">
+                        <img src="{{ asset('image/logo.png') }}" style="width: 45px; height: 45px;">
                     </div>
 
                     <div class="text m ms-3 text-start">
@@ -47,9 +48,11 @@
                         <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     @auth
+                    @if (auth()->user()->role == 'user')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('laporanku.public') }}">Laporanku</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('laporanku.public') }}">Laporanku</a>
                         </li>
+                        @endif
                     @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
@@ -106,7 +109,7 @@
             <div class="row">
                 <div class="col-md-2 text-center">
                     <img class="logo" src="{{ asset('image/logo.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 90px;">
+                        alt="Logo Tidak ditemukan"style="width: 85px; height: 90px;">
                     <h6>BPBD TOBA</h6>
 
                 </div>
@@ -124,7 +127,7 @@
                         <li><a href="#">Pendaftaran</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <h6>Kontak</h6>
                     <ul class="list-unstyled">
                         <li><a href="#">No Telepon : 0632 21 709</a></li>
@@ -132,15 +135,16 @@
                         <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 text-center">
 
                     <img class="logo" src="{{ asset('image/toba.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 85px; height: 120px;">
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 120px;">
                         <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 80px; height: 90px;">
+                        style="width: 75px; height: 90px;">
                 </div>
             </div>
         </div>
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
