@@ -23,6 +23,7 @@ use App\Notifications\DisasterReported;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
+use Image;
 use Illuminate\Support\Facades\DB;
 
 class LaporanBencanaController extends Controller
@@ -189,7 +190,7 @@ $count_grafik = korban::select(
 
         $nama_file = time()."_".$file->getClientOriginalName();
 
-        $file->move("laporan", $nama_file);
+        $img = Image::make($file)->resize(800, 800)->save('laporan/' . $nama_file, 0);
 
         $laporanBencana = LaporanBencana::create([
             'jenis_bencana' => $request->jenis_bencana,
@@ -216,7 +217,7 @@ $count_grafik = korban::select(
                 ->subject('Laporan Terjadi bencana dari ' . $authUser['name']);
         });
 
-        return back()->with('sukses', 'Laporan Bencana berhasil ditambahkan');
+        return redirect()->route('laporanku.public')->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }
 
     public function addAdmin(StoreLaporanBencanaRequest $request)

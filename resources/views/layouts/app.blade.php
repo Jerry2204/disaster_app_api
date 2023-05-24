@@ -284,7 +284,7 @@
                     confirmButtonText: 'Lihat Laporan',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = `http://localhost:8000/laporan/bencana/${data.name.id}`;
+                        window.location.href = `{{ env('APP_URL') }}/laporan/bencana/${data.name.id}`;
                     }
                 })
             });

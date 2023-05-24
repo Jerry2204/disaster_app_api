@@ -23,12 +23,13 @@
 </head>
 
 <body>
+    <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
         <div class="container">
             <a class="navbar-brand" href="{{ route('public') }}">
-                <div style="display: flex; align-items: center;">
-                    <div class="logo">
-                        <img src="{{ asset('image/logo.png') }}" style="width: 60px; height: 60px;">
+                <div class="d-flex align-items-center">
+                    <div class="logo" class="d-sm-none d-md-block">
+                        <img src="{{ asset('image/logo.png') }}" style="width: 45px; height: 45px;">
                     </div>
 
                     <div class="text m ms-3 text-start">
@@ -153,6 +154,40 @@
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
 
+    <script>
+        @if (!empty(Session::get('sukses')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('sukses') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
+    <script>
+        @if (!empty(Session::get('gagal')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ session('gagal') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
 
     <script>
         $(".logout").click(function(e) {
