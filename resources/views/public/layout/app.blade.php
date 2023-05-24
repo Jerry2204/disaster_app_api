@@ -47,9 +47,11 @@
                         <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     @auth
+                    @if (auth()->user()->role == 'user')
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('laporanku.public') }}">Laporanku</a>
                         </li>
+                        @endif
                     @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
@@ -124,7 +126,7 @@
                         <li><a href="#">Pendaftaran</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <h6>Kontak</h6>
                     <ul class="list-unstyled">
                         <li><a href="#">No Telepon : 0632 21 709</a></li>
@@ -132,12 +134,12 @@
                         <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 text-center">
 
                     <img class="logo" src="{{ asset('image/toba.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 85px; height: 120px;">
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 120px;">
                         <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 80px; height: 90px;">
+                        style="width: 75px; height: 90px;">
                 </div>
             </div>
         </div>

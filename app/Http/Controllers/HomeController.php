@@ -16,10 +16,12 @@ class HomeController extends Controller
     {
         $laporan = LaporanBencana::count();
         $laporan_terkonfirmasi = LaporanBencana::where('confirmed', true)->count();
-        $laporan_diproses = StatusPenanggulangan::where('status', 'proses')->count();
-        $laporan_selesai = StatusPenanggulangan::where('status', 'selesai')->count();
+        $laporan_diproses = StatusPenanggulangan::where('status', 'Proses')->count();
+        $laporan_selesai = StatusPenanggulangan::where('status', 'Selesai')->count();
+        // $latest = LaporanBencana::get();
+        $latest = LaporanBencana::latest()->get();
 
-        return view('admin.index', compact('laporan', 'laporan_diproses', 'laporan_terkonfirmasi', 'laporan_selesai'));
+        return view('admin.index', compact('laporan', 'laporan_diproses', 'laporan_terkonfirmasi', 'laporan_selesai','latest'));
     }
 
     public function profile_bpbd()
