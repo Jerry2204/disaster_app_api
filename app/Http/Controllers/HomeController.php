@@ -23,6 +23,7 @@ class HomeController extends Controller
 
         return view('admin.index', compact('laporan', 'laporan_diproses', 'laporan_terkonfirmasi', 'laporan_selesai','latest'));
     }
+    
 
     public function profile_bpbd()
     {
