@@ -1,7 +1,8 @@
 @extends('public.layout.app')
 
 @section('content')
-    <div class="hero position-relative d-flex justify-content-center align-items-center"><img
+    <div class="hero position-relative d-flex justify-content-center align-items-center">
+        <img
             src="{{ asset('image/home.jpeg') }}" class="overflow-hidden hero-image" alt="">
         <div class="container position-relative hero-container">
             <div class="row">

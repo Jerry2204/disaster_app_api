@@ -73,7 +73,7 @@
                     <div class="login-card card-block auth-body mr-auto ml-auto">
                         <form class="md-float-material" action="{{ route('login') }}" method="POST">
                             @csrf
-                          
+
                             <div class="text-center">
                                 <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png" style="width: 90px; height: 90px;">
                             </div>
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Username/Email"
+                                    <input type="text" name="email" class="form-control" placeholder="Username/Email"
                                         style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
@@ -122,6 +122,7 @@
                                 </div>
                             </div>
                         </form>
+                        
 
                         <!-- end of form -->
                     </div>
