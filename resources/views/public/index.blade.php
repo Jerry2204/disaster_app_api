@@ -56,7 +56,7 @@
                     <div class="bg- w-100 text-white text-start p-3 box-weather shadow ">
                         <h3>Balige</h3>
                         <div class="d-flex overflow-auto shadow">
-                            @foreach ($cuaca as $item)
+                            @forelse ($cuaca as $item)
                                 <div class="mt-5 ms-3 border px-3 cuaca-box " key={index}>
                                     @if ($item['name'] == 'Berawan')
                                         <img src="{{ asset('image/berawan.png') }}" alt="" />
@@ -71,7 +71,11 @@
                                     </p>
                                     <p>{{ $item['name'] }}</p>
                                 </div>
-                            @endforeach
+                                @empty
+                                <div class="mt-5 ms-3 border px-3 cuaca-box">
+                                    <h5>Data Tidak Ada</h5>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
