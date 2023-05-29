@@ -15,7 +15,8 @@
                 <h4>{{ $laporan }}</h4>
                 <div>
                     <span class="f-left m-t-10 text-muted">
-                        <i class="text-c-red f-16 icofont icofont-tag m-r-10"></i>Diupdate 2 jam lalu
+                        {{-- <i class="text-c-red f-16 icofont icofont-tag m-r-10"></i>
+                        Diupdate 2 jam lalu --}}
                     </span>
                 </div>
             </div>
@@ -31,7 +32,7 @@
                 <h4>{{ $laporan_terkonfirmasi }}</h4>
                 <div>
                     <span class="f-left m-t-10 text-muted">
-                        <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Last 24 hours
+                        {{-- <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Last 24 hours --}}
                     </span>
                 </div>
             </div>
@@ -46,7 +47,7 @@
                 <h4>{{ $laporan_diproses }}</h4>
                 <div>
                     <span class="f-left m-t-10 text-muted">
-                        <i class="text-c-blue f-16 icofont icofont-warning m-r-10"></i>Get more space
+                        {{-- <i class="text-c-blue f-16 icofont icofont-warning m-r-10"></i>Get more space --}}
                     </span>
                 </div>
             </div>
@@ -64,7 +65,7 @@
                 <h4>{{ $laporan_selesai }}</h4>
                 <div>
                     <span class="f-left m-t-10 text-muted">
-                        <i class="text-c-yellow f-16 icofont icofont-refresh m-r-10"></i>Just update
+                        {{-- <i class="text-c-yellow f-16 icofont icofont-refresh m-r-10"></i>Just update --}}
                     </span>
                 </div>
             </div>

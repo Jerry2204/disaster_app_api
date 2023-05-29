@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;">
+    {{-- <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;"> --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
         <div class="container">
             <a class="navbar-brand" href="{{ route('public') }}">
@@ -83,12 +83,19 @@
                                         @csrf
                                         <button class="dropdown-item">Keluar <span></span><i class="fa fa-sign-out"
                                                 aria-hidden="true"></i></button>
+
                                     </form>
                                 </li>
+                                <li>
+                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana'|| auth()->user()->role == 'pra_bencana')
+                                <li>
+                                    <button class="dropdown-item"><a  href="{{ route('home') }}" style="text-decoration: none; color:black;">Admin</a> <span></span></button>
+                                   </li>
+                                @endif
+                                </li>
                             </ul>
-
-
                         </li>
+
                     @endauth
                     @guest
                         <li class="nav-item">

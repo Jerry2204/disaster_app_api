@@ -9,7 +9,7 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <i class="ti-location-pin bg-c-pink"></i>
-          
+
                     <div class="d-inline">
                         <h4>Rawan Bencana</h4>
                         <span>Daftar Daerah Rawan Bencana</span>
@@ -223,11 +223,10 @@
                             <div class="col-sm-10">
                                 <select name="level_rawan_bencana" id="level_rawan_bencana" class="form-control">
                                     <option value="">Pilih Level Rawan Bencana</option>
-                                    <option value="level 1">Level 1</option>
-                                    <option value="level 2">Level 2</option>
-                                    <option value="level 3">Level 3</option>
-                                    <option value="level 4">Level 4</option>
-                                </select>
+                                    <option value="Rendah">Rendah</option>
+                                    <option value="Sedang">Sedang</option>
+                                    <option value="Tinggi">Tinggi</option>
+                                    </select>
                             </div>
                         </div>
                     </div>
