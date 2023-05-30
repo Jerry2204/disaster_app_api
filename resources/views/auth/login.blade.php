@@ -64,7 +64,7 @@
     </div>
     <!-- Pre-loader end -->
 
-    <section class="text-center " style="background-color: #8A9CB7; height: 100%">
+    <section class="text-center " style="background-color: #8A9CB7; height: 100vh">
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
