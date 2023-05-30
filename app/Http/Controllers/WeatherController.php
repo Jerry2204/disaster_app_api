@@ -17,7 +17,7 @@ class WeatherController extends Controller
         try {
             $client = new Client();
 
-            $response = $client->get('https://cuaca-gempa-rest-api.vercel.app/weather/sumatera-utara/balige');
+            $response = $client->get('https://cuaca-gempa-rest-api.vercel.app/weather/sumatera-barat/Batusangkar');
 
             $data = json_decode($response->getBody(), true);
 

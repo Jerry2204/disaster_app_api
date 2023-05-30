@@ -203,6 +203,7 @@
         let map;
 
         const tobaCoordinates = @json($rawanBencana);
+        console.log(tobaCoordinates);
 
         async function initMap() {
             //@ts-ignore
@@ -243,9 +244,9 @@
                     marker.setMap(map);
                     var information = new google.maps.InfoWindow({
                         content: `<div>
-                        <h5 class="text-danger">${el.nama_wilayah}</h5>
+                        <h4 class="text-dark">${el.nama_wilayah}</h4>
                         <p class="text-danger">Rawan Bencana ${el.jenis_rawan_bencana}</p>
-                        <strong class="text-danger">Berisiko ${el.level_rawan_bencana}</strong>
+                        <h6 class="${el.level_rawan_bencana == 'Tinggi' ? 'text-danger' : el.level_rawan_bencana == 'Sedang' ? 'text-warning' : 'text-info' }">Berisiko ${el.level_rawan_bencana}</h6>
                         </div>`
                     });
 
