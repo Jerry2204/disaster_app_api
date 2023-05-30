@@ -68,7 +68,7 @@
                 </li>
                 @endif
 
-            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana'|| auth()->user()->role == 'pra_bencana')
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana' || auth()->user()->role == 'pra_bencana')
                 <li>
                     <a href="{{ route('laporan_bencana.index') }}">
                         <span class="pcoded-micon"><i class="fa fa-line-chart"></i><b>D</b></span>
@@ -77,14 +77,7 @@
                     </a>
                 </li>
                 @endif
-            @if (auth()->user()->role == 'admin')
-            <li>
-                <a href="{{ route('artikel.index') }}">
-                    <span class="pcoded-micon"><i class="fa fa-book"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Artikel</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
+            @if (auth()->user()->role == 'admin' )
             <li>
                 <a href="{{ route('users.index') }}">
                     <span class="pcoded-micon"><i class="fa fa-users"></i><b>D</b></span>
@@ -105,6 +98,15 @@
                 <a href="{{ route('petugas.index') }}">
                     <span class="pcoded-micon"><i class="fa fa-sitemap"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Struktur Organisasi</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana'|| auth()->user()->role == 'pra_bencana')
+            <li>
+                <a href="{{ route('artikel.index') }}">
+                    <span class="pcoded-micon"><i class="fa fa-book"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Artikel</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>

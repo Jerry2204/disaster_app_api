@@ -58,7 +58,7 @@
                     <div class="bg- w-100 text-white text-start p-3 box-weather shadow ">
                         <h3>Balige</h3>
                         <div class="d-flex overflow-auto shadow">
-                            @foreach ($cuaca as $item)
+                            @forelse ($cuaca as $item)
                                 <div class="mt-5 ms-3 border px-3 cuaca-box " key={index}>
                                     @if ($item['name'] == 'Berawan')
                                         <img src="{{ asset('image/berawan.png') }}" alt="" />
@@ -73,7 +73,11 @@
                                     </p>
                                     <p>{{ $item['name'] }}</p>
                                 </div>
-                            @endforeach
+                                @empty
+                                <div class="mt-5 ms-3 border px-3 cuaca-box">
+                                    <h5>Data Tidak Ada</h5>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -200,6 +204,7 @@
         let map;
 
         const tobaCoordinates = @json($rawanBencana);
+        console.log(tobaCoordinates);
 
         async function initMap() {
             //@ts-ignore
@@ -240,9 +245,9 @@
                     marker.setMap(map);
                     var information = new google.maps.InfoWindow({
                         content: `<div>
-                        <p class="text-danger">${el.nama_wilayah}</p>
-                        <p class="text-danger">${el.jenis_rawan_bencana}</p>
-                        <strong class="text-danger">${el.level_rawan_bencana}</strong>
+                        <h4 class="text-dark">${el.nama_wilayah}</h4>
+                        <p class="text-danger">Rawan Bencana ${el.jenis_rawan_bencana}</p>
+                        <h6 class="${el.level_rawan_bencana == 'Tinggi' ? 'text-danger' : el.level_rawan_bencana == 'Sedang' ? 'text-warning' : 'text-info' }">Berisiko ${el.level_rawan_bencana}</h6>
                         </div>`
                     });
 
