@@ -112,7 +112,7 @@ class UserController extends Controller
         if($request->password) {
             $request->validate([
                 'old_password' => 'required',
-                'password' => 'nullable|confirmed|min:12|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+                'password' => 'nullable|confirmed|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
             ]);
 
             if (Hash::check($request->old_password, $user->password)) {
@@ -120,7 +120,7 @@ class UserController extends Controller
                     'name' => 'required',
                     'username' => 'required',
                     'email' => 'required|email',
-                    'password' => 'nullable|confirmed|min:12|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                    'password' => 'nullable|confirmed|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
                 ]);
 
                 $updated = $user->update([

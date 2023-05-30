@@ -67,14 +67,14 @@
                 <div class="container">
                     <div class="row">
                         @foreach ($kontakDarurat as $item)
-                            <div class="col-md-4 container py-2">
-                                <div class="cards  container card" style="width: 20rem; height: 22rem;"><br>
+                            <div class="col-md-4 py-4">
+                                <div class="cards container card p-3" style="width: 20rem; "><br>
                                     <div class="card-title h5">
                                         <p>{{ $item->name }}</p>
                                     </div>
                                     <img class="card-img-top damkar" src="{{ asset('kontak/' . $item->gambar) }}">
-                                    <a href="tel:{{ $item->nomor }}"><button class="btn-custom-danger"> <i class="fa fa-phone"
-                                        style="font-size:35px;"></i>{{ $item->nomor }}<strong> </strong></button></a>
+                                    <a href="tel:{{ $item->nomor }}" class="btn btn-danger mt-2" style="background-color: #FA0000"> <i class="fa fa-phone me-2"
+                                        ></i>{{ $item->nomor }}</a>
 
                                 </div>
                             </div>

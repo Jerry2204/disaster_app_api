@@ -45,16 +45,16 @@
                     <div class="card-header">
                         <h5>{{ $laporanBencana->nama_bencana }}</h5>
                         <span>{{ $laporanBencana->jenis_bencana }}</span>
-                        @if (auth()->user()->role == 'tanggap_darurat')
-                        @if ($laporanBencana->status_penanggulangan->status == 'menunggu')
+                        @if (auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'admin')
+                        @if ($laporanBencana->status_penanggulangan->status == 'Menunggu')
                         <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}" class="btn btn-sm btn-success">
                             Konfirmasi
                         </a>
-                        @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
+                        @elseif ($laporanBencana->status_penanggulangan->status == 'Proses')
                         <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
                             Selesai
                         </button>
-                        @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
+                        @elseif ($laporanBencana->status_penanggulangan->status == 'Diterima')
                         <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">
                             Proses Laporan
                         </button>
@@ -81,16 +81,16 @@
                                     Status Penanggulangan:
                                 </p>
 
-                                @if ($laporanBencana->status_penanggulangan->status == 'selesai')
+                                @if ($laporanBencana->status_penanggulangan->status == 'Selesai')
                                     <div class="badge badge-success">
                                         {{ $laporanBencana->status_penanggulangan->status }}</div>
-                                @elseif ($laporanBencana->status_penanggulangan->status == 'menunggu')
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'Menunggu')
                                     <div class="badge badge-danger">{{ $laporanBencana->status_penanggulangan->status }}
                                     </div>
-                                @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'Diterima')
                                     <div class="badge badge-info">{{ $laporanBencana->status_penanggulangan->status }}
                                     </div>
-                                @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'Proses')
                                     <div class="badge badge-warning">
                                         {{ $laporanBencana->status_penanggulangan->status }}</div>
                                 @endif

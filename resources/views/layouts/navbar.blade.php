@@ -76,29 +76,29 @@
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
-                        <li>
+                        {{-- <li>
                             <a href="#!">
                                 <i class="ti-settings"></i> Settings
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('users.profile.index') }}">
                                 <i class="ti-user"></i> Profile
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="#">
                                 <i class="ti-email"></i> My Messages
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="#">
                                 <i class="ti-lock"></i> Lock Screen
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="#" class="logout">
-                                <i class="ti-layout-sidebar-left"></i> Logout
+                                <i class="ti-layout-sidebar-left"></i> Keluar
                             </a>
                         </li>
                     </ul>

@@ -39,25 +39,19 @@
             </li>
             @if (auth()->user()->role == 'admin' || auth()->user()->role == 'pra_bencana')
                 <li>
+                    <a href="{{ route('peringatan_dini.index') }}">
+                        <span class="pcoded-micon"><i class="fa fa-warning"></i><b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Peringatan Dini</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('rawan_bencana.index') }}">
                         <span class="pcoded-micon"><i class="ti-location-pin"></i><b>D</b></span>
-                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Rawan Bencana</span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Daerah Rawan Bencana</span>
                         <span class="pcoded-mcaret"></span>
                     </a>
                 </li>
-            @endif
-            @if (auth()->user()->role == 'admin' ||
-                    auth()->user()->role == 'tanggap_darurat' ||
-                    auth()->user()->role == 'pasca_bencana')
-                <li>
-                    <a href="{{ route('laporan_bencana.index') }}">
-                        <span class="pcoded-micon"><i class="fa fa-line-chart"></i><b>D</b></span>
-                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Laporan</span>
-                        <span class="pcoded-mcaret"></span>
-                    </a>
-                </li>
-            @endif
-            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'pra_bencana')
                 <li>
                     <a href="{{ route('mitigasi_bencana.index') }}">
                         <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>D</b></span>
@@ -65,14 +59,25 @@
                         <span class="pcoded-mcaret"></span>
                     </a>
                 </li>
-            @endif
-            <li>
-                <a href="{{ route('peringatan_dini.index') }}">
-                    <span class="pcoded-micon"><i class="fa fa-warning"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Peringatan Dini</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('kontak.index') }}">
+                        <span class="pcoded-micon"><i class="fa fa-phone"></i></<b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Kontak Darurat</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+                @endif
+
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana'|| auth()->user()->role == 'pra_bencana')
+                <li>
+                    <a href="{{ route('laporan_bencana.index') }}">
+                        <span class="pcoded-micon"><i class="fa fa-line-chart"></i><b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Laporan</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+                @endif
+            @if (auth()->user()->role == 'admin')
             <li>
                 <a href="{{ route('artikel.index') }}">
                     <span class="pcoded-micon"><i class="fa fa-book"></i><b>D</b></span>
@@ -87,13 +92,6 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('kontak.index') }}">
-                    <span class="pcoded-micon"><i class="fa fa-phone"></i></<b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Kontak Darurat</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Profil</div>
             <li>
                 <a href="{{ route('profile.index') }}">
@@ -102,6 +100,7 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+
             <li>
                 <a href="{{ route('petugas.index') }}">
                     <span class="pcoded-micon"><i class="fa fa-sitemap"></i><b>D</b></span>
@@ -110,6 +109,7 @@
                 </a>
             </li>
         </ul>
+        @endif
         <br>
         <div class="row">
             <div class="col-lg-12">

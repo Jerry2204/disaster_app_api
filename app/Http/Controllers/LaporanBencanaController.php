@@ -468,7 +468,7 @@ $count_grafik = korban::select(
         if ($bencana) {
             $status_penanggulangan->update([
                 'petugas' => $request->petugas,
-                'status' => 'selesai',
+                'status' => 'Selesai',
                 'keterangan' => $request->keterangan,
                 'tindakan' => $request->tindakan
             ]);

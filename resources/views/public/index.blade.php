@@ -2,7 +2,8 @@
 <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%; background-repeat: repeat-x;">
 
 @section('content')
-    <div class="hero position-relative d-flex justify-content-center align-items-center"><img
+    <div class="hero position-relative d-flex justify-content-center align-items-center">
+        <img
             src="{{ asset('image/home.jpeg') }}" class="overflow-hidden hero-image" alt="">
         <div class="container position-relative hero-container">
             <div class="row">
@@ -93,25 +94,29 @@
                                         <img src="{{ asset('laporan/' . $item->gambar) }}" alt="{{ $item->gambar }}"
                                             style="border-radius: 5px 5px 0px 0px;">
 
-                                        @if ($item->status_penanggulangan->status == 'menunggu')
+                                        @if ($item->status_penanggulangan->status == 'Menunggu')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
                                                 <p class="badge bg-danger">{{ $item->status_penanggulangan->status }}
                                                 </p>
                                             </div>
-                                        @elseif ($item->status_penanggulangan->status == 'diterima')
+                                        @elseif ($item->status_penanggulangan->status == 'Diterima')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
-                                                <p class="badge bg-info">{{ $item->status_penanggulangan->status }}</p>
+                                                <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: #0DCAF0; border-radius: 5px; text-align: center;">
+                                                    <h6 style="position: relative;top: -3px; color:white;margin-left:7%">{{ $item->status_penanggulangan->status }}</h6>
+                                                  </h1>
                                             </div>
-                                        @elseif ($item->status_penanggulangan->status == 'proses')
+                                        @elseif ($item->status_penanggulangan->status == 'Proses')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
-                                                <p class="badge bg-warning">{{ $item->status_penanggulangan->status }}
-                                                </p>
+                                                <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: #FFC107; border-radius: 5px; text-align: center;">
+                                                    <h6 style="position: relative;top: -4px; color:white;margin-left:8%">{{ $item->status_penanggulangan->status }}</h6>
+                                                  </h1>
+
                                             </div>
-                                        @elseif ($item->status_penanggulangan->status == 'selesai')
+                                        @elseif ($item->status_penanggulangan->status == 'Selesai')
                                             <div class="d-inline ms-3" style="margin-top: -30px;">
                                                 <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: rgba(58, 196, 48, 0.88); border-radius: 5px; text-align: center;">
-                                                    {{ $item->status_penanggulangan->status }}
-                                                  </h4>
+                                                    <h6 style="position: relative;top: -4px; color:white;margin-left:8%">{{ $item->status_penanggulangan->status }}</h6>
+                                                  </h1>
                                             </div>
                                             @endif
                                             <br>
@@ -126,6 +131,7 @@
                                             <b class=" fw-light mt-3">
                                                 {!! Str::words($item->keterangan, 10) !!}
                                             </b>
+                                            <br>
                                             <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
                                                 <a href="{{ route('report.detail', $item->id) }}"
                                                     style="text-decoration: none; color: white;">

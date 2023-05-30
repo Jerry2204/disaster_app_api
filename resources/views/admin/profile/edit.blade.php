@@ -64,11 +64,11 @@
                         </div>
                         <div
                             class="form-group row {{ session()->has('old_password') ? 'has-danger' : '' }} {{ $errors->has('old_password') ? 'has-danger' : '' }}">
-                            <label class="col-sm-2 col-form-label" for="old_password">Old Password</label>
+                            <label class="col-sm-2 col-form-label" for="old_password"> Password Lama</label>
                             <div class="col-sm-10">
                                 <input type="password" id="old_password" name="old_password"
                                     class="form-control {{ session()->has('old_password') ? 'form-control-danger' : '' }} {{ $errors->has('old_password') ? 'form-control-danger' : '' }}"
-                                    placeholder="Old Password" value="">
+                                    placeholder="Masukkan Password Lama Anda" value="">
                                 @if (session()->has('old_password'))
                                     <div class="col-form-label">
                                         {{ session('old_password') }}
@@ -92,14 +92,14 @@
                                         @foreach ($errors->all() as $error)
                                             {{ $error }} <br>
                                         @endforeach
-                                        Password format : Minimum 12 characters, at least one uppercase letter, one
-                                        lowercase letter, one number, one special character
+                                        Format password: Minimal 12 karakter, setidaknya satu huruf kapital, satu huruf
+                                        kecil, satu angka, satu karakter spesial.
                                     </div>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group row {{ $errors->has('password_confirmation') ? 'has-danger' : '' }}">
-                            <label class="col-sm-2 col-form-label" for="password_confirmation">Confirm Password</label>
+                            <label class="col-sm-2 col-form-label" for="password_confirmation">Konfirmasi Password</label>
                             <div class="col-sm-10">
                                 <input type="password" id="password_confirmation" name="password_confirmation"
                                     class="form-control {{ $errors->has('password_confirmation') ? 'form-control-danger' : '' }}"

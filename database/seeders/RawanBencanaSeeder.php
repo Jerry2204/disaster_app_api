@@ -324,8 +324,8 @@ class RawanBencanaSeeder extends Seeder
             ],
             [
                 'nama_wilayah' => 'Sibarani Nasampulu',
-                'koordinat_lattitude' => '2.2852752963916325',
-                'koordinat_longitude' => '99.35512387813682',
+                'koordinat_lattitude' => '2.3462195699226314',
+                'koordinat_longitude' => '99.12224544607697',
                 'jenis_rawan_bencana' => 'Puting beliung ',
                 'level_rawan_bencana' => 'Sedang',
                 'user_id' => User::all()->random()->id

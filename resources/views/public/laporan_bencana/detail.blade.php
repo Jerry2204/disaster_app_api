@@ -67,6 +67,8 @@
                             </p>
                             <p class="mb-0">
                                 Status Bencana:
+                                {{-- {{ $laporanBencana->status_penanggulangan->status}} --}}
+
                             </p>
                             <p>
                                 {{ $laporanBencana->status_bencana }}
@@ -134,9 +136,7 @@
                                     <p class="mb-0 mt-3">
                                         Luka Berat:
                                     </p>
-                                    <b>
-                                        {{ $laporanBencana->korban->luka_berat }}
-                                    </b>
+
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-0 mt-3">
@@ -150,10 +150,35 @@
                                     </p>
                                     <b>
                                         {{ $laporanBencana->korban->hilang }} <br>
-                                        {{ $laporanBencana->upaya }}
+
                                     </b>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="laporan-lengkap mt-4">
+                    <div class="row p-5">
+                        <div class="col-md-6">
+                            <h6>Upaya</h6>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th> {{ $laporanBencana->status_penanggulangan->tindakan }}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($laporanBencana->kerusakan as $item)
+                                                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="3">Upaya Tidak Ada</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

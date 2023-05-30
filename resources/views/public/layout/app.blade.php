@@ -23,12 +23,16 @@
 </head>
 
 <body>
+    {{-- <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;"> --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
         <div class="container">
             <a class="navbar-brand" href="{{ route('public') }}">
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
                         <img src="{{ asset('image/logo.png') }}" style="width: 50px; height: 50px;">
+                <div class="d-flex align-items-center">
+                    <div class="logo" class="d-sm-none d-md-block">
+                        <img src="{{ asset('image/logo.png') }}" style="width: 45px; height: 45px;">
                     </div>
 
                     {{-- <style>
@@ -52,9 +56,11 @@
                         <a class="nav-link" aria-current="page" href="{{ route('public') }}">Beranda</a>
                     </li>
                     @auth
+                    @if (auth()->user()->role == 'user')
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('laporanku.public') }}">Laporanku</a>
                         </li>
+                        @endif
                     @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
@@ -85,12 +91,19 @@
                                         @csrf
                                         <button class="dropdown-item">Keluar <span></span><i class="fa fa-sign-out"
                                                 aria-hidden="true"></i></button>
+
                                     </form>
                                 </li>
+                                <li>
+                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'pasca_bencana'|| auth()->user()->role == 'pra_bencana')
+                                <li>
+                                    <button class="dropdown-item"><a  href="{{ route('home') }}" style="text-decoration: none; color:black;">Admin</a> <span></span></button>
+                                   </li>
+                                @endif
+                                </li>
                             </ul>
-
-
                         </li>
+
                     @endauth
                     @guest
                         <li class="nav-item">
@@ -129,7 +142,7 @@
                         <li><a href="#">Pendaftaran</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <h6>Kontak</h6>
                     <ul class="list-unstyled">
                         <li><a href="#">No Telepon : 0632 21 709</a></li>
@@ -137,12 +150,13 @@
                         <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 text-center">
 
                     <img class="logo" src="{{ asset('image/toba.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 100px; height: 100px;">
+                        alt="Logo Tidak ditemukan"style="width: 80px; height: 120px;">
                         <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 80px; height: 90px;">
+                        style="width: 75px; height: 90px;">
                 </div>
             </div>
         </div>
