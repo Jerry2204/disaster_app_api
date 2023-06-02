@@ -30,11 +30,6 @@
                 <div style="display: flex; align-items: center;">
                     <div class="logo">
                         <img src="{{ asset('image/logo.png') }}" style="width: 50px; height: 50px;">
-                <div class="d-flex align-items-center">
-                    <div class="logo" class="d-sm-none d-md-block">
-                        <img src="{{ asset('image/logo.png') }}" style="width: 45px; height: 45px;">
-                    </div>
-
                     {{-- <style>
                         .text p{
                             margin-left: 10px
