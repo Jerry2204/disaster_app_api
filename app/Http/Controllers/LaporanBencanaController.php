@@ -191,6 +191,9 @@ $count_grafik = korban::select(
         $nama_file = time()."_".$file->getClientOriginalName();
 
         $file->move("laporan", $nama_file);
+        $file->move("laporan/", $nama_file);
+
+        // $img = Image::make($file)->resize(800, 800)->save('laporan/' . $nama_file, 0);
 
         $laporanBencana = LaporanBencana::create([
             'jenis_bencana' => $request->jenis_bencana,

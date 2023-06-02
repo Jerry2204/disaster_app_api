@@ -8,7 +8,8 @@
         <div class="row">
             <div class="col-md-7 order-md-1">
                 <br>
-                <h5 class="ml-5">Artikel</h5>
+                <h5>Artikel</h5>
+                <div class="sharethis-inline-share-buttons text-start"></div>
                 @foreach ($article as $article_item)
                     <div class="AnnouncementPage-announcement-info">
                         <div>
@@ -20,32 +21,6 @@
                             <span>
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                                 {{ \Carbon\Carbon::parse($article_item->created_at)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
-                            </span>
-                            <span>
-                                <button style="margin-left:75% margin-top:71%" type="button" class="btn btn-primary "
-                                    data-toggle="modal" data-target="#shareModal">
-                                    <i class="fa fa-share-alt" aria-hidden="true"></i> Bagikan Berita
-                                </button>
-
-                            </span>
-                            <!-- Modal -->
-                            <div class="modal fade" id="shareModal" tabindex="-1" role="dialog"
-                                aria-labelledby="shareModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="shareModalLabel">Bagikan Berita </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body"
-                                            style="display:flex; flex-direction: column; justify-content: flex-start;">
-                                            <div class="sharethis-inline-share-buttons"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             </span>
                         </div>
                     </div>
@@ -118,5 +93,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 @endsection
+

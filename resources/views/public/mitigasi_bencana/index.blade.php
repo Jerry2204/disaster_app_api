@@ -25,7 +25,7 @@
                 @foreach ($mitigasiBencanaPDF as $item)
                 <div class="col-md-3 mb-3 text-dark">
                     <div class="card text-start" style="padding: 0px;">
-                        <img src="" alt=""
+                        <img src="{{ asset('admin/images/pdf.png') }}" alt=""
                             style="border-radius: 5px 5px 0px 0px;">
                         <div class="card-body">
                             <h6 class="card-title text-start">
