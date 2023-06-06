@@ -1,6 +1,4 @@
 @extends('public.layout.app')
-<img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%; background-repeat: repeat-x;">
-
 @section('content')
     <div class="hero position-relative d-flex justify-content-center align-items-center">
         <img
@@ -259,5 +257,9 @@
         }
         initMap();
     </script>
-        <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="gambar Tidak ditemukan" style="width: 100%;">
+
+    {{-- image footer --}}
+
+    <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="gambar Tidak ditemukan" style="width: 100%;">
+
 @endsection

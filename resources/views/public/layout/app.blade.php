@@ -23,20 +23,16 @@
 </head>
 
 <body>
-    {{-- <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="Logo Tidak ditemukan" style="width: 100%;"> --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
         <div class="container">
             <a class="navbar-brand" href="{{ route('public') }}">
-                <div style="display: flex; align-items: center;">
-                    <div class="logo">
-                        <img src="{{ asset('image/logo.png') }}" style="width: 50px; height: 50px;">
-                    {{-- <style>
-                        .text p{
-                            margin-left: 10px
-                        }
-                    </style> --}}
+                <div class="d-flex align-items-center">
+                    <div class="logo" class="d-sm-none d-md-block">
+                        <img src="{{ asset('image/logo.png') }}" style="width: 45px; height: 45px;">
+                    </div>
+
                     <div class="text m ms-3 text-start">
-                        <p class="mb-0 brand-bold" >Badan Penanggulangan Bencana Daerah</p>
+                        <p class="mb-0 brand-bold">Badan Penanggulangan Bencana Daerah</p>
                         <p class="brand-regular mb-0">Kabupaten Toba</p>
                     </div>
                 </div>
@@ -119,7 +115,7 @@
             <div class="row">
                 <div class="col-md-2 text-center">
                     <img class="logo" src="{{ asset('image/logo.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 80px;">
+                        alt="Logo Tidak ditemukan"style="width: 85px; height: 90px;">
                     <h6>BPBD TOBA</h6>
 
                 </div>
@@ -148,7 +144,6 @@
                 <div class="col-md-2 text-center">
 
                     <img class="logo" src="{{ asset('image/toba.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 100px; height: 100px;">
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 120px;">
                         <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
                         style="width: 75px; height: 90px;">
@@ -165,6 +160,40 @@
     <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
 
+    <script>
+        @if (!empty(Session::get('sukses')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('sukses') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
+    <script>
+        @if (!empty(Session::get('gagal')))
+            var popupId = "{{ uniqid() }}";
+            if (!sessionStorage.getItem('shown-' + popupId)) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ session('gagal') }}'
+                })
+            }
+            sessionStorage.setItem('shown-' + popupId, '1');
+        @endif
+    </script>
 
     <script>
         $(".logout").click(function(e) {
