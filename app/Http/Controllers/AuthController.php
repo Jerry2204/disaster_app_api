@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -47,14 +49,27 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+
+
     public function registrasiStore(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'username' => 'required',
             'email' => 'required|unique:users',
             'nomor_telepon' => 'required|unique:users',
-            'password' => 'required'
+            'password' => 'required',
+            'tanggal_lahir' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    $umurMin = 17;
+                    $umur = Carbon::parse($value)->age;
+
+                    if ($umur < $umurMin) {
+                        $fail('Anda harus berusia minimal ' . $umurMin . ' tahun.');
+                    }
+                },
+            ],
         ], [
             'name.required' => 'Nama harus diisi.',
             'username.required' => 'Username harus diisi.',
@@ -62,8 +77,13 @@ class AuthController extends Controller
             'email.unique' => 'Email sudah digunakan.',
             'nomor_telepon.required' => 'Nomor telepon harus diisi.',
             'nomor_telepon.unique' => 'Nomor telepon sudah digunakan.',
-            'password.required' => 'Password harus diisi.'
+            'password.required' => 'Password harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $validatedData = $request->all();
 
@@ -90,6 +110,7 @@ class AuthController extends Controller
 
         return back()->with('gagal', 'Gagal menambahkan pengguna baru.');
     }
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -98,9 +119,12 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
+<<<<<<< HEAD
         // return redirect('/');
 
         //jika logout maka tidak akan langsung ke beranda 
+=======
+>>>>>>> a8a4b58e06ffa0937a06a505e3908fc0e94c8fcb
         return redirect('login');
     }
 }

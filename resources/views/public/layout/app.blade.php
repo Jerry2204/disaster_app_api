@@ -143,10 +143,10 @@
                 </div>
                 <div class="col-md-2 text-center">
 
-                    <img class="logo" src="{{ asset('image/toba.png') }}"
+                    {{-- <img class="logo" src="{{ asset('image/toba.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 120px;">
                         <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 75px; height: 90px;">
+                        style="width: 75px; height: 90px;"> --}}
                 </div>
             </div>
         </div>

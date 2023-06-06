@@ -1,5 +1,8 @@
 @extends('public.layout.app')
+{{-- <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="gambar Tidak ditemukan" style="width: 100%;"> --}}
+
 @section('content')
+
     <div class="hero position-relative d-flex justify-content-center align-items-center">
         <img
             src="{{ asset('image/home.jpeg') }}" class="overflow-hidden hero-image" alt="">
@@ -262,4 +265,5 @@
 
     <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="gambar Tidak ditemukan" style="width: 100%;">
 
+        {{-- <img class="logo" src="{{ asset('image/footer.jpeg') }}" alt="gambar Tidak ditemukan" style="width: 100%;"> --}}
 @endsection

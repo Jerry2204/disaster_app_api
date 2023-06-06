@@ -99,6 +99,16 @@
                                     @enderror
                                 </div>
                                 <div class="input-group">
+                                    <input type="date" name="tanggal_lahir" class="form-control" placeholder="Masukkan tanggal lahir anda"
+                                        style="height: 50px;" value="{{ old('tanggal_lahir') }}">
+                                </div>
+                                <div class="input-group">
+                                    @error('tanggal_lahir')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="input-group">
                                     <input type="text" name="username" class="form-control" placeholder="Username"
                                         style="height: 50px;" value="{{ old('username') }}">
                                 </div>
@@ -144,7 +154,7 @@
                                 </div>
                                 <div class="input-group">
                                     <input type="password" name="password_confirmation" class="form-control"
-                                        placeholder="Konfirmasi Password" style="height: 50px;">
+                                        placeholder="Konfirmasi Password Anda" style="height: 50px;">
                                     {{-- <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="fa fa-eye" id="toggleConfirmPassword"></i>

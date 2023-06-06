@@ -28,7 +28,9 @@ class UpdateLaporanBencanaRequest extends FormRequest
             'nama_bencana' => 'required',
             'lokasi' => ['required'],
             'keterangan' => ['required'],
-            'status_bencana' => ['required']
+            'status_bencana' => ['required'],
+            'desa_id' => ['required'],
+            'kecamatan_id' => ['required']
         ];
     }
 }
