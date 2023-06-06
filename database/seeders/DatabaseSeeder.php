@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PeringatanDiniSeeder::class,
             ArtikelSeeder::class,
-            RawanBencanaSeeder::class
+            RawanBencanaSeeder::class,
+            KecamatanSeeder::class
             // StatusPenanggulanganSeeder::class,
             // KorbanSeeder::class
         ]);

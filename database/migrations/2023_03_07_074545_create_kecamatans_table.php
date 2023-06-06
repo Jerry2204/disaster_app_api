@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeringatanDinisTable extends Migration
+class CreateKecamatansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreatePeringatanDinisTable extends Migration
      */
     public function up()
     {
-        Schema::create('peringatan_dinis', function (Blueprint $table) {
+        Schema::create('kecamatans', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->string('lokasi');
-            $table->text('deskripsi');
+            $table->string('nama_kecamatan');
             $table->timestamps();
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.
@@ -29,6 +27,6 @@ class CreatePeringatanDinisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('peringatan_dinis');
+        Schema::dropIfExists('kecamatans');
     }
 }

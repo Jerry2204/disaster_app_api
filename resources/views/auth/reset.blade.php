@@ -101,7 +101,9 @@
                                         style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
-
+                                <a href="{{ url('/password/reset') }}">
+                                    <small style="color: #1877F2"><h6 style="margin-left: 68%">Lupa Kata Sandi?</h6></small>
+                                    </a>
 
                                 @error('password')
                                 <span class="text-danger">{{ $message }}</span>
@@ -152,3 +154,4 @@
 </body>
 
 </html>
+
