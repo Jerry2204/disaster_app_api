@@ -12,6 +12,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\DesaController;
 use App\Models\VisiMisi;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +36,20 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 /** Public */
 // Beranda
 Route::get('/', [WeatherController::class, 'getWeather'])->name('public');
+
+
+//Pdf
+Route::get('/export-pdf', 'PDFController@exportPDF');
+Route::get('/laporan-bencana/export-pdf', [LaporanBencanaController::class, 'exportPDF'])->name('laporan-bencana.export-pdf');
+//Excel
+Route::get('/export-csv', 'ExportController@exportCSV',)->name('export.csv');
+
+Route::get('/export-csv', [LaporanBencanaController::class, 'exportExcel']);
+
+
+Route::get('/show-form', [LaporanBencanaController::class, 'showForm']);
+Route::get('/get-desa-by-kecamatan', [LaporanBencanaController::class, 'getDesaByKecamatan']);
+
 
 // Mitigasi Bencana
 Route::get('/public/mitigasi/bencana', [MitigasiBencanaController::class, 'indexPublic'])->name('mitigasi.public');
@@ -126,6 +142,18 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin']], func
     Route::put('/rawan/bencana', [RawanBencanaController::class, 'updateAdmin'])->name('rawan_bencana.update');
     Route::delete('/rawan/bencana/{id}', [RawanBencanaController::class, 'deleteAdmin'])->name('rawan_bencana.delete');
 
+    //Kecamatan
+    Route::get('data/kecamatan', [KecamatanController::class, 'indexAdmin'])->name('kecamatan.index');
+    Route::post('data/kecamatan', [KecamatanController::class, 'addAdmin'])->name('kecamatan.add');
+    Route::put('data/kecamatan', [KecamatanController::class, 'updateAdmin'])->name('kecamatan.update');
+    Route::delete('data/kecamatan/{id}', [KecamatanController::class, 'deleteAdmin'])->name('kecamatan.delete');
+
+    //Desa
+    Route::get('data/desa', [DesaController::class, 'indexAdmin'])->name('desa.index');
+    Route::post('data/desa', [DesaController::class, 'addAdmin'])->name('desa.add');
+    Route::put('data/desa', [DesaController::class, 'updateAdmin'])->name('desa.update');
+    Route::delete('data/desa/{id}', [DesaController::class, 'deleteAdmin'])->name('desa.delete');
+
     // Mitigasi Bencana
     Route::get('/mitigasi/bencana', [MitigasiBencanaController::class, 'indexAdmin'])->name('mitigasi_bencana.index');
     Route::post('/mitigasi/bencana', [MitigasiBencanaController::class, 'addAdmin'])->name('mitigasi_bencana.add');
@@ -136,8 +164,12 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin']], func
 /** Auth Tanggap Darurat */
 Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,admin']], function() {
     // Manage Laporan Bencana
+    Route::get('/show-form', [LaporanBencanaController::class, 'showForm']);
+    Route::get('/get-desa-by-kecamatan', [LaporanBencanaController::class, 'getDesaByKecamatanadmin']);
     Route::post('/laporan/bencana', [LaporanBencanaController::class, 'addAdmin'])->name('laporan_bencana.add');
     Route::put('/laporan/bencana', [LaporanBencanaController::class, 'updateAdmin'])->name('laporan_bencana.update');
+    Route::get('/show-form', [LaporanBencanaController::class, 'showForm']);
+    Route::get('/get-desa-by-kecamatans', [LaporanBencanaController::class, 'getDesaByKecamatanedit']);
     Route::delete('/laporan/bencana/{id}', [LaporanBencanaController::class, 'deleteAdmin'])->name('laporan_bencana.delete');
     Route::get('/laporan/bencana/{id}/confirm', [LaporanBencanaController::class, 'confirmAdmin'])->name('laporan_bencana.confirm');
     Route::get('/laporan/bencana/{id}/reject', [LaporanBencanaController::class, 'rejectAdmin'])->name('laporan_bencana.reject');

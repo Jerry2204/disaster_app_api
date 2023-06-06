@@ -47,6 +47,7 @@
                             Tambah Laporan Bencana
                         </button>
                         @endif
+
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option">
                                 <li><i class="icofont icofont-simple-left "></i></li>
@@ -56,37 +57,63 @@
                                 <li><i class="icofont icofont-error close-card"></i></li>
                             </ul>
                         </div>
-                    </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm p-0" style="margin-left:3%">
+                                <select class="form-control" id="filter-jenis-bencana" name="jenis_bencana">
+                                    <option value="Semua Jenis Bencana" id="all">Semua Jenis Bencana</option>
+                                    @foreach ($laporanBencana->pluck('jenis_bencana')->unique() as $jenisBencana)
+                                        <option value="{{ $jenisBencana }}">{{ $jenisBencana }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm p-0" style="margin-left:3%">
+                                <select class="form-control" id="filter-kecamatan" name="kecamatan">
+                                    <option value="Semua Kecamatan" id="all">Semua Kecamatan</option>
+                                    @foreach ($laporanBencana->pluck('nama_kecamatan')->unique() as $kecamatan)
+                                        <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div >
+                                <a href="{{ route('laporan-bencana.export-pdf') }}" class="btn btn-primary"style="margin-left: 200%;margin-bottom:20%">Export PDF</a>
+                            </div>
+                        </div>
+
+                        {{-- <a href="/export-csv">Export to CSV</a> --}}
+
+
                     <div class="card-block table-border-style">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th>No</th>
-                                        <th>Jenis Bencana</th>
-                                        <th>Nomor Telepon</th>
-                                        <th>lokasi</th>
-                                        <th>Keterangan</th>
-                                        <th>Status Bencana</th>
-                                        <th>Status Penanggulangan</th>
+                                        <th>Tanggal Kejadian</th>
+                                        <th>Nama Bencana</th>
+                                        {{-- <th>Nomor Telepon</th> --}}
+                                        <th>Kecamatan</th>
+                                        <th>Desa</th>
+                                       <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($laporanBencana as $item)
-                                        <tr>
+                                    <tr class="task-list-row" data-jenis-bencana="{{ $item->jenis_bencana }}">
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $item->jenis_bencana }}</td>
-                                            <td>
+                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}</td>
+                                            {{-- <td>{{ $item->jenis_bencana }}</td> --}}
+                                            <td>{{ $item->nama_bencana }}</td>
+                                            {{-- <td>
                                                   <a href="tel:{{ $item->nomor_telepon }}">
-                                                    {{-- <i class="fa fa-phone"
-                                                    style="font-size:18px;color:red"></i> --}}
                                                     {{ $item->nomor_telepon }}
                                                 </a>
-                                              </td>
-                                             <td>{{ $item->lokasi }}</td>
-                                            <td>{{ $item->keterangan }}</td>
-                                            <td>{{ $item->status_bencana }}</td>
+                                              </td> --}}
+                                              <td>{{ $item->nama_kecamatan}}</td>
+                                              <td>{{ $item->nama_desa}}</td>
                                             <td>
                                                 @if ($item->status == 'Menunggu')
                                                 <span class="badge badge-danger">{{ $item->status }}</span>
@@ -104,7 +131,6 @@
                                                 <button type="button" class="btn btn-sm btn-warning"
                                                         id="modalEdit-{{ $item->id }}" data-toggle="modal"
                                                         data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
-                                                        data-lokasi="{{ $item->lokasi }}"
                                                         data-keterangan="{{ $item->keterangan }}"
                                                         data-status_bencana="{{ $item->status_bencana }}"
                                                         data-nama_bencana="{{ $item->nama_bencana }}"
@@ -165,6 +191,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <form method="POST" action="{{ route('laporan_bencana.add') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
@@ -172,7 +199,7 @@
                             <label class="col-sm-2 col-form-label" for="jenis_bencana">Jenis Bencana</label>
                             <div class="col-sm-10">
                                 <select name="jenis_bencana" id="jenis_bencana" class="form-control">
-                                    <option value="">Pilih Jenis Bencana</option>
+                                    <option value=""disabled selected>Pilih Jenis Bencana</option>
                                     <option value="bencana alam">Bencana Alam</option>
                                     <option value="bencana non alam">Bencana Non Alam</option>
                                     <option value="bencana sosial">Bencana Sosial</option>
@@ -182,17 +209,30 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="nama_bencana">Nama Bencana</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama_bencana" id="nama_bencana" class="form-control"
-                                    placeholder="Masukkan nama bencana">
+                                <input type="text" name="nama_bencana" id="nama_bencana" class="form-control" placeholder="Masukkan nama bencana">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="kecamatanSelect" class="col-sm-2 col-form-label">Kecamatan</label>
+                            <div class="col-sm-10">
+                                <select name="kecamatan_id" class="form-control"  id="kecamatanSelect" aria-label="Floating label select example">
+                                    <option value="">-- Pilih Kecamatan --</option>
+                                    @foreach ($kecamatans as $kecamatan)
+                                        <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
+                            <label class="col-sm-2 col-form-label" for="desaSelect">Desa</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi" class="form-control"
-                                    placeholder="Masukkan lokasi bencana">
+                                <select name="desa_id" class="form-control" id="desaSelect" aria-label="Floating label select example">
+                                    <option value="">-- Pilih Desa --</option>
+                                </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                             <div class="col-sm-10">
@@ -232,7 +272,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Daerah Rawan Bencana</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Laporan Bencana</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -261,13 +301,26 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
+                            <label for="kecamatanSelect" class="col-sm-2 col-form-label">Kecamatan</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi" class="form-control"
-                                    placeholder="Masukkan lokasi bencana">
+                                <select name="kecamatans_id" class="form-control"  id="kecamatanSelects" aria-label="Floating label select example">
+                                    <option value="">-- Pilih Kecamatan --</option>
+                                    @foreach ($kecamatans as $kecamatan)
+                                        <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="desaSelect">Desa</label>
+                            <div class="col-sm-10">
+                                <select name="desas_id" class="form-control" id="desaSelects" aria-label="Floating label select example">
+                                    <option value="">-- Pilih Desa --</option>
+                                </select>
+                            </div>
+                        </div>
+                             <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                             <div class="col-sm-10">
                                 <textarea id="keterangan" rows="5" cols="5" class="form-control" name="keterangan"
@@ -340,4 +393,96 @@
             })
         })
     </script>
+  <script>
+    $('#filter-jenis-bencana').on('change', function() {
+        var jenisBencana = this.value;
+
+        if (jenisBencana === 'Semua Jenis Bencana') {
+            $('.task-list-row').show();
+        } else {
+            $('.task-list-row').hide().filter(function() {
+                return $(this).data('jenis-bencana') === jenisBencana;
+             }).show();
+        }
+    });
+
+    $('#filter-kecamatan').on('change', function() {
+        var kecamatan = this.value;
+
+        if (kecamatan === 'Semua Kecamatan') {
+            $('.task-list-row').show(); // Menampilkan semua baris jika 'Semua Kecamatan' dipilih
+        } else {
+            $('.task-list-row').hide().filter(function() {
+                return $(this).data('kecamatan-id') === kecamatan; // Menyembunyikan baris yang tidak sesuai dengan kecamatan yang dipilih
+            }).show();
+        }
+    });
+</script>
+<script>
+    function getDesaByKecamatanadmin(kecamatanId) {
+        $.ajax({
+            url: '/get-desa-by-kecamatan',
+            method: 'GET',
+            data: {
+                kecamatan_id: kecamatanId
+            },
+            success: function(response) {
+
+                $('#desaSelect').empty();
+
+
+                response.forEach(function(desa) {
+                    $('#desaSelect').append($('<option>', {
+                        value: desa.id,
+                        text: desa.nama_desa
+                    }));
+                });
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+
+    $('#kecamatanSelect').change(function() {
+        var kecamatanId = $(this).val();
+        getDesaByKecamatanadmin(kecamatanId);
+    });
+</script>
+{{-- ubah --}}
+<script>
+    function getDesaByKecamatanedit(kecamatanId) {
+        $.ajax({
+            url: '/get-desa-by-kecamatans',
+            method: 'GET',
+            data: {
+                kecamatans_id: kecamatanId
+            },
+            success: function(response) {
+
+                $('#desaSelects').empty();
+
+
+                response.forEach(function(desa) {
+                    $('#desaSelects').append($('<option>', {
+                        value: desa.id,
+                        text: desa.nama_desa
+                    }));
+                });
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+
+    $('#kecamatanSelects').change(function() {
+        var kecamatanId = $(this).val();
+        getDesaByKecamatanedit(kecamatanId);
+    });
+</script>
+
+
 @endsection

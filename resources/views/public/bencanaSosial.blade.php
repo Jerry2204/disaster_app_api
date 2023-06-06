@@ -45,7 +45,8 @@
                                 {!! Str::words($item->keterangan, 3)  !!}
                             </p>
                             <button class="btn btn-primary mt-5" style="background-color: rgb(2, 85, 165);">
-                                <a href="http://127.0.0.1:8000/laporan/4/detail"
+
+                                <a href="{{ route('report.detail', $item->id) }}"
                                     style="text-decoration: none; color: white;">
                                     Baca Selengkapnya
                                 </a>

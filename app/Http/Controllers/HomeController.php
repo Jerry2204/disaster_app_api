@@ -7,7 +7,7 @@ use App\Models\VisiMisi;
 use App\Models\Petugas;
 use App\Models\StatusPenanggulangan;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use Carbon\CarbonInterface;
 
 class HomeController extends Controller
@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         return view('admin.index', compact('laporan', 'laporan_diproses', 'laporan_terkonfirmasi', 'laporan_selesai','latest'));
     }
-    
+
 
     public function profile_bpbd()
     {

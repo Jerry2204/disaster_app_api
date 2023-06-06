@@ -64,7 +64,7 @@
     </div>
     <!-- Pre-loader end -->
 
-    <section class="text-center " style="background-color: #8A9CB7; height: 100vh">
+    <section class="text-center " style="background-color: #8A9CB7;">
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
@@ -101,7 +101,9 @@
                                         style="height: 50px;">
                                     <span class="md-line"></span>
                                 </div>
-
+                                <a href="{{ url('/password/reset') }}">
+                                    <small style="color: #1877F2"><h6 style="margin-left: 68%">Lupa Kata Sandi?</h6></small>
+                                    </a>
 
                                 @error('password')
                                 <span class="text-danger">{{ $message }}</span>
@@ -152,3 +154,4 @@
 </body>
 
 </html>
+

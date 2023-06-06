@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Events\ReportInserted;
 use App\Models\LaporanBencana;
 use App\Http\Requests\StoreLaporanBencanaRequest;
+use App\Exports\LaporanBencanaExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\UpdateDampakBencanaRequest;
 use App\Http\Requests\UpdateLaporanBencanaRequest;
 use App\Http\Resources\LaporanBencanasResource;
 use App\Models\Kerusakan;
 use App\Models\KontakDarurat;
+use App\Models\kecamatan;
+use App\Models\Desa;
 use App\Models\Korban;
 use App\Mail\Laporan;
 use App\Models\StatusPenanggulangan;
@@ -21,8 +25,10 @@ use App\Mail\FormDataMail;
 use App\Models\User;
 use App\Notifications\DisasterReported;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
+use PDF;
 use Image;
 use Illuminate\Support\Facades\DB;
 
@@ -52,17 +58,65 @@ class LaporanBencanaController extends Controller
             $laporanBencana
         );
     }
-
-    public function indexAdmin()
+    public function exportPDF()
     {
-            $laporanBencana = DB::table('laporan_bencanas')
-            ->select('laporan_bencanas.*', 'users.nomor_telepon','laporan_bencanas.*', 'status_penanggulangans.status')
-            ->join('users', 'users.id', '=', 'laporan_bencanas.user_id')
-            ->join('status_penanggulangans', 'status_penanggulangan_id', '=', 'laporan_bencanas.status_penanggulangan_id')
-            ->paginate(10);
 
-        return view('admin.laporan_bencana.index', compact('laporanBencana'));
+
+        setlocale(LC_TIME, 'id_ID'); // Mengatur bahasa Indonesia
+
+        // $laporanBencanas = LaporanBencana::all();
+        $laporanBencanas = DB::table('laporan_bencanas')
+     ->select('laporan_bencanas.*', 'korbans.*', 'kerusakans.*','desas.*','kecamatans.*')
+    ->leftjoin('kerusakans', 'laporan_bencanas.id', '=', 'kerusakans.laporan_bencana_id')
+    ->join('korbans', 'korbans.id', '=', 'laporan_bencanas.korban_id')
+    ->join('desas', 'laporan_bencanas.desa_id', '=', 'desas.id')
+    ->join('kecamatans', 'laporan_bencanas.kecamatan_id', '=', 'kecamatans.id')
+    ->get();
+
+
+        $content = 'Data Kebencanaan Toba/' . Carbon::now()->formatLocalized('%A %e %B %Y') . '';
+
+        $pdf = PDF::loadView('admin.pdf.laporan', compact('laporanBencanas', 'content'))
+            ->setOption('orientation', 'landscape');
+        return $pdf->download('laporan-bencana.pdf');
     }
+
+    public function indexAdmin(Request $request)
+{
+    // $jenisBencana = DB::table('laporan_bencanas')
+    //     ->select('jenis_bencana')
+    //     ->distinct()
+    //     ->get();
+
+    $laporanBencana = DB::table('laporan_bencanas')
+    ->select('laporan_bencanas.*', 'users.nomor_telepon', 'status_penanggulangans.status', 'kecamatans.nama_kecamatan', 'desas.nama_desa')
+    ->join('users', 'users.id', '=', 'laporan_bencanas.user_id')
+    ->join('status_penanggulangans', 'status_penanggulangans.id', '=', 'laporan_bencanas.status_penanggulangan_id')
+    ->join('kecamatans', 'kecamatans.id', '=', 'laporan_bencanas.kecamatan_id')
+    ->join('desas', 'desas.id', '=', 'laporan_bencanas.desa_id')
+    ->orderByDesc('laporan_bencanas.created_at')
+    ->distinct();
+
+
+    if ($request->has('jenis_bencana')) {
+        $jenisBencanaFilter = $request->input('jenis_bencana');
+        $laporanBencana = $laporanBencana->where('laporan_bencanas.jenis_bencana', $jenisBencanaFilter);
+    }
+    if ($request->has('kecamatan')) {
+        $kecamatanFilter = $request->input('kecamatan');
+        $laporanBencana = $laporanBencana->where('kecamatans.nama_kecamatan', $kecamatanFilter);
+    }
+
+
+    $laporanBencana = $laporanBencana->paginate(10);
+    $kecamatans = Kecamatan::all();
+    return view('admin.laporan_bencana.index', compact('laporanBencana','kecamatans'));
+}
+
+
+
+
+
 
     public function bencanaAlam()
     {
@@ -138,6 +192,7 @@ $count_grafik = korban::select(
             'user_id' => $request->user_id,
         ]);
 
+
         $status_penanggulangan = StatusPenanggulangan::create([
             'user_id' => $request->user_id,
         ]);
@@ -171,14 +226,18 @@ $count_grafik = korban::select(
         $request->validate([
             'jenis_bencana' => 'required',
             'nama_bencana' => 'required',
-            'lokasi' => 'required',
+            'desa_id' => 'required',
+            'kecamatan_id' => 'required',
             'keterangan' => 'required',
             'gambar' => 'required'
         ]);
 
+
+        // $kecamatans = Kecamatan::all();
+
         $users = User::where('role', 'admin')->orWhere('role', 'pra_bencana')->orWhere('role', 'tanggap_darurat')->orWhere('role', 'pasca_bencana')->get();
 
-        $korban = Korban::create([
+        $korban    = Korban::create([
             'user_id' => Auth::user()->id
         ]);
 
@@ -197,7 +256,8 @@ $count_grafik = korban::select(
         $laporanBencana = LaporanBencana::create([
             'jenis_bencana' => $request->jenis_bencana,
             'nama_bencana' => $request->nama_bencana,
-            'lokasi' => $request->lokasi,
+            'desa_id' => $request->desa_id,
+            'kecamatan_id' => $request->kecamatan_id,
             'keterangan' => $request->keterangan,
             'status_bencana' => $request->status_bencana,
             'korban_id' => $korban->id,
@@ -205,13 +265,11 @@ $count_grafik = korban::select(
             'status_penanggulangan_id' => $status_penanggulangan->id,
             'user_id' => Auth::user()->id
         ]);
+        // $kecamatans = Kecamatan::all();
 
         Carbon::setLocale('id');
-
         event(new ReportInserted($laporanBencana));
         Notification::send($users, new DisasterReported($laporanBencana));
-
-        // $report = LaporanBencana::first();
         $authUser = Auth::user();
         $laporanBencana = $laporanBencana->toArray();
         Mail::send('public.mail', ['laporanBencana' => $laporanBencana,'authUser'=>$authUser], function($message) use ($authUser) {
@@ -222,46 +280,104 @@ $count_grafik = korban::select(
         return redirect()->route('laporanku.public')->with('sukses', 'Laporan Bencana berhasil ditambahkan');
     }
 
-    public function addAdmin(StoreLaporanBencanaRequest $request)
-    {
-        $request->validated($request->all());
 
-        $korban = Korban::create([
-            'user_id' => Auth::user()->id,
-        ]);
+public function getDesaByKecamatan(Request $request)
+{
+    $kecamatanId = $request->input('kecamatan_id');
+    $desas = Desa::where('kecamatan_id', $kecamatanId)->get();
+    return response()->json($desas);
+}
 
-        $status_penanggulangan = StatusPenanggulangan::create([
-            'user_id' => Auth::user()->id,
-        ]);
+// public function addAdmin(StoreLaporanBencanaRequest $request)
+// {
+//     $validatedData = $request->validated();
 
-        // Handle file
-        $file = $request->file('file');
+//     $kecamatans = Kecamatan::all();
 
-        $nama_file = time()."_".$file->getClientOriginalName();
+//     $korban = Korban::create([
+//         'user_id' => Auth::user()->id,
+//     ]);
 
-        $file->move("laporan", $nama_file);
+//     $status_penanggulangan = StatusPenanggulangan::create([
+//         'user_id' => Auth::user()->id,
+//     ]);
 
-        $users = User::where('role', 'admin')->orWhere('role', 'pra_bencana')->orWhere('role', 'tanggap_darurat')->orWhere('role', 'pasca_bencana')->get();
+//     // Handle file
+//     $file = $request->file('file');
+//     $nama_file = time()."_".$file->getClientOriginalName();
+//     $file->move("laporan", $nama_file);
 
-        $laporanBencana = LaporanBencana::create([
-            'jenis_bencana' => $request->jenis_bencana,
-            'nama_bencana' => $request->nama_bencana,
-            'lokasi' => $request->lokasi,
-            'keterangan' => $request->keterangan,
-            'status_bencana' => $request->status_bencana,
-            'korban_id' => $korban->id,
-            'gambar' => $nama_file,
-            'status_penanggulangan_id' => $status_penanggulangan->id,
-            'user_id' => Auth::user()->id,
-        ]);
+//     $users = User::whereIn('role', ['admin', 'pra_bencana', 'tanggap_darurat', 'pasca_bencana'])->get();
 
-    }
+//     $laporanBencana = LaporanBencana::create([
+//         'jenis_bencana' => $validatedData['jenis_bencana'],
+//         'nama_bencana' => $validatedData['nama_bencana'],
+//         'desa_id' => $validatedData['desa_id'],
+//         'kecamatan_id' => $validatedData['kecamatan_id'],
+//         'keterangan' => $validatedData['keterangan'],
+//         'status_bencana' => $validatedData['status_bencana'],
+//         'korban_id' => $korban->id,
+//         'gambar' => $nama_file,
+//         'status_penanggulangan_id' => $status_penanggulangan->id,
+//         'user_id' => Auth::user()->id,
+//     ]);
 
+//     $kecamatans = kecamatan::all();
+
+//     return view('admin.laporan_bencana.index', compact('laporanBencana', 'kecamatans'));
+// }
+public function addAdmin(StoreLaporanBencanaRequest $request)
+{
+    $request->validated($request->all());
+
+    $korban = Korban::create([
+        'user_id' => Auth::user()->id,
+    ]);
+
+    $status_penanggulangan = StatusPenanggulangan::create([
+        'user_id' => Auth::user()->id,
+    ]);
+
+    // Handle file
+    $file = $request->file('file');
+
+    $nama_file = time()."_".$file->getClientOriginalName();
+
+    $file->move("laporan", $nama_file);
+
+    $users = User::where('role', 'admin')->orWhere('role', 'pra_bencana')->orWhere('role', 'tanggap_darurat')->orWhere('role', 'pasca_bencana')->get();
+
+    $laporanBencana = LaporanBencana::create([
+        'jenis_bencana' => $request->jenis_bencana,
+        'nama_bencana' => $request->nama_bencana,
+        'desa_id' => $request->desa_id,
+        'kecamatan_id' => $request->kecamatan_id,
+         'keterangan' => $request->keterangan,
+        'status_bencana' => $request->status_bencana,
+        'korban_id' => $korban->id,
+        'gambar' => $nama_file,
+        'status_penanggulangan_id' => $status_penanggulangan->id,
+        'user_id' => Auth::user()->id,
+    ]);
+    return Redirect::back()->with('success', 'Data berhasil ditambahkan');
+}
+
+
+
+public function getDesaByKecamatanadmin(Request $request)
+{
+    $kecamatanId = $request->input('kecamatan_id');
+    $desas = Desa::where('kecamatan_id', $kecamatanId)->get();
+    return response()->json($desas);
+}
     public function publicAdd()
     {
         $kontakDarurat = KontakDarurat::all();
+        $kecamatans = Kecamatan::all();
 
-        return view('public.laporan_bencana.add', compact('kontakDarurat'));
+
+
+        return view('public.laporan_bencana.add', compact('kontakDarurat','kecamatans'));
     }
 
     /**
@@ -353,7 +469,12 @@ $count_grafik = korban::select(
 
         return new LaporanBencanasResource($bencana);
     }
-
+public function getDesaByKecamatanedit(Request $request)
+{
+    $kecamatanId = $request->input('kecamatan_id');
+    $desas = Desa::where('kecamatan_id', $kecamatanId)->get();
+    return response()->json($desas);
+}
     public function updateAdmin(UpdateLaporanBencanaRequest $request)
     {
         $request->validated($request->all());
@@ -378,7 +499,8 @@ $count_grafik = korban::select(
                 $bencana->update([
                     'jenis_bencana' => $request->jenis_bencana,
                     'nama_bencana' => $request->nama_bencana,
-                    'lokasi' => $request->lokasi,
+                    'desa_id' => $request->desa_id,
+                    'kecamatan_id' => $request->kecamatan_id,
                     'keterangan' => $request->keterangan,
                     'status_bencana' => $request->status_bencana,
                     'gambar' => $nama_file
@@ -389,7 +511,8 @@ $count_grafik = korban::select(
                 $bencana->update([
                     'jenis_bencana' => $request->jenis_bencana,
                     'nama_bencana' => $request->nama_bencana,
-                    'lokasi' => $request->lokasi,
+                    'desa_id' => $request->desa_id,
+                    'kecamatan_id' => $request->kecamatan_id,
                     'keterangan' => $request->keterangan,
                     'status_bencana' => $request->status_bencana
                 ]);
@@ -565,12 +688,13 @@ $count_grafik = korban::select(
     public function updateDampakBencanaAdmin($id)
     {
         $bencana = LaporanBencana::find($id);
+        $kecamatans = Kecamatan::all();
 
         if (!$bencana) {
             return back()->with('gagal', 'Data Laporan Bencana tidak ditemukan');
         }
 
-        return view('admin.dampak_bencana.update', compact('bencana'));
+        return view('admin.dampak_bencana.update', compact('bencana','kecamatans'));
     }
 
     public function updateDampakBencanaAdminStore(Request $request, $id)
@@ -621,4 +745,9 @@ $count_grafik = korban::select(
 
         return redirect()->route('laporan_bencana.detail', $request->laporan_id);
     }
+
+    public function exportExcel()
+{
+    return Excel::download(new LaporanBencanaExport, 'laporan-bencana.xlsx');
+}
 }

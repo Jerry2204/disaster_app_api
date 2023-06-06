@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Peringatan Dini')
+@section('title', 'Desa')
 
 @section('content')
     <!-- Page-header start -->
@@ -8,11 +8,11 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-                    <i class="fa fa-warning bg-c-yellow"></i>
+                    <i class="ti-location-pin bg-c-pink"></i>
 
                     <div class="d-inline">
-                        <h4>Peringatan Dini</h4>
-                        <span>Daftar Peringatan Dini</span>
+                        <h4>Desa</h4>
+                        <span>Daftar Desa Kabupaten Toba</span>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                         </li>
                         <li class="breadcrumb-item"><a href="#!">Pages</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Peringatan Dini</a>
+                        <li class="breadcrumb-item"><a href="#!">Desa</a>
                         </li>
                     </ul>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="card-header">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Tambah Peringatan Dini
+                            Tambah Desa
                         </button>
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option">
@@ -61,27 +61,26 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Tanggal</th>
-                                        <th>Lokasi</th>
-                                        <th>Deskripsi</th>
+                                        <th>Nama Desa</th>
+                                        <th>Nama Kecamatan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($peringatanDini as $item)
+                                    @forelse ($desa as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $item->tanggal }}</td>
-                                            <td>{{ $item->lokasi }}</td>
-                                            <td>{{ $item->deskripsi }}</td>
+                                            <td>{{ $item->nama_desa }}</td>
+                                            <td>{{ $item->kecamatan->nama_kecamatan }}</td> <!-- Memanggil properti nama_kecamatan dari relasi kecamatan -->
+
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                    data-target="#modalEdit" data-lokasi="{{ $item->lokasi }}" data-tanggal="{{ $item->tanggal }}" data-deskripsi="{{ $item->deskripsi }}" data-peringatan_id="{{ $item->id }}">
+                                                    data-target="#modalEdit" data-nama_desa="{{ $item->nama_desa }}" data-koordinat_lattitude="{{ $item->koordinat_lattitude }}" data-koordinat_longitude="{{ $item->koordinat_longitude }}" data-jenis_rawan_bencana="{{ $item->jenis_rawan_bencana }}" data-level_rawan_bencana="{{ $item->level_rawan_bencana }}" data-rawan_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                    <form action="{{ route('peringatan_dini.delete', $item->id) }}" method="POST"
+                                                    <form action="{{ route('desa.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
@@ -92,14 +91,14 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <th scope="row" colspan="7" class="text-center">Data Daerah Rawan Bencana
-                                                Tidak Ada</th>
+                                            <th scope="row" colspan="7" class="text-center">Data Desa Tidak Ada</th>
                                         </tr>
                                     @endforelse
                                 </tbody>
+
                             </table>
                             <div class="d-flex my-5">
-                                {!! $peringatanDini->links() !!}
+                                {!! $desa->links() !!}
                             </div>
                         </div>
                     </div>
@@ -114,45 +113,37 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Peringatan Dini</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Desa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('peringatan_dini.add') }}">
+                <form method="POST" action="{{ route('desa.add') }}">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group {{ $errors->has('tanggal') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
+                        <div class="form-group {{ $errors->has('nama_desa') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="nama_desa">Desa</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tanggal" id="tanggal" class="form-control {{ $errors->has('tanggal') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan nama wilayah">
+                                <input type="text" name="nama_desa" id="nama_desa" class="form-control {{ $errors->has('nama_desa') ? 'form-control-danger' : '' }}"
+                                    placeholder="Masukkan nama desa">
                             </div>
                         </div>
 
-                        
-                        <div class="form-group {{ $errors->has('lokasi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
+                        <div class="form-group {{ $errors->has('kecamatan_id') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="kecamatan_id">Kecamatan</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi"
-                                    class="form-control {{ $errors->has('lokasi') ? 'form-control-danger' : '' }}" placeholder="Masukkan lokasi">
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}" placeholder="Masukkan deskripsi">
+                                <select name="kecamatan_id" id="kecamatan_id" class="form-control {{ $errors->has('kecamatan_id') ? 'form-control-danger' : '' }}">
+                                    <option value="">Pilih Kecamatan</option>
+                                    @foreach ($kecamatan as $kc)
+                                        <option value="{{ $kc->id }}">{{ $kc->nama_kecamatan }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
@@ -164,37 +155,36 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Peringatan Dini</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Desa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('peringatan_dini.update') }}">
+                <form method="POST" action="{{ route('desa.update') }}">
                     @csrf
                     <input name="_method" type="hidden" value="PUT">
                     <div class="modal-body">
-                        <input type="hidden" name="peringatan_id" id="peringatan_id" value="">
-                        <div class="form-group {{ $errors->has('tanggal') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
+                        <input type="hidden" name="rawan_id" id="rawan_id" value="">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="nama_desa">Desa</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tanggal" id="tanggal" class="form-control {{ $errors->has('tanggal') ? 'form-control-danger' : '' }}"
-                                    placeholder="Masukkan nama wilayah">
+                                <input type="text" name="nama_desa" id="nama_desa" class="form-control"
+                                    placeholder="Masukkan nama desa">
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('lokasi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
+                         <div class="form-group {{ $errors->has('kecamatan_id') ? 'has-danger' : '' }} row">
+                            <label class="col-sm-2 col-form-label" for="kecamatan_id">Kecamatan</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lokasi" id="lokasi"
-                                    class="form-control {{ $errors->has('lokasi') ? 'form-control-danger' : '' }}" placeholder="Masukkan lokasi">
+                                <select name="kecamatan_id" id="kecamatan_id" class="form-control {{ $errors->has('kecamatan_id') ? 'form-control-danger' : '' }}">
+                                    <option value="">Pilih Kecamatan</option>
+                                    @foreach ($kecamatan as $kc)
+                                        <option value="{{ $kc->id }}">{{ $kc->nama_kecamatan }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('deskripsi') ? 'has-danger' : '' }} row">
-                            <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="deskripsi" id="deskripsi"
-                                    class="form-control {{ $errors->has('deskripsi') ? 'form-control-danger' : '' }}" placeholder="Masukkan deskripsi">
-                            </div>
-                        </div>
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -210,18 +200,15 @@
 <script>
     $('#modalEdit').on('show.bs.modal', function(e) {
         var link = $(e.relatedTarget)
-        var tanggal = link.data("tanggal");
-        var lokasi = link.data('lokasi');
-        var deskripsi = link.data('deskripsi');
-        var peringatan_id = link.data('peringatan_id');
+        var nama_desa = link.data("nama_desa");
 
-        console.log(peringatan_id);
+        var rawan_id = link.data('rawan_id');
+
+        console.log(rawan_id);
 
         var modal = $(this)
-        modal.find('.modal-body #tanggal').val(tanggal);
-        modal.find('.modal-body #lokasi').val(lokasi);
-        modal.find('.modal-body #deskripsi').val(deskripsi);
-        modal.find('.modal-body #peringatan_id').val(peringatan_id);
+        modal.find('.modal-body #nama_desa').val(nama_desa);
+       modal.find('.modal-body #rawan_id').val(rawan_id);
     })
 
     $(".delete").click(function(e) {
