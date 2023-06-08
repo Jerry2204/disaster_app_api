@@ -69,7 +69,7 @@
                             </select>
                         </div>
                         <div class="col-lg-4 col-md-2 col-sm-12">
-                            <select class="form-control" id="filter-kecamatan" name="kecamatan">
+                            <select class="form-control" id="filter-kecamatan" name="kecamatan_id">
                                 <option value="Semua Kecamatan" id="all">Semua Kecamatan</option>
                                 @foreach ($laporanBencana->pluck('nama_kecamatan')->unique() as $kecamatan)
                                     <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
@@ -77,38 +77,43 @@
                             </select>
                         </div>
                         <span></span>
-                      {{-- excel --}}
-                      <div class="modal fade" id="dateRangeModalExcel" tabindex="-1" role="dialog" aria-labelledby="dateRangeModalLabelExcel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="dateRangeModalLabelExcel">Pilih Rentang Tanggal</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('export-excel') }}" method="GET">
-                                        <div class="form-group">
-                                            <label for="start_date_excel">Mulai Tanggal:</label>
-                                            <input type="date" id="start_date_excel" name="start_date" class="form-control" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="end_date_excel">Sampai Tanggal:</label>
-                                            <input type="date" id="end_date_excel" name="end_date" class="form-control" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Download Excel</button>
-                                    </form>
+                        {{-- excel --}}
+                        <div class="modal fade" id="dateRangeModalExcel" tabindex="-1" role="dialog"
+                            aria-labelledby="dateRangeModalLabelExcel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="dateRangeModalLabelExcel">Pilih Rentang Tanggal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('export-excel') }}" method="GET">
+                                            <div class="form-group">
+                                                <label for="start_date_excel">Mulai Tanggal:</label>
+                                                <input type="date" id="start_date_excel" name="start_date"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="end_date_excel">Sampai Tanggal:</label>
+                                                <input type="date" id="end_date_excel" name="end_date"
+                                                    class="form-control" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Download Excel</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-primary" style="background-color: #1D6F42" data-toggle="modal" data-target="#dateRangeModalExcel">Download Excel</button>
-                    </div>
+                        <div class="col-lg-2 col-md-4 col-sm-12">
+                            <button type="button" class="btn btn-primary" style="background-color: #1D6F42"
+                                data-toggle="modal" data-target="#dateRangeModalExcel">Download Excel</button>
+                        </div>
 
                         <!--PDF-->
-                        <div class="modal fade" id="dateRangeModalPDF" tabindex="-1" role="dialog" aria-labelledby="dateRangeModalLabelPDF" aria-hidden="true">
+                        <div class="modal fade" id="dateRangeModalPDF" tabindex="-1" role="dialog"
+                            aria-labelledby="dateRangeModalLabelPDF" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -118,24 +123,29 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="dateRangeFormPDF" action="{{ route('laporan-bencana.export-pdf') }}" method="POST">
+                                        <form id="dateRangeFormPDF" action="{{ route('laporan-bencana.export-pdf') }}"
+                                            method="POST">
                                             @csrf
                                             <div class="form-group">
                                                 <label for="start_date_pdf">Mulai Tanggal:</label>
-                                                <input type="date" id="start_date_pdf" name="start_date" class="form-control">
+                                                <input type="date" id="start_date_pdf" name="start_date"
+                                                    class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="end_date_pdf">Sampai Tanggal:</label>
-                                                <input type="date" id="end_date_pdf" name="end_date" class="form-control">
+                                                <input type="date" id="end_date_pdf" name="end_date"
+                                                    class="form-control">
                                             </div>
-                                            <button type="submit" class="btn btn-primary" name="export_pdf">Download PDF</button>
+                                            <button type="submit" class="btn btn-primary" name="export_pdf">Download
+                                                PDF</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-12">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#dateRangeModalPDF">Download PDF</a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal"
+                                data-target="#dateRangeModalPDF">Download PDF</a>
                         </div>
                     </div>
                     <div class="card-block table-border-style">
@@ -155,7 +165,9 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($laporanBencana as $item)
-                                        <tr class="task-list-row" data-jenis-bencana="{{ $item->jenis_bencana }}">
+                                    <tr class="task-list-row" data-jenis-bencana="{{ $item->jenis_bencana . ', ' . $item->nama_kecamatan }}">
+
+
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
                                             </td>
@@ -365,28 +377,25 @@
                                     placeholder="Masukkan nama bencana">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="kecamatanSelect" class="col-sm-2 col-form-label">Kecamatan</label>
-                            <div class="col-sm-10">
-                                <select name="kecamatans_id" class="form-control" id="kecamatanSelects"
-                                    aria-label="Floating label select example">
-                                    <option value="">-- Pilih Kecamatan --</option>
-                                    @foreach ($kecamatans as $kecamatan)
-                                        <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-2 col-sm-12">
+                                <select class="form-control" id="filter-jenis-bencana" name="jenis_bencana">
+                                    <option value="Semua Jenis Bencana" id="all">Semua Jenis Bencana</option>
+                                    @foreach ($laporanBencana->pluck('jenis_bencana')->unique() as $jenisBencana)
+                                        <option value="{{ $jenisBencana }}">{{ $jenisBencana }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-2 col-sm-12">
+                                <select class="form-control" id="filter-kecamatan" name="kecamatan_id">
+                                    <option value="Semua Kecamatan" id="all">Semua Kecamatan</option>
+                                    @foreach ($laporanBencana->pluck('nama_kecamatan')->unique() as $kecamatan)
+                                        <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="desaSelect">Desa</label>
-                            <div class="col-sm-10">
-                                <select name="desas_id" class="form-control" id="desaSelects"
-                                    aria-label="Floating label select example">
-                                    <option value="">-- Pilih Desa --</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                             <div class="col-sm-10">
@@ -447,12 +456,12 @@
             console.log(id);
             Swal.fire({
                 title: "Tolak Laporan?",
-                text: "You can't restore the data later!",
+                // text: "You can't restore the data later!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Ya,Tolak!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $(`#reject${id}`).submit();
@@ -460,32 +469,33 @@
             })
         })
     </script>
-    <script>
-        $('#filter-jenis-bencana').on('change', function() {
-            var jenisBencana = this.value;
+   <script>
+    $('#filter-kecamatan').on('change', function() {
+        var kecamatan = this.value;
 
-            if (jenisBencana === 'Semua Jenis Bencana') {
-                $('.task-list-row').show();
-            } else {
-                $('.task-list-row').hide().filter(function() {
-                    return $(this).data('jenis-bencana') === jenisBencana;
-                }).show();
-            }
-        });
+        if (kecamatan === 'Semua Kecamatan') {
+            $('.task-list-row').show();
+        } else {
+            $('.task-list-row').hide().filter(function() {
+                return $(this).data('jenis-bencana').includes(kecamatan);
+            }).show();
+        }
+    });
 
-        $('#filter-kecamatan').on('change', function() {
-            var kecamatan = this.value;
+    $('#filter-jenis-bencana').on('change', function() {
+        var jenisBencana = this.value;
 
-            if (kecamatan === 'Semua Kecamatan') {
-                $('.task-list-row').show(); // Menampilkan semua baris jika 'Semua Kecamatan' dipilih
-            } else {
-                $('.task-list-row').hide().filter(function() {
-                    return $(this).data('kecamatan-id') ===
-                        kecamatan; // Menyembunyikan baris yang tidak sesuai dengan kecamatan yang dipilih
-                }).show();
-            }
-        });
-    </script>
+        if (jenisBencana === 'Semua Jenis Bencana') {
+            $('.task-list-row').show();
+        } else {
+            $('.task-list-row').hide().filter(function() {
+                return $(this).data('jenis-bencana').includes(jenisBencana);
+            }).show();
+        }
+    });
+</script>
+
+
     <script>
         function getDesaByKecamatanadmin(kecamatanId) {
             $.ajax({

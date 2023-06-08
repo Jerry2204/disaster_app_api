@@ -105,12 +105,13 @@ class LaporanBencanaController extends Controller
 
     if ($request->has('jenis_bencana')) {
         $jenisBencanaFilter = $request->input('jenis_bencana');
-        $laporanBencana = $laporanBencana->where('laporan_bencanas.jenis_bencana', $jenisBencanaFilter);
+        $laporanBencana = $laporanBencana->where('jenis_bencana', $jenisBencanaFilter);
     }
-    if ($request->has('kecamatan')) {
-        $kecamatanFilter = $request->input('kecamatan');
-        $laporanBencana = $laporanBencana->where('kecamatans.nama_kecamatan', $kecamatanFilter);
+    if ($request->has('kecamatan_id')) {
+        $kecamatanFilter = $request->input('kecamatan_id');
+        $laporanBencana = $laporanBencana->where('nama_kecamatan', $kecamatanFilter);
     }
+
 
 
     $laporanBencana = $laporanBencana->paginate(10);

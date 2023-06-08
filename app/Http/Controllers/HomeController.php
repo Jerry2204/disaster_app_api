@@ -7,7 +7,7 @@ use App\Models\VisiMisi;
 use App\Models\Petugas;
 use App\Models\StatusPenanggulangan;
 use Carbon\Carbon;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use Carbon\CarbonInterface;
 
 class HomeController extends Controller
@@ -26,10 +26,11 @@ class HomeController extends Controller
 
 
     public function profile_bpbd()
-    {
-        $visiMisi = VisiMisi::all();
-        $petugas = Petugas::all();
+{
+    $visiMisi = VisiMisi::first();
 
-        return view('public.profile.index',compact('visiMisi','petugas'));
-    }
+    $petugas = Petugas::all();
+
+    return view('public.profile.index', compact('visiMisi', 'petugas'));
+}
 }

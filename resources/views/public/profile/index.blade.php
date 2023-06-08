@@ -9,31 +9,26 @@
                 <div class="col-md-12 my-5">
                     <h3 class="text-center">Visi & Misi BPBD Kabupaten Toba</h3>
                 </div>
-                @if (count($visiMisi) > 0)
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>Visi</h4>
-                            <p>Visi Pemerintah Kabupaten Toba untuk periode tahun 2021-2026 adalah:</p>
-                            @foreach ($visiMisi as $item)
-                                <p>{!! $item->visi !!}</p>
-                            @endforeach
-                        </div>
-                        <div class="col-md-6">
-                            <h4>Misi</h4>
-                            <p>Misi Badan Penanggulangan Bencana Daerah Kabupaten Toba adalah :</p>
-
-                                @foreach ($visiMisi as $item)
-                                    <p>{!! $item->misi !!}</p>
-                                @endforeach
-
-                        </div>
+                @if ($visiMisi)
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Visi</h4>
+                        <p>Visi Pemerintah Kabupaten Toba untuk periode tahun 2021-2026 adalah:</p>
+                        <p>{!! $visiMisi->visi !!}</p>
                     </div>
-                @else
-                    <div class="col-md-12 my-5">
-                        <h1 class="mb-5 text-Black text-center">VISI & MISI BPBD TOBA BELUM DITAMBAHKAN</h1>
+                    <div class="col-md-6">
+                        <h4>Misi</h4>
+                        <p>Misi Badan Penanggulangan Bencana Daerah Kabupaten Toba adalah :</p>
+                        <p>{!! $visiMisi->misi !!}</p>
                     </div>
-                @endif
-            </div>
+                </div>
+            @else
+                <div class="col-md-12 my-5">
+                    <h1 class="mb-5 text-black text-center">VISI & MISI BPBD TOBA BELUM DITAMBAHKAN</h1>
+                </div>
+            @endif
+
+
     <div class="col-md-12 my-5">
         <h3 class="text-center">STRUKTUR ORGANISASI BPBD KABUPATEN TOBA</h3>
     </div>

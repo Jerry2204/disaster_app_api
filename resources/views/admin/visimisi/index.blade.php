@@ -9,7 +9,7 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <i class="ti-target bg-c-pink"></i>
-                   
+
                     <div class="d-inline">
                         <h4>Visi & Misi</h4>
                         <span>Daftar Visi & Misi</span>
@@ -77,14 +77,14 @@
                                                     class="btn btn-sm btn-warning">
                                                     Ubah
                                                 </a>
-                                                <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('visimisi.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
                                                     Hapus
-                                                </button>
+                                                </button> --}}
                                             </td>
                                         </tr>
                                     @empty
@@ -156,7 +156,7 @@
             id = e.target.dataset.id
             Swal.fire({
                 title: "Apakah anda yakin ingin menghapus data ini?",
-                text: "Anda tidak dapat memulihkan data nanti",
+                // text: "Anda tidak dapat memulihkan data nanti",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
