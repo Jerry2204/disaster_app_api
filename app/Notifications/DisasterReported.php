@@ -44,7 +44,7 @@ class DisasterReported extends Notification
         return [
             'laporan_id' => $this->reportedData['id'],
             'nama_bencana' => $this->reportedData['nama_bencana'],
-            'lokasi' => $this->reportedData['lokasi'],
+            
             'keterangan' => $this->reportedData['keterangan'],
             'jenis_bencana' => $this->reportedData['jenis_bencana'],
             'created_at' => $this->reportedData['created_at'],

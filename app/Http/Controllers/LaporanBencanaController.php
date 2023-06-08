@@ -235,7 +235,7 @@ $count_grafik = korban::select(
             'desa_id' => 'required',
             'kecamatan_id' => 'required',
             'keterangan' => 'required',
-            'gambar' => 'required'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
 

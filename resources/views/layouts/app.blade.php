@@ -278,7 +278,7 @@
                     position: 'top-end',
                     icon: 'warning',
                     title: 'Laporan Baru',
-                    text: `Telah terjadi ${data.name.nama_bencana} di ${data.name.kecamatan}`,
+                    text: `Telah terjadi ${data.name.nama_bencana} `,
                     showConfirmButton: true,
                     timer: 10000,
                     confirmButtonText: 'Lihat Laporan',
