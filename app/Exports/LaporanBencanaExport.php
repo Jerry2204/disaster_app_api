@@ -3,16 +3,24 @@
 namespace App\Exports;
 
 use App\Models\LaporanBencana;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-
-class LaporanBencanaExport implements FromCollection, WithHeadings
+class LaporanBencanaExport implements FromQuery, WithHeadings
 {
-    public function collection()
+    protected $startDate;
+    protected $endDate;
+
+    public function __construct($startDate, $endDate)
     {
-        return LaporanBencana::all();
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
+
+    public function query()
+    {
+        return LaporanBencana::query()
+            ->whereBetween('created_at', [$this->startDate . ' 00:00:00', $this->endDate . ' 23:59:59']);
     }
 
     public function headings(): array

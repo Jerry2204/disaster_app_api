@@ -63,7 +63,7 @@
                                 Lokasi:
                             </p>
                             <p>
-                                {{ $laporanBencana->lokasi }}
+                             Desa {{ $laporanBencana->nama_desa }},Kecamatan {{ $laporanBencana->nama_kecamatan }}
                             </p>
                             <p class="mb-0">
                                 Status Bencana:

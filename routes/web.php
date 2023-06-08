@@ -39,12 +39,17 @@ Route::get('/', [WeatherController::class, 'getWeather'])->name('public');
 
 
 //Pdf
-Route::get('/export-pdf', 'PDFController@exportPDF');
-Route::get('/laporan-bencana/export-pdf', [LaporanBencanaController::class, 'exportPDF'])->name('laporan-bencana.export-pdf');
-//Excel
-Route::get('/export-csv', 'ExportController@exportCSV',)->name('export.csv');
+// Route::post('/laporan-bencana/export', [LaporanBencanaController::class, 'export'])->name('laporan-bencana.export');
+Route::post('/laporan-bencana/export-pdf', [LaporanBencanaController::class, 'exportPDF'])->name('laporan-bencana.export-pdf');
 
-Route::get('/export-csv', [LaporanBencanaController::class, 'exportExcel']);
+//Excel
+// Route::get('/export-csv', 'ExportController@exportCSV',)->name('export.csv');
+
+// Route::get('/export-csv', [LaporanBencanaController::class, 'exportExcel']);
+Route::get('/export-excel', 'App\Http\Controllers\LaporanBencanaController@exportExcel')->name('export-excel');
+
+
+
 
 
 Route::get('/show-form', [LaporanBencanaController::class, 'showForm']);
@@ -162,7 +167,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pra_bencana,admin']], func
 });
 
 /** Auth Tanggap Darurat */
-Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,admin']], function() {
+Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,admin,user']], function() {
     // Manage Laporan Bencana
     Route::get('/show-form', [LaporanBencanaController::class, 'showForm']);
     Route::get('/get-desa-by-kecamatan', [LaporanBencanaController::class, 'getDesaByKecamatanadmin']);

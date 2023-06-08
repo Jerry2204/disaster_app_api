@@ -58,28 +58,33 @@ class LaporanBencanaController extends Controller
             $laporanBencana
         );
     }
-    public function exportPDF()
-    {
+    public function exportPDF(Request $request)
+{
+    $startDate = Carbon::createFromFormat('Y-m-d', $request->input('start_date'))->startOfDay();
+    $endDate = Carbon::createFromFormat('Y-m-d', $request->input('end_date'))->endOfDay();
 
+    $laporanBencanas = DB::table('laporan_bencanas')
+        ->select('laporan_bencanas.*', 'korbans.*', 'kerusakans.*', 'desas.*', 'kecamatans.*')
+        ->leftJoin('kerusakans', 'laporan_bencanas.id', '=', 'kerusakans.laporan_bencana_id')
+        ->join('korbans', 'korbans.id', '=', 'laporan_bencanas.korban_id')
+        ->join('desas', 'laporan_bencanas.desa_id', '=', 'desas.id')
+        ->join('kecamatans', 'laporan_bencanas.kecamatan_id', '=', 'kecamatans.id')
+        ->whereBetween('laporan_bencanas.created_at', [$startDate, $endDate])
+        ->get();
 
-        setlocale(LC_TIME, 'id_ID'); // Mengatur bahasa Indonesia
-
-        // $laporanBencanas = LaporanBencana::all();
-        $laporanBencanas = DB::table('laporan_bencanas')
-     ->select('laporan_bencanas.*', 'korbans.*', 'kerusakans.*','desas.*','kecamatans.*')
-    ->leftjoin('kerusakans', 'laporan_bencanas.id', '=', 'kerusakans.laporan_bencana_id')
-    ->join('korbans', 'korbans.id', '=', 'laporan_bencanas.korban_id')
-    ->join('desas', 'laporan_bencanas.desa_id', '=', 'desas.id')
-    ->join('kecamatans', 'laporan_bencanas.kecamatan_id', '=', 'kecamatans.id')
-    ->get();
-
-
-        $content = 'Data Kebencanaan Toba/' . Carbon::now()->formatLocalized('%A %e %B %Y') . '';
-
-        $pdf = PDF::loadView('admin.pdf.laporan', compact('laporanBencanas', 'content'))
-            ->setOption('orientation', 'landscape');
-        return $pdf->download('laporan-bencana.pdf');
+    foreach ($laporanBencanas as $laporan) {
+        $laporan->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $laporan->created_at)->setTimezone('Asia/Jakarta')->isoFormat('D MMMM YYYY, HH:mm:ss');
     }
+
+    $content = 'Data Kebencanaan Toba/' . Carbon::now()->formatLocalized('%A %e %B %Y') . '';
+
+    $pdf = PDF::loadView('admin.pdf.laporan', compact('laporanBencanas', 'content'))
+        ->setOption('orientation', 'landscape');
+
+    return $pdf->stream('Daftar Laporan Bencana.pdf');
+}
+
+
 
     public function indexAdmin(Request $request)
 {
@@ -403,7 +408,10 @@ public function getDesaByKecamatanadmin(Request $request)
 
     public function detailAdmin($id)
     {
-        $laporanBencana = LaporanBencana::find($id);
+        $laporanBencana = LaporanBencana::select('laporan_bencanas.*', 'kecamatans.nama_kecamatan', 'desas.nama_desa')
+            ->join('kecamatans', 'kecamatans.id', '=', 'laporan_bencanas.kecamatan_id')
+            ->join('desas', 'desas.id', '=', 'laporan_bencanas.desa_id')
+            ->find($id);
 
         if (!$laporanBencana) {
             return redirect()->route('laporan_bencana.index')->with('gagal', 'Data laporan bencana tidak ditemukan');
@@ -411,10 +419,23 @@ public function getDesaByKecamatanadmin(Request $request)
 
         return view('admin.laporan_bencana.detail', compact('laporanBencana'));
     }
+    // public function detailAdmin($id)
+    // {
+    //     $laporanBencana = LaporanBencana::find($id);
+
+    //     if (!$laporanBencana) {
+    //         return redirect()->route('laporan_bencana.index')->with('gagal', 'Data laporan bencana tidak ditemukan');
+    //     }
+
+    //     return view('admin.laporan_bencana.detail', compact('laporanBencana'));
+    // }
 
     public function detailPublic($id)
     {
-        $laporanBencana = LaporanBencana::find($id);
+        $laporanBencana = LaporanBencana::select('laporan_bencanas.*', 'kecamatans.nama_kecamatan', 'desas.nama_desa')
+            ->join('kecamatans', 'kecamatans.id', '=', 'laporan_bencanas.kecamatan_id')
+            ->join('desas', 'desas.id', '=', 'laporan_bencanas.desa_id')
+            ->find($id);
 
         if (!$laporanBencana) {
             return redirect()->route('laporan_bencana.index')->with('gagal', 'Data laporan bencana tidak ditemukan');
@@ -746,8 +767,12 @@ public function getDesaByKecamatanedit(Request $request)
         return redirect()->route('laporan_bencana.detail', $request->laporan_id);
     }
 
-    public function exportExcel()
-{
-    return Excel::download(new LaporanBencanaExport, 'laporan-bencana.xlsx');
-}
+    public function exportExcel(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        return Excel::download(new LaporanBencanaExport($startDate, $endDate), 'Daftar Laporan Bencana.xlsx');
+    }
+
 }

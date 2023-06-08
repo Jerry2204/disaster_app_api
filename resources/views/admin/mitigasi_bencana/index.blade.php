@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Rawan Bencana')
+@section('title', 'Mitigasi Bencana')
 
 @section('content')
     <!-- Page-header start -->
