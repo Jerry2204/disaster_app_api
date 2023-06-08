@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMitigasiBencanaRequest;
 use App\Http\Resources\MitigasiBencanasResource;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class MitigasiBencanaController extends Controller
 {
@@ -31,6 +32,12 @@ class MitigasiBencanaController extends Controller
 
         return view('admin.mitigasi_bencana.index', compact('mitigasiBencana'));
     }
+    // public function indexAdmin()
+    // {
+    //     $mitigasiBencana = MitigasiBencana::whereDate('created_at', '>', Carbon::now()->subDays(2))->paginate(10);
+
+    //     return view('admin.mitigasi_bencana.index', compact('mitigasiBencana'));
+    // }
 
     public function indexPublic()
     {

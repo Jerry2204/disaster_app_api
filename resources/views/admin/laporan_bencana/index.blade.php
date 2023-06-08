@@ -42,10 +42,10 @@
                 <div class="card p-3">
                     <div class="card-header">
                         @if (auth()->user()->role == 'tanggap_darurat')
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Tambah Laporan Bencana
-                        </button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Tambah Laporan Bencana
+                            </button>
                         @endif
 
                         <div class="card-header-right">
@@ -57,54 +57,108 @@
                                 <li><i class="icofont icofont-error close-card"></i></li>
                             </ul>
                         </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-2 col-sm-12">
+                            <select class="form-control" id="filter-jenis-bencana" name="jenis_bencana">
+                                <option value="Semua Jenis Bencana" id="all">Semua Jenis Bencana</option>
+                                @foreach ($laporanBencana->pluck('jenis_bencana')->unique() as $jenisBencana)
+                                    <option value="{{ $jenisBencana }}">{{ $jenisBencana }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm p-0" style="margin-left:3%">
-                                <select class="form-control" id="filter-jenis-bencana" name="jenis_bencana">
-                                    <option value="Semua Jenis Bencana" id="all">Semua Jenis Bencana</option>
-                                    @foreach ($laporanBencana->pluck('jenis_bencana')->unique() as $jenisBencana)
-                                        <option value="{{ $jenisBencana }}">{{ $jenisBencana }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm p-0" style="margin-left:3%">
-                                <select class="form-control" id="filter-kecamatan" name="kecamatan">
-                                    <option value="Semua Kecamatan" id="all">Semua Kecamatan</option>
-                                    @foreach ($laporanBencana->pluck('nama_kecamatan')->unique() as $kecamatan)
-                                        <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div >
-                                <a href="{{ route('laporan-bencana.export-pdf') }}" class="btn btn-primary"style="margin-left: 200%;margin-bottom:20%">Export PDF</a>
+                        <div class="col-lg-4 col-md-2 col-sm-12">
+                            <select class="form-control" id="filter-kecamatan" name="kecamatan">
+                                <option value="Semua Kecamatan" id="all">Semua Kecamatan</option>
+                                @foreach ($laporanBencana->pluck('nama_kecamatan')->unique() as $kecamatan)
+                                    <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <span></span>
+                      {{-- excel --}}
+                      <div class="modal fade" id="dateRangeModalExcel" tabindex="-1" role="dialog" aria-labelledby="dateRangeModalLabelExcel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="dateRangeModalLabelExcel">Pilih Rentang Tanggal</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('export-excel') }}" method="GET">
+                                        <div class="form-group">
+                                            <label for="start_date_excel">Mulai Tanggal:</label>
+                                            <input type="date" id="start_date_excel" name="start_date" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="end_date_excel">Sampai Tanggal:</label>
+                                            <input type="date" id="end_date_excel" name="end_date" class="form-control" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Download Excel</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-12">
+                        <button type="button" class="btn btn-primary" style="background-color: #1D6F42" data-toggle="modal" data-target="#dateRangeModalExcel">Download Excel</button>
+                    </div>
 
-                        {{-- <a href="/export-csv">Export to CSV</a> --}}
-
-
+                        <!--PDF-->
+                        <div class="modal fade" id="dateRangeModalPDF" tabindex="-1" role="dialog" aria-labelledby="dateRangeModalLabelPDF" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="dateRangeModalLabelPDF">Pilih Rentang Waktu</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="dateRangeFormPDF" action="{{ route('laporan-bencana.export-pdf') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="start_date_pdf">Mulai Tanggal:</label>
+                                                <input type="date" id="start_date_pdf" name="start_date" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="end_date_pdf">Sampai Tanggal:</label>
+                                                <input type="date" id="end_date_pdf" name="end_date" class="form-control">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" name="export_pdf">Download PDF</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-12">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#dateRangeModalPDF">Download PDF</a>
+                        </div>
+                    </div>
                     <div class="card-block table-border-style">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
-                                    <tr >
+                                    <tr>
                                         <th>No</th>
                                         <th>Tanggal Kejadian</th>
                                         <th>Nama Bencana</th>
                                         {{-- <th>Nomor Telepon</th> --}}
                                         <th>Kecamatan</th>
                                         <th>Desa</th>
-                                       <th>Status</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($laporanBencana as $item)
-                                    <tr class="task-list-row" data-jenis-bencana="{{ $item->jenis_bencana }}">
+                                        <tr class="task-list-row" data-jenis-bencana="{{ $item->jenis_bencana }}">
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
+                                            </td>
                                             {{-- <td>{{ $item->jenis_bencana }}</td> --}}
                                             <td>{{ $item->nama_bencana }}</td>
                                             {{-- <td>
@@ -112,25 +166,27 @@
                                                     {{ $item->nomor_telepon }}
                                                 </a>
                                               </td> --}}
-                                              <td>{{ $item->nama_kecamatan}}</td>
-                                              <td>{{ $item->nama_desa}}</td>
+                                            <td>{{ $item->nama_kecamatan }}</td>
+                                            <td>{{ $item->nama_desa }}</td>
                                             <td>
                                                 @if ($item->status == 'Menunggu')
-                                                <span class="badge badge-danger">{{ $item->status }}</span>
+                                                    <span class="badge badge-danger">{{ $item->status }}</span>
                                                 @elseif ($item->status == 'Diterima')
-                                                <span class="badge badge-info">{{ $item->status }}</span>
+                                                    <span class="badge badge-info">{{ $item->status }}</span>
                                                 @elseif ($item->status == 'Proses')
-                                                <span class="badge badge-warning">{{ $item->status }}</span>
+                                                    <span class="badge badge-warning">{{ $item->status }}</span>
                                                 @elseif ($item->status == 'Selesai')
-                                                <span class="badge badge-success">{{ $item->status }}</span>
+                                                    <span class="badge badge-success">{{ $item->status }}</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('laporan_bencana.detail', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                                                <a href="{{ route('laporan_bencana.detail', $item->id) }}"
+                                                    class="btn btn-sm btn-info">Lihat</a>
                                                 @if (auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'admin')
-                                                <button type="button" class="btn btn-sm btn-warning"
+                                                    <button type="button" class="btn btn-sm btn-warning"
                                                         id="modalEdit-{{ $item->id }}" data-toggle="modal"
-                                                        data-target="#modalEdit" data-jenis_bencana="{{ $item->jenis_bencana }}"
+                                                        data-target="#modalEdit"
+                                                        data-jenis_bencana="{{ $item->jenis_bencana }}"
                                                         data-keterangan="{{ $item->keterangan }}"
                                                         data-status_bencana="{{ $item->status_bencana }}"
                                                         data-nama_bencana="{{ $item->nama_bencana }}"
@@ -139,18 +195,23 @@
                                                     </button>
                                                     @if ($item->confirmed == true)
                                                         <!-- Button trigger modal -->
-                                                        <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
-                                                            <form action="{{ route('laporan_bencana.reject', $item->id) }}" id="reject{{ $item->id }}">
+                                                        <button class="btn btn-sm btn-danger delete"
+                                                            data-id="{{ $item->id }}">
+                                                            <form
+                                                                action="{{ route('laporan_bencana.reject', $item->id) }}"
+                                                                id="reject{{ $item->id }}">
                                                             </form>
                                                             Tolak
                                                         </button>
                                                     @else
-                                                        <a href="{{ route('laporan_bencana.confirm', $item->id) }}" class="btn btn-sm btn-success">Konfirmasi</a>
+                                                        <a href="{{ route('laporan_bencana.confirm', $item->id) }}"
+                                                            class="btn btn-sm btn-success">Konfirmasi</a>
                                                     @endif
-                                                    @elseif (auth()->user()->role == 'pasca_bencana')
-                                                   <a href="{{ route('dampak_bencana.edit', $item->id) }}" class="btn btn-sm btn-primary">
-                                                    Tambah Dampak Bencana
-                                                </a>
+                                                @elseif (auth()->user()->role == 'pasca_bencana')
+                                                    <a href="{{ route('dampak_bencana.edit', $item->id) }}"
+                                                        class="btn btn-sm btn-primary">
+                                                        Tambah Dampak Bencana
+                                                    </a>
                                                 @endif
                                                 {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('laporan_bencana.delete', $item->id) }}"
@@ -186,6 +247,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Laporan Bencana</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -209,14 +271,16 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="nama_bencana">Nama Bencana</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama_bencana" id="nama_bencana" class="form-control" placeholder="Masukkan nama bencana">
+                                <input type="text" name="nama_bencana" id="nama_bencana" class="form-control"
+                                    placeholder="Masukkan nama bencana">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="kecamatanSelect" class="col-sm-2 col-form-label">Kecamatan</label>
                             <div class="col-sm-10">
-                                <select name="kecamatan_id" class="form-control"  id="kecamatanSelect" aria-label="Floating label select example">
+                                <select name="kecamatan_id" class="form-control" id="kecamatanSelect"
+                                    aria-label="Floating label select example">
                                     <option value="">-- Pilih Kecamatan --</option>
                                     @foreach ($kecamatans as $kecamatan)
                                         <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
@@ -227,7 +291,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="desaSelect">Desa</label>
                             <div class="col-sm-10">
-                                <select name="desa_id" class="form-control" id="desaSelect" aria-label="Floating label select example">
+                                <select name="desa_id" class="form-control" id="desaSelect"
+                                    aria-label="Floating label select example">
                                     <option value="">-- Pilih Desa --</option>
                                 </select>
                             </div>
@@ -303,7 +368,8 @@
                         <div class="form-group row">
                             <label for="kecamatanSelect" class="col-sm-2 col-form-label">Kecamatan</label>
                             <div class="col-sm-10">
-                                <select name="kecamatans_id" class="form-control"  id="kecamatanSelects" aria-label="Floating label select example">
+                                <select name="kecamatans_id" class="form-control" id="kecamatanSelects"
+                                    aria-label="Floating label select example">
                                     <option value="">-- Pilih Kecamatan --</option>
                                     @foreach ($kecamatans as $kecamatan)
                                         <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
@@ -315,12 +381,13 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="desaSelect">Desa</label>
                             <div class="col-sm-10">
-                                <select name="desas_id" class="form-control" id="desaSelects" aria-label="Floating label select example">
+                                <select name="desas_id" class="form-control" id="desaSelects"
+                                    aria-label="Floating label select example">
                                     <option value="">-- Pilih Desa --</option>
                                 </select>
                             </div>
                         </div>
-                             <div class="form-group row">
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                             <div class="col-sm-10">
                                 <textarea id="keterangan" rows="5" cols="5" class="form-control" name="keterangan"
@@ -393,96 +460,97 @@
             })
         })
     </script>
-  <script>
-    $('#filter-jenis-bencana').on('change', function() {
-        var jenisBencana = this.value;
+    <script>
+        $('#filter-jenis-bencana').on('change', function() {
+            var jenisBencana = this.value;
 
-        if (jenisBencana === 'Semua Jenis Bencana') {
-            $('.task-list-row').show();
-        } else {
-            $('.task-list-row').hide().filter(function() {
-                return $(this).data('jenis-bencana') === jenisBencana;
-             }).show();
-        }
-    });
-
-    $('#filter-kecamatan').on('change', function() {
-        var kecamatan = this.value;
-
-        if (kecamatan === 'Semua Kecamatan') {
-            $('.task-list-row').show(); // Menampilkan semua baris jika 'Semua Kecamatan' dipilih
-        } else {
-            $('.task-list-row').hide().filter(function() {
-                return $(this).data('kecamatan-id') === kecamatan; // Menyembunyikan baris yang tidak sesuai dengan kecamatan yang dipilih
-            }).show();
-        }
-    });
-</script>
-<script>
-    function getDesaByKecamatanadmin(kecamatanId) {
-        $.ajax({
-            url: '/get-desa-by-kecamatan',
-            method: 'GET',
-            data: {
-                kecamatan_id: kecamatanId
-            },
-            success: function(response) {
-
-                $('#desaSelect').empty();
-
-
-                response.forEach(function(desa) {
-                    $('#desaSelect').append($('<option>', {
-                        value: desa.id,
-                        text: desa.nama_desa
-                    }));
-                });
-            },
-            error: function(xhr) {
-                console.log(xhr.responseText);
+            if (jenisBencana === 'Semua Jenis Bencana') {
+                $('.task-list-row').show();
+            } else {
+                $('.task-list-row').hide().filter(function() {
+                    return $(this).data('jenis-bencana') === jenisBencana;
+                }).show();
             }
         });
-    }
 
+        $('#filter-kecamatan').on('change', function() {
+            var kecamatan = this.value;
 
-    $('#kecamatanSelect').change(function() {
-        var kecamatanId = $(this).val();
-        getDesaByKecamatanadmin(kecamatanId);
-    });
-</script>
-{{-- ubah --}}
-<script>
-    function getDesaByKecamatanedit(kecamatanId) {
-        $.ajax({
-            url: '/get-desa-by-kecamatans',
-            method: 'GET',
-            data: {
-                kecamatans_id: kecamatanId
-            },
-            success: function(response) {
-
-                $('#desaSelects').empty();
-
-
-                response.forEach(function(desa) {
-                    $('#desaSelects').append($('<option>', {
-                        value: desa.id,
-                        text: desa.nama_desa
-                    }));
-                });
-            },
-            error: function(xhr) {
-                console.log(xhr.responseText);
+            if (kecamatan === 'Semua Kecamatan') {
+                $('.task-list-row').show(); // Menampilkan semua baris jika 'Semua Kecamatan' dipilih
+            } else {
+                $('.task-list-row').hide().filter(function() {
+                    return $(this).data('kecamatan-id') ===
+                        kecamatan; // Menyembunyikan baris yang tidak sesuai dengan kecamatan yang dipilih
+                }).show();
             }
         });
-    }
+    </script>
+    <script>
+        function getDesaByKecamatanadmin(kecamatanId) {
+            $.ajax({
+                url: '/get-desa-by-kecamatan',
+                method: 'GET',
+                data: {
+                    kecamatan_id: kecamatanId
+                },
+                success: function(response) {
+
+                    $('#desaSelect').empty();
 
 
-    $('#kecamatanSelects').change(function() {
-        var kecamatanId = $(this).val();
-        getDesaByKecamatanedit(kecamatanId);
-    });
-</script>
+                    response.forEach(function(desa) {
+                        $('#desaSelect').append($('<option>', {
+                            value: desa.id,
+                            text: desa.nama_desa
+                        }));
+                    });
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+
+        $('#kecamatanSelect').change(function() {
+            var kecamatanId = $(this).val();
+            getDesaByKecamatanadmin(kecamatanId);
+        });
+    </script>
+    {{-- ubah --}}
+    <script>
+        function getDesaByKecamatanedit(kecamatanId) {
+            $.ajax({
+                url: '/get-desa-by-kecamatans',
+                method: 'GET',
+                data: {
+                    kecamatans_id: kecamatanId
+                },
+                success: function(response) {
+
+                    $('#desaSelects').empty();
+
+
+                    response.forEach(function(desa) {
+                        $('#desaSelects').append($('<option>', {
+                            value: desa.id,
+                            text: desa.nama_desa
+                        }));
+                    });
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+
+        $('#kecamatanSelects').change(function() {
+            var kecamatanId = $(this).val();
+            getDesaByKecamatanedit(kecamatanId);
+        });
+    </script>
 
 
 @endsection

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Models\PeringatanDini;
 use App\Http\Requests\StorePeringatanDiniRequest;
 use App\Http\Requests\UpdatePeringatanDiniRequest;
@@ -22,12 +22,21 @@ class PeringatanDiniController extends Controller
         );
     }
 
+
     public function indexAdmin()
     {
-        $peringatanDini = PeringatanDini::paginate(10);
+       $peringatanDini = PeringatanDini::latest()->paginate(10);
 
         return view('admin.peringatan_dini.index', compact('peringatanDini'));
     }
+
+    // public function indexAdmin()
+    // {
+    //     $peringatanDini = PeringatanDini::whereDate('created_at', '>', Carbon::now()->subDays(30))->paginate(10);
+
+    //     return view('admin.peringatan_dini.index', compact('peringatanDini'));
+    //     }
+
 
     /**
      * Show the form for creating a new resource.

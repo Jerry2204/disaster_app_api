@@ -77,8 +77,8 @@
                             <div class="text-center">
                                 <img src="{{ asset('admin/images/logo_bpbd.png') }}" alt="logo.png" style="width: 90px; height: 90px;">
                             </div>
-                            <strong class="text-black" style="font-size: 20px">Badan Penanggulangan Bencana Daerah</strong>
-                            <h5 style="color:#000000">Kabupaten Toba</h5>
+                            <strong class="text-black" style="font-size: 20px">Badan Penanggulangan Bencana Daerah Kabupaten Toba</strong>
+                            <h5 style="color:#000000"></h5>
                             <div class="auth-box">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">

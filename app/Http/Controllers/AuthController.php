@@ -35,12 +35,12 @@ class AuthController extends Controller
 
         if (!User::where('email', $request->email)->exists()) {
             return back()->withErrors([
-                'email' => 'Username/Email yang anda isi tidak tepat! Coba lagi!',
+                'email' => 'Username/Email yang Anda masukkan tidak sesuai. Silahkan coba lagi',
             ])->onlyInput('email');
         }
 
         return back()->withErrors([
-            'password' => 'Password yang anda isi tidak tepat! Coba lagi!',
+            'password' => 'Password yang Anda masukkan tidak sesuai. Silahkan coba lagi',
         ])->onlyInput('email');
     }
 
@@ -119,6 +119,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('login');
+        return redirect('/');
     }
 }

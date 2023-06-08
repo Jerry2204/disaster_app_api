@@ -121,7 +121,7 @@
 
                 </div>
                 <br>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h6>BPBD Kabupaten Toba</h6>
                     <p>JL DI. Panjaitan, Toba Samosir, Balige, Sumatera Utara, Indonesia.</p>
                 </div>
@@ -142,7 +142,7 @@
                         <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2 text-center">
+                <div class="col-md-1 text-center">
 
                     {{-- <img class="logo" src="{{ asset('image/toba.png') }}"
                         alt="Logo Tidak ditemukan"style="width: 80px; height: 120px;">

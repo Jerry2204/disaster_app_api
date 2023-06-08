@@ -80,14 +80,14 @@
                                                     data-target="#modalEdit" data-lokasi="{{ $item->lokasi }}" data-tanggal="{{ $item->tanggal }}" data-deskripsi="{{ $item->deskripsi }}" data-peringatan_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
-                                                <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('peringatan_dini.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
                                                     Hapus
-                                                </button>
+                                                </button> --}}
                                             </td>
                                         </tr>
                                     @empty
@@ -130,7 +130,7 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="form-group {{ $errors->has('lokasi') ? 'has-danger' : '' }} row">
                             <label class="col-sm-2 col-form-label" for="lokasi">Lokasi</label>
                             <div class="col-sm-10">

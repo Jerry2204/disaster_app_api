@@ -79,8 +79,8 @@
                                     style="width: 90px; height: 90px;">
                             </div>
                             <strong class="text-black" style="font-size: 20px">Badan Penanggulangan Bencana
-                                Daerah</strong>
-                            <h5 class="text-center" style="color:#000000">Kabupaten Toba</h5>
+                                Daerah Kabupaten Toba</strong>
+                            <h5 class="text-center" style="color:#000000"></h5>
                             <div class="auth-box" style="width: 400px;">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
@@ -166,25 +166,26 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="input-group">
+                                {{-- <div class="input-group">
                                     <span class="md-line"></span>
                                     <div class="input-group-append">
                                         <span class="text-left" id="error-message" style="color: red;"></span>
                                     </div>
                                 </div>
-                                <span class="text-left" id="error-message" style="color: red;"></span>
+                                <span class="text-left" id="error-message" style="color: red;"></span> --}}
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit"
                                             class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Daftar</button>
                                     </div>
                                 </div>
+                                <p class="mb-0 text-left text-center"> <a
+                                                href="{{'/'}}" style="color: blue; text-decoration: blue red;">Kembali Ke Beranda</a>
+                                        </p>
                             </div>
                         </form>
 
-
-
-                        <script>
+                       <script>
                             //Validasi Password
                             document.getElementById('togglePassword').addEventListener('click', function() {
                                 var passwordInput = document.getElementsByName('password')[0];

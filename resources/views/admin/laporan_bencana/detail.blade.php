@@ -14,7 +14,7 @@
                     <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
                     <div class="d-inline">
                         <h4>Laporan Bencana</h4>
-                        <span>Daftar Laporan Bencana</span>
+                        <span>Detail Laporan Bencana</span>
                     </div>
                 </div>
             </div>
@@ -104,7 +104,9 @@
                                     Lokasi:
                                 </p>
                                 <b>
-                                    {{ $laporanBencana->lokasi }}
+
+                                        Desa {{ $laporanBencana->nama_desa }},Kecamatan {{ $laporanBencana->nama_kecamatan }}
+
                                 </b>
                                 <p class="mb-0 mt-3">
                                     Status Bencana:

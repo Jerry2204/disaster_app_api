@@ -29,7 +29,7 @@
     <table>
         <thead>
             <tr>
-                <th rowspan="2">Tanggal Kejadian</th>
+                {{-- <th rowspan="2">Tanggal Kejadian</th> --}}
                 <th rowspan="2">Nama Bencana</th>
                 <th rowspan="2">Jenis Bencana</th>
                 <th rowspan="2">Desa</th>
@@ -52,7 +52,7 @@
             @foreach ($laporanBencanas as $item)
 
             <tr>
-                <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}</td>
+                {{-- <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}</td> --}}
                 <td>{{ $item->nama_bencana }}</td>
                 <td>{{ $item->jenis_bencana }}</td>
                 <td>{{ $item->nama_desa }}</td>

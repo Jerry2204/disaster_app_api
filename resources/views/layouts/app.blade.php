@@ -265,30 +265,30 @@
                 });
         </script>
 
-        <script>
-            Pusher.logToConsole = true;
+<script>
+    Pusher.logToConsole = true;
 
-            var pusher = new Pusher('08583ec192b21489bdb9', {
-                cluster: 'ap1'
-            });
+    var pusher = new Pusher('YOUR_PUSHER_API_KEY', {
+        cluster: 'ap1'
+    });
 
-            var channel = pusher.subscribe('popup-channel');
-            channel.bind('report-inserted', function(data) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    title: 'Laporan Baru',
-                    text: `Telah terjadi ${data.name.nama_bencana} di ${data.name.kecamatan}`,
-                    showConfirmButton: true,
-                    timer: 10000,
-                    confirmButtonText: 'Lihat Laporan',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = `{{ env('APP_URL') }}/laporan/bencana/${data.name.id}`;
-                    }
-                })
-            });
-        </script>
+    var channel = pusher.subscribe('popup-channel');
+    channel.bind('report-inserted', function(data) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Laporan Baru',
+            text: `Telah terjadi ${data.name.nama_bencana} di ${data.name.nama_desa}`,
+            showConfirmButton: true,
+            timer: 10000,
+            confirmButtonText: 'Lihat Laporan',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `{{ env('APP_URL') }}/laporan/bencana/${data.name.id}`;
+            }
+        })
+    });
+</script>
 
         <script>
             function sendMarkRequest(id = null) {
