@@ -60,6 +60,28 @@ class LaporanBencanaController extends Controller
     }
     public function exportPDF(Request $request)
 {
+    if ($request->input('start_date') == null || $request->input('end_date') == null) {
+
+        $laporanBencanas = DB::table('laporan_bencanas')
+            ->select('laporan_bencanas.*', 'korbans.*', 'kerusakans.*', 'desas.*', 'kecamatans.*')
+            ->leftJoin('kerusakans', 'laporan_bencanas.id', '=', 'kerusakans.laporan_bencana_id')
+            ->join('korbans', 'korbans.id', '=', 'laporan_bencanas.korban_id')
+            ->join('desas', 'laporan_bencanas.desa_id', '=', 'desas.id')
+            ->join('kecamatans', 'laporan_bencanas.kecamatan_id', '=', 'kecamatans.id')
+            ->get();
+
+        foreach ($laporanBencanas as $laporan) {
+            $laporan->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $laporan->created_at)->setTimezone('Asia/Jakarta')->isoFormat('D MMMM YYYY, HH:mm:ss');
+        }
+
+        $content = 'Data Kebencanaan Toba/' . Carbon::now()->formatLocalized('%A %e %B %Y') . '';
+
+        $pdf = PDF::loadView('admin.pdf.laporan', compact('laporanBencanas', 'content'))
+            ->setOption('orientation', 'landscape');
+
+        return $pdf->stream('Daftar Laporan Bencana.pdf');
+    }
+
     $startDate = Carbon::createFromFormat('Y-m-d', $request->input('start_date'))->startOfDay();
     $endDate = Carbon::createFromFormat('Y-m-d', $request->input('end_date'))->endOfDay();
 

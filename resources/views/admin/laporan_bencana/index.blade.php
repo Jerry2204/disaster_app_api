@@ -93,12 +93,12 @@
                                             <div class="form-group">
                                                 <label for="start_date_excel">Mulai Tanggal:</label>
                                                 <input type="date" id="start_date_excel" name="start_date"
-                                                    class="form-control" required>
+                                                    class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="end_date_excel">Sampai Tanggal:</label>
                                                 <input type="date" id="end_date_excel" name="end_date"
-                                                    class="form-control" required>
+                                                    class="form-control">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Download Excel</button>
                                         </form>

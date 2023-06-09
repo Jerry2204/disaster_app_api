@@ -11,7 +11,7 @@ class LaporanBencanaExport implements FromQuery, WithHeadings
     protected $startDate;
     protected $endDate;
 
-    public function __construct($startDate, $endDate)
+    public function __construct($startDate = null, $endDate = null)
     {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
@@ -19,6 +19,10 @@ class LaporanBencanaExport implements FromQuery, WithHeadings
 
     public function query()
     {
+        if($this->startDate == null || $this->endDate == null) {
+            return LaporanBencana::query();
+        }
+
         return LaporanBencana::query()
             ->whereBetween('created_at', [$this->startDate . ' 00:00:00', $this->endDate . ' 23:59:59']);
     }
