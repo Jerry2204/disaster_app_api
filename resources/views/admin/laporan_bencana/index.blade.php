@@ -41,7 +41,7 @@
             <div class="col-sm-12">
                 <div class="card p-3">
                     <div class="card-header">
-                        @if (auth()->user()->role == 'tanggap_darurat')
+                        @if (auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'admin')
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Tambah Laporan Bencana
