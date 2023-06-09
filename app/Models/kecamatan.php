@@ -25,6 +25,6 @@ class Kecamatan extends Model
     }
 
     public function laporanBencana() {
-        return $this->hasMany(Kecamatan::class,'kecamatan_id');
+        return $this->hasMany(kecamatan::class,'kecamatan_id');
     }
 }

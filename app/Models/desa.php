@@ -22,7 +22,7 @@ class desa extends Model
     }
 
     public function kecamatan() {
-        return $this->belongsTo(Kecamatan::class);
+        return $this->belongsTo(kecamatan::class);
     }
 
 
