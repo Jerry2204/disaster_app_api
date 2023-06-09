@@ -161,7 +161,7 @@
             <div class="container">
                 <div class="col-md-12 mt-5 mb-5">
                     <div class="my-5">
-                        <h3 class="mb-5 text-white text-center">Pengumuman</h3>
+                        <h3 class="mb-5 text-white text-center">Artikel</h3>
                         <div class="row">
                             @foreach ($newestArtikel as $item)
                                 <div class="col-md-3 mb-3">
