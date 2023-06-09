@@ -13,7 +13,7 @@ use App\Http\Resources\LaporanBencanasResource;
 use App\Models\Kerusakan;
 use App\Models\KontakDarurat;
 use App\Models\kecamatan;
-use App\Models\Desa;
+use App\Models\desa;
 use App\Models\Korban;
 use App\Mail\Laporan;
 use App\Models\StatusPenanggulangan;
@@ -373,7 +373,7 @@ public function addAdmin(StoreLaporanBencanaRequest $request)
 public function getDesaByKecamatanadmin(Request $request)
 {
     $kecamatanId = $request->input('kecamatan_id');
-    $desas = Desa::where('kecamatan_id', $kecamatanId)->get();
+    $desas = desa::where('kecamatan_id', $kecamatanId)->get();
     return response()->json($desas);
 }
     public function publicAdd()
@@ -494,7 +494,7 @@ public function getDesaByKecamatanadmin(Request $request)
 public function getDesaByKecamatanedit(Request $request)
 {
     $kecamatanId = $request->input('kecamatan_id');
-    $desas = Desa::where('kecamatan_id', $kecamatanId)->get();
+    $desas = desa::where('kecamatan_id', $kecamatanId)->get();
     return response()->json($desas);
 }
     public function updateAdmin(UpdateLaporanBencanaRequest $request)
