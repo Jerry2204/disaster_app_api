@@ -580,7 +580,7 @@ public function getDesaByKecamatanedit(Request $request)
             ]);
 
             $status_penanggulangan->update([
-                'status' => 'menunggu'
+                'status' => 'Ditolak'
             ]);
 
             return redirect()->back()->with('sukses', 'Laporan ditolak');
