@@ -41,7 +41,7 @@
             <div class="col-sm-12">
                 <div class="card p-3">
                     <div class="card-header">
-                        @if (auth()->user()->role == 'tanggap_darurat')
+                        @if (auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'admin')
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Tambah Laporan Bencana
@@ -93,12 +93,12 @@
                                             <div class="form-group">
                                                 <label for="start_date_excel">Mulai Tanggal:</label>
                                                 <input type="date" id="start_date_excel" name="start_date"
-                                                    class="form-control" required>
+                                                    class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="end_date_excel">Sampai Tanggal:</label>
                                                 <input type="date" id="end_date_excel" name="end_date"
-                                                    class="form-control" required>
+                                                    class="form-control">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Download Excel</button>
                                         </form>

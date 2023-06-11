@@ -80,14 +80,14 @@
             @if (auth()->user()->role == 'admin' )
             <li>
                 <a href="{{ route('kecamatan.index') }}">
-                    <span class="pcoded-micon"><i class="fa fa-warning"></i><b>D</b></span>
+                    <span class="pcoded-micon"><i class="ti-direction"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Kecamatan</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('desa.index') }}">
-                    <span class="pcoded-micon"><i class="fa fa-warning"></i><b>D</b></span>
+                    <span class="pcoded-micon"><i class="ti-map-alt"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Desa</span>
                     <span class="pcoded-mcaret"></span>
                 </a>

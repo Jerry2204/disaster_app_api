@@ -19,12 +19,12 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
-                'name' => 'Jerry Andrianto Pangaribuan',
-                'email' => 'jerryandrianto22@gmail.com',
+                'name' => 'Admin BPBD',
+                'email' => 'adminbpbd@gmail.com',
                 'tanggal_lahir' => '1999-04-18',
                 'nomor_telepon'=>'082274221345',
-                'username' => 'jerry2204',
-                'password' => Hash::make('jerry123'),
+                'username' => 'adminbpbd',
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'created_at' => Date::now(),
                 'updated_at' => Date::now()

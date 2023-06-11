@@ -131,15 +131,15 @@
 
                             @csrf
                             <div class="form-floating mb-3 ">
-                                <select name="jenis_bencana" class="form-select" id="floatingSelectt"
+                                <select name="jenis_bencana" class="form-select" id="jenis_bencana"
                                     aria-label="Floating label select example">
                                     <option value="">-- Pilih Jenis Bencana --</option>
                                     <option value="bencana alam">Bencana Alam</option>
                                     <option value="bencana non alam">Bencana Non Alam</option>
                                     <option value="bencana sosial">Bencana Sosial</option>
                                 </select>
-                                <label for="floatingSelectt">Jenis Bencana <span class="required-field">*</span></label>
-                                <label for="floatingSelectt">Jenis Bencana</label>
+                                <label for="jenis_bencana">Jenis Bencana <span class="required-field">*</span></label>
+                                <label for="jenis_bencana">Jenis Bencana</label>
                             </div>
 
                             <div class="form-floating mb-3">
@@ -148,14 +148,14 @@
                                 <label for="nama_bencana">Nama Bencana<span class="required-field">*</span></label>
                             </div>
                             <div class="form-floating mb-3">
-                                <select name="kecamatan_id" class="form-select" id="kecamatanSelect"
+                                <select name="kecamatan_id" class="form-select" id="kecamatan_id"
                                     aria-label="Floating label select example">
                                     <option value=""disabled selected>-- Pilih Kecamatan --</option>
                                     @foreach ($kecamatans as $kecamatan)
                                         <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
                                     @endforeach
                                 </select>
-                                <label for="kecamatanSelect">Kecamatan<span class="required-field">*</span></label>
+                                <label for="kecamatan_id">Kecamatan<span class="required-field">*</span></label>
                             </div>
                             <div class="form-floating mb-3">
                                 <select name="desa_id" class="form-select" id="desaSelect"
@@ -176,7 +176,7 @@
                         <input name="gambar" class="form-control form-control-sm" id="gambar" type="file"
                             accept="image/*">
                     </div>
-                    <button type="submit" class="btn btn-primary"
+                    <button type="button" class="btn btn-primary"
                         onclick="laporkan()"style="width: 100%">Laporkan</button>
                     </div>
                     </form>
@@ -214,10 +214,10 @@
                     </script>
                     <script>
                         function laporkan() {
-                            var jenisBencana = document.getElementById("floatingSelectt").value;
+                            var jenisBencana = document.getElementById("jenis_bencana").value;
                             var namaBencana = document.getElementById("nama_bencana").value;
                             var keterangan = document.getElementById("keterangan").value;
-                            var kecamatan = document.getElementById("ecamatanSelect").value;
+                            var kecamatan = document.getElementById("kecamatan_id").value;
                             var desa = document.getElementById("desaSelect").value;
 
 
@@ -240,7 +240,7 @@
                         }
                     </script>
                     <script>
-                        $('#floatingSelectt').change(function() {
+                        $('#kecamatan_id').change(function() {
                             var kecamatanId = $(this).val();
                             getDesaByKecamatan(kecamatanId);
                         });
