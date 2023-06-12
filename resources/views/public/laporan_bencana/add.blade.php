@@ -75,7 +75,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link active border btn " id="pills-home-tab" data-bs-toggle="pill"
                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                    aria-selected="true">Lapor
+                    aria-selected="true">Lapor Dengan Form
                 </button>
             </li>
 

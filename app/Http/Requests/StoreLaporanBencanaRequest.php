@@ -27,7 +27,7 @@ class StoreLaporanBencanaRequest extends FormRequest
             'jenis_bencana' => ['required'],
             'nama_bencana' => ['required'],
             'keterangan' => ['required'],
-            'file' => ['required'],
+            'file' => [''],
             'desa_id' => ['required'],
             'kecamatan_id' => ['required']
         ];

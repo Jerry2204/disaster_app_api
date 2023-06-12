@@ -182,13 +182,15 @@
                                             <td>{{ $item->nama_desa }}</td>
                                             <td>
                                                 @if ($item->status == 'Menunggu')
-                                                    <span class="badge badge-danger">{{ $item->status }}</span>
+                                                    <span class="badge badge-secondary">{{ $item->status }}</span>
                                                 @elseif ($item->status == 'Diterima')
                                                     <span class="badge badge-info">{{ $item->status }}</span>
                                                 @elseif ($item->status == 'Proses')
                                                     <span class="badge badge-warning">{{ $item->status }}</span>
                                                 @elseif ($item->status == 'Selesai')
                                                     <span class="badge badge-success">{{ $item->status }}</span>
+                                                    @elseif ($item->status == 'Ditolak')
+                                                    <span class="badge badge-danger">{{ $item->status }}</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -207,17 +209,17 @@
                                                     </button>
                                                     @if ($item->confirmed == true)
                                                         <!-- Button trigger modal -->
-                                                        <button class="btn btn-sm btn-danger delete"
+                                                        {{-- <button class="btn btn-sm btn-danger delete"
                                                             data-id="{{ $item->id }}">
                                                             <form
                                                                 action="{{ route('laporan_bencana.reject', $item->id) }}"
                                                                 id="reject{{ $item->id }}">
                                                             </form>
                                                             Tolak
-                                                        </button>
-                                                    @else
+                                                        </button> --}}
+                                                    {{-- @else
                                                         <a href="{{ route('laporan_bencana.confirm', $item->id) }}"
-                                                            class="btn btn-sm btn-success">Konfirmasi</a>
+                                                            class="btn btn-sm btn-success">Konfirmasi</a> --}}
                                                     @endif
                                                 @elseif (auth()->user()->role == 'pasca_bencana')
                                                     <a href="{{ route('dampak_bencana.edit', $item->id) }}"
@@ -377,24 +379,28 @@
                                     placeholder="Masukkan nama bencana">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-2 col-sm-12">
-                                <select class="form-control" id="filter-jenis-bencana" name="jenis_bencana">
-                                    <option value="Semua Jenis Bencana" id="all">Semua Jenis Bencana</option>
-                                    @foreach ($laporanBencana->pluck('jenis_bencana')->unique() as $jenisBencana)
-                                        <option value="{{ $jenisBencana }}">{{ $jenisBencana }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-lg-4 col-md-2 col-sm-12">
-                                <select class="form-control" id="filter-kecamatan" name="kecamatan_id">
-                                    <option value="Semua Kecamatan" id="all">Semua Kecamatan</option>
-                                    @foreach ($laporanBencana->pluck('nama_kecamatan')->unique() as $kecamatan)
-                                        <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="kecamatanSelect">Kecamatan</label>
+                            <div class="col-sm-10">
+                                <select name="kecamatan_id" class="form-control" id="kecamatanSelect"
+                                    aria-label="Floating label select example">
+                                    <option value="">-- Pilih Kecamatan --</option>
+                                    @foreach ($kecamatans as $kecamatan)
+                                        <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="desaSelect">Desa</label>
+                            <div class="col-sm-10">
+                                <select name="desa_id" class="form-control" id="desaSelect"
+                                aria-label="Floating label select example">
+                                <option value="">-- Pilih Desa --</option>
+                            </select>
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>

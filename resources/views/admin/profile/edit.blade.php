@@ -5,7 +5,7 @@
 @section('content')
     <div class="card" style="min-height: 550px">
         <div class="card-header text-center">
-            <h5>My Profile</h5>
+            <h5>Profil Saya</h5>
             <span>{{ auth()->user()->name }}</span>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option" style="width: 35px;">

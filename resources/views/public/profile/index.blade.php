@@ -1,6 +1,6 @@
 @extends('public.layout.app')
 
-@section('title', 'Profil')
+@section('title', 'Profil BPBD')
 
 @section('content')
     <div class="container">

@@ -591,39 +591,52 @@ public function getDesaByKecamatanedit(Request $request)
 
     }
 
-    public function rejectAdmin($id)
+    public function rejectAdmin(Request $request, $id)
     {
         $bencana = LaporanBencana::find($id);
         $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
 
-        if ($bencana) {
-            $bencana->update([
-                'confirmed' => false
-            ]);
+        $validatedData = $request->validate([
+            'alasan_penolakan' => 'required'
+        ], [
+            'alasan_penolakan.required' => 'Alasan penolakan harus diisi'
+        ]);
 
+        if ($bencana) {
             $status_penanggulangan->update([
-                'status' => 'menunggu'
+                'confirmed' => 'proses',
+                'alasan_penolakan' => $validatedData['alasan_penolakan'],
+                'status' => 'Ditolak'
             ]);
 
             return redirect()->back()->with('sukses', 'Laporan ditolak');
         }
 
-        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
 
+        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
     }
+
+
 
     public function processAdmin(Request $request, $id)
     {
         $bencana = LaporanBencana::find($id);
         $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
 
+        $validatedData = $request->validate([
+            'alasan_penolakan' => 'required'
+        ], [
+            'alasan_penolakan.required' => 'Alasan penolakan harus diisi'
+        ]);
+
         if ($bencana) {
             $status_penanggulangan->update([
-                'status' => 'proses',
-                'petugas' => $request->petugas
+                'confirmed' => 'proses',
+                'alasan_penolakan' => $validatedData['alasan_penolakan'],
+                'status' => 'Ditolak'
             ]);
 
-            return redirect()->back()->with('sukses', 'Laporan diproses');
+            return redirect()->back()->with('sukses', 'Laporan ditolak');
         }
 
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
