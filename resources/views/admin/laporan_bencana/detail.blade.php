@@ -46,23 +46,45 @@
                         <h5>{{ $laporanBencana->nama_bencana }}</h5>
                         <span>{{ $laporanBencana->jenis_bencana }}</span>
                         @if (auth()->user()->role == 'tanggap_darurat' || auth()->user()->role == 'admin')
-                        @if ($laporanBencana->status_penanggulangan->status == 'Menunggu')
-                        <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}" class="btn btn-sm btn-success">
+                            @if ($laporanBencana->status_penanggulangan->status == 'Menunggu')
+                                <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}"
+                                    class="btn btn-sm btn-success">
+                                    Konfirmasi
+                                </a>
+
+                                {{-- <button class="btn btn-sm btn-danger delete"
+                                                            data-id="{{ $item->id }}">
+                                                            <form
+                                                                action="{{ route('laporan_bencana.reject', $item->id) }}"
+                                                                id="reject{{ $item->id }}">
+                                                            </form>
+                                                            Tolak
+                                                        </button> --}}
+                                <a href="{{ route('laporan_bencana.reject', $laporanBencana->id) }}"
+                                    class="btn btn-sm btn-danger"data-toggle="modal" data-target="#tolakModal">
+                                    Tolak
+                                </a>
+
+                                {{-- @elseif ($laporanBencana->status_penanggulangan->status == 'Ditolak')
+                        <a href="{{ route('laporan_bencana.confirm', $laporanBencana->id) }}" class="btn btn-sm btn-secondary">
                             Konfirmasi
-                        </a>
-                        @elseif ($laporanBencana->status_penanggulangan->status == 'Proses')
-                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
-                            Selesai
-                        </button>
-                        @elseif ($laporanBencana->status_penanggulangan->status == 'Diterima')
-                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">
-                            Proses Laporan
-                        </button>
-                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesaiModal">
-                            Selesai
-                        </button>
-                        @else
-                        @endif
+                        </a> --}}
+                            @elseif ($laporanBencana->status_penanggulangan->status == 'Proses')
+                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
+                                    data-target="#selesaiModal">
+                                    Selesai
+                                </button>
+                            @elseif ($laporanBencana->status_penanggulangan->status == 'Diterima')
+                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    Proses Laporan
+                                </button>
+                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
+                                    data-target="#selesaiModal">
+                                    Selesai
+                                </button>
+                            @else
+                            @endif
                         @endif
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option" style="width: 35px;">
@@ -85,7 +107,7 @@
                                     <div class="badge badge-success">
                                         {{ $laporanBencana->status_penanggulangan->status }}</div>
                                 @elseif ($laporanBencana->status_penanggulangan->status == 'Menunggu')
-                                    <div class="badge badge-danger">{{ $laporanBencana->status_penanggulangan->status }}
+                                    <div class="badge badge-secondary">{{ $laporanBencana->status_penanggulangan->status }}
                                     </div>
                                 @elseif ($laporanBencana->status_penanggulangan->status == 'Diterima')
                                     <div class="badge badge-info">{{ $laporanBencana->status_penanggulangan->status }}
@@ -93,6 +115,22 @@
                                 @elseif ($laporanBencana->status_penanggulangan->status == 'Proses')
                                     <div class="badge badge-warning">
                                         {{ $laporanBencana->status_penanggulangan->status }}</div>
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'Ditolak')
+                                    <div class="badge badge-danger">
+                                        {{ $laporanBencana->status_penanggulangan->status }}</div>
+                                        <p class="mb-0 mt-3">
+                                            Alasan Penolakan:
+                                        </p>
+                                        <b>
+                                         {{ $laporanBencana->status_penanggulangan->alasan_penolakan}}
+                                        </b>
+
+                                        <p class="mb-0 mt-3">
+                                            Lokasi:
+                                        </p>
+                                        <b>
+                                            Desa {{ $laporanBencana->nama_desa }},Kecamatan {{ $laporanBencana->nama_kecamatan }}
+                                        </b>
                                 @endif
                                 <p class="mb-0 mt-3">
                                     Tanggal:
@@ -105,7 +143,7 @@
                                 </p>
                                 <b>
 
-                                        Desa {{ $laporanBencana->nama_desa }},Kecamatan {{ $laporanBencana->nama_kecamatan }}
+                                    Desa {{ $laporanBencana->nama_desa }},Kecamatan {{ $laporanBencana->nama_kecamatan }}
 
                                 </b>
                                 <p class="mb-0 mt-3">
@@ -232,66 +270,104 @@
     <!-- Page body end -->
 
     {{-- Modal Proses --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Proses Laporan</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="{{ route('laporan_bencana.process', $laporanBencana->id) }}" method="post">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="petugas">Petugas</label>
-                        <input id="petugas" name="petugas" class="form-control" type="text" placeholder="Masukkan nama petugas">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Proses Laporan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('laporan_bencana.process', $laporanBencana->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="petugas">Petugas</label>
+                            <input id="petugas" name="petugas" class="form-control" type="text"
+                                placeholder="Masukkan nama petugas">
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-          </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
+    </div>
 
-      {{-- Modal Selesai --}}
-      <div class="modal fade" id="selesaiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- Modal Selesai --}}
+    <div class="modal fade" id="selesaiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Laporan Selesai</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('laporan_bencana.complete', $laporanBencana->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Petugas">Petugas</label>
+                            <input id="Petugas" class="form-control" type="text" name="petugas"
+                                placeholder="Masukkan nama petugas"
+                                value="{{ $laporanBencana->status_penanggulangan->petugas ? $laporanBencana->status_penanggulangan->petugas : '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="keterangan">Keterangan</label>
+                            <textarea id="keterangan" class="form-control" name="keterangan" rows="5" placeholder="Masukkan keterangan"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tindakan">Tindakan</label>
+                            <textarea id="tindakan" class="form-control" name="tindakan" rows="5" placeholder="Masukkan tindakan"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
-            <form action="{{ route('laporan_bencana.complete', $laporanBencana->id) }}" method="post">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="Petugas">Petugas</label>
-                        <input id="Petugas" class="form-control" type="text" name="petugas" placeholder="Masukkan nama petugas" value="{{ $laporanBencana->status_penanggulangan->petugas ? $laporanBencana->status_penanggulangan->petugas : '' }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea id="keterangan" class="form-control" name="keterangan" rows="5" placeholder="Masukkan keterangan"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="tindakan">Tindakan</label>
-                        <textarea id="tindakan" class="form-control" name="tindakan" rows="5" placeholder="Masukkan tindakan"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-          </div>
         </div>
-      </div>
+    </div>
+
+    {{-- Modal Tolak --}}
+    <div class="modal fade" id="tolakModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tolak Laporan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('laporan_bencana.reject', $laporanBencana->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="alasan_penolakan">Alasan Penolakan</label>
+                            <input id="alasan_penolakan" class="form-control" type="text" name="alasan_penolakan" placeholder="Masukkan Alasan Penolakan" value="{{ old('alasan_penolakan') }}" required>
+                            @error('alasan_penolakan')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 @endsection

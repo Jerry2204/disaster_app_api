@@ -55,7 +55,7 @@
                         @endif
                     @endauth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil</a>
+                        <a class="nav-link" href="{{ route('bpbd.profil') }}">Profil BPBD</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('mitigasi.public') }}">Mitigasi Bencana</a>

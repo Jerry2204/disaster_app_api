@@ -33,22 +33,29 @@
                             <p>
                                 {{ $laporanBencana->jenis_bencana }}
                             </p>
-                            <b class="mt-5 mb-0">
+                            <b class="mt-0 mb-0">
                                 Status Penanggulangan:
                             </b>
-                            @if ($laporanBencana->status_penanggulangan->status == 'menunggu')
+                            <br>
+                            @if ($laporanBencana->status_penanggulangan->status == 'Ditolak')
                                 <p class="badge rounded-pill bg-danger text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}
                                 </p>
-                            @elseif ($laporanBencana->status_penanggulangan->status == 'diterima')
+                                <p class="mb-0 ">
+                                    Alasan Penolakan:
+                                </p>
+                                <b>
+                                 {{ $laporanBencana->status_penanggulangan->alasan_penolakan}}
+                                </b>
+                            @elseif ($laporanBencana->status_penanggulangan->status == 'Diterima')
                                 <p class="badge rounded-pill bg-info text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}
                                 </p>
-                            @elseif ($laporanBencana->status_penanggulangan->status == 'proses')
+                            @elseif ($laporanBencana->status_penanggulangan->status == 'Proses')
                                 <p class="badge rounded-pill bg-warning text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}
                                 </p>
-                            @elseif ($laporanBencana->status_penanggulangan->status == 'sukses')
+                            @elseif ($laporanBencana->status_penanggulangan->status == 'Selesai')
                                 <p class="badge rounded-pill bg-success text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}
                                 </p>

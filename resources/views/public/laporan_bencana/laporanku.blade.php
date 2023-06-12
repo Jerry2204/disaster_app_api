@@ -8,7 +8,11 @@
             <div class="col-md-12 my-5">
                 <h3 class="text-center">Riwayat Laporan Saya</h3>
             </div>
-
+            @if ($bencanaAlam->isEmpty())
+            <div class="col-md-12">
+                <h4 class="text-center">Laporan Tidak Ada</h4>
+            </div>
+        @else
             <div class="row">
                 @foreach ($bencanaAlam as $item)
                     <div class="col-md-3 mb-3">
@@ -18,7 +22,7 @@
                             <div class="d-inline ms-3" style="margin-top: -30px;">
                                 @if ($item->status_penanggulangan->status == 'Menunggu')
                                     <h1 class="badge"
-                                        style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: #FA0000; border-radius: 5px; text-align: center;">
+                                        style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: #6C757D; border-radius: 5px; text-align: center;">
                                         <h6 style="position: relative;top: -4px; color:white;margin-left:4%">
                                             {{ $item->status_penanggulangan->status }}</h6>
                                     </h1>
@@ -37,6 +41,12 @@
                                 @elseif ($item->status_penanggulangan->status == 'Selesai')
                                     <h1 class="badge"
                                         style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: rgba(58, 196, 48, 0.88); border-radius: 5px; text-align: center;">
+                                        <h6 style="position: relative;top: -4px; color:white;margin-left:8%">
+                                            {{ $item->status_penanggulangan->status }}</h6>
+                                    </h1>
+                                @elseif ($item->status_penanggulangan->status == 'Ditolak')
+                                    <h1 class="badge"
+                                        style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: #FA0000; border-radius: 5px; text-align: center;">
                                         <h6 style="position: relative;top: -4px; color:white;margin-left:8%">
                                             {{ $item->status_penanggulangan->status }}</h6>
                                     </h1>
@@ -68,8 +78,9 @@
             <div class="d-flex my-5">
                 {!! $bencanaAlam->links() !!}
             </div>
-        </div>
+        @endif
     </div>
+</div>
     <div class="fixed-bottom d-flex justify-content-end text-center" style="bottom: 50px; right: 20px;">
         <div class="button-urgent animasi rounded-circle d-flex justify-content-center align-items-center text-white fs-6">
             <a href="{{ route('report.add') }}" style="text-decoration: none; color: white;">
