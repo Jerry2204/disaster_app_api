@@ -64,22 +64,22 @@
         <div class="row">
             @endif
             <div class="col-md-4 mb-4">
-                <div class="card bg-gray text-white"
+                <div class="card bg-gray text-white position-relative"
                     style="border: 2px solid #0255A5; border-bottom-right-radius: 50px; box-sizing: border-box;">
+                    <div class="trapezoid" style="width: 70%">
+                        <p style="color: black; position: absolute; top: -50px;">
+                            {{ $petugas[$i]->jabatan }}</p>
+                    </div>
                     <div class="card-body">
                         <div style="display: inline-block; vertical-align: top;">
                             <img src="{{ asset('petugas/' . $petugas[$i]->gambar) }}" alt="photo"
                                 style="width: 90px; height: 90px; margin-right: 240px;">
                         </div>
-                        <div style="display: inline-block;positon:absolute">
+                        <div style="display: inline-block;" class="position-relative">
                             <h6 class="card-text" style="color: black; margin-top: 0;">
                                 <p>{{ $petugas[$i]->nama }}</p>
                                 <strong>{{ $petugas[$i]->nomor }}</strong>
                             </h6>
-                            <div class="trapezoid" style="width: 65%">
-                                <p style="color: black; position: absolute; top: -50px;">
-                                    {{ $petugas[$i]->jabatan }}</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
             border-left: 40px solid transparent;
             width: 250px;
             position: absolute;
-            left: 41%;
+            right: -30px;
             top: -10%;
             border-top-color: #D9D9D9;
         }
