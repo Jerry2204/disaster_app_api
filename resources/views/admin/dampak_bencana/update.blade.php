@@ -65,7 +65,7 @@
                                 <div class="col-sm-10">
                                     <input type="text" name="lokasi" id="lokasi" disabled
                                         class="form-control {{ $errors->has('lokasi') ? 'form-control-danger' : '' }}"
-                                        placeholder="Masukkan lokasi" value="{{ $bencana->lokasi }}">
+                                        placeholder="Masukkan lokasi" value=" Desa {{ $bencana->desa->nama_desa }}, Kecamatan{{ $bencana->kecamatan->nama_kecamatan }}">
                                 </div>
                             </div>
                             <div class="form-group {{ $errors->has('luka_ringan') ? 'has-danger' : '' }} row">
@@ -106,7 +106,7 @@
 
                         </div>
                         <div class="card-header">
-                            <h5>Form Kerusakan Infrastruktur</h5>
+                            <h5>Data Kerusakan Infrastruktur</h5>
                             <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
 
                             <div class="card-header-right">
@@ -120,8 +120,8 @@
                                     <thead>
                                         <tr>
                                             <th>Jenis Infrastruktur</th>
-                                            <th>Jumlah Rusak Ringan</th>
-                                            <th>Jumlah Rusak Berat</th>
+                                            <th>Volume Rusak Ringan</th>
+                                            <th>Volume Rusak Berat</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -136,13 +136,13 @@
                                                 </td>
                                                 {{-- Input field untuk jumlah rusak ringan --}}
                                                 <td>
-                                                    <input type="number" name="rusak_ringan[]" id="rusak_ringan"
+                                                    <input type="text" name="rusak_ringan[]" id="rusak_ringan"
                                                         class="form-control" placeholder="Masukkan jumlah rusak ringan"
                                                         value="{{ $item->rusak_ringan }}" required>
                                                 </td>
                                                 {{-- Input field untuk jumlah rusak berat --}}
                                                 <td>
-                                                    <input type="number" name="rusak_berat[]" id="rusak_berat"
+                                                    <input type="text" name="rusak_berat[]" id="rusak_berat"
                                                         class="form-control" placeholder="Masukkan jumlah rusak berat"
                                                         value="{{ $item->rusak_berat }}" required>
                                                 </td>
@@ -157,13 +157,13 @@
                                                 </td>
                                                 {{-- Input field untuk jumlah rusak ringan --}}
                                                 <td>
-                                                    <input type="number" name="rusak_ringan[]" id="rusak_ringan"
+                                                    <input type="text" name="rusak_ringan[]" id="rusak_ringan"
                                                         class="form-control" placeholder="Masukkan jumlah rusak ringan"
                                                         value="" required>
                                                 </td>
                                                 {{-- Input field untuk jumlah rusak berat --}}
                                                 <td>
-                                                    <input type="number" name="rusak_berat[]" id="rusak_berat"
+                                                    <input type="text" name="rusak_berat[]" id="rusak_berat"
                                                         class="form-control" placeholder="Masukkan jumlah rusak berat"
                                                         value="" required>
                                                 </td>
@@ -172,19 +172,49 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{-- Tombol untuk menambah input field --}}
-                            <button type="button" id="tambah">Tambah</button>
-                            <button type="button" onclick="deleteLastRow()">Hapus Data Terakhir</button>
-                            <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                             {{-- Tombol untuk menambah input field --}}
+                             <button type="button" id="tambah">Tambah</button>
+                             <button type="button" onclick="deleteLastRow()">Hapus Data Terakhir</button>
+
+                             {{-- Data Gambar --}}
+                            <div class="card-header">
+                                <h5>Gambar Pasca Bencana</h5>
+                                <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+
+                                <div class="card-header-right">
+                                    <i class="icofont icofont-spinner-alt-5"></i>
+                                </div>
                             </div>
-                        </div>
+                            <div class="card-block">
+
+                                <div class="form-group {{ $errors->has('nama_bencana') ? 'has-danger' : '' }} row">
+                                    <label class="col-sm-5 col-form-label" for="nama_bencana">Gambar kerusakan infrastruktur Saat Kejadian</label>
+                                    <div class="col-sm-7">
+                                        {{-- <input type="text" name="nama_bencana" id="nama_bencana" disabled
+                                            class="form-control {{ $errors->has('nama_bencana') ? 'form-control-danger' : '' }}"
+                                            placeholder="Masukkan nama_bencana" value="{{ $bencana->nama_bencana }}"> --}}
+                                            <input type="file" name="gambar_kejadian" id="file" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group {{ $errors->has('nama_bencana') ? 'has-danger' : '' }} row">
+                                    <label class="col-sm-5 col-form-label" for="nama_bencana">Gambar kerusakan infrastruktur Setelah Kejadian</label>
+                                    <div class="col-sm-7">
+                                        {{-- <input type="text" name="nama_bencana" id="nama_bencana" disabled
+                                            class="form-control {{ $errors->has('nama_bencana') ? 'form-control-danger' : '' }}"
+                                            placeholder="Masukkan nama_bencana" value="{{ $bencana->nama_bencana }}"> --}}
+                                            <input type="file" name="gambar_pasca" id="file" class="form-control">
+                                    </div>
+                                </div>
                     </form>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
                 </div>
             </div>
             <!-- Basic Form Inputs card end -->
         </div>
     </div>
+
 @endsection
 
 @section('js')
@@ -203,7 +233,7 @@
                 var newRow = lastRow.clone();
 
                 // Hapus value pada input field jumlah rusak ringan dan rusak berat
-                newRow.find('input[type="number"]').val('');
+                newRow.find('input[type="text"]').val('');
                 newRow.find('input[type="text"]').val('');
 
                 // Tambahkan row baru ke tbody

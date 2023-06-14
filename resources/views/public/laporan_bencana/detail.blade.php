@@ -59,6 +59,10 @@
                                 <p class="badge rounded-pill bg-success text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}
                                 </p>
+                                @elseif ($laporanBencana->status_penanggulangan->status == 'Menunggu')
+                                <p class="badge rounded-pill bg-secondary text-capitalize">
+                                    {{ $laporanBencana->status_penanggulangan->status }}
+                                </p>
                             @endif
                             <p class="mt-3 mb-0">
                                 Tanggal:
@@ -96,10 +100,11 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="laporan-lengkap mt-4">
                     <div class="row p-5">
                         <div class="col-md-6">
-                            <h6>Kerusakan Infrastruktur</h6>
+                            <h6><b>Data Kerusakan Infrastruktur</b></h6>
                         </div>
                         <div class="col-md-12 mt-3">
                             <table class="table">
@@ -123,7 +128,17 @@
                                     </tr>
                                     @endforelse
                                 </tbody>
-                            </table>
+                               </table>
+                               <div class="row">
+                                <div class="col-md-6">
+                                    <b>Gambar kerusakan infrastruktur Saat Kejadian :</b>
+                                    <img src="{{ asset('laporan/' . $laporanBencana->gambar_kejadian) }}" class="image-laporan" alt="">
+                                </div>
+                                <div class="col-md-6">
+                                    <b>Gambar kerusakan infrastruktur Sesudah Kejadian:</b>
+                                    <img src="{{ asset('laporan/' . $laporanBencana->gambar_pasca) }}" class="image-laporan" alt="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,7 +146,7 @@
                 <div class="laporan-lengkap mt-4">
                     <div class="row">
                         <div class="col-md-12 p-5">
-                            <h6>Korban Jiwa</h6>
+                            <h6><b>Korban Jiwa</b></h6>
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <p class="mb-0">
@@ -167,7 +182,7 @@
                 <div class="laporan-lengkap mt-4">
                     <div class="row p-5">
                         <div class="col-md-6">
-                            <h6>Upaya</h6>
+                            <h6><b>Upaya</b></h6>
                         </div>
                         <div class="col-md-12 mt-3">
                             <table class="table">

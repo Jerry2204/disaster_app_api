@@ -17,8 +17,10 @@ class CreateLaporanBencanasTable extends Migration
             $table->id();
             $table->enum('jenis_bencana', ['Bencana alam', 'Bencana non alam', 'Bencana sosial']);
             $table->string('nama_bencana');
-             $table->text('keterangan');
+            $table->text('keterangan');
             $table->text('gambar');
+            $table->text('gambar_kejadian')->nullable();
+            $table->text('gambar_pasca')->nullable();
             $table->foreignId('kecamatan_id')->nullable()->constrained();
             $table->foreignId('desa_id')->nullable()->constrained();
             $table->string('status_bencana')->nullable();
