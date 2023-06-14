@@ -190,19 +190,13 @@
                                 <div class="form-group {{ $errors->has('nama_bencana') ? 'has-danger' : '' }} row">
                                     <label class="col-sm-5 col-form-label" for="nama_bencana">Gambar kerusakan infrastruktur Saat Kejadian</label>
                                     <div class="col-sm-7">
-                                        {{-- <input type="text" name="nama_bencana" id="nama_bencana" disabled
-                                            class="form-control {{ $errors->has('nama_bencana') ? 'form-control-danger' : '' }}"
-                                            placeholder="Masukkan nama_bencana" value="{{ $bencana->nama_bencana }}"> --}}
-                                            <input type="file" name="gambar_kejadian" id="file" class="form-control">
+                                            <input type="file" name="gambar_kejadian[]" id="file" class="form-control" multiple>
                                     </div>
                                 </div>
                                 <div class="form-group {{ $errors->has('nama_bencana') ? 'has-danger' : '' }} row">
                                     <label class="col-sm-5 col-form-label" for="nama_bencana">Gambar kerusakan infrastruktur Setelah Kejadian</label>
                                     <div class="col-sm-7">
-                                        {{-- <input type="text" name="nama_bencana" id="nama_bencana" disabled
-                                            class="form-control {{ $errors->has('nama_bencana') ? 'form-control-danger' : '' }}"
-                                            placeholder="Masukkan nama_bencana" value="{{ $bencana->nama_bencana }}"> --}}
-                                            <input type="file" name="gambar_pasca" id="file" class="form-control">
+                                    <input type="file" name="gambar_pasca[]" id="file" class="form-control" multiple>
                                     </div>
                                 </div>
                     </form>

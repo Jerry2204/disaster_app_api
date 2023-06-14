@@ -63,7 +63,7 @@ class LaporanBencanaController extends Controller
     if ($request->input('start_date') == null || $request->input('end_date') == null) {
 
         $laporanBencanas = DB::table('laporan_bencanas')
-            ->select('laporan_bencanas.*', 'korbans.*', 'kerusakans.*', 'desas.*', 'kecamatans.*', 'kecamatans.*')
+            ->select('laporan_bencanas.', 'korbans.', 'kerusakans.', 'desas.', 'kecamatans.', 'kecamatans.')
             ->leftJoin('kerusakans', 'laporan_bencanas.id', '=', 'kerusakans.laporan_bencana_id')
             ->join('korbans', 'korbans.id', '=', 'laporan_bencanas.korban_id')
             ->join('desas', 'laporan_bencanas.desa_id', '=', 'desas.id')
@@ -86,7 +86,7 @@ class LaporanBencanaController extends Controller
     $endDate = Carbon::createFromFormat('Y-m-d', $request->input('end_date'))->endOfDay();
 
     $laporanBencanas = DB::table('laporan_bencanas')
-        ->select('laporan_bencanas.*', 'korbans.*', 'kerusakans.*', 'desas.*', 'kecamatans.*')
+        ->select('laporan_bencanas.', 'korbans.', 'kerusakans.', 'desas.', 'kecamatans.*')
         ->leftJoin('kerusakans', 'laporan_bencanas.id', '=', 'kerusakans.laporan_bencana_id')
         ->join('korbans', 'korbans.id', '=', 'laporan_bencanas.korban_id')
         ->join('desas', 'laporan_bencanas.desa_id', '=', 'desas.id')
@@ -465,6 +465,7 @@ public function getDesaByKecamatanadmin(Request $request)
         }
 
         return view('public.laporan_bencana.detail', compact('laporanBencana'));
+
     }
 
     /**
@@ -770,23 +771,53 @@ public function getDesaByKecamatanedit(Request $request)
             'luka_ringan' => $request->luka_ringan,
             'hilang' => $request->hilang
             ]);
-                $file_kejadian = $request->file('gambar_kejadian');
-                $file_pasca = $request->file('gambar_pasca');
+//                 $file_kejadian = $request->file('gambar_kejadian');
+//                 $file_pasca = $request->file('gambar_pasca');
 
-                $nama_file_kejadian = time()."_".$file_kejadian->getClientOriginalName();
-                $nama_file_pasca = time()."_".$file_pasca->getClientOriginalName();
+//                 $nama_file_kejadian = time()."_".$file_kejadian->getClientOriginalName();
+//                 $nama_file_pasca = time()."_".$file_pasca->getClientOriginalName();
 
-                $file_kejadian->move("laporan/", $nama_file_kejadian);
-                $file_pasca->move("laporan/", $nama_file_pasca);
+//                 $file_kejadian->move("laporan/", $nama_file_kejadian);
+//                 $file_pasca->move("laporan/", $nama_file_pasca);
 
-                $laporan = LaporanBencana::where('user_id', $korban->user_id);
+//                 $laporan = LaporanBencana::where('user_id', $korban->user_id);
 
-                $laporan->update([
-                    'gambar_kejadian' => $nama_file_kejadian,
-                    'gambar_pasca' => $nama_file_pasca
-]);
+//                 $laporan->update([
+//                     'gambar_kejadian' => $nama_file_kejadian,
+//                     'gambar_pasca' => $nama_file_pasca
+// ]);
 
+        //update gambar $file_kejadian dapat menyimpan lebih dari 1 gambar dan simpan ke DB dalam nilai json
+        if ($request->hasFile('gambar_kejadian')) {
+            $files = $request->file('gambar_kejadian');
+            $nama_file_kejadian = [];
+            foreach ($files as $file) {
+                $nama_file = time()."_".$file->getClientOriginalName();
+                $file->move("laporan/", $nama_file);
+                $nama_file_kejadian[] = $nama_file;
+            }
 
+            $laporan = LaporanBencana::where('user_id', $korban->user_id);
+            $laporan->update([
+                'gambar_kejadian' => json_encode($nama_file_kejadian)
+            ]);
+        }
+
+        //update gambar $file_pasca dapat menyimpan lebih dari 1 gambar dan simpan ke DB dalam nilai json
+        if ($request->hasFile('gambar_pasca')) {
+            $files = $request->file('gambar_pasca');
+            $nama_file_pasca = [];
+            foreach ($files as $file) {
+                $nama_file = time()."_".$file->getClientOriginalName();
+                $file->move("laporan/", $nama_file);
+                $nama_file_pasca[] = $nama_file;
+            }
+
+            $laporan = LaporanBencana::where('user_id', $korban->user_id);
+            $laporan->update([
+                'gambar_pasca' => json_encode($nama_file_pasca)
+            ]);
+        }
 
         if ($request->nama_infrastruktur) {
             $kerusakan_length = count($request->nama_infrastruktur);

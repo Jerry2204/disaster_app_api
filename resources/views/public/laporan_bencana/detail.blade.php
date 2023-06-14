@@ -29,7 +29,7 @@
                         <div class="col-md-6 p-5">
                             <td>
                                 <h5>{{ $laporanBencana->nama_bencana }}</h5>
-                              </td>
+                            </td>
                             <p>
                                 {{ $laporanBencana->jenis_bencana }}
                             </p>
@@ -45,7 +45,7 @@
                                     Alasan Penolakan:
                                 </p>
                                 <b>
-                                 {{ $laporanBencana->status_penanggulangan->alasan_penolakan}}
+                                    {{ $laporanBencana->status_penanggulangan->alasan_penolakan }}
                                 </b>
                             @elseif ($laporanBencana->status_penanggulangan->status == 'Diterima')
                                 <p class="badge rounded-pill bg-info text-capitalize">
@@ -59,7 +59,7 @@
                                 <p class="badge rounded-pill bg-success text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}
                                 </p>
-                                @elseif ($laporanBencana->status_penanggulangan->status == 'Menunggu')
+                            @elseif ($laporanBencana->status_penanggulangan->status == 'Menunggu')
                                 <p class="badge rounded-pill bg-secondary text-capitalize">
                                     {{ $laporanBencana->status_penanggulangan->status }}
                                 </p>
@@ -74,7 +74,7 @@
                                 Lokasi:
                             </p>
                             <p>
-                             Desa {{ $laporanBencana->nama_desa }},Kecamatan {{ $laporanBencana->nama_kecamatan }}
+                                Desa {{ $laporanBencana->nama_desa }},Kecamatan {{ $laporanBencana->nama_kecamatan }}
                             </p>
                             <p class="mb-0">
                                 Status Bencana:
@@ -117,28 +117,46 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($laporanBencana->kerusakan as $item)
-                                    <tr>
-                                        <td>{{ $item->nama_infrastruktur }}</td>
-                                        <td>{{ $item->rusak_ringan }}</td>
-                                        <td>{{ $item->rusak_berat }}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $item->nama_infrastruktur }}</td>
+                                            <td>{{ $item->rusak_ringan }}</td>
+                                            <td>{{ $item->rusak_berat }}</td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td class="text-center" colspan="3">Data Kerusakan Tidak Ada</td>
-                                    </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="3">Data Kerusakan Tidak Ada</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
-                               </table>
-                               <div class="row">
+                            </table>
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <b>Gambar kerusakan infrastruktur Saat Kejadian :</b>
-                                    <img src="{{ asset('laporan/' . $laporanBencana->gambar_kejadian) }}" class="image-laporan" alt="">
+                                    <b>Gambar kerusakan infrastruktur Saat Kejadian:</b>
+                                    @if (!empty($laporanBencana->gambar_kejadian))
+                                        @foreach (json_decode($laporanBencana->gambar_kejadian) as $image)
+                                            <img src="{{ asset('laporan/' . $image) }}" style="width: 100%; height: auto; display: block; margin-bottom: 10px;" alt="">
+                                        @endforeach
+                                    @else
+                                        <p>Gambar Kerusakan Belum Ditambahkan</p>
+                                    @endif
                                 </div>
                                 <div class="col-md-6">
                                     <b>Gambar kerusakan infrastruktur Sesudah Kejadian:</b>
-                                    <img src="{{ asset('laporan/' . $laporanBencana->gambar_pasca) }}" class="image-laporan" alt="">
+                                    @if (!empty($laporanBencana->gambar_pasca))
+                                        @foreach (json_decode($laporanBencana->gambar_pasca) as $image)
+                                            <img src="{{ asset('laporan/' . $image) }}" style="width: 100%; height: auto; display: block; margin-bottom: 10px;" alt="">
+                                        @endforeach
+                                    @else
+                                        <p>Gambar Kerusakan Pasca Bencana Belum Ditambahkan</p>
+                                    @endif
                                 </div>
+                                {{-- <div class="col-md-4">
+                                    <!-- Tambahkan konten kolom ketiga di sini -->
+                                </div> --}}
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -194,10 +212,10 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($laporanBencana->kerusakan as $item)
-                                                                @empty
-                                    <tr>
-                                        <td class="text-center" colspan="3">Upaya Tidak Ada</td>
-                                    </tr>
+                                    @empty
+                                        <tr>
+                                            <td class="text-center" colspan="3">Upaya Tidak Ada</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
