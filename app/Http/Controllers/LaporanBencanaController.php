@@ -771,23 +771,6 @@ public function getDesaByKecamatanedit(Request $request)
             'luka_ringan' => $request->luka_ringan,
             'hilang' => $request->hilang
             ]);
-//                 $file_kejadian = $request->file('gambar_kejadian');
-//                 $file_pasca = $request->file('gambar_pasca');
-
-//                 $nama_file_kejadian = time()."_".$file_kejadian->getClientOriginalName();
-//                 $nama_file_pasca = time()."_".$file_pasca->getClientOriginalName();
-
-//                 $file_kejadian->move("laporan/", $nama_file_kejadian);
-//                 $file_pasca->move("laporan/", $nama_file_pasca);
-
-//                 $laporan = LaporanBencana::where('user_id', $korban->user_id);
-
-//                 $laporan->update([
-//                     'gambar_kejadian' => $nama_file_kejadian,
-//                     'gambar_pasca' => $nama_file_pasca
-// ]);
-
-        //update gambar $file_kejadian dapat menyimpan lebih dari 1 gambar dan simpan ke DB dalam nilai json
         if ($request->hasFile('gambar_kejadian')) {
             $files = $request->file('gambar_kejadian');
             $nama_file_kejadian = [];
@@ -803,7 +786,7 @@ public function getDesaByKecamatanedit(Request $request)
             ]);
         }
 
-        //update gambar $file_pasca dapat menyimpan lebih dari 1 gambar dan simpan ke DB dalam nilai json
+
         if ($request->hasFile('gambar_pasca')) {
             $files = $request->file('gambar_pasca');
             $nama_file_pasca = [];
