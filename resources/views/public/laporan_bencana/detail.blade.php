@@ -134,7 +134,7 @@
                                     <b>Gambar kerusakan infrastruktur Saat Kejadian:</b>
                                     @if (!empty($laporanBencana->gambar_kejadian))
                                         @foreach (json_decode($laporanBencana->gambar_kejadian) as $image)
-                                            <img src="{{ asset('laporan/' . $image) }}" style="width: 100%; height: auto; display: block; margin-bottom: 10px;" alt="">
+                                            <img src="{{ asset('laporan/' . $image) }}" style="width: 50%; height: auto; display: block; margin-bottom: 10px;" alt="">
                                         @endforeach
                                     @else
                                         <p>Gambar Kerusakan Belum Ditambahkan</p>
@@ -144,7 +144,7 @@
                                     <b>Gambar kerusakan infrastruktur Sesudah Kejadian:</b>
                                     @if (!empty($laporanBencana->gambar_pasca))
                                         @foreach (json_decode($laporanBencana->gambar_pasca) as $image)
-                                            <img src="{{ asset('laporan/' . $image) }}" style="width: 100%; height: auto; display: block; margin-bottom: 10px;" alt="">
+                                            <img src="{{ asset('laporan/' . $image) }}" style="width: 50%; height: auto; display: block; margin-bottom: 10px;" alt="">
                                         @endforeach
                                     @else
                                         <p>Gambar Kerusakan Pasca Bencana Belum Ditambahkan</p>
