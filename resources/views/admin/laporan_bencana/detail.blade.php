@@ -235,10 +235,7 @@
                                         <p>Gambar Kerusakan Pasca Bencana Belum Ditambahkan</p>
                                     @endif
                                 </div>
-                                {{-- <div class="col-md-4">
-                                    <!-- Tambahkan konten kolom ketiga di sini -->
-                                </div> --}}
-                            </div>
+                              </div>
                         </div>
 
                     </div>
