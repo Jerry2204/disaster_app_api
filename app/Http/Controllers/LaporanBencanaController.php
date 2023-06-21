@@ -63,7 +63,7 @@ class LaporanBencanaController extends Controller
     if ($request->input('start_date') == null || $request->input('end_date') == null) {
 
         $laporanBencanas = DB::table('laporan_bencanas')
-            ->select('laporan_bencanas.', 'korbans.', 'kerusakans.', 'desas.', 'kecamatans.', 'kecamatans.')
+            ->select('laporan_bencanas.*', 'korbans.*', 'kerusakans.*', 'desas.*', 'kecamatans.*')
             ->leftJoin('kerusakans', 'laporan_bencanas.id', '=', 'kerusakans.laporan_bencana_id')
             ->join('korbans', 'korbans.id', '=', 'laporan_bencanas.korban_id')
             ->join('desas', 'laporan_bencanas.desa_id', '=', 'desas.id')
