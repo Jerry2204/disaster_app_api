@@ -134,20 +134,21 @@
                         <li><a href="#">Pendaftaran</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h6>Kontak</h6>
                     <ul class="list-unstyled">
                         <li><a href="#">No Telepon : 0632 21 709</a></li>
                         <li><a href="#">Email</a></li>
-                        <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li>
+                        {{-- <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li> --}}
                     </ul>
                 </div>
-                <div class="col-md-1 text-center">
-
-                    {{-- <img class="logo" src="{{ asset('image/toba.png') }}"
-                        alt="Logo Tidak ditemukan"style="width: 80px; height: 120px;">
-                        <img class="logo" src="{{ asset('image/del.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 75px; height: 90px;"> --}}
+                <div class="col-md-2 text-center">
+                        <p>Developed By:</p>
+                       <ul class="list-unstyled">
+                        <li><a href="https://www.del.ac.id">Institut Teknologi Del </a></li>
+                        <img class="logo" src="{{ asset('image/Logo_ITDEL transparent.png') }}" alt="Logo Tidak ditemukan"
+                        style="width: 85px; height: 90px;">
+                    </ul>
                 </div>
             </div>
         </div>
