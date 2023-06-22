@@ -123,7 +123,7 @@
                 <br>
                 <div class="col-md-4">
                     <h6>BPBD Kabupaten Toba</h6>
-                    <p>JL DI. Panjaitan, Toba Samosir, Balige, Sumatera Utara, Indonesia.</p>
+                    <p>JL . A.B Silalahi Komplek Perkantoran Simanjalo Balige</p>
                 </div>
                 <div class="col-md-2">
                     <h6>Tentang Kami</h6>
@@ -138,7 +138,7 @@
                     <h6>Kontak</h6>
                     <ul class="list-unstyled">
                         <li><a href="#">No Telepon : 0632 21 709</a></li>
-                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Email:bpbdtobasa2016@gmail.com</a></li>
                         {{-- <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li> --}}
                     </ul>
                 </div>

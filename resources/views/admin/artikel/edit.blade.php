@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Artikel')
+@section('title', 'Berita')
 
 @section('content')
     <!-- Page-header start -->
@@ -10,8 +10,8 @@
                 <div class="page-header-title">
                     <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
                     <div class="d-inline">
-                        <h4>Ubah Artikel</h4>
-                        <span>Form Ubah Artikel</span>
+                        <h4>Ubah Berita</h4>
+                        <span>Form Ubah Berita</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         </li>
                         <li class="breadcrumb-item"><a href="#!">Pages</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Ubah Artikel</a>
+                        <li class="breadcrumb-item"><a href="#!">Ubah Berita</a>
                         </li>
                     </ul>
                 </div>
@@ -40,7 +40,7 @@
                 <!-- Basic Form Inputs card start -->
                 <div class="card">
                     <div class="card-header">
-                        <h5>Form Ubah Artikel</h5>
+                        <h5>Form Ubah Berita</h5>
                         <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
 
                         <div class="card-header-right">

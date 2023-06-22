@@ -10,8 +10,8 @@
                 <div class="page-header-title">
                     <i class="fa fa-book"style="background-color: #AB7967"></i>
                     <div class="d-inline">
-                        <h4>Artikel</h4>
-                        <span>Daftar Artikel</span>
+                        <h4>Berita</h4>
+                        <span>Daftar Berita</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         </li>
                         <li class="breadcrumb-item"><a href="#!">Pages</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Artikel</a>
+                        <li class="breadcrumb-item"><a href="#!">Berita</a>
                         </li>
                     </ul>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="card-header">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Tambah Artikel
+                            Tambah Berita
                         </button>
                         <div class="card-header-right">
                             <ul class="list-unstyled card-option">
@@ -89,7 +89,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <th scope="row" colspan="7" class="text-center">Artikel
+                                            <th scope="row" colspan="7" class="text-center">Berita
                                                 Tidak Ada</th>
                                         </tr>
                                     @endforelse
