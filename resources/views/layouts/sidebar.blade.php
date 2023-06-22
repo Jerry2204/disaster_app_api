@@ -120,7 +120,7 @@
             <li>
                 <a href="{{ route('artikel.index') }}">
                     <span class="pcoded-micon"><i class="fa fa-book"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Artikel</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Berita</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>

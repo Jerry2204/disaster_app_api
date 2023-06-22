@@ -292,34 +292,36 @@
     <!-- Page body end -->
 
     {{-- Modal Proses --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Proses Laporan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('laporan_bencana.process', $laporanBencana->id) }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="petugas">Petugas</label>
-                            <input id="petugas" name="petugas" class="form-control" type="text"
-                                placeholder="Masukkan nama petugas">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
+    <<!-- Modal Proses -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Proses Laporan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
+        <form action="{{ route('laporan_bencana.process', $laporanBencana->id) }}" method="post">
+            @csrf
+            @method('PUT')
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="nama_petugas">Petugas</label>
+                    <input id="nama_petugas" name="nama_petugas" class="form-control" type="text"
+                        placeholder="Masukkan nama petugas">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
     </div>
+</div>
+</div>
+
 
     {{-- Modal Selesai --}}
     <div class="modal fade" id="selesaiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

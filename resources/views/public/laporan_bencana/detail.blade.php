@@ -24,6 +24,7 @@
         <div class="row">
             <div class="col-md-12 my-5">
                 <h2 class="text-center">Detail Laporan</h2>
+                
                 <div class="laporan-lengkap mt-4">
                     <div class="row">
                         <div class="col-md-6 p-5">
