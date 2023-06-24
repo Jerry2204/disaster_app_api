@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="hero position-relative d-flex justify-content-center align-items-center"><img
-            src="{{ asset('image/banjir.jpg') }}" class="overflow-hidden hero-image" alt="">
+            src="{{ asset('image/mitigasi.jpeg') }}" class="overflow-hidden hero-image" alt="" style="opacity: 80%;">
         <div class="container position-relative hero-container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-start d-flex flex-column justify-content-center left-hero">

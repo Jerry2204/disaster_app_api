@@ -123,22 +123,21 @@
                 <br>
                 <div class="col-md-4">
                     <h6>BPBD Kabupaten Toba</h6>
-                    <p>JL . A.B Silalahi Komplek Perkantoran Simanjalo Balige</p>
+                    <p>JL . A.B Silalahi Komplek Perkantoran Simanjalo Balige <br>Kec. Balige, Toba, Sumatera Utara, Indonesia</p>
                 </div>
                 <div class="col-md-2">
                     <h6>Tentang Kami</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#">Bantuan</a></li>
-                        <li><a href="#">Info Layanan</a></li>
-                        <li><a href="#">Kegiatan</a></li>
-                        <li><a href="#">Pendaftaran</a></li>
+                        <li><a href="http://tobatangguh.tobakab.go.id/bpbd/profil">Profil BBPD Toba 2023</a></li>
+
                     </ul>
                 </div>
                 <div class="col-md-2">
                     <h6>Kontak</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#">No Telepon : 0632 21 709</a></li>
-                        <li><a href="#">Email:bpbdtobasa2016@gmail.com</a></li>
+                        {{-- <li><a href="#">No Telepon : 0632 21 709</a></li> --}}
+                        <li><a href="mailto:bpbdtobasa2016@gmail.com">Email: bpbdtobasa2016@gmail.com</a>
+                        </li>
                         {{-- <li><a href="#">Hak Cipta oleh BPBD Kabupaten Toba</a></li> --}}
                     </ul>
                 </div>
@@ -146,8 +145,9 @@
                         <p>Developed By:</p>
                        <ul class="list-unstyled">
                         <li><a href="https://www.del.ac.id">Institut Teknologi Del </a></li>
-                        <img class="logo" src="{{ asset('image/Logo_ITDEL transparent.png') }}" alt="Logo Tidak ditemukan"
-                        style="width: 85px; height: 90px;">
+                        <li>  <img class="logo" src="{{ asset('image/Logo_ITDEL transparent.png') }}" alt="Logo Tidak ditemukan"
+                            style="width: 85px; height: 90px;"></li>
+
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('public.layout.app')
 
-@section('title', 'Detail Artikel')
+@section('title', 'Detail Berita')
 
 @section('content')
     <br>
@@ -8,14 +8,13 @@
         <div class="row">
             <div class="col-md-7 order-md-1">
                 <br>
-                <h5>Artikel</h5>
-                <div class="sharethis-inline-share-buttons text-start"></div>
-                @foreach ($article as $article_item)
+                <h3>Berita</h3> <br>
+                 @foreach ($article as $article_item)
                     <div class="AnnouncementPage-announcement-info">
                         <div>
                             <span>
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
-                                {{ $article_item->name }}
+                              {{ $article_item->name }}
                             </span>
                             &nbsp; &nbsp;
                             <span>
@@ -27,8 +26,8 @@
 
                     <h3 style="text-align:justify">{{ $article_item->judul }}</h3>
                     <br>
-                    <center>
-                        <img src="{{ asset('artikel/' . $article_item->gambar) }}" alt="{{ $article_item->gambar }}"
+                    <div class="sharethis-inline-share-buttons text-start"></div> <br>
+                       <img src="{{ asset('artikel/' . $article_item->gambar) }}" alt="{{ $article_item->gambar }}"
                             style="max-width: 100%">
                     </center>
                     <br>
