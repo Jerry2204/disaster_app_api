@@ -135,7 +135,6 @@ class LaporanBencanaController extends Controller
     }
 
 
-
     $laporanBencana = $laporanBencana->paginate(10);
     $kecamatans = Kecamatan::all();
     return view('admin.laporan_bencana.index', compact('laporanBencana','kecamatans'));

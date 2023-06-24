@@ -81,14 +81,14 @@
                                                     data-nomor="{{ $item->nomor }}" data-kontak_id="{{ $item->id }}">
                                                     Ubah
                                                 </button>
-                                                {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
+                                                <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">
                                                     <form action="{{ route('kontak.delete', $item->id) }}" method="POST"
                                                         id="delete{{ $item->id }}">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
                                                     Hapus
-                                                </button> --}}
+                                                </button>
                                             </td>
                                         </tr>
                                     @empty
