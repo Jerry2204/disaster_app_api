@@ -309,7 +309,7 @@ aria-hidden="true">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="nama_petugas">Petugas</label>
-                    <input id="nama_petugas" name="nama_petugas" class="form-control" type="text"
+                    <input id="petugas" name="petugas" class="form-control" type="text"
                         placeholder="Masukkan nama petugas">
                 </div>
             </div>
