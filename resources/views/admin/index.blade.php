@@ -83,43 +83,47 @@
         </div>
     </div>
 </div>
-{{-- <div class="container px-1 px-md-4 py-5 mx-auto">
+<div class="container px-1 px-md-4 py-5 mx-auto">
     <div class="card">
         <div class="row d-flex justify-content-between px-3 top">
             <div class="d-flex">
                 <h5>
-                    <span class="text-dark font-weight-bold">
-                        <span class="text-dark">{{ $latest->first()->nama_bencana }}</span> | Desa {{ $latest->first()->nama_desa }} | Kecamatan {{ $latest->first()->nama_kecamatan }}
+                    <span class="text-dark font-weight-bold"><br>
+                        <span class="text-dark" style="margin-left:20pt">{{ $latest->first()->nama_bencana }}</span> | Desa {{ $latest->first()->nama_desa }} | Kecamatan {{ $latest->first()->nama_kecamatan }}
                     </span>
                 </h5>
             </div>
             <div class="d-flex flex-column text-sm-right">
-                <p class="ml-1">{{ $latest->first()->created_at->format('d F Y') }} <span></span></p>
+               <br>
+                <b style="margin-right:20pt">{{ $latest->first()->created_at->format('d F Y') }} <span></span></b>
             </div>
 
-        </div> --}}
+        </div>
 
         <!-- Add class 'active' to progress -->
-        {{-- <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
             <div class="col-12">
                 <ul id="progressbar" class="text-center">
                     <li class="{{ $latest->first()->status === 'Menunggu' || $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'step1' : '' }}">
-                        Menunggu @if($latest->first()->status === 'Menunggu') &#10003; @endif
+                        Menunggu @if($latest->first()->status === 'Menunggu')  @endif
                     </li>
                     <li class="{{ $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'step1' : '' }}">
-                        Diterima @if($latest->first()->status === 'Diterima') &#10003; @endif
+                        Diterima @if($latest->first()->status === 'Diterima')  @endif
                     </li>
                     <li class="{{ $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Selesai' ? 'step1' : '' }}">
-                        Proses @if($latest->first()->status === 'Proses') &#10003; @endif
+                        Proses @if($latest->first()->status === 'Proses') <br> <b> Ditangani Oleh:</b> <b style="color: #6666ff"> {{ $latest->first()->status_penanggulangan->petugas}}</b> @endif
                     </li>
                     <li class="{{ $latest->first()->status === 'Selesai' ? 'active' : '' }}">
-                        Selesai @if($latest->first()->status === 'Selesai') &#10003; @endif
+                        Selesai @if($latest->first()->status === 'Selesai')  @endif
                     </li>
                 </ul>
             </div>
-        </div> --}}
 
-        {{-- <style>
+            <a href="{{ route('laporan_bencana.detail',  $latest->first()->id) }}"
+                class="btn btn-sm btn-info">Lihat Detail</a>
+        </div>
+
+        <style>
             .card {
                 z-index: 0;
                 padding-bottom: 20px;
@@ -245,7 +249,7 @@
                     width: 50%;
                 }
             }
-        </style> --}}
+        </style>
 
 
 
