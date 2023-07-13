@@ -623,20 +623,13 @@ public function getDesaByKecamatanedit(Request $request)
         $bencana = LaporanBencana::find($id);
         $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
 
-        $validatedData = $request->validate([
-            'alasan_penolakan' => 'required'
-        ], [
-            'alasan_penolakan.required' => 'Alasan penolakan harus diisi'
-        ]);
-
         if ($bencana) {
             $status_penanggulangan->update([
-                'confirmed' => 'proses',
-                'alasan_penolakan' => $validatedData['alasan_penolakan'],
-                'status' => 'Ditolak'
+                'status' => 'Proses',
+                'petugas' => $request->petugas
             ]);
 
-            return redirect()->back()->with('sukses', 'Laporan ditolak');
+            return redirect()->back()->with('sukses', 'Laporan diproses');
         }
 
         return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
