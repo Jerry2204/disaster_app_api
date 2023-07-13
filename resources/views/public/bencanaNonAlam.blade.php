@@ -14,7 +14,7 @@
                         <img src="{{ asset('laporan/' . $item->gambar) }}" alt="1681457803_longsor.jpg"
                             style="border-radius: 5px 5px 0px 0px;">
                         <div class="d-inline ms-3" style="margin-top: -30px;">
-                            @if ($item->status_penanggulangan->status == 'Menunggu')
+                            {{-- @if ($item->status_penanggulangan->status == 'Menunggu')
                             <p class="badge bg-danger">{{ $item->status_penanggulangan->status }}</p>
                             @elseif ($item->status_penanggulangan->status == 'Diterima')
                             <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: #0DCAF0; border-radius: 5px; text-align: center;">
@@ -28,8 +28,8 @@
                             <h1 class="badge" style="position: absolute; width: 100px; height: 30px; left: 18px; top: 110px; background: rgba(58, 196, 48, 0.88); border-radius: 5px; text-align: center;">
                                 <h6 style="position: relative;top: -4px; color:white;margin-left:8%">{{ $item->status_penanggulangan->status }}</h6>
                               </h1>
-                            @endif
-                        </div>
+                            @endif --}}
+                        </div><br>
                         <div class="card-body">
                             <h6 class="card-title text-start">
                                 {{ $item->nama_bencana }}
