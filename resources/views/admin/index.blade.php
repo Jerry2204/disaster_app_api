@@ -84,6 +84,7 @@
     </div>
 </div>
 <div class="container px-1 px-md-4 py-5 mx-auto">
+    @if ($latest->isNotEmpty())
     <div class="card">
         <div class="row d-flex justify-content-between px-3 top">
             <div class="d-flex">
@@ -98,30 +99,48 @@
                 <b style="margin-right:20pt">{{ $latest->first()->created_at->format('d F Y') }} <span></span></b>
             </div>
 
-        </div>
+            </div>
 
+        <b class="text-center">Status Penanganan</b>
         <!-- Add class 'active' to progress -->
         <div class="row d-flex justify-content-center">
             <div class="col-12">
                 <ul id="progressbar" class="text-center">
-                    <li class="{{ $latest->first()->status === 'Menunggu' || $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'step1' : '' }}">
-                        Menunggu @if($latest->first()->status === 'Menunggu')  @endif
+                    <li class="{{ $latest->first()->status === 'Menunggu' || $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'step1' : '' }}"
+                        onclick="showStatusInfo(this)">
+                        Menunggu
+                        @if ($latest->first()->status === 'Menunggu')
+                            <div class="status-info">Laporan telah dikirimkan, mohon tunggu untuk laporan dikonfirmasi.</div>
+                        @endif
                     </li>
-                    <li class="{{ $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'step1' : '' }}">
-                        Diterima @if($latest->first()->status === 'Diterima')  @endif
+                    <li class="{{ $latest->first()->status === 'Diterima' || $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'step1' : '' }}"
+                        onclick="showStatusInfo(this)">
+                        Diterima
+                        @if (in_array($latest->first()->status, ['Diterima', 'Proses', 'Selesai']))
+                            <div class="status-info"> Diterima Oleh: <b >{{ $latest->first()->status_penanggulangan->penerima}}</b></div>
+                        @endif
                     </li>
-                    <li class="{{ $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Selesai' ? 'step1' : '' }}">
-                        Proses @if($latest->first()->status === 'Proses') <br> <b> Ditangani Oleh:</b> <b style="color: #6666ff"> {{ $latest->first()->status_penanggulangan->petugas}}</b> @endif
+                    <li class="{{ $latest->first()->status === 'Proses' || $latest->first()->status === 'Selesai' ? 'active' : '' }} {{ $latest->first()->status === 'Selesai' ? 'step1' : '' }}"
+                        onclick="showStatusInfo(this)">
+                        Proses
+                        @if (in_array($latest->first()->status, ['Proses', 'Selesai']))
+                            <div class="status-info"> {{ $latest->first()->status_penanggulangan->tindakan}}</div>
+                        @endif
                     </li>
-                    <li class="{{ $latest->first()->status === 'Selesai' ? 'active' : '' }}">
-                        Selesai @if($latest->first()->status === 'Selesai')  @endif
+                    <li class="{{ $latest->first()->status === 'Selesai' ? 'active' : '' }}" onclick="showStatusInfo(this)">
+                        Selesai
+                        @if ($latest->first()->status === 'Selesai')
+                            <div class="status-info"> {{ $latest->first()->status_penanggulangan->keterangan}}  </div>
+                        @endif
                     </li>
                 </ul>
             </div>
-
-            <a href="{{ route('laporan_bencana.detail',  $latest->first()->id) }}"
-                class="btn btn-sm btn-info">Lihat Detail</a>
+            <a href="{{ route('laporan_bencana.detail',  $latest->first()->id) }}" class="btn btn-sm btn-info">Lihat Detail</a>
+            @else
+        <h3 class="text-center">Tidak ada laporan yang tersedia saat ini.</h3>
+    @endif
         </div>
+
 
         <style>
             .card {
@@ -131,6 +150,13 @@
                 margin-bottom: 90px;
                 border-radius: 10px;
             }
+            .status-info {
+        display: none;
+        background-color: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
 
             .top {}
 
@@ -251,6 +277,18 @@
             }
         </style>
 
+<script>
+    function showStatusInfo(element) {
+        // Mengambil elemen dengan class 'status-info' di dalam elemen yang diklik
+        const statusInfo = element.querySelector('.status-info');
 
+        // Mengubah tampilan (show/hide) keterangan status saat elemen diklik
+        if (statusInfo.style.display === "none") {
+            statusInfo.style.display = "block";
+        } else {
+            statusInfo.style.display = "none";
+        }
+    }
+</script>
 
 @endsection

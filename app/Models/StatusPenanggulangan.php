@@ -15,6 +15,7 @@ class StatusPenanggulangan extends Model
         'tindakan',
         'alasan_penolakan',
         'status',
+        'penerima',
         'user_id'
     ];
 
