@@ -308,11 +308,18 @@ aria-hidden="true">
             @method('PUT')
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="nama_petugas">Petugas</label>
+                    <label for="nama_petugas">Petugas<span style="color: red">*</span></label>
                     <input id="petugas" name="petugas" class="form-control" type="text"
                         placeholder="Masukkan nama petugas">
                 </div>
+
+                <div class="form-group">
+
+                    <label for="tindakan">Keterangan<span style="color: red">*</span></label>
+                    <textarea id="tindakan" class="form-control" name="tindakan" rows="5" placeholder="Masukkan Keterangan"></textarea>
+                </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -339,20 +346,20 @@ aria-hidden="true">
                     @method('PUT')
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="Petugas">Petugas</label>
+                            <label for="Petugas">Petugas<span style="color: red">*</span></label>
                             <input id="Petugas" class="form-control" type="text" name="petugas"
                                 placeholder="Masukkan nama petugas"
                                 value="{{ $laporanBencana->status_penanggulangan->petugas ? $laporanBencana->status_penanggulangan->petugas : '' }}">
                         </div>
                         <div class="form-group">
-                            <label for="keterangan">Keterangan</label>
+                            <label for="keterangan">Keterangan<span style="color: red">*</span></label>
                             <textarea id="keterangan" class="form-control" name="keterangan" rows="5" placeholder="Masukkan keterangan"></textarea>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="tindakan">Tindakan</label>
                             <textarea id="tindakan" class="form-control" name="tindakan" rows="5" placeholder="Masukkan tindakan"></textarea>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>

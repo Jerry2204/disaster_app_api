@@ -11,6 +11,7 @@ use App\Models\StatusPenanggulangan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Carbon\CarbonInterface;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,7 @@ class HomeController extends Controller
             ->orderByDesc('laporan_bencanas.created_at')
             ->limit(1)
             ->get();
+
 // var_dump(json_encode($latest));
 
         return view('admin.index', compact('laporan', 'laporan_diproses', 'laporan_terkonfirmasi', 'laporan_selesai','laporan_ditolak', 'latest'));

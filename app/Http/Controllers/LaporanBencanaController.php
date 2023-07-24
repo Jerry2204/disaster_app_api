@@ -569,27 +569,30 @@ public function getDesaByKecamatanedit(Request $request)
     }
 
     public function confirmAdmin($id)
-    {
+{
+    $bencana = LaporanBencana::find($id);
+    $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
 
-        $bencana = LaporanBencana::find($id);
-        $status_penanggulangan = StatusPenanggulangan::find($bencana->status_penanggulangan->id);
+    if ($bencana && $status_penanggulangan) {
 
-        if ($bencana) {
+        $bencana->update([
+            'confirmed' => true
+        ]);
 
-            $bencana->update([
-                'confirmed' => true
-            ]);
+        $status_penanggulangan->update([
+            'status' => 'diterima'
+        ]);
+        $user = Auth::user(); // Mendapatkan data user yang sedang login
+        $status_penanggulangan->update([
+            'penerima' => $user->name
+        ]);
 
-            $status_penanggulangan->update([
-                'status' => 'diterima'
-            ]);
-
-            return redirect()->back()->with('sukses', 'Laporan dikonfirmasi');
-        }
-
-        return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
-
+        $userWhoConfirmed = Auth::user()->name; // Mengambil nama user yang melakukan konfirmasi
+        return redirect()->back()->with('sukses', 'Laporan dikonfirmasi oleh ' . $userWhoConfirmed);
     }
+
+    return back()->with('gagal', 'Laporan Bencana tidak ditemukan');
+}
 
     public function rejectAdmin(Request $request, $id)
     {
@@ -626,7 +629,9 @@ public function getDesaByKecamatanedit(Request $request)
         if ($bencana) {
             $status_penanggulangan->update([
                 'status' => 'Proses',
-                'petugas' => $request->petugas
+                'petugas' => $request->petugas,
+                'tindakan' => $request->tindakan
+
             ]);
 
             return redirect()->back()->with('sukses', 'Laporan diproses');
@@ -644,8 +649,8 @@ public function getDesaByKecamatanedit(Request $request)
             $status_penanggulangan->update([
                 'petugas' => $request->petugas,
                 'status' => 'Selesai',
-                'keterangan' => $request->keterangan,
-                'tindakan' => $request->tindakan
+                'keterangan' => $request->keterangan
+
             ]);
 
             return redirect()->back()->with('sukses', 'Laporan Selesai');

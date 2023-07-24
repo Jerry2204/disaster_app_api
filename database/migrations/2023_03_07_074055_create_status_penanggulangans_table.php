@@ -20,6 +20,7 @@ class CreateStatusPenanggulangansTable extends Migration
             $table->text('tindakan')->nullable();
             $table->text('alasan_penolakan')->nullable();
             $table->enum('status', ['Menunggu', 'Diterima', 'Proses', 'Selesai','Ditolak'])->default('Menunggu');
+            $table->string('penerima')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
