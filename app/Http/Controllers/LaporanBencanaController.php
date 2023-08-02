@@ -768,6 +768,87 @@ public function getDesaByKecamatanedit(Request $request)
             'luka_ringan' => $request->luka_ringan,
             'hilang' => $request->hilang
             ]);
+        // if ($request->hasFile('gambar_kejadian')) {
+        //     $files = $request->file('gambar_kejadian');
+        //     $nama_file_kejadian = [];
+        //     foreach ($files as $file) {
+        //         $nama_file = time()."_".$file->getClientOriginalName();
+        //         $file->move("laporan/", $nama_file);
+        //         $nama_file_kejadian[] = $nama_file;
+        //     }
+
+        //     $laporan = LaporanBencana::where('user_id', $korban->user_id);
+        //     $laporan->update([
+        //         'gambar_kejadian' => json_encode($nama_file_kejadian)
+        //     ]);
+        // }
+
+
+        // if ($request->hasFile('gambar_pasca')) {
+        //     $files = $request->file('gambar_pasca');
+        //     $nama_file_pasca = [];
+        //     foreach ($files as $file) {
+        //         $nama_file = time()."_".$file->getClientOriginalName();
+        //         $file->move("laporan/", $nama_file);
+        //         $nama_file_pasca[] = $nama_file;
+        //     }
+
+        //     $laporan = LaporanBencana::where('user_id', $korban->user_id);
+        //     $laporan->update([
+        //         'gambar_pasca' => json_encode($nama_file_pasca)
+        //     ]);
+        // }
+
+        // if ($request->nama_infrastruktur) {
+        //     $kerusakan_length = count($request->nama_infrastruktur);
+
+        //     if ($bencana->kerusakan) {
+        //         foreach ($bencana->kerusakan as $item) {
+        //             $item->delete();
+        //         }
+        //     }
+
+        //     for ($i = 0; $i < $kerusakan_length; $i++) {
+        //         Kerusakan::create([
+        //             'nama_infrastruktur' => $request->nama_infrastruktur[$i],
+        //             'rusak_ringan' => $request->rusak_ringan[$i],
+        //             'rusak_berat' => $request->rusak_berat[$i],
+        //             'laporan_bencana_id' => $bencana->id,
+        //             'user_id' => Auth::user()->id
+        //         ]);
+        //     }
+        // }
+
+        return back()->with('sukses', 'Dampak Bencana berhasil ditambahkan');
+    }
+    public function updateinfrastruktur($id)
+    {
+        $bencana = LaporanBencana::find($id);
+        $kecamatans = Kecamatan::all();
+
+        if (!$bencana) {
+            return back()->with('gagal', 'Data Laporan Bencana tidak ditemukan');
+        }
+
+        return view('admin.dampak_bencana.update_infrastruktur', compact('bencana','kecamatans'));
+    }
+
+    public function updateinfrastrukturStore(Request $request, $id)
+    {
+        $bencana = LaporanBencana::find($id);
+
+        if (!$bencana) {
+            return back()->with('gagal', 'Data Laporan Bencana tidak ditemukan');
+        }
+
+        $korban = Korban::find($bencana->korban->id);
+
+        // $korban->update([
+        //     'meninggal' => $request->meninggal,
+        //     'luka_berat' => $request->luka_berat,
+        //     'luka_ringan' => $request->luka_ringan,
+        //     'hilang' => $request->hilang
+        //     ]);
         if ($request->hasFile('gambar_kejadian')) {
             $files = $request->file('gambar_kejadian');
             $nama_file_kejadian = [];
@@ -821,7 +902,6 @@ public function getDesaByKecamatanedit(Request $request)
 
         return back()->with('sukses', 'Dampak Bencana berhasil ditambahkan');
     }
-
     public function markNotification(Request $request)
     {
         Auth::user()->unReadNotifications->when($request->input('id'), function ($query) use($request) {
