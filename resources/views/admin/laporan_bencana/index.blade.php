@@ -222,11 +222,15 @@
                                                             class="btn btn-sm btn-success">Konfirmasi</a> --}}
                                                     @endif
                                                 @endif
-                                                @if (auth()->user()->role == 'pasca_bencana'|| auth()->user()->role == 'tanggap_darurat')
-                                                    <a href="{{ route('dampak_bencana.edit', $item->id) }}" class="btn btn-sm btn-primary">
-                                                        Tambah Dampak Bencana
-                                                    </a>
-                                                @endif
+                                                @if (auth()->user()->role == 'pasca_bencana')
+                                                <a href="{{ route('infra_bencana.edit', $item->id) }}" class="btn btn-sm btn-primary">
+                                                    Tambah Kerusakan Infrastruktur
+                                                </a>
+                                            @elseif (auth()->user()->role == 'tanggap_darurat')
+                                                <a href="{{ route('dampak_bencana.edit', $item->id) }}" class="btn btn-sm btn-primary">
+                                                    Tambah Korban
+                                                </a>
+                                            @endif
 
 
                                                 {{-- <button class="btn btn-sm btn-danger delete" data-id="{{ $item->id }}">

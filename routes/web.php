@@ -190,6 +190,11 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin,tangga
     Route::get('/dampak/bencana/{id}', [LaporanBencanaController::class, 'updateDampakBencanaAdmin'])->name('dampak_bencana.edit');
     Route::put('/dampak/bencana/{id}', [LaporanBencanaController::class, 'updateDampakBencanaAdminStore'])->name('dampak_bencana.update');
 });
+//infra
+Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin']], function() {
+    Route::get('/infra/bencana/{id}', [LaporanBencanaController::class, 'updateinfrastruktur'])->name('infra_bencana.edit');
+    Route::put('/infra/bencana/{id}', [LaporanBencanaController::class, 'updateinfrastrukturStore'])->name('infra_bencana.update');
+});
 
 Route::group(['middleware' => ['auth', 'checkRoleUser:user']], function() {
     //LAPORANKU
