@@ -71,9 +71,10 @@
                                     @forelse ($peringatanDini as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $item->tanggal }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id-ID')->format('d F Y') }}
+                                            </td>
                                             <td>{{ $item->lokasi }}</td>
-                                            <td>{{ $item->deskripsi }}</td>
+                                            <td>{!! Str::words($item->deskripsi, 5)  !!} </td>
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"

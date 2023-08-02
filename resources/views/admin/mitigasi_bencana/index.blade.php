@@ -63,7 +63,7 @@
                                         <th>Judul</th>
                                         <th>Deskripsi</th>
                                         <th>Jenis Konten</th>
-                                        <th>File</th>
+                                        {{-- <th>File</th> --}}
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -74,7 +74,7 @@
                                             <td>{{ $item->title }}</td>
                                             <td>{{ $item->deskripsi }}</td>
                                             <td>{{ $item->jenis_konten }}</td>
-                                            <td>{{ $item->file }}</td>
+                                            {{-- <td>{{ $item->file }}</td> --}}
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-sm btn-warning" id="modalEdit-{{ $item->id }}" data-toggle="modal"
