@@ -186,7 +186,7 @@ Route::group(['middleware' => ['auth', 'checkRoleUser:tanggap_darurat,pasca_benc
 
 });
 
-Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin']], function() {
+Route::group(['middleware' => ['auth', 'checkRoleUser:pasca_bencana,admin,tanggap_darurat']], function() {
     Route::get('/dampak/bencana/{id}', [LaporanBencanaController::class, 'updateDampakBencanaAdmin'])->name('dampak_bencana.edit');
     Route::put('/dampak/bencana/{id}', [LaporanBencanaController::class, 'updateDampakBencanaAdminStore'])->name('dampak_bencana.update');
 });
